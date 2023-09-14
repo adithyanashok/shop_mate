@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shop_mate/presentation/home_screen/home_screen.dart';
+import 'package:shop_mate/application/bloc/bottom_nav_bloc.dart';
+import 'package:shop_mate/presentation/screens/home_screen/home_screen.dart';
+import 'package:shop_mate/presentation/screens/main_page.dart';
 
 void main() async {
   await ScreenUtil.ensureScreenSize();
@@ -14,14 +17,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(builder: (context, child) {
-      return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          useMaterial3: true,
-        ),
-        debugShowCheckedModeBanner: false,
-        home: HomeScreen(),
-      );
+      return MultiBlocProvider(
+          providers: [BlocProvider(create: (context) => BottomNavBloc())],
+          child: MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              useMaterial3: true,
+            ),
+            debugShowCheckedModeBanner: false,
+            home: MainPage(),
+          ));
     });
   }
 }
