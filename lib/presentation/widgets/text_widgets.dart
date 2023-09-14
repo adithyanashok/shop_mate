@@ -21,3 +21,22 @@ class BuildHeadingText extends StatelessWidget {
     );
   }
 }
+
+class BuildSmallText extends StatelessWidget {
+  const BuildSmallText({
+    super.key,
+    required this.text,
+  });
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 12.sp,
+        fontWeight: FontWeight.w400,
+      ),
+    );
+  }
+}

@@ -4,6 +4,7 @@ import 'package:shop_mate/application/bloc/bottom_nav_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/screens/cart_screen/cart_screen.dart';
 import 'package:shop_mate/presentation/screens/home_screen/home_screen.dart';
+import 'package:shop_mate/presentation/screens/product_screen/product_screen.dart';
 import 'package:shop_mate/presentation/screens/profile_screen/profile_screen.dart';
 import 'package:shop_mate/presentation/screens/search_screen/search_screen.dart';
 
@@ -13,7 +14,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screens = [
-      HomeScreen(),
+      ProductScreen(),
       SearchScreen(),
       CartScreen(),
       ProfileScreen(),
