@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/constants/route_animation.dart';
+import 'package:shop_mate/presentation/screens/product_screen/product_screen.dart';
 import 'package:shop_mate/presentation/widgets/app_bar_widget.dart';
 import 'package:shop_mate/presentation/widgets/banner_widget.dart';
 import 'package:shop_mate/presentation/widgets/product_card.dart';
@@ -148,12 +150,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 250,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) => const BuildProductCard(
-                      title: "Macbook Pro M2",
-                      image: 'assets/images/macbook.png',
-                      description:
-                          "APPLE 2022 MacBook Pro M2 - (8 GB/256 GB SSD/Mac OS Monterey) MNEH3HN/A  (13.3 Inch, Space Grey, 1.38 Kg)",
-                      price: '1999',
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                            buildNavigation(route: const ProductScreen()));
+                      },
+                      child: const BuildProductCard(
+                        title: "Macbook Pro M2",
+                        image: 'assets/images/macbook.png',
+                        description:
+                            "APPLE 2022 MacBook Pro M2 - (8 GB/256 GB SSD/Mac OS Monterey) MNEH3HN/A  (13.3 Inch, Space Grey, 1.38 Kg)",
+                        price: '1999',
+                      ),
                     ),
                     separatorBuilder: (context, index) => const SizedBox(),
                     itemCount: 20,

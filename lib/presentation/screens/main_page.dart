@@ -14,7 +14,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screens = [
-      ProductScreen(),
+      HomeScreen(),
       SearchScreen(),
       CartScreen(),
       ProfileScreen(),
