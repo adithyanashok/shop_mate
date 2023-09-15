@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
-import 'package:shop_mate/presentation/widgets/button_wodgets.dart';
+import 'package:shop_mate/presentation/widgets/button_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -12,7 +12,7 @@ class ProductScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Product Details"),
+        title: const BuildRegularTextWidget(text: 'Product Details'),
       ),
       body: SafeArea(
           child: SingleChildScrollView(

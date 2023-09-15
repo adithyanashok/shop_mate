@@ -28,10 +28,12 @@ class BuildSmallText extends StatelessWidget {
     required this.text,
     this.fontSize = 14,
     this.color = AppColor.blackColor,
+    this.textOverflow = TextOverflow.ellipsis,
   });
   final String text;
   final double fontSize;
   final Color color;
+  final TextOverflow textOverflow;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class BuildSmallText extends StatelessWidget {
         fontWeight: FontWeight.w400,
         color: color,
       ),
-      overflow: TextOverflow.ellipsis,
+      overflow: textOverflow,
     );
   }
 }
@@ -68,24 +70,6 @@ class BuildMiniText extends StatelessWidget {
   }
 }
 
-class BuildMediumText1 extends StatelessWidget {
-  const BuildMediumText1({
-    super.key,
-    required this.text,
-  });
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: 15.sp,
-      ),
-    );
-  }
-}
-
 class BuildButtonText extends StatelessWidget {
   const BuildButtonText({
     super.key,
@@ -100,6 +84,27 @@ class BuildButtonText extends StatelessWidget {
       style: TextStyle(
         color: AppColor.whiteColor,
         fontSize: 14.sp,
+        fontWeight: FontWeight.w400,
+      ),
+    );
+  }
+}
+
+class BuildRegularTextWidget extends StatelessWidget {
+  const BuildRegularTextWidget({
+    super.key,
+    required this.text,
+    this.fontSize = 22,
+  });
+  final String text;
+  final double fontSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: fontSize.sp,
         fontWeight: FontWeight.w400,
       ),
     );

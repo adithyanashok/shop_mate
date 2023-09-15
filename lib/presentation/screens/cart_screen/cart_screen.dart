@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/constants/route_animation.dart';
+import 'package:shop_mate/presentation/screens/checkout_screen/checkout_screen.dart';
 import 'package:shop_mate/presentation/widgets/app_bar_widget.dart';
 import 'package:shop_mate/presentation/widgets/button_widgets.dart';
 import 'package:shop_mate/presentation/widgets/row_widget.dart';
@@ -13,7 +15,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Cart"),
+        title: const BuildRegularTextWidget(text: 'Cart'),
         centerTitle: true,
       ),
       body: const SafeArea(
@@ -49,31 +51,49 @@ class CartAmountSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
-                "Price Details",
-                style: TextStyle(
-                  fontSize: 22.sp,
-                  fontWeight: FontWeight.w400,
+              const BuildRegularTextWidget(text: "Price Details"),
+              const BuildTextRow(
+                text1: BuildRegularTextWidget(
+                  text: 'Subtotal:',
+                  fontSize: 15,
+                ),
+                text2: BuildRegularTextWidget(
+                  text: '\$1000.0',
+                  fontSize: 15,
                 ),
               ),
               const BuildTextRow(
-                text1: BuildMediumText1(text: 'Subtotal:'),
-                text2: BuildMediumText1(text: '\$1000.0'),
+                text1: BuildRegularTextWidget(
+                  text: 'Delivery Fee:',
+                  fontSize: 15,
+                ),
+                text2: BuildRegularTextWidget(
+                  text: '\$5.00',
+                  fontSize: 15,
+                ),
               ),
               const BuildTextRow(
-                text1: BuildMediumText1(text: 'Delivery Fee:'),
-                text2: BuildMediumText1(text: '\$5.00'),
+                text1: BuildRegularTextWidget(
+                  text: 'Discount:',
+                  fontSize: 15,
+                ),
+                text2: BuildRegularTextWidget(
+                  text: '\$10',
+                  fontSize: 15,
+                ),
               ),
               const BuildTextRow(
-                text1: BuildMediumText1(text: 'Discount:'),
-                text2: BuildMediumText1(text: '\$10'),
-              ),
-              const BuildTextRow(
-                text1: BuildMediumText1(text: "Total:"),
+                text1: BuildRegularTextWidget(text: "Total:"),
                 text2: BuildHeadingText(text: '\$1000'),
               ),
-              const BuildButtonWidget(
-                text: 'Continue',
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context)
+                      .push(buildNavigation(route: const CheckoutScreen()));
+                },
+                child: const BuildButtonWidget(
+                  text: 'Continue',
+                ),
               )
             ],
           ),
