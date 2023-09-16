@@ -89,7 +89,7 @@ class CartAmountSection extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context)
-                      .push(buildNavigation(route: const CheckoutScreen()));
+                      .push(buildNavigation(route: CheckoutScreen()));
                 },
                 child: const BuildButtonWidget(
                   text: 'Continue',
