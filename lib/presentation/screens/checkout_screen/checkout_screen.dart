@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/screens/checkout_screen/checkout_screens_widgets/checkout_screen_widgets.dart';
+import 'package:shop_mate/presentation/screens/order_successful_screen/order_successful_screen.dart';
 import 'package:shop_mate/presentation/widgets/row_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
@@ -71,34 +73,40 @@ class CheckoutScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: BuildHeadingText(text: "Payment Methods"),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      BuildPaymentMethodCard(
-                        asset: SvgPicture.asset(
-                          'assets/images/stripe-v2.svg',
-                          width: 55,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context)
+                          .push(buildNavigation(route: OrderSuccessScreen()));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        BuildPaymentMethodCard(
+                          asset: SvgPicture.asset(
+                            'assets/images/stripe-v2.svg',
+                            width: 55,
+                          ),
                         ),
-                      ),
-                      BuildPaymentMethodCard(
-                        asset: SvgPicture.asset(
-                          'assets/images/razorpay.svg',
-                          width: 55,
+                        BuildPaymentMethodCard(
+                          asset: SvgPicture.asset(
+                            'assets/images/razorpay.svg',
+                            width: 55,
+                          ),
                         ),
-                      ),
-                      BuildPaymentMethodCard(
-                        asset: Image.asset(
-                          'assets/images/google.com.png',
-                          width: 55,
+                        BuildPaymentMethodCard(
+                          asset: Image.asset(
+                            'assets/images/google.com.png',
+                            width: 55,
+                          ),
                         ),
-                      ),
-                      BuildPaymentMethodCard(
-                        asset: Image.asset(
-                          'assets/images/cashondel.png',
-                          width: 55,
+                        BuildPaymentMethodCard(
+                          asset: Image.asset(
+                            'assets/images/cashondel.png',
+                            width: 55,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   const Expanded(
                     child: Card(
