@@ -5,6 +5,7 @@ import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/screens/cart_screen/cart_screen.dart';
 import 'package:shop_mate/presentation/screens/checkout_screen/checkout_screen.dart';
 import 'package:shop_mate/presentation/screens/home_screen/home_screen.dart';
+import 'package:shop_mate/presentation/screens/login_screen/login_screen.dart';
 import 'package:shop_mate/presentation/screens/product_screen/product_screen.dart';
 import 'package:shop_mate/presentation/screens/profile_screen/profile_screen.dart';
 import 'package:shop_mate/presentation/screens/search_screen/search_screen.dart';
@@ -15,7 +16,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screens = [
-      HomeScreen(),
+      LoginScreen(),
       SearchScreen(),
       CartScreen(),
       ProfileScreen(),
@@ -46,7 +47,7 @@ class BuildNavBar extends StatelessWidget {
       showUnselectedLabels: false,
       unselectedItemColor: AppColor.greenColor,
       selectedItemColor: AppColor.greenColor,
-      backgroundColor: AppColor.colorGrey2,
+      backgroundColor: AppColor.colorGrey3,
       onTap: (value) {
         context
             .read<BottomNavBloc>()

@@ -2,6 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 
+class BuildTextWithSignupLink extends StatelessWidget {
+  const BuildTextWithSignupLink({
+    super.key,
+    required this.text1,
+    required this.text2,
+  });
+  final String text1;
+  final String text2;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text.rich(
+        TextSpan(
+          text: text1,
+          style: TextStyle(
+            color: AppColor.colorGrey1,
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w200,
+          ),
+          children: [
+            TextSpan(
+              text: text2,
+              style: TextStyle(
+                color: AppColor.blackColor,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class BuildHeadingText extends StatelessWidget {
   const BuildHeadingText({
     super.key,
@@ -29,11 +65,13 @@ class BuildSmallText extends StatelessWidget {
     this.fontSize = 14,
     this.color = AppColor.blackColor,
     this.textOverflow = TextOverflow.ellipsis,
+    this.fontWeight = FontWeight.w400,
   });
   final String text;
   final double fontSize;
   final Color color;
   final TextOverflow textOverflow;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +79,7 @@ class BuildSmallText extends StatelessWidget {
       text,
       style: TextStyle(
         fontSize: fontSize.sp,
-        fontWeight: FontWeight.w400,
+        fontWeight: fontWeight,
         color: color,
       ),
       overflow: textOverflow,
