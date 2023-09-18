@@ -3,22 +3,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
-import 'package:shop_mate/presentation/screens/signup_screen/signup_screen.dart';
+import 'package:shop_mate/presentation/screens/login_screen/login_screen.dart';
 import 'package:shop_mate/presentation/widgets/asset_card.dart';
 import 'package:shop_mate/presentation/widgets/text_form_field_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatelessWidget {
+  const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        leading: const Icon(
-          Icons.close,
-          color: AppColor.colorGrey3,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: const Icon(
+            Icons.close,
+            color: AppColor.colorGrey3,
+          ),
         ),
       ),
       body: SafeArea(
@@ -31,9 +36,9 @@ class LoginScreen extends StatelessWidget {
                 const Center(
                   child: Column(
                     children: [
-                      BuildHeadingText2(text: "Welcome!"),
+                      BuildHeadingText2(text: "Let’s Get Started"),
                       BuildSmallText(
-                        text: 'Please enter your  data to continue',
+                        text: 'Sign up and we will continue',
                         color: AppColor.colorGrey2,
                         fontSize: 15,
                       ),
@@ -47,6 +52,14 @@ class LoginScreen extends StatelessWidget {
                   label: 'Email',
                   hintText: "Enter your email",
                   icon: Icons.mail,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const BuildTextFormField(
+                  label: 'Username',
+                  hintText: "Enter username",
+                  icon: Icons.person,
                 ),
                 const SizedBox(
                   height: 10,
@@ -110,7 +123,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   child: const Center(
                     child: BuildSmallText(
-                      text: "Login",
+                      text: "Sign up",
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                       color: AppColor.whiteColor,
@@ -120,11 +133,11 @@ class LoginScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context)
-                        .push(buildNavigation(route: SignupScreen()));
+                        .push(buildNavigation(route: LoginScreen()));
                   },
                   child: const BuildTextWithSignupLink(
                     text1: "Don't have an account?",
-                    text2: "Signup",
+                    text2: "Login",
                   ),
                 )
               ],

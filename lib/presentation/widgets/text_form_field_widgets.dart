@@ -9,10 +9,12 @@ class BuildTextFormField extends StatelessWidget {
     required this.label,
     required this.hintText,
     required this.icon,
+    this.obscureText = false,
   });
   final String label;
   final String hintText;
   final IconData icon;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +45,7 @@ class BuildTextFormField extends StatelessWidget {
               ),
               Expanded(
                 child: TextField(
+                  obscureText: obscureText,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,

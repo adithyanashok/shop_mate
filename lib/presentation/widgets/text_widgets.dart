@@ -2,6 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 
+class BuildHeadingText2 extends StatelessWidget {
+  const BuildHeadingText2({
+    super.key,
+    required this.text,
+  });
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 33.sp,
+        fontWeight: FontWeight.w700,
+        letterSpacing: 0.99,
+      ),
+    );
+  }
+}
+
 class BuildTextWithSignupLink extends StatelessWidget {
   const BuildTextWithSignupLink({
     super.key,
