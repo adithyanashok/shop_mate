@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/bloc/bottom_nav_bloc.dart';
+import 'package:shop_mate/presentation/screens/admin/home_screen.dart';
+import 'package:shop_mate/presentation/screens/admin/main_screen.dart';
 import 'package:shop_mate/presentation/screens/home_screen/home_screen.dart';
 import 'package:shop_mate/presentation/screens/main_page.dart';
+import 'package:shop_mate/presentation/screens/splash_screen/splash_screen.dart';
 
 void main() async {
   await ScreenUtil.ensureScreenSize();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+  bool user = false;
 
   // This widget is the root of your application.
   @override
@@ -25,7 +29,7 @@ class MyApp extends StatelessWidget {
               useMaterial3: true,
             ),
             debugShowCheckedModeBanner: false,
-            home: MainPage(),
+            home: user == true ? MainPage() : MainScreen(),
           ));
     });
   }

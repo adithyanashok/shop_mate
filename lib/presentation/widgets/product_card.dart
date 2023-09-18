@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class BuildProductCard extends StatelessWidget {
   const BuildProductCard({

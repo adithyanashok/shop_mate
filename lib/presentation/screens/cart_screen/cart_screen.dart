@@ -5,6 +5,7 @@ import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/screens/checkout_screen/checkout_screen.dart';
 import 'package:shop_mate/presentation/widgets/app_bar_widget.dart';
 import 'package:shop_mate/presentation/widgets/button_widgets.dart';
+import 'package:shop_mate/presentation/widgets/product_card.dart';
 import 'package:shop_mate/presentation/widgets/row_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 

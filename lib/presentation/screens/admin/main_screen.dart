@@ -2,32 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/bloc/bottom_nav_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/screens/admin/home_screen.dart';
+import 'package:shop_mate/presentation/screens/admin/order_screen/order_screen.dart';
+import 'package:shop_mate/presentation/screens/admin/product_screen/product_screen.dart';
 import 'package:shop_mate/presentation/screens/cart_screen/cart_screen.dart';
-import 'package:shop_mate/presentation/screens/checkout_screen/checkout_screen.dart';
-import 'package:shop_mate/presentation/screens/home_screen/home_screen.dart';
-import 'package:shop_mate/presentation/screens/login_screen/login_screen.dart';
-import 'package:shop_mate/presentation/screens/product_screen/product_screen.dart';
 import 'package:shop_mate/presentation/screens/profile_screen/profile_screen.dart';
 import 'package:shop_mate/presentation/screens/search_screen/search_screen.dart';
 
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
+class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final screens = [
-      HomeScreen(),
-      SearchScreen(),
-      CartScreen(),
+      AdminHomeScreen(),
+      AdminProductScreen(),
+      AdminOrdersScreen(),
       ProfileScreen(),
     ];
     return BlocBuilder<BottomNavBloc, BottomNavState>(
       builder: (context, state) {
         return Scaffold(
-            body: screens[state.value],
-            bottomNavigationBar: BuildNavBar(
-              state: state,
-            ));
+          body: screens[state.value],
+          bottomNavigationBar: BuildNavBar(
+            state: state,
+          ),
+        );
       },
     );
   }
@@ -56,9 +56,9 @@ class BuildNavBar extends StatelessWidget {
       currentIndex: state.value,
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined), label: "Cart"),
+            icon: Icon(Icons.grid_view_outlined), label: "Products"),
+        BottomNavigationBarItem(icon: Icon(Icons.widgets), label: "Orders"),
         BottomNavigationBarItem(
             icon: Icon(Icons.person_2_outlined), label: "Profile"),
       ],

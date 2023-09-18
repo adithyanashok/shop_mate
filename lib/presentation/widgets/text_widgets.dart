@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 
 class BuildHeadingText2 extends StatelessWidget {
   const BuildHeadingText2({
     super.key,
     required this.text,
+    this.fontSize = 33,
+    this.fontWeight = FontWeight.w700,
+    this.letterSpacing = 0.99,
   });
   final String text;
+  final double fontSize;
+  final FontWeight fontWeight;
+  final double letterSpacing;
 
   @override
   Widget build(BuildContext context) {
@@ -153,18 +160,41 @@ class BuildRegularTextWidget extends StatelessWidget {
     super.key,
     required this.text,
     this.fontSize = 22,
+    this.letterSpacing = 0,
+    this.color = AppColor.blackColor,
   });
   final String text;
   final double fontSize;
+  final double letterSpacing;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       style: TextStyle(
+        color: color,
         fontSize: fontSize.sp,
         fontWeight: FontWeight.w400,
+        letterSpacing: letterSpacing,
       ),
+    );
+  }
+}
+
+class BuildLogoText extends StatelessWidget {
+  const BuildLogoText({
+    super.key,
+    required this.title,
+  });
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: GoogleFonts.moul(fontSize: 20.sp, color: AppColor.whiteColor),
     );
   }
 }
