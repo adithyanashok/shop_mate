@@ -46,21 +46,28 @@ class BuildButtonWidget extends StatelessWidget {
   const BuildButtonWidget({
     super.key,
     required this.text,
+    this.onTap,
   });
   final String text;
+  final Function? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: 0.9.sw,
-        height: 60,
-        decoration: BoxDecoration(
-          color: AppColor.greenColor,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Center(
-          child: BuildButtonText(text: text),
+    return GestureDetector(
+      onTap: () {
+        onTap!();
+      },
+      child: Center(
+        child: Container(
+          width: 0.9.sw,
+          height: 60,
+          decoration: BoxDecoration(
+            color: AppColor.greenColor,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Center(
+            child: BuildButtonText(text: text),
+          ),
         ),
       ),
     );

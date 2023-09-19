@@ -4,18 +4,22 @@ import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class BuildTextFormField extends StatelessWidget {
-  const BuildTextFormField(
+  BuildTextFormField(
       {super.key,
       required this.label,
       required this.hintText,
       required this.icon,
       this.obscureText = false,
-      this.keyboardType = TextInputType.multiline});
+      this.keyboardType = TextInputType.multiline,
+      this.func});
   final String label;
   final String hintText;
   final IconData icon;
   final bool obscureText;
   final TextInputType keyboardType;
+  final Function(String value)? func;
+
+  final TextEditingController txtCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +50,10 @@ class BuildTextFormField extends StatelessWidget {
               ),
               Expanded(
                 child: TextField(
+                  onChanged: (value) {
+                    func!(value);
+                  },
+                  controller: txtCtrl,
                   keyboardType: keyboardType,
                   obscureText: obscureText,
                   decoration: InputDecoration(
