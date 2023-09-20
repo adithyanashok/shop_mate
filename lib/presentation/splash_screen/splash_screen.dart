@@ -1,22 +1,37 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
-import 'package:shop_mate/presentation/login_screen/login_screen.dart';
+import 'package:shop_mate/presentation/main_page.dart';
+import 'package:shop_mate/presentation/signup_screen/signup_screen.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
-
+  SplashScreen({super.key});
+  final user = FirebaseAuth.instance.currentUser!.emailVerified;
   @override
   Widget build(BuildContext context) {
     Future.delayed(
       const Duration(seconds: 3),
       () => {
-        Navigator.of(context).pushAndRemoveUntil(
-            buildNavigation(
-              route: const LoginScreen(),
-            ),
-            (route) => false)
+        if (user == true)
+          {
+            Navigator.of(context).pushAndRemoveUntil(
+              buildNavigation(
+                route: const MainPage(),
+              ),
+              (route) => false,
+            )
+          }
+        else
+          {
+            Navigator.of(context).pushAndRemoveUntil(
+              buildNavigation(
+                route: SignupScreen(),
+              ),
+              (route) => false,
+            )
+          }
       },
     );
     return Scaffold(

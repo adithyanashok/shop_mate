@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
@@ -8,10 +10,13 @@ import 'package:shop_mate/presentation/profile_screen/profile_screen.dart';
 import 'package:shop_mate/presentation/search_screen/search_screen.dart';
 
 class MainPage extends StatelessWidget {
-  const MainPage({super.key});
+  const MainPage({super.key, this.user});
+
+  final user;
 
   @override
   Widget build(BuildContext context) {
+    log(user.toString());
     final screens = [
       HomeScreen(),
       SearchScreen(),

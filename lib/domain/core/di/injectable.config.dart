@@ -26,7 +26,7 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    gh.lazySingleton<_i3.ISignupFacade>(() => _i4.SignupRepositary());
+    gh.lazySingleton<_i3.ISignupFacade>(() => _i4.SignupRepository());
     gh.factory<_i5.SignupBloc>(() => _i5.SignupBloc(gh<_i3.ISignupFacade>()));
     return this;
   }

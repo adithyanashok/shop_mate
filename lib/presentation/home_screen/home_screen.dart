@@ -1,11 +1,14 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/product_screen/product_screen.dart';
+import 'package:shop_mate/presentation/signup_screen/signup_screen.dart';
+import 'package:shop_mate/presentation/util/snackbar.dart';
 import 'package:shop_mate/presentation/widgets/app_bar_widget.dart';
 import 'package:shop_mate/presentation/widgets/banner_widget.dart';
 import 'package:shop_mate/presentation/widgets/product_card.dart';
@@ -76,17 +79,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 0.2.sh,
                 child: PageView(
                   controller: _pageController,
-                  children: const [
+                  children: [
                     // Banner widget for the first page
-                    BuildBannerWidget(
-                      backgroundColor: AppColor.greenColor,
-                      buttonTextColor: AppColor.greenColor,
-                      image: 'assets/images/shopping.png',
-                      text: '50% OFF DURING\nSALE',
-                      textColor: AppColor.whiteColor,
+                    GestureDetector(
+                      onTap: () async {
+                        await signOut();
+                      },
+                      child: const BuildBannerWidget(
+                        backgroundColor: AppColor.greenColor,
+                        buttonTextColor: AppColor.greenColor,
+                        image: 'assets/images/shopping.png',
+                        text: '50% OFF DURING\nSALE',
+                        textColor: AppColor.whiteColor,
+                      ),
                     ),
                     // Banner widget for the second page
-                    BuildBannerWidget(
+                    const BuildBannerWidget(
                       backgroundColor: AppColor.dartBlueColor,
                       buttonTextColor: AppColor.dartBlueColor,
                       image: 'assets/images/shopping.png',
@@ -222,5 +230,20 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       // bottomNavigationBar: BottomNavBarWidget(),
     );
+  }
+
+  Future<void> signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+
+      // Navigate to the onboarding screen.
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) {
+          return SignupScreen();
+        },
+      ));
+    } catch (e) {
+      snackBar(context: context, msg: e.toString());
+    }
   }
 }

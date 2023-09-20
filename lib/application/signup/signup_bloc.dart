@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shop_mate/domain/core/failures/main_failures.dart';
@@ -17,19 +21,22 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     on<_Signup>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
-        Either<MainFailure, UserModel> signin =
-            await iSignupFacade.signupMethod(event.userModel);
-        emit(
-          signin.fold(
-            (l) => state.copyWith(
-              isLoading: false,
-            ),
-            (r) => state.copyWith(
-              isLoading: false,
-              user: r as Map<String, dynamic>,
+        final signinOpt =
+            await iSignupFacade.signupMethod(event.userModel, event.context);
+        log("Message at bloc: $signinOpt");
+        emit(signinOpt.fold(
+          (failure) => state.copyWith(
+            isLoading: false,
+            signinOpt: Some(Left(failure)),
+          ),
+          (success) => state.copyWith(
+            isLoading: false,
+            user: success,
+            signinOpt: Some(
+              Right(success),
             ),
           ),
-        );
+        ));
       },
     );
   }
