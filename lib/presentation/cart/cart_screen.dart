@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shop_mate/presentation/checkout_screen/checkout_screen.dart';
+import 'package:shop_mate/presentation/checkout/checkout_screen.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/widgets/app_bar_widget.dart';

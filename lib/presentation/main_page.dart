@@ -3,11 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
-import 'package:shop_mate/presentation/cart_screen/cart_screen.dart';
+import 'package:shop_mate/presentation/cart/cart_screen.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
-import 'package:shop_mate/presentation/home_screen/home_screen.dart';
-import 'package:shop_mate/presentation/profile_screen/profile_screen.dart';
-import 'package:shop_mate/presentation/search_screen/search_screen.dart';
+import 'package:shop_mate/presentation/home/home_screen.dart';
+import 'package:shop_mate/presentation/profile/profile_screen.dart';
+import 'package:shop_mate/presentation/search/search_screen.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key, this.user});

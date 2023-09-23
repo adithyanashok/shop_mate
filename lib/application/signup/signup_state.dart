@@ -8,9 +8,8 @@ class SignupState with _$SignupState {
     required Option<Either<MainFailure, User>> signinOpt,
   }) = _SignupState;
   factory SignupState.initial() {
-    return SignupState(
+    return const SignupState(
       isLoading: false,
-      // user: ,
       signinOpt: None(),
     );
   }

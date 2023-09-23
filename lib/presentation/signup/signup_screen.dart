@@ -8,7 +8,7 @@ import 'package:shop_mate/application/signup/signup_bloc.dart';
 import 'package:shop_mate/domain/users/model/user.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
-import 'package:shop_mate/presentation/login_screen/login_screen.dart';
+import 'package:shop_mate/presentation/login/login_screen.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
 import 'package:shop_mate/presentation/widgets/asset_card.dart';
 import 'package:shop_mate/presentation/widgets/button_widgets.dart';
@@ -170,7 +170,7 @@ class SignupScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context)
-                        .push(buildNavigation(route: const LoginScreen()));
+                        .push(buildNavigation(route: LoginScreen()));
                   },
                   child: const BuildTextWithSignupLink(
                     text1: "Don't have an account?",

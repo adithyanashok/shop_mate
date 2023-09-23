@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
-import 'package:shop_mate/presentation/search_screen/widgets/search_screen_widgets.dart';
+import 'package:shop_mate/presentation/search/widgets/search_screen_widgets.dart';
 import 'package:shop_mate/presentation/widgets/product_card.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 

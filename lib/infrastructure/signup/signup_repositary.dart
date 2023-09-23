@@ -12,7 +12,7 @@ import 'package:shop_mate/presentation/util/snackbar.dart';
 class SignupRepository implements ISignupFacade {
   @override
   Future<Either<MainFailure, User>> signupMethod(user, context) async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseAuth auth = FirebaseAuth.instance;
     User? currentUser;
 
     final db = FirebaseFirestore.instance;
@@ -26,7 +26,7 @@ class SignupRepository implements ISignupFacade {
       };
 
       // Create a user using Firebase Auth
-      await _auth
+      await auth
           .createUserWithEmailAndPassword(
               email: user.email!, password: user.password!)
           .then((value) async {

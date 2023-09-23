@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/main_page.dart';
-import 'package:shop_mate/presentation/signup_screen/signup_screen.dart';
+import 'package:shop_mate/presentation/signup/signup_screen.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class SplashScreen extends StatelessWidget {

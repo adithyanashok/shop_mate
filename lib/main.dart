@@ -8,12 +8,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/auth/auth_bloc.dart';
 import 'package:shop_mate/application/auth/auth_state.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
+import 'package:shop_mate/application/login/login_bloc.dart';
 import 'package:shop_mate/application/signup/signup_bloc.dart';
 import 'package:shop_mate/domain/core/di/injectable.dart';
 import 'package:shop_mate/presentation/admin/main_screen.dart';
-import 'package:shop_mate/presentation/login_screen/login_screen.dart';
+import 'package:shop_mate/presentation/login/login_screen.dart';
 import 'package:shop_mate/presentation/main_page.dart';
-import 'package:shop_mate/presentation/signup_screen/signup_screen.dart';
+import 'package:shop_mate/presentation/signup/signup_screen.dart';
 import 'package:shop_mate/presentation/splash_screen/splash_screen.dart';
 
 void main() async {
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => BottomNavBloc()),
             BlocProvider(create: (context) => getIt<SignupBloc>()),
+            BlocProvider(create: (context) => getIt<LoginBloc>()),
             BlocProvider<AuthBloc>(
               create: (_) => AuthBloc(),
             ),
@@ -49,7 +51,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             home: SplashScreen(),
             routes: {
-              "login": (context) => const LoginScreen(),
+              "login": (context) => LoginScreen(),
             },
           ));
     });
