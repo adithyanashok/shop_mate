@@ -16,7 +16,6 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log(user.toString());
     final screens = [
       HomeScreen(),
       SearchScreen(),

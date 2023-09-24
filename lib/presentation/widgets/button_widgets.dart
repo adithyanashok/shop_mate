@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/widgets/loader_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class BuildMediumButton extends StatelessWidget {
@@ -47,9 +48,11 @@ class BuildButtonWidget extends StatelessWidget {
     super.key,
     required this.text,
     this.onTap,
+    this.state,
   });
   final String text;
   final Function? onTap;
+  final state;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +69,9 @@ class BuildButtonWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
           ),
           child: Center(
-            child: BuildButtonText(text: text),
+            child: state.isLoading == true
+                ? const BuildMiniLoader()
+                : BuildButtonText(text: text),
           ),
         ),
       ),

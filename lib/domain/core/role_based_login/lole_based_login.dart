@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_mate/domain/core/collections/collections.dart';
 import 'package:shop_mate/presentation/admin/main_screen.dart';
+import 'package:shop_mate/presentation/login/login_screen.dart';
 import 'package:shop_mate/presentation/main_page.dart';
 
 void route(context) {
@@ -20,11 +21,18 @@ void route(context) {
             builder: (context) => const MainScreen(),
           ),
         );
-      } else {
+      } else if (documentSnapshot.get('isAdmin') == false) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => const MainPage(),
+          ),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginScreen(),
           ),
         );
       }

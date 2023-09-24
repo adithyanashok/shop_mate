@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shop_mate/domain/core/failures/main_failures.dart';
+import 'package:shop_mate/domain/core/role_based_login/lole_based_login.dart';
 import 'package:shop_mate/domain/login/i_login_facade.dart';
 import 'package:shop_mate/presentation/main_page.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
@@ -38,11 +39,7 @@ class LoginRepositary implements ILoginFacade {
       }
 
       // Navigate to the MainPage on successful login
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) {
-          return const MainPage();
-        },
-      ));
+      route(context);
 
       // Return a Right with the signed-in user as the result of the login
       return Right(user);

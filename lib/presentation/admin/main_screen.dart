@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
 import 'package:shop_mate/presentation/admin/home_screen.dart';
 import 'package:shop_mate/presentation/admin/order_screen/order_screen.dart';
-import 'package:shop_mate/presentation/admin/product_screen/product_screen.dart';
+import 'package:shop_mate/presentation/admin/product/product_screen.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/profile/profile_screen.dart';
 

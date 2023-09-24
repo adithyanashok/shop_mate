@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_mate/domain/core/role_based_login/lole_based_login.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/main_page.dart';
@@ -8,30 +9,13 @@ import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class SplashScreen extends StatelessWidget {
   SplashScreen({super.key});
-  final user = FirebaseAuth.instance.currentUser!.emailVerified;
+  final user = FirebaseAuth.instance.currentUser?.emailVerified;
   @override
   Widget build(BuildContext context) {
     Future.delayed(
       const Duration(seconds: 3),
       () => {
-        if (user == true)
-          {
-            Navigator.of(context).pushAndRemoveUntil(
-              buildNavigation(
-                route: const MainPage(),
-              ),
-              (route) => false,
-            )
-          }
-        else
-          {
-            Navigator.of(context).pushAndRemoveUntil(
-              buildNavigation(
-                route: SignupScreen(),
-              ),
-              (route) => false,
-            )
-          }
+        if (user == true) {route(context)} else {route(context)}
       },
     );
     return Scaffold(

@@ -9,6 +9,7 @@ import 'package:shop_mate/application/auth/auth_bloc.dart';
 import 'package:shop_mate/application/auth/auth_state.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
 import 'package:shop_mate/application/login/login_bloc.dart';
+import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/application/signup/signup_bloc.dart';
 import 'package:shop_mate/domain/core/di/injectable.dart';
 import 'package:shop_mate/presentation/admin/main_screen.dart';
@@ -23,8 +24,6 @@ void main() async {
   await ScreenUtil.ensureScreenSize();
   await Firebase.initializeApp();
   runApp(const MyApp());
-  final user = FirebaseAuth.instance.currentUser;
-  log(user.toString());
 }
 
 class MyApp extends StatelessWidget {
@@ -39,6 +38,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => BottomNavBloc()),
             BlocProvider(create: (context) => getIt<SignupBloc>()),
             BlocProvider(create: (context) => getIt<LoginBloc>()),
+            BlocProvider(create: (context) => getIt<ProductBloc>()),
             BlocProvider<AuthBloc>(
               create: (_) => AuthBloc(),
             ),
