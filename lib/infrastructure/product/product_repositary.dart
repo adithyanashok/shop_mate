@@ -41,7 +41,9 @@ class ProductRepository implements IProductFacade {
           await db.collection(Collection.collectionProduct).get();
       for (var docSnapshot in querySnapshot.docs) {
         final productData = docSnapshot.data();
-        final product = ProductModel.fromJson(productData);
+        final product =
+            ProductModel.fromJson(productData).copyWith(id: docSnapshot.id);
+
         productList.add(product);
       }
       return Right(productList);

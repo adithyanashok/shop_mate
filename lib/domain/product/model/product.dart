@@ -10,6 +10,7 @@ class ProductModel with _$ProductModel {
     required double amount,
     required int quantity,
     required String image,
+    String? id,
   }) = _ProductModel;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>

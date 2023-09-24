@@ -25,6 +25,7 @@ mixin _$ProductModel {
   double get amount => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +44,8 @@ abstract class $ProductModelCopyWith<$Res> {
       String description,
       double amount,
       int quantity,
-      String image});
+      String image,
+      String? id});
 }
 
 /// @nodoc
@@ -64,6 +66,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? amount = null,
     Object? quantity = null,
     Object? image = null,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -86,6 +89,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -103,7 +110,8 @@ abstract class _$$_ProductModelCopyWith<$Res>
       String description,
       double amount,
       int quantity,
-      String image});
+      String image,
+      String? id});
 }
 
 /// @nodoc
@@ -122,6 +130,7 @@ class __$$_ProductModelCopyWithImpl<$Res>
     Object? amount = null,
     Object? quantity = null,
     Object? image = null,
+    Object? id = freezed,
   }) {
     return _then(_$_ProductModel(
       name: null == name
@@ -144,6 +153,10 @@ class __$$_ProductModelCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -156,7 +169,8 @@ class _$_ProductModel implements _ProductModel {
       required this.description,
       required this.amount,
       required this.quantity,
-      required this.image});
+      required this.image,
+      this.id});
 
   factory _$_ProductModel.fromJson(Map<String, dynamic> json) =>
       _$$_ProductModelFromJson(json);
@@ -171,10 +185,12 @@ class _$_ProductModel implements _ProductModel {
   final int quantity;
   @override
   final String image;
+  @override
+  final String? id;
 
   @override
   String toString() {
-    return 'ProductModel(name: $name, description: $description, amount: $amount, quantity: $quantity, image: $image)';
+    return 'ProductModel(name: $name, description: $description, amount: $amount, quantity: $quantity, image: $image, id: $id)';
   }
 
   @override
@@ -188,13 +204,14 @@ class _$_ProductModel implements _ProductModel {
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
-            (identical(other.image, image) || other.image == image));
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, name, description, amount, quantity, image);
+      Object.hash(runtimeType, name, description, amount, quantity, image, id);
 
   @JsonKey(ignore: true)
   @override
@@ -216,7 +233,8 @@ abstract class _ProductModel implements ProductModel {
       required final String description,
       required final double amount,
       required final int quantity,
-      required final String image}) = _$_ProductModel;
+      required final String image,
+      final String? id}) = _$_ProductModel;
 
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
       _$_ProductModel.fromJson;
@@ -231,6 +249,8 @@ abstract class _ProductModel implements ProductModel {
   int get quantity;
   @override
   String get image;
+  @override
+  String? get id;
   @override
   @JsonKey(ignore: true)
   _$$_ProductModelCopyWith<_$_ProductModel> get copyWith =>

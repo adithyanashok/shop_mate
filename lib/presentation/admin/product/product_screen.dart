@@ -33,6 +33,7 @@ class AdminProductScreen extends StatelessWidget {
             padding: const EdgeInsets.all(1.0),
             child: BlocBuilder<ProductBloc, ProductState>(
               builder: (context, state) {
+                log(state.products.toString());
                 return DataTable2(
                   dataRowHeight: 100,
                   columns: const [
