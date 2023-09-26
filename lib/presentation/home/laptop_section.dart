@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
+import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/product/product_screen.dart';
+import 'package:shop_mate/presentation/widgets/loading_widget.dart';
 import 'package:shop_mate/presentation/widgets/product_card.dart';
 
 class LaptopSection extends StatelessWidget {
@@ -20,35 +22,37 @@ class LaptopSection extends StatelessWidget {
         child: BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
             final newState = state.laptopListOpt;
-            return SizedBox(
-              height: 250,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  final product = newState[index];
-                  return BuildProductCard(
-                    title: product.name,
-                    image: Image.network(
-                      product.image![0],
-                      fit: BoxFit.cover,
-                      width: 100,
+            return state.isLoading
+                ? const BuildLoadingWidget()
+                : SizedBox(
+                    height: 250,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        final product = newState[index];
+                        return BuildProductCard(
+                          title: product.name,
+                          image: Image.network(
+                            product.image![0],
+                            fit: BoxFit.cover,
+                            width: 100,
+                          ),
+                          onTap: () {
+                            Navigator.of(context).push(
+                              buildNavigation(
+                                route: const ProductScreen(),
+                                arguments: product.id,
+                              ),
+                            );
+                          },
+                          description: product.description,
+                          price: '${product.amount.round()}',
+                        );
+                      },
+                      separatorBuilder: (context, index) => const SizedBox(),
+                      itemCount: newState.length,
                     ),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        buildNavigation(
-                          route: const ProductScreen(),
-                          arguments: product.id,
-                        ),
-                      );
-                    },
-                    description: product.description,
-                    price: '${product.amount.round()}',
                   );
-                },
-                separatorBuilder: (context, index) => const SizedBox(),
-                itemCount: newState.length,
-              ),
-            );
           },
         ));
   }

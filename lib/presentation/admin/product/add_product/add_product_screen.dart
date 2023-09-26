@@ -182,6 +182,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
             amount: am,
             quantity: qty,
             category: category!,
+            image: [],
           ),
           selectedImages: image!,
           context: context,

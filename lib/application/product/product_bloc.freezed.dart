@@ -1418,7 +1418,7 @@ abstract class _GetProduct implements ProductEvent {
 
 /// @nodoc
 mixin _$ProductState {
-  ProductModel? get product => throw _privateConstructorUsedError;
+  ProductModel get product => throw _privateConstructorUsedError;
   List<ProductModel> get products => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Either<MainFailure, ProductModel>> get productOpt =>
@@ -1441,7 +1441,7 @@ abstract class $ProductStateCopyWith<$Res> {
       _$ProductStateCopyWithImpl<$Res, ProductState>;
   @useResult
   $Res call(
-      {ProductModel? product,
+      {ProductModel product,
       List<ProductModel> products,
       bool isLoading,
       Option<Either<MainFailure, ProductModel>> productOpt,
@@ -1450,7 +1450,7 @@ abstract class $ProductStateCopyWith<$Res> {
       List<ProductModel> earphoneListOpt,
       List<ProductModel> mobileListOpt});
 
-  $ProductModelCopyWith<$Res>? get product;
+  $ProductModelCopyWith<$Res> get product;
 }
 
 /// @nodoc
@@ -1466,7 +1466,7 @@ class _$ProductStateCopyWithImpl<$Res, $Val extends ProductState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? product = freezed,
+    Object? product = null,
     Object? products = null,
     Object? isLoading = null,
     Object? productOpt = null,
@@ -1476,10 +1476,10 @@ class _$ProductStateCopyWithImpl<$Res, $Val extends ProductState>
     Object? mobileListOpt = null,
   }) {
     return _then(_value.copyWith(
-      product: freezed == product
+      product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
-              as ProductModel?,
+              as ProductModel,
       products: null == products
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
@@ -1513,12 +1513,8 @@ class _$ProductStateCopyWithImpl<$Res, $Val extends ProductState>
 
   @override
   @pragma('vm:prefer-inline')
-  $ProductModelCopyWith<$Res>? get product {
-    if (_value.product == null) {
-      return null;
-    }
-
-    return $ProductModelCopyWith<$Res>(_value.product!, (value) {
+  $ProductModelCopyWith<$Res> get product {
+    return $ProductModelCopyWith<$Res>(_value.product, (value) {
       return _then(_value.copyWith(product: value) as $Val);
     });
   }
@@ -1533,7 +1529,7 @@ abstract class _$$_ProductStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {ProductModel? product,
+      {ProductModel product,
       List<ProductModel> products,
       bool isLoading,
       Option<Either<MainFailure, ProductModel>> productOpt,
@@ -1543,7 +1539,7 @@ abstract class _$$_ProductStateCopyWith<$Res>
       List<ProductModel> mobileListOpt});
 
   @override
-  $ProductModelCopyWith<$Res>? get product;
+  $ProductModelCopyWith<$Res> get product;
 }
 
 /// @nodoc
@@ -1557,7 +1553,7 @@ class __$$_ProductStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? product = freezed,
+    Object? product = null,
     Object? products = null,
     Object? isLoading = null,
     Object? productOpt = null,
@@ -1567,10 +1563,10 @@ class __$$_ProductStateCopyWithImpl<$Res>
     Object? mobileListOpt = null,
   }) {
     return _then(_$_ProductState(
-      product: freezed == product
+      product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
-              as ProductModel?,
+              as ProductModel,
       products: null == products
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
@@ -1607,7 +1603,7 @@ class __$$_ProductStateCopyWithImpl<$Res>
 
 class _$_ProductState implements _ProductState {
   const _$_ProductState(
-      {this.product,
+      {required this.product,
       final List<ProductModel> products = const [],
       required this.isLoading,
       required this.productOpt,
@@ -1621,7 +1617,7 @@ class _$_ProductState implements _ProductState {
         _mobileListOpt = mobileListOpt;
 
   @override
-  final ProductModel? product;
+  final ProductModel product;
   final List<ProductModel> _products;
   @override
   @JsonKey()
@@ -1711,7 +1707,7 @@ class _$_ProductState implements _ProductState {
 
 abstract class _ProductState implements ProductState {
   const factory _ProductState(
-      {final ProductModel? product,
+      {required final ProductModel product,
       final List<ProductModel> products,
       required final bool isLoading,
       required final Option<Either<MainFailure, ProductModel>> productOpt,
@@ -1721,7 +1717,7 @@ abstract class _ProductState implements ProductState {
       final List<ProductModel> mobileListOpt}) = _$_ProductState;
 
   @override
-  ProductModel? get product;
+  ProductModel get product;
   @override
   List<ProductModel> get products;
   @override

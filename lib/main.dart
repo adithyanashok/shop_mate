@@ -1,21 +1,17 @@
-import 'dart:developer';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/auth/auth_bloc.dart';
 import 'package:shop_mate/application/auth/auth_state.dart';
+import 'package:shop_mate/application/pageview/pageview_bloc.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
 import 'package:shop_mate/application/login/login_bloc.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/application/signup/signup_bloc.dart';
 import 'package:shop_mate/domain/core/di/injectable.dart';
-import 'package:shop_mate/presentation/admin/main_screen.dart';
 import 'package:shop_mate/presentation/login/login_screen.dart';
 import 'package:shop_mate/presentation/main_page.dart';
-import 'package:shop_mate/presentation/product/product_screen.dart';
 import 'package:shop_mate/presentation/signup/signup_screen.dart';
 import 'package:shop_mate/presentation/splash_screen/splash_screen.dart';
 
@@ -37,6 +33,7 @@ class MyApp extends StatelessWidget {
       return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => BottomNavBloc()),
+            BlocProvider(create: (context) => PageviewBloc()),
             BlocProvider(create: (context) => getIt<SignupBloc>()),
             BlocProvider(create: (context) => getIt<LoginBloc>()),
             BlocProvider(create: (context) => getIt<ProductBloc>()),
