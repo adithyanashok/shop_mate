@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,19 +6,7 @@ import 'package:shop_mate/presentation/admin/product/add_product/add_product_scr
 import 'package:shop_mate/presentation/constants/colors.dart';
 
 class AdminProductScreen extends StatelessWidget {
-  AdminProductScreen({super.key});
-
-  final List datas = [
-    [
-      'assets/images/macbook.png',
-      'Macbook Pro M2 with free bang',
-      '100',
-      '10000'
-    ],
-    ['assets/images/macbook.png', 'Macbook', '100', '10000'],
-    ['assets/images/macbook.png', 'Macbook', '100', '10000'],
-    ['assets/images/macbook.png', 'Macbook', '100', '10000'],
-  ];
+  const AdminProductScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,62 +14,65 @@ class AdminProductScreen extends StatelessWidget {
         .add(const ProductEvent.getAllProduct());
 
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-            padding: const EdgeInsets.all(1.0),
-            child: BlocBuilder<ProductBloc, ProductState>(
-              builder: (context, state) {
-                log(state.products.toString());
-                return DataTable2(
-                  dataRowHeight: 100,
-                  columns: const [
-                    DataColumn(
-                      label: Text("Image"),
-                    ),
-                    DataColumn(
-                      label: Text("Name"),
-                    ),
-                    DataColumn(
-                      label: Text("Qty"),
-                    ),
-                    DataColumn(
-                      label: Text("Price"),
-                    ),
-                  ],
-                  rows: List.generate(
-                    state.products!.length,
-                    (index) {
-                      final product = state.products?[index];
-
-                      return DataRow(
-                        cells: [
-                          DataCell(
-                            Image.network(
-                              '${product?.image}',
-                            ),
+      body: BlocBuilder<ProductBloc, ProductState>(
+        builder: (context, state) {
+          return SafeArea(
+            child: Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: state.products.isEmpty
+                    ? const Center(
+                        child: Text('No Products'),
+                      )
+                    : DataTable2(
+                        dataRowHeight: 100,
+                        columns: const [
+                          DataColumn(
+                            label: Text("Image"),
                           ),
-                          DataCell(
-                            Text(
-                              '${product?.name}',
-                            ),
+                          DataColumn(
+                            label: Text("Name"),
                           ),
-                          DataCell(
-                            Text(
-                              '${product?.quantity}',
-                            ),
+                          DataColumn(
+                            label: Text("Qty"),
                           ),
-                          DataCell(
-                            Text(
-                              '${product?.amount}',
-                            ),
+                          DataColumn(
+                            label: Text("Price"),
                           ),
                         ],
-                      );
-                    },
-                  ),
-                );
-              },
-            )),
+                        rows: List.generate(
+                          state.products.length,
+                          (index) {
+                            final product = state.products[index];
+
+                            return DataRow(
+                              cells: [
+                                DataCell(
+                                  Image.network(
+                                    product.image![0],
+                                  ),
+                                ),
+                                DataCell(
+                                  Text(
+                                    product.name,
+                                  ),
+                                ),
+                                DataCell(
+                                  Text(
+                                    '${product.quantity}',
+                                  ),
+                                ),
+                                DataCell(
+                                  Text(
+                                    '${product.amount}',
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      )),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

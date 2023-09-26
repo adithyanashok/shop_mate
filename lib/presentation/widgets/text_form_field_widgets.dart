@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class BuildTextFormField extends StatelessWidget {
-  BuildTextFormField(
+  const BuildTextFormField(
       {super.key,
       required this.label,
       required this.hintText,
@@ -18,8 +20,6 @@ class BuildTextFormField extends StatelessWidget {
   final bool obscureText;
   final TextInputType keyboardType;
   final Function(String value)? func;
-
-  final TextEditingController txtCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +51,9 @@ class BuildTextFormField extends StatelessWidget {
               Expanded(
                 child: TextField(
                   onChanged: (value) {
+                    log(value);
                     func!(value);
                   },
-                  controller: txtCtrl,
                   keyboardType: keyboardType,
                   obscureText: obscureText,
                   decoration: InputDecoration(
@@ -129,7 +129,7 @@ class BuildTextAreaField extends StatelessWidget {
                   },
                   maxLines: 10,
                   minLines: 7,
-                  maxLength: 100,
+                  maxLength: 500,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,

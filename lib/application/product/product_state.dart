@@ -4,13 +4,19 @@ part of 'product_bloc.dart';
 class ProductState with _$ProductState {
   const factory ProductState({
     ProductModel? product,
-    List<ProductModel>? products,
+    @Default([]) List<ProductModel> products,
     required bool isLoading,
     required Option<Either<MainFailure, ProductModel>> productOpt,
     Option<Either<MainFailure, List<ProductModel>>>? productList,
+    @Default([]) List<ProductModel> laptopListOpt,
+    @Default([]) List<ProductModel> earphoneListOpt,
+    @Default([]) List<ProductModel> mobileListOpt,
   }) = _ProductState;
 
   factory ProductState.initial() {
-    return const ProductState(isLoading: false, productOpt: None());
+    return const ProductState(
+      isLoading: false,
+      productOpt: None(),
+    );
   }
 }

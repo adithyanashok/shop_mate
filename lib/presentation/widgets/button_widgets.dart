@@ -52,7 +52,7 @@ class BuildButtonWidget extends StatelessWidget {
   });
   final String text;
   final Function? onTap;
-  final state;
+  final dynamic state;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,7 @@ class BuildButtonWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
           ),
           child: Center(
-            child: state.isLoading == true
+            child: state?.isLoading == true
                 ? const BuildMiniLoader()
                 : BuildButtonText(text: text),
           ),

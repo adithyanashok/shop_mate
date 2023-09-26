@@ -10,7 +10,7 @@ void route(context) {
   User? user = FirebaseAuth.instance.currentUser;
   var userData = FirebaseFirestore.instance
       .collection(Collection.collectionUser)
-      .doc(user!.uid)
+      .doc(user?.uid)
       .get()
       .then((DocumentSnapshot documentSnapshot) {
     if (documentSnapshot.exists) {
@@ -37,7 +37,12 @@ void route(context) {
         );
       }
     } else {
-      print('Document does not exist on the database');
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginScreen(),
+        ),
+      );
     }
   });
 }

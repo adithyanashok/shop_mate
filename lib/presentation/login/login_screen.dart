@@ -55,7 +55,10 @@ class LoginScreen extends StatelessWidget {
                   label: 'Email',
                   hintText: "Enter your email",
                   icon: Icons.mail,
+                  keyboardType: TextInputType.emailAddress,
                   func: (value) {
+                    log(value);
+
                     email = value;
                   },
                 ),
@@ -68,6 +71,8 @@ class LoginScreen extends StatelessWidget {
                   icon: Icons.lock,
                   obscureText: true,
                   func: (value) {
+                    log(value);
+
                     password = value;
                   },
                 ),
@@ -161,6 +166,8 @@ class LoginScreen extends StatelessWidget {
   }
 
   void formValidationAndSubmission(BuildContext context) {
+    log(email.toString());
+    log(password.toString());
     if (email == '' || email == null) {
       snackBar(
         context: context,

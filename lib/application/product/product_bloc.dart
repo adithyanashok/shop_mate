@@ -1,8 +1,8 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:image_pickers/image_pickers.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shop_mate/domain/core/failures/main_failures.dart';
 import 'package:shop_mate/domain/product/i_product_facade.dart';
@@ -21,7 +21,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         emit(state.copyWith(isLoading: true));
         final productOpt = await iProductFacade.addProduct(
           event.product,
-          'userId',
+          event.selectedImages,
+          event.context,
         );
         emit(
           productOpt.fold(
@@ -61,6 +62,92 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
               productList: Some(
                 Right(success),
               ),
+            ),
+          ),
+        );
+      },
+    );
+    on<_GetLaptops>(
+      (event, emit) async {
+        emit(state.copyWith(isLoading: true));
+        final productOpt =
+            await iProductFacade.getLaptops(event.category, event.context);
+        emit(
+          productOpt.fold(
+            (failure) => state.copyWith(
+                isLoading: false,
+                productList: Some(
+                  Left(failure),
+                )),
+            (success) => state.copyWith(
+              isLoading: false,
+              laptopListOpt: success,
+            ),
+          ),
+        );
+      },
+    );
+    on<_GetEarphones>(
+      (event, emit) async {
+        emit(state.copyWith(isLoading: true));
+        final productOpt =
+            await iProductFacade.getEarphones(event.category, event.context);
+        emit(
+          productOpt.fold(
+            (failure) => state.copyWith(
+                isLoading: false,
+                productList: Some(
+                  Left(failure),
+                )),
+            (success) => state.copyWith(
+              isLoading: false,
+              earphoneListOpt: success,
+            ),
+          ),
+        );
+      },
+    );
+
+    on<_GetMobiles>(
+      (event, emit) async {
+        emit(state.copyWith(isLoading: true));
+        final productOpt =
+            await iProductFacade.getMobiles(event.category, event.context);
+        emit(
+          productOpt.fold(
+            (failure) => state.copyWith(
+                isLoading: false,
+                productList: Some(
+                  Left(failure),
+                )),
+            (success) => state.copyWith(
+              isLoading: false,
+              mobileListOpt: success,
+            ),
+          ),
+        );
+      },
+    );
+
+    on<_GetProduct>(
+      (event, emit) async {
+        emit(state.copyWith(isLoading: true));
+        final productOpt =
+            await iProductFacade.getProduct(event.productId, event.context);
+        emit(
+          productOpt.fold(
+            (failure) => state.copyWith(
+              isLoading: false,
+              productOpt: Some(
+                Left(failure),
+              ),
+            ),
+            (success) => state.copyWith(
+              isLoading: false,
+              productOpt: Some(
+                Right(success),
+              ),
+              product: success,
             ),
           ),
         );

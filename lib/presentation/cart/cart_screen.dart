@@ -45,7 +45,7 @@ class CartAmountSection extends StatelessWidget {
     return Expanded(
       child: SizedBox(
         width: double.infinity,
-        height: double.infinity,
+        height: .5.sh,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
@@ -113,7 +113,7 @@ class CartProductSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 0.5.sh,
+      height: 0.4.sh,
       child: ListView.separated(
         itemBuilder: (context, index) {
           return Row(

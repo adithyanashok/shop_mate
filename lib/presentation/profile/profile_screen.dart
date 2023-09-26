@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/signup/signup_screen.dart';
+import 'package:shop_mate/presentation/util/snackbar.dart';
 import 'package:shop_mate/presentation/widgets/app_bar_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
@@ -21,6 +24,7 @@ class ProfileScreen extends StatelessWidget {
               BuildTextButton(icon: Icons.edit, text: "Edit profile"),
               BuildTextButton(icon: Icons.home_filled, text: "Address"),
               BuildTextButton(icon: Icons.widgets, text: "Orders"),
+              BuildTextButton(icon: Icons.logout, text: "Logout"),
             ],
           ),
         ));
@@ -40,7 +44,9 @@ class BuildTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
-      onPressed: () {},
+      onPressed: () {
+        signOut(context);
+      },
       icon: Icon(
         icon,
         color: AppColor.blackColor,
@@ -55,5 +61,20 @@ class BuildTextButton extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> signOut(context) async {
+    try {
+      await FirebaseAuth.instance.signOut();
+
+      // Navigate to the onboarding screen.
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) {
+          return SignupScreen();
+        },
+      ));
+    } catch (e) {
+      snackBar(context: context, msg: e.toString());
+    }
   }
 }

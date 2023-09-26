@@ -1,17 +1,18 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
-import 'package:shop_mate/presentation/constants/route_animation.dart';
-import 'package:shop_mate/presentation/product/product_screen.dart';
+import 'package:shop_mate/presentation/home/earphone_section.dart';
+import 'package:shop_mate/presentation/home/laptop_section.dart';
+import 'package:shop_mate/presentation/home/mobile_section.dart';
 import 'package:shop_mate/presentation/signup/signup_screen.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
 import 'package:shop_mate/presentation/widgets/app_bar_widget.dart';
 import 'package:shop_mate/presentation/widgets/banner_widget.dart';
-import 'package:shop_mate/presentation/widgets/product_card.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -152,78 +153,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   text: "Laptops",
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  height: 250,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                            buildNavigation(route: const ProductScreen()));
-                      },
-                      child: const BuildProductCard(
-                        title: "Macbook Pro M2",
-                        image: 'assets/images/macbook.png',
-                        description:
-                            "APPLE 2022 MacBook Pro M2 - (8 GB/256 GB SSD/Mac OS Monterey) MNEH3HN/A  (13.3 Inch, Space Grey, 1.38 Kg)",
-                        price: '1999',
-                      ),
-                    ),
-                    separatorBuilder: (context, index) => const SizedBox(),
-                    itemCount: 20,
-                  ),
-                ),
-              ),
+              const LaptopSection(),
               const Padding(
                 padding: EdgeInsets.all(20.0),
                 child: BuildHeadingText(
                   text: "Earphones",
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  height: 250,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) => const BuildProductCard(
-                      title: "Macbook Pro M2",
-                      image: 'assets/images/beats.png',
-                      description:
-                          "APPLE 2022 MacBook Pro M2 - (8 GB/256 GB SSD/Mac OS Monterey) MNEH3HN/A  (13.3 Inch, Space Grey, 1.38 Kg)",
-                      price: '1999',
-                    ),
-                    separatorBuilder: (context, index) => const SizedBox(),
-                    itemCount: 20,
-                  ),
-                ),
-              ),
+              const EarphonesSection(),
               const Padding(
                 padding: EdgeInsets.all(20.0),
                 child: BuildHeadingText(
                   text: "Mobiles",
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  height: 250,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) => const BuildProductCard(
-                      title: "Macbook Pro M2",
-                      image: 'assets/images/iphone.png',
-                      description:
-                          "APPLE 2022 MacBook Pro M2 - (8 GB/256 GB SSD/Mac OS Monterey) MNEH3HN/A  (13.3 Inch, Space Grey, 1.38 Kg)",
-                      price: '1999',
-                    ),
-                    separatorBuilder: (context, index) => const SizedBox(),
-                    itemCount: 20,
-                  ),
-                ),
-              ),
+              const MobileSection(),
             ],
           ),
         ),

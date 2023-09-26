@@ -11,36 +11,36 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const BuildSearchBarWidget(),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: BuildMiniText(fontSize: 13, text: 'Results'),
-            ),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.8,
-                  crossAxisSpacing: 1,
-                  mainAxisSpacing: 3,
-                ),
-                itemBuilder: (context, index) {
-                  return const BuildProductCard(
-                      image: 'assets/images/macbook.png',
-                      title: 'Macbook Pro M2',
-                      price: '1000',
-                      description: 'Brand new Macbook Pro with M2 chipset');
-                },
-                itemCount: 6,
-              ),
-            )
-          ],
-        ),
-      ),
-    );
+        // body: SafeArea(
+        //   child: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+        //     children: [
+        //       const BuildSearchBarWidget(),
+        //       const Padding(
+        //         padding: EdgeInsets.all(8.0),
+        //         child: BuildMiniText(fontSize: 13, text: 'Results'),
+        //       ),
+        //       Expanded(
+        //         child: GridView.builder(
+        //           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        //             crossAxisCount: 2,
+        //             childAspectRatio: 0.8,
+        //             crossAxisSpacing: 1,
+        //             mainAxisSpacing: 3,
+        //           ),
+        //           itemBuilder: (context, index) {
+        //             return BuildProductCard(
+        //                 image: Image.asset('assets/images/macbook.png'),
+        //                 title: 'Macbook Pro M2',
+        //                 price: '1000',
+        //                 description: 'Brand new Macbook Pro with M2 chipset');
+        //           },
+        //           itemCount: 6,
+        //         ),
+        //       )
+        //     ],
+        //   ),
+        // ),
+        );
   }
 }

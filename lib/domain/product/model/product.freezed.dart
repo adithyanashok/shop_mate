@@ -22,9 +22,10 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
 mixin _$ProductModel {
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  String get category => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
+  List<String>? get image => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,9 +43,10 @@ abstract class $ProductModelCopyWith<$Res> {
   $Res call(
       {String name,
       String description,
+      String category,
       double amount,
       int quantity,
-      String image,
+      List<String>? image,
       String? id});
 }
 
@@ -63,9 +65,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
   $Res call({
     Object? name = null,
     Object? description = null,
+    Object? category = null,
     Object? amount = null,
     Object? quantity = null,
-    Object? image = null,
+    Object? image = freezed,
     Object? id = freezed,
   }) {
     return _then(_value.copyWith(
@@ -77,6 +80,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -85,10 +92,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -108,9 +115,10 @@ abstract class _$$_ProductModelCopyWith<$Res>
   $Res call(
       {String name,
       String description,
+      String category,
       double amount,
       int quantity,
-      String image,
+      List<String>? image,
       String? id});
 }
 
@@ -127,9 +135,10 @@ class __$$_ProductModelCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? description = null,
+    Object? category = null,
     Object? amount = null,
     Object? quantity = null,
-    Object? image = null,
+    Object? image = freezed,
     Object? id = freezed,
   }) {
     return _then(_$_ProductModel(
@@ -141,6 +150,10 @@ class __$$_ProductModelCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -149,10 +162,10 @@ class __$$_ProductModelCopyWithImpl<$Res>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      image: null == image
-          ? _value.image
+      image: freezed == image
+          ? _value._image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -167,10 +180,12 @@ class _$_ProductModel implements _ProductModel {
   const _$_ProductModel(
       {required this.name,
       required this.description,
+      required this.category,
       required this.amount,
       required this.quantity,
-      required this.image,
-      this.id});
+      final List<String>? image,
+      this.id})
+      : _image = image;
 
   factory _$_ProductModel.fromJson(Map<String, dynamic> json) =>
       _$$_ProductModelFromJson(json);
@@ -180,17 +195,27 @@ class _$_ProductModel implements _ProductModel {
   @override
   final String description;
   @override
+  final String category;
+  @override
   final double amount;
   @override
   final int quantity;
+  final List<String>? _image;
   @override
-  final String image;
+  List<String>? get image {
+    final value = _image;
+    if (value == null) return null;
+    if (_image is EqualUnmodifiableListView) return _image;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final String? id;
 
   @override
   String toString() {
-    return 'ProductModel(name: $name, description: $description, amount: $amount, quantity: $quantity, image: $image, id: $id)';
+    return 'ProductModel(name: $name, description: $description, category: $category, amount: $amount, quantity: $quantity, image: $image, id: $id)';
   }
 
   @override
@@ -201,17 +226,19 @@ class _$_ProductModel implements _ProductModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
-            (identical(other.image, image) || other.image == image) &&
+            const DeepCollectionEquality().equals(other._image, _image) &&
             (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, description, amount, quantity, image, id);
+  int get hashCode => Object.hash(runtimeType, name, description, category,
+      amount, quantity, const DeepCollectionEquality().hash(_image), id);
 
   @JsonKey(ignore: true)
   @override
@@ -231,9 +258,10 @@ abstract class _ProductModel implements ProductModel {
   const factory _ProductModel(
       {required final String name,
       required final String description,
+      required final String category,
       required final double amount,
       required final int quantity,
-      required final String image,
+      final List<String>? image,
       final String? id}) = _$_ProductModel;
 
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
@@ -244,11 +272,13 @@ abstract class _ProductModel implements ProductModel {
   @override
   String get description;
   @override
+  String get category;
+  @override
   double get amount;
   @override
   int get quantity;
   @override
-  String get image;
+  List<String>? get image;
   @override
   String? get id;
   @override

@@ -15,6 +15,7 @@ import 'package:shop_mate/domain/core/di/injectable.dart';
 import 'package:shop_mate/presentation/admin/main_screen.dart';
 import 'package:shop_mate/presentation/login/login_screen.dart';
 import 'package:shop_mate/presentation/main_page.dart';
+import 'package:shop_mate/presentation/product/product_screen.dart';
 import 'package:shop_mate/presentation/signup/signup_screen.dart';
 import 'package:shop_mate/presentation/splash_screen/splash_screen.dart';
 
