@@ -33,14 +33,14 @@ class LaptopSection extends StatelessWidget {
                         return BuildProductCard(
                           title: product.name,
                           image: Image.network(
-                            product.image![0],
+                            product.image[0],
                             fit: BoxFit.cover,
                             width: 100,
                           ),
                           onTap: () {
                             Navigator.of(context).push(
                               buildNavigation(
-                                route: const ProductScreen(),
+                                route: ProductScreen(),
                                 arguments: product.id,
                               ),
                             );

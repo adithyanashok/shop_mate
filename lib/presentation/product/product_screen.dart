@@ -1,23 +1,31 @@
+import 'dart:developer';
+
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/pageview/pageview_bloc.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/rating/rating.dart';
 import 'package:shop_mate/presentation/widgets/button_widgets.dart';
 import 'package:shop_mate/presentation/widgets/loading_widget.dart';
+import 'package:shop_mate/presentation/widgets/star_rating_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class ProductScreen extends StatelessWidget {
-  const ProductScreen({super.key});
+  ProductScreen({super.key});
+  final userId = FirebaseAuth.instance.currentUser?.uid;
 
   @override
   Widget build(BuildContext context) {
-    final arguments = ModalRoute.of(context)?.settings.arguments;
+    BlocProvider.of<PageviewBloc>(context)
+        .add(const PageviewEvent.onPageChanged(currentIndex: 0));
+    final productId = ModalRoute.of(context)?.settings.arguments as String;
     PageController pageController = PageController(initialPage: 0);
     BlocProvider.of<ProductBloc>(context).add(ProductEvent.getProduct(
-        productId: arguments.toString(), context: context));
+        productId: productId.toString(), context: context));
 
     return Scaffold(
       appBar: AppBar(
@@ -36,7 +44,7 @@ class ProductScreen extends StatelessWidget {
                       children: [
                         Container(
                           width: 1.sw,
-                          height: .5.sh,
+                          height: .4.sh,
                           margin: const EdgeInsets.only(left: 20, right: 20),
                           child: PageView.builder(
                             itemCount: product.image.length,
@@ -60,6 +68,7 @@ class ProductScreen extends StatelessWidget {
                         Center(
                           child: BlocBuilder<PageviewBloc, PageviewState>(
                             builder: (context, state) {
+                              log(state.currentIndex.toString());
                               if (product.image.isNotEmpty) {
                                 return DotsIndicator(
                                   dotsCount: product.image.length,
@@ -109,22 +118,23 @@ class ProductScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: 140,
-                              height: 35,
-                              child: ListView.separated(
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return CircleAvatar(
-                                    backgroundColor: Colors.blue[index],
-                                  );
-                                },
-                                separatorBuilder: (context, index) {
-                                  return const SizedBox();
-                                },
-                                itemCount: 3,
-                              ),
-                            )
+                            StarRatingWidget(initialRating: 4, readOnly: true),
+                            // SizedBox(
+                            //   width: 140,
+                            //   height: 35,
+                            //   child: ListView.separated(
+                            //     scrollDirection: Axis.horizontal,
+                            //     itemBuilder: (context, index) {
+                            //       return CircleAvatar(
+                            //         backgroundColor: Colors.blue[index],
+                            //       );
+                            //     },
+                            //     separatorBuilder: (context, index) {
+                            //       return const SizedBox();
+                            //     },
+                            //     itemCount: 3,
+                            //   ),
+                            // )
                           ],
                         ),
                         const SizedBox(
@@ -147,38 +157,58 @@ class ProductScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 20, top: 20),
-                          child: BuildHeadingText(text: "Product Review"),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.only(left: 20, top: 20),
+                              child: BuildHeadingText(text: "Product Review"),
+                            ),
+                            RatingProductWidget(
+                              productId: productId.toString(),
+                              userId: userId!,
+                            )
+                          ],
                         ),
                         SizedBox(
                           width: double.infinity,
-                          height: 205,
+                          height: .8.sh,
                           child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
+                            scrollDirection: Axis.vertical,
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Card(
                                   child: SizedBox(
                                     width: 200,
-                                    height: 200,
+                                    // height: 200,
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            "Greate Product",
-                                            style: TextStyle(
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.w500,
-                                            ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "Greate Product",
+                                                style: TextStyle(
+                                                  fontSize: 15.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                              StarRatingWidget(
+                                                initialRating: 5,
+                                                readOnly: true,
+                                              )
+                                            ],
                                           ),
                                           const BuildSmallText(
                                             text:
                                                 "Awesome product loved it, nice quality. value fo money",
+                                            textOverflow: TextOverflow.visible,
                                           )
                                         ],
                                       ),

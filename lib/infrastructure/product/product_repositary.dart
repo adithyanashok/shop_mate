@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -120,6 +121,7 @@ class ProductRepository implements IProductFacade {
   @override
   Future<Either<MainFailure, ProductModel>> getProduct(
       String productId, context) async {
+    String? id;
     try {
       final db = FirebaseFirestore.instance;
       final docRef = await db
@@ -127,9 +129,11 @@ class ProductRepository implements IProductFacade {
           .doc(productId)
           .get()
           .then((doc) {
+        id = doc.id;
         return doc.data();
       });
-      final product = ProductModel.fromJson(docRef!);
+      final product = ProductModel.fromJson(docRef!).copyWith(id: id);
+
       return Right(product);
     } catch (e) {
       snackBar(context: context, msg: e.toString());

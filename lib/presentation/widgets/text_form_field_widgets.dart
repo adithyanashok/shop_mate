@@ -89,11 +89,13 @@ class BuildTextAreaField extends StatelessWidget {
     required this.hintText,
     required this.icon,
     this.func,
+    this.maxLength = 500,
   });
   final String label;
   final String hintText;
   final IconData icon;
   final Function(String value)? func;
+  final int maxLength;
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +131,7 @@ class BuildTextAreaField extends StatelessWidget {
                   },
                   maxLines: 10,
                   minLines: 7,
-                  maxLength: 500,
+                  maxLength: maxLength,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
