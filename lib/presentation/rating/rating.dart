@@ -80,6 +80,12 @@ class RatingProductWidget extends StatelessWidget {
                         text: "Rate",
                         onTap: () {
                           rate(context);
+                          BlocProvider.of<RatingBloc>(context).add(
+                            RatingEvent.fetchRatings(
+                              productId: productId,
+                              context: context,
+                            ),
+                          );
                         },
                         state: state,
                       );

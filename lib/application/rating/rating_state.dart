@@ -5,7 +5,9 @@ class RatingState with _$RatingState {
   const factory RatingState({
     required bool isLoading,
     required RatingModel rating,
+    required List<RatingModel> ratings,
     required Option<Either<MainFailure, RatingModel>> ratingOpt,
+    required Option<Either<MainFailure, List<RatingModel>>> ratingListOpt,
   }) = _RatingState;
   factory RatingState.initial() {
     return const RatingState(
@@ -18,6 +20,8 @@ class RatingState with _$RatingState {
         userId: '',
       ),
       ratingOpt: None(),
+      ratings: [],
+      ratingListOpt: None(),
     );
   }
 }

@@ -39,5 +39,30 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
         );
       },
     );
+    // fetch all ratings here
+    on<_FetchRatings>(
+      (event, emit) async {
+        emit(state.copyWith(isLoading: true));
+        final ratingList =
+            await iRatingFacade.fetchRatings(event.productId, event.context);
+        emit(
+          ratingList.fold(
+            (failure) => state.copyWith(
+              isLoading: false,
+              ratingListOpt: Some(
+                Left(failure),
+              ),
+            ),
+            (success) => state.copyWith(
+              isLoading: false,
+              ratings: success,
+              ratingListOpt: Some(
+                Right(success),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }

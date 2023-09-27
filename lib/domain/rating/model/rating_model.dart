@@ -10,6 +10,7 @@ class RatingModel with _$RatingModel {
     required double rating,
     required String title,
     required String description,
+    String? id,
   }) = _RatingModel;
 
   factory RatingModel.fromJson(Map<String, dynamic> json) =>

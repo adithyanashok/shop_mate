@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/pageview/pageview_bloc.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
+import 'package:shop_mate/application/rating/rating_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/rating/rating.dart';
 import 'package:shop_mate/presentation/widgets/button_widgets.dart';
@@ -22,10 +23,15 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     BlocProvider.of<PageviewBloc>(context)
         .add(const PageviewEvent.onPageChanged(currentIndex: 0));
+
     final productId = ModalRoute.of(context)?.settings.arguments as String;
     PageController pageController = PageController(initialPage: 0);
+
     BlocProvider.of<ProductBloc>(context).add(ProductEvent.getProduct(
         productId: productId.toString(), context: context));
+
+    BlocProvider.of<RatingBloc>(context)
+        .add(RatingEvent.fetchRatings(productId: productId, context: context));
 
     return Scaffold(
       appBar: AppBar(
@@ -119,22 +125,6 @@ class ProductScreen extends StatelessWidget {
                               ),
                             ),
                             StarRatingWidget(initialRating: 4, readOnly: true),
-                            // SizedBox(
-                            //   width: 140,
-                            //   height: 35,
-                            //   child: ListView.separated(
-                            //     scrollDirection: Axis.horizontal,
-                            //     itemBuilder: (context, index) {
-                            //       return CircleAvatar(
-                            //         backgroundColor: Colors.blue[index],
-                            //       );
-                            //     },
-                            //     separatorBuilder: (context, index) {
-                            //       return const SizedBox();
-                            //     },
-                            //     itemCount: 3,
-                            //   ),
-                            // )
                           ],
                         ),
                         const SizedBox(
@@ -170,58 +160,69 @@ class ProductScreen extends StatelessWidget {
                             )
                           ],
                         ),
-                        SizedBox(
-                          width: double.infinity,
-                          height: .8.sh,
-                          child: ListView.separated(
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Card(
-                                  child: SizedBox(
-                                    width: 200,
-                                    // height: 200,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "Greate Product",
-                                                style: TextStyle(
-                                                  fontSize: 15.sp,
-                                                  fontWeight: FontWeight.w500,
+                        BlocBuilder<RatingBloc, RatingState>(
+                          builder: (context, state) {
+                            return SizedBox(
+                              width: double.infinity,
+                              height: .8.sh,
+                              child: ListView.separated(
+                                scrollDirection: Axis.vertical,
+                                itemBuilder: (context, index) {
+                                  final ratings = state.ratings[index];
+                                  return state.isLoading
+                                      ? const BuildLoadingWidget()
+                                      : Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Card(
+                                            child: SizedBox(
+                                              width: 200,
+                                              // height: 200,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          ratings.title,
+                                                          style: TextStyle(
+                                                            fontSize: 15.sp,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                        ),
+                                                        StarRatingWidget(
+                                                          initialRating:
+                                                              ratings.rating,
+                                                          readOnly: true,
+                                                        )
+                                                      ],
+                                                    ),
+                                                    BuildSmallText(
+                                                      text: ratings.description,
+                                                      textOverflow:
+                                                          TextOverflow.visible,
+                                                    )
+                                                  ],
                                                 ),
                                               ),
-                                              StarRatingWidget(
-                                                initialRating: 5,
-                                                readOnly: true,
-                                              )
-                                            ],
+                                            ),
                                           ),
-                                          const BuildSmallText(
-                                            text:
-                                                "Awesome product loved it, nice quality. value fo money",
-                                            textOverflow: TextOverflow.visible,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                            separatorBuilder: (context, index) {
-                              return const SizedBox();
-                            },
-                            itemCount: 5,
-                          ),
+                                        );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return const SizedBox();
+                                },
+                                itemCount: state.ratings.length,
+                              ),
+                            );
+                          },
                         )
                       ],
                     ),

@@ -13,6 +13,7 @@ _$_RatingModel _$$_RatingModelFromJson(Map<String, dynamic> json) =>
       rating: (json['rating'] as num).toDouble(),
       title: json['title'] as String,
       description: json['description'] as String,
+      id: json['id'] as String?,
     );
 
 Map<String, dynamic> _$$_RatingModelToJson(_$_RatingModel instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$$_RatingModelToJson(_$_RatingModel instance) =>
       'rating': instance.rating,
       'title': instance.title,
       'description': instance.description,
+      'id': instance.id,
     };

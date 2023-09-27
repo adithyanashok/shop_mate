@@ -25,6 +25,7 @@ mixin _$RatingModel {
   double get rating => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +44,8 @@ abstract class $RatingModelCopyWith<$Res> {
       String userId,
       double rating,
       String title,
-      String description});
+      String description,
+      String? id});
 }
 
 /// @nodoc
@@ -64,6 +66,7 @@ class _$RatingModelCopyWithImpl<$Res, $Val extends RatingModel>
     Object? rating = null,
     Object? title = null,
     Object? description = null,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
       productId: null == productId
@@ -86,6 +89,10 @@ class _$RatingModelCopyWithImpl<$Res, $Val extends RatingModel>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -103,7 +110,8 @@ abstract class _$$_RatingModelCopyWith<$Res>
       String userId,
       double rating,
       String title,
-      String description});
+      String description,
+      String? id});
 }
 
 /// @nodoc
@@ -122,6 +130,7 @@ class __$$_RatingModelCopyWithImpl<$Res>
     Object? rating = null,
     Object? title = null,
     Object? description = null,
+    Object? id = freezed,
   }) {
     return _then(_$_RatingModel(
       productId: null == productId
@@ -144,6 +153,10 @@ class __$$_RatingModelCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -156,7 +169,8 @@ class _$_RatingModel implements _RatingModel {
       required this.userId,
       required this.rating,
       required this.title,
-      required this.description});
+      required this.description,
+      this.id});
 
   factory _$_RatingModel.fromJson(Map<String, dynamic> json) =>
       _$$_RatingModelFromJson(json);
@@ -171,10 +185,12 @@ class _$_RatingModel implements _RatingModel {
   final String title;
   @override
   final String description;
+  @override
+  final String? id;
 
   @override
   String toString() {
-    return 'RatingModel(productId: $productId, userId: $userId, rating: $rating, title: $title, description: $description)';
+    return 'RatingModel(productId: $productId, userId: $userId, rating: $rating, title: $title, description: $description, id: $id)';
   }
 
   @override
@@ -188,13 +204,14 @@ class _$_RatingModel implements _RatingModel {
             (identical(other.rating, rating) || other.rating == rating) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, productId, userId, rating, title, description);
+  int get hashCode => Object.hash(
+      runtimeType, productId, userId, rating, title, description, id);
 
   @JsonKey(ignore: true)
   @override
@@ -216,7 +233,8 @@ abstract class _RatingModel implements RatingModel {
       required final String userId,
       required final double rating,
       required final String title,
-      required final String description}) = _$_RatingModel;
+      required final String description,
+      final String? id}) = _$_RatingModel;
 
   factory _RatingModel.fromJson(Map<String, dynamic> json) =
       _$_RatingModel.fromJson;
@@ -231,6 +249,8 @@ abstract class _RatingModel implements RatingModel {
   String get title;
   @override
   String get description;
+  @override
+  String? get id;
   @override
   @JsonKey(ignore: true)
   _$$_RatingModelCopyWith<_$_RatingModel> get copyWith =>
