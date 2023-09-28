@@ -25,7 +25,7 @@ mixin _$ProductModel {
   String get category => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
-  List<String> get image => throw _privateConstructorUsedError;
+  List<String>? get image => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $ProductModelCopyWith<$Res> {
       String category,
       double amount,
       int quantity,
-      List<String> image,
+      List<String>? image,
       String? id});
 }
 
@@ -68,7 +68,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? category = null,
     Object? amount = null,
     Object? quantity = null,
-    Object? image = null,
+    Object? image = freezed,
     Object? id = freezed,
   }) {
     return _then(_value.copyWith(
@@ -92,10 +92,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -118,7 +118,7 @@ abstract class _$$_ProductModelCopyWith<$Res>
       String category,
       double amount,
       int quantity,
-      List<String> image,
+      List<String>? image,
       String? id});
 }
 
@@ -138,7 +138,7 @@ class __$$_ProductModelCopyWithImpl<$Res>
     Object? category = null,
     Object? amount = null,
     Object? quantity = null,
-    Object? image = null,
+    Object? image = freezed,
     Object? id = freezed,
   }) {
     return _then(_$_ProductModel(
@@ -162,10 +162,10 @@ class __$$_ProductModelCopyWithImpl<$Res>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      image: null == image
+      image: freezed == image
           ? _value._image
           : image // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -183,7 +183,7 @@ class _$_ProductModel implements _ProductModel {
       required this.category,
       required this.amount,
       required this.quantity,
-      required final List<String> image,
+      final List<String>? image,
       this.id})
       : _image = image;
 
@@ -200,12 +200,14 @@ class _$_ProductModel implements _ProductModel {
   final double amount;
   @override
   final int quantity;
-  final List<String> _image;
+  final List<String>? _image;
   @override
-  List<String> get image {
+  List<String>? get image {
+    final value = _image;
+    if (value == null) return null;
     if (_image is EqualUnmodifiableListView) return _image;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_image);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -259,7 +261,7 @@ abstract class _ProductModel implements ProductModel {
       required final String category,
       required final double amount,
       required final int quantity,
-      required final List<String> image,
+      final List<String>? image,
       final String? id}) = _$_ProductModel;
 
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
@@ -276,7 +278,7 @@ abstract class _ProductModel implements ProductModel {
   @override
   int get quantity;
   @override
-  List<String> get image;
+  List<String>? get image;
   @override
   String? get id;
   @override

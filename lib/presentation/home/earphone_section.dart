@@ -31,7 +31,7 @@ class EarphonesSection extends StatelessWidget {
                         return BuildProductCard(
                           title: value.name,
                           image: Image.network(
-                            value.image[0],
+                            value.image![0],
                             fit: BoxFit.cover,
                             width: 80,
                           ),

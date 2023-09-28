@@ -153,5 +153,44 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
       },
     );
+    on<_EditProduct>(
+      (event, emit) async {
+        emit(state.copyWith(isLoading: true));
+        final productUpdate = await iProductFacade.editProduct(
+          event.product,
+          event.selectedImages,
+          event.context,
+        );
+        emit(
+          productUpdate.fold(
+            (failure) => state.copyWith(
+              isLoading: false,
+            ),
+            (r) => state.copyWith(
+              isLoading: false,
+            ),
+          ),
+        );
+      },
+    );
+    on<_DeleteProduct>(
+      (event, emit) async {
+        emit(state.copyWith(isLoading: true));
+        final productUpdate = await iProductFacade.deleteProduct(
+          event.productId,
+          event.context,
+        );
+        emit(
+          productUpdate.fold(
+            (failure) => state.copyWith(
+              isLoading: false,
+            ),
+            (r) => state.copyWith(
+              isLoading: false,
+            ),
+          ),
+        );
+      },
+    );
   }
 }

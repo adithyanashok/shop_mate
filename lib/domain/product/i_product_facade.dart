@@ -9,6 +9,15 @@ abstract class IProductFacade {
     List<Media> selectedImages,
     context,
   );
+  Future<Either<MainFailure, bool>> editProduct(
+    ProductModel product,
+    List<Media>? selectedImages,
+    context,
+  );
+  Future<Either<MainFailure, bool>> deleteProduct(
+    String productId,
+    context,
+  );
 
   Future<Either<MainFailure, List<ProductModel>>> getAllProducts();
   Future<Either<MainFailure, List<ProductModel>>> getProductsByCategory(

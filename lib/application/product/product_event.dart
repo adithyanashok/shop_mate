@@ -8,6 +8,17 @@ class ProductEvent with _$ProductEvent {
     required BuildContext context,
   }) = _AddProduct;
 
+  const factory ProductEvent.editProduct({
+    required ProductModel product,
+    required BuildContext context,
+    List<Media>? selectedImages,
+  }) = _EditProduct;
+
+  const factory ProductEvent.deleteProduct({
+    required String productId,
+    required BuildContext context,
+  }) = _DeleteProduct;
+
   const factory ProductEvent.getAllProduct() = _GetAllProduct;
 
   const factory ProductEvent.getProductsByCategory({

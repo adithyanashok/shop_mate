@@ -1,16 +1,19 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
-class BuildTextFormField extends StatelessWidget {
-  const BuildTextFormField(
+class BuildTextFormField extends StatefulWidget {
+  BuildTextFormField(
       {super.key,
       required this.label,
       required this.hintText,
       required this.icon,
+      this.initialValue = '',
       this.obscureText = false,
       this.keyboardType = TextInputType.multiline,
       this.func});
@@ -20,6 +23,25 @@ class BuildTextFormField extends StatelessWidget {
   final bool obscureText;
   final TextInputType keyboardType;
   final Function(String value)? func;
+  final String initialValue;
+
+  @override
+  State<BuildTextFormField> createState() => _BuildTextFormFieldState();
+}
+
+class _BuildTextFormFieldState extends State<BuildTextFormField> {
+  late TextEditingController textEditingController;
+  @override
+  void initState() {
+    super.initState();
+    textEditingController = TextEditingController(text: widget.initialValue);
+  }
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +49,7 @@ class BuildTextFormField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         BuildSmallText(
-          text: label,
+          text: widget.label,
           fontSize: 14,
           fontWeight: FontWeight.w600,
         ),
@@ -42,7 +64,7 @@ class BuildTextFormField extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                icon,
+                widget.icon,
                 color: AppColor.colorGrey2,
               ),
               const SizedBox(
@@ -52,14 +74,15 @@ class BuildTextFormField extends StatelessWidget {
                 child: TextField(
                   onChanged: (value) {
                     log(value);
-                    func!(value);
+                    widget.func!(value);
                   },
-                  keyboardType: keyboardType,
-                  obscureText: obscureText,
+                  keyboardType: widget.keyboardType,
+                  obscureText: widget.obscureText,
+                  controller: textEditingController,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
-                    hintText: hintText,
+                    hintText: widget.hintText,
                     hintStyle: TextStyle(
                       color: AppColor.colorGrey2,
                       fontSize: 14.sp,
@@ -82,7 +105,7 @@ class BuildTextFormField extends StatelessWidget {
   }
 }
 
-class BuildTextAreaField extends StatelessWidget {
+class BuildTextAreaField extends StatefulWidget {
   const BuildTextAreaField({
     super.key,
     required this.label,
@@ -90,12 +113,32 @@ class BuildTextAreaField extends StatelessWidget {
     required this.icon,
     this.func,
     this.maxLength = 500,
+    this.initialValue = '',
   });
   final String label;
   final String hintText;
   final IconData icon;
   final Function(String value)? func;
   final int maxLength;
+  final String initialValue;
+
+  @override
+  State<BuildTextAreaField> createState() => _BuildTextAreaFieldState();
+}
+
+class _BuildTextAreaFieldState extends State<BuildTextAreaField> {
+  late TextEditingController textEditingController;
+  @override
+  void initState() {
+    super.initState();
+    textEditingController = TextEditingController(text: widget.initialValue);
+  }
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +146,7 @@ class BuildTextAreaField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         BuildSmallText(
-          text: label,
+          text: widget.label,
           fontSize: 14,
           fontWeight: FontWeight.w600,
         ),
@@ -118,7 +161,7 @@ class BuildTextAreaField extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                icon,
+                widget.icon,
                 color: AppColor.colorGrey2,
               ),
               const SizedBox(
@@ -127,15 +170,16 @@ class BuildTextAreaField extends StatelessWidget {
               Expanded(
                 child: TextField(
                   onChanged: (value) {
-                    func!(value);
+                    widget.func!(value);
                   },
                   maxLines: 10,
                   minLines: 7,
-                  maxLength: maxLength,
+                  maxLength: widget.maxLength,
+                  controller: textEditingController,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
-                    hintText: hintText,
+                    hintText: widget.hintText,
                     hintStyle: TextStyle(
                       color: AppColor.colorGrey2,
                       fontSize: 14.sp,

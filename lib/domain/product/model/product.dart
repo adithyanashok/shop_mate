@@ -11,7 +11,7 @@ class ProductModel with _$ProductModel {
     required String category,
     required double amount,
     required int quantity,
-    required List<String> image,
+    List<String>? image,
     String? id,
   }) = _ProductModel;
 

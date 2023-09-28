@@ -1,12 +1,14 @@
-import 'dart:developer';
+// import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_pickers/image_pickers.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/domain/core/collections/collections.dart';
 import 'package:shop_mate/domain/core/failures/main_failures.dart';
 import 'package:shop_mate/domain/product/i_product_facade.dart';
@@ -40,6 +42,55 @@ class ProductRepository implements IProductFacade {
   }
 
   @override
+  Future<Either<MainFailure, bool>> editProduct(
+      ProductModel product, List<Media>? selectedImages, context) async {
+    try {
+      final db = FirebaseFirestore.instance;
+      if (selectedImages != null) {
+        List<String> images =
+            await uploadImagesToFirebaseStorage(selectedImages, context);
+        product = product.copyWith(image: images);
+        db.collection(Collection.collectionProduct).doc(product.id).update(
+          {
+            "image": product.image,
+          },
+        );
+      } else {}
+
+      db.collection(Collection.collectionProduct).doc(product.id).update(
+        {
+          "name": product.name,
+          "description": product.description,
+          "amount": product.amount,
+          "quantity": product.quantity,
+          "category": product.category,
+        },
+      );
+
+      Navigator.of(context).pop();
+      return const Right(true);
+    } catch (e) {
+      return const Left(MainFailure.clientFailure());
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, bool>> deleteProduct(
+      String productId, context) async {
+    try {
+      final db = FirebaseFirestore.instance;
+      await db.collection(Collection.collectionProduct).doc(productId).delete();
+      BlocProvider.of<ProductBloc>(context)
+          .add(const ProductEvent.getAllProduct());
+      Navigator.of(context).pop();
+      return const Right(true);
+    } catch (e) {
+      snackBar(context: context, msg: e.toString());
+      return const Left(MainFailure.clientFailure());
+    }
+  }
+
+  @override
   Future<Either<MainFailure, List<ProductModel>>> getAllProducts() async {
     try {
       final db = FirebaseFirestore.instance;
@@ -47,6 +98,7 @@ class ProductRepository implements IProductFacade {
 
       final querySnapshot =
           await db.collection(Collection.collectionProduct).get();
+
       for (var docSnapshot in querySnapshot.docs) {
         final productData = docSnapshot.data();
         final product =

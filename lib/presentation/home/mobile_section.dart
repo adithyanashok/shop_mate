@@ -31,7 +31,7 @@ class MobileSection extends StatelessWidget {
                       return BuildProductCard(
                         title: product.name,
                         image: Image.network(
-                          product.image[0],
+                          product.image![0],
                           fit: BoxFit.cover,
                           width: 80,
                         ),

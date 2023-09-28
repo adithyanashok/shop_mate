@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,16 +12,21 @@ import 'package:shop_mate/presentation/widgets/text_form_field_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 import 'package:image_pickers/image_pickers.dart';
 
-class AddProductScreen extends StatefulWidget {
-  AddProductScreen({
+class EditProductScreen extends StatefulWidget {
+  EditProductScreen({
     super.key,
+    this.product,
+    required this.id,
   });
+  final dynamic product;
+  final String id;
 
   @override
-  State<AddProductScreen> createState() => _AddProductScreenState();
+  State<EditProductScreen> createState() => _EditProductScreenState();
 }
 
-class _AddProductScreenState extends State<AddProductScreen> {
+class _EditProductScreenState extends State<EditProductScreen> {
+  List<Media>? image;
   String? name;
 
   String? description;
@@ -27,16 +34,24 @@ class _AddProductScreenState extends State<AddProductScreen> {
   String? amount;
 
   String? quantity;
-  String? category;
 
-  List<Media>? image;
+  String? category;
 
   bool error = false;
 
-  _AddProductScreenState();
+  @override
+  void initState() {
+    super.initState();
+    name = widget.product.name;
+    description = widget.product.description;
+    amount = widget.product.amount.toString();
+    quantity = widget.product.quantity.toString();
+    category = widget.product.category;
+  }
 
   @override
   Widget build(BuildContext context) {
+    log(widget.product.id.toString());
     return Container(
       color: AppColor.whiteColor,
       width: 1.sw,
@@ -51,7 +66,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 children: [
                   error == true
                       ? const CircleAvatar()
-                      : const BuildHeadingText(text: 'Add Product'),
+                      : const BuildHeadingText(text: 'Edit Product'),
                   IconButton(
                     onPressed: () {
                       Navigator.of(context).pop();
@@ -63,35 +78,42 @@ class _AddProductScreenState extends State<AddProductScreen> {
               BuildTextFormField(
                 label: "Product name",
                 hintText: 'Enter product name',
+                initialValue: widget.product.name,
                 icon: Icons.abc,
                 func: (value) {
-                  name = value;
+                  name = value = value.isNotEmpty ? value : widget.product.name;
                 },
               ),
               BuildTextAreaField(
                 label: "Desciption",
                 hintText: 'Enter product description',
                 icon: Icons.description,
+                initialValue: widget.product.description,
                 func: (value) {
-                  description = value;
+                  description = value =
+                      value.isNotEmpty ? value : widget.product.description;
                 },
               ),
               BuildTextFormField(
                 label: "Amount",
                 hintText: 'Enter product amount',
                 icon: Icons.money,
+                initialValue: widget.product.amount.toString(),
                 keyboardType: TextInputType.number,
                 func: (value) {
-                  amount = value;
+                  amount =
+                      value = value.isNotEmpty ? value : widget.product.amount;
                 },
               ),
               BuildTextFormField(
                 label: "Quantity",
                 hintText: 'Enter product quantity',
                 icon: Icons.shopping_basket,
+                initialValue: widget.product.quantity.toString(),
                 keyboardType: TextInputType.number,
                 func: (value) {
-                  quantity = value;
+                  quantity = value =
+                      value.isNotEmpty ? value : widget.product.quantity;
                 },
               ),
               const SizedBox(
@@ -99,7 +121,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
               ),
               DropdownMenu(
                 onSelected: (value) {
-                  category = value;
+                  category = value = value.toString().isNotEmpty
+                      ? value
+                      : widget.product.category;
                 },
                 menuStyle: const MenuStyle(
                   backgroundColor:
@@ -111,10 +135,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   DropdownMenuEntry(value: 'mobile', label: 'Mobiles'),
                   DropdownMenuEntry(value: 'earphone', label: 'Earphones'),
                 ],
+                initialSelection: widget.product.category,
               ),
               TextButton.icon(
                 onPressed: () async {
-                  List<Media> selectedImages = await pickMultipleImages();
+                  List<Media> selectedImages =
+                      await pickMultipleImages(context);
                   if (selectedImages.isNotEmpty) {
                     image = selectedImages;
                   }
@@ -136,9 +162,18 @@ class _AddProductScreenState extends State<AddProductScreen> {
               BlocBuilder<ProductBloc, ProductState>(
                 builder: (context, state) {
                   return BuildButtonWidget(
-                    text: "Upload",
+                    text: "Update",
                     onTap: () {
-                      uploadData(context);
+                      uploadData(
+                        name,
+                        description,
+                        quantity,
+                        category,
+                        amount,
+                        context,
+                      );
+                      BlocProvider.of<ProductBloc>(context)
+                          .add(const ProductEvent.getAllProduct());
                     },
                     state: state,
                   );
@@ -151,7 +186,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     );
   }
 
-  Future<List<Media>> pickMultipleImages() async {
+  Future<List<Media>> pickMultipleImages(context) async {
     try {
       List<Media> selectedImages = await ImagePickers.pickerPaths(
         galleryMode: GalleryMode.image,
@@ -164,29 +199,27 @@ class _AddProductScreenState extends State<AddProductScreen> {
     }
   }
 
-  void uploadData(context) {
+  void uploadData(name, description, quantity, category, amount, context) {
     if (name == null ||
         description == null ||
-        amount == null ||
         quantity == null ||
-        image == null ||
-        category == null) {
+        category == null ||
+        amount == null) {
       snackBar(context: context, msg: 'Please fill the form');
-      // return;
     } else {
-      final am = double.parse(amount!);
-      final qty = int.parse(quantity!);
+      final parsedAmount = double.parse(amount!);
+      final parsedQty = int.parse(quantity!);
       BlocProvider.of<ProductBloc>(context).add(
-        ProductEvent.addProduct(
+        ProductEvent.editProduct(
           product: ProductModel(
             name: name!,
             description: description!,
-            amount: am,
-            quantity: qty,
             category: category!,
-            image: [],
+            amount: parsedAmount,
+            quantity: parsedQty,
+            id: widget.product.id,
           ),
-          selectedImages: image!,
+          selectedImages: image,
           context: context,
         ),
       );

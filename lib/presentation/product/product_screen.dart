@@ -21,27 +21,32 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // set index of pageview 0
     BlocProvider.of<PageviewBloc>(context)
         .add(const PageviewEvent.onPageChanged(currentIndex: 0));
-
+    // get productid
     final productId = ModalRoute.of(context)?.settings.arguments as String;
+    //page controller
     PageController pageController = PageController(initialPage: 0);
-
+    // get product event
     BlocProvider.of<ProductBloc>(context).add(ProductEvent.getProduct(
         productId: productId.toString(), context: context));
-
+    // fetch ratings of the product
     BlocProvider.of<RatingBloc>(context)
         .add(RatingEvent.fetchRatings(productId: productId, context: context));
 
     return Scaffold(
+      // Appbar
       appBar: AppBar(
         centerTitle: true,
         title: const BuildRegularTextWidget(text: 'Product Details'),
       ),
+      // body
       body: BlocBuilder<ProductBloc, ProductState>(
         builder: (context, state) {
           final product = state.product;
           return SafeArea(
+            // show a loading when fetching
             child: state.isLoading
                 ? const BuildLoadingWidget()
                 : SingleChildScrollView(
@@ -53,10 +58,10 @@ class ProductScreen extends StatelessWidget {
                           height: .4.sh,
                           margin: const EdgeInsets.only(left: 20, right: 20),
                           child: PageView.builder(
-                            itemCount: product.image.length,
+                            itemCount: product.image!.length,
                             itemBuilder: (BuildContext context, int index) {
                               return Image.network(
-                                product.image[index],
+                                product.image![index],
                                 width: 340,
                                 fit: BoxFit.contain,
                               );
@@ -74,11 +79,12 @@ class ProductScreen extends StatelessWidget {
                         Center(
                           child: BlocBuilder<PageviewBloc, PageviewState>(
                             builder: (context, state) {
-                              log(state.currentIndex.toString());
-                              if (product.image.isNotEmpty) {
+                              if (product.image!.isNotEmpty) {
+                                // Dots indicator
                                 return DotsIndicator(
-                                  dotsCount: product.image.length,
+                                  dotsCount: product.image!.length,
                                   position: state.currentIndex,
+                                  // dots styles
                                   decorator: const DotsDecorator(
                                     color: AppColor.colorGrey3,
                                     activeColor: AppColor.greenColor,
@@ -160,76 +166,85 @@ class ProductScreen extends StatelessWidget {
                             )
                           ],
                         ),
-                        BlocBuilder<RatingBloc, RatingState>(
-                          builder: (context, state) {
-                            return SizedBox(
-                              width: double.infinity,
-                              height: .8.sh,
-                              child: ListView.separated(
-                                scrollDirection: Axis.vertical,
-                                itemBuilder: (context, index) {
-                                  final ratings = state.ratings[index];
-                                  return state.isLoading
-                                      ? const BuildLoadingWidget()
-                                      : Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Card(
-                                            child: SizedBox(
-                                              width: 200,
-                                              // height: 200,
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                          ratings.title,
-                                                          style: TextStyle(
-                                                            fontSize: 15.sp,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                          ),
-                                                        ),
-                                                        StarRatingWidget(
-                                                          initialRating:
-                                                              ratings.rating,
-                                                          readOnly: true,
-                                                        )
-                                                      ],
-                                                    ),
-                                                    BuildSmallText(
-                                                      text: ratings.description,
-                                                      textOverflow:
-                                                          TextOverflow.visible,
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                },
-                                separatorBuilder: (context, index) {
-                                  return const SizedBox();
-                                },
-                                itemCount: state.ratings.length,
-                              ),
-                            );
-                          },
-                        )
+                        const ReviewSection()
                       ],
                     ),
                   ),
           );
         },
       ),
+    );
+  }
+}
+
+class ReviewSection extends StatelessWidget {
+  const ReviewSection({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<RatingBloc, RatingState>(
+      builder: (context, state) {
+        return state.ratings.isEmpty
+            ? const Center(child: Text('No Review'))
+            : SizedBox(
+                width: double.infinity,
+                height: .2.sh,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    final ratings = state.ratings[index];
+                    return state.isLoading
+                        ? const BuildLoadingWidget()
+                        : Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Card(
+                              surfaceTintColor: AppColor.whiteColor,
+                              child: SizedBox(
+                                width: 255,
+                                height: 100,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            ratings.title,
+                                            style: TextStyle(
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w800),
+                                          ),
+                                          StarRatingWidget(
+                                            starSize: 10,
+                                            initialRating: ratings.rating,
+                                            readOnly: true,
+                                          )
+                                        ],
+                                      ),
+                                      BuildSmallText(
+                                        text: ratings.description,
+                                        textOverflow: TextOverflow.visible,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox();
+                  },
+                  itemCount: state.ratings.length,
+                ),
+              );
+      },
     );
   }
 }

@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/presentation/admin/product/add_product/add_product_screen.dart';
+import 'package:shop_mate/presentation/admin/product/edit_product/edit_product.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/constants/route_animation.dart';
+import 'package:shop_mate/presentation/product/product_screen.dart';
 
 class AdminProductScreen extends StatelessWidget {
   const AdminProductScreen({super.key});
@@ -16,6 +19,7 @@ class AdminProductScreen extends StatelessWidget {
     return Scaffold(
       body: BlocBuilder<ProductBloc, ProductState>(
         builder: (context, state) {
+          // log(state.productList.toString());
           return SafeArea(
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
@@ -50,6 +54,86 @@ class AdminProductScreen extends StatelessWidget {
                                   Image.network(
                                     product.image![0],
                                   ),
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      buildNavigation(
+                                        route: ProductScreen(),
+                                        arguments: product.id!,
+                                      ),
+                                    );
+                                  },
+                                  onLongPress: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return SimpleDialog(
+                                          title: Text(product.name),
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      15,
+                                                    ),
+                                                    color: Colors.red,
+                                                  ),
+                                                  child: IconButton(
+                                                    onPressed: () {
+                                                      BlocProvider.of<
+                                                                  ProductBloc>(
+                                                              context)
+                                                          .add(
+                                                        ProductEvent
+                                                            .deleteProduct(
+                                                          productId:
+                                                              product.id!,
+                                                          context: context,
+                                                        ),
+                                                      );
+                                                    },
+                                                    icon: const Icon(
+                                                      Icons.delete,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      15,
+                                                    ),
+                                                    color: Colors.blue,
+                                                  ),
+                                                  child: IconButton(
+                                                    onPressed: () {
+                                                      showModalBottomSheet(
+                                                        context: context,
+                                                        isScrollControlled:
+                                                            true,
+                                                        builder: (context) {
+                                                          return EditProductScreen(
+                                                            product: product,
+                                                            id: product.id!,
+                                                          );
+                                                        },
+                                                      );
+                                                    },
+                                                    icon: const Icon(
+                                                      Icons.edit,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
                                 ),
                                 DataCell(
                                   Text(

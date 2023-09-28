@@ -21,6 +21,11 @@ mixin _$ProductEvent {
     required TResult Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)
         addProduct,
+    required TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)
+        editProduct,
+    required TResult Function(String productId, BuildContext context)
+        deleteProduct,
     required TResult Function() getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
@@ -37,6 +42,10 @@ mixin _$ProductEvent {
     TResult? Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)?
         addProduct,
+    TResult? Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult? Function(String productId, BuildContext context)? deleteProduct,
     TResult? Function()? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
@@ -51,6 +60,10 @@ mixin _$ProductEvent {
     TResult Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)?
         addProduct,
+    TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult Function(String productId, BuildContext context)? deleteProduct,
     TResult Function()? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
@@ -64,6 +77,8 @@ mixin _$ProductEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AddProduct value) addProduct,
+    required TResult Function(_EditProduct value) editProduct,
+    required TResult Function(_DeleteProduct value) deleteProduct,
     required TResult Function(_GetAllProduct value) getAllProduct,
     required TResult Function(_GetProductsByCategory value)
         getProductsByCategory,
@@ -76,6 +91,8 @@ mixin _$ProductEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AddProduct value)? addProduct,
+    TResult? Function(_EditProduct value)? editProduct,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
     TResult? Function(_GetAllProduct value)? getAllProduct,
     TResult? Function(_GetProductsByCategory value)? getProductsByCategory,
     TResult? Function(_GetLaptops value)? getLaptops,
@@ -87,6 +104,8 @@ mixin _$ProductEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AddProduct value)? addProduct,
+    TResult Function(_EditProduct value)? editProduct,
+    TResult Function(_DeleteProduct value)? deleteProduct,
     TResult Function(_GetAllProduct value)? getAllProduct,
     TResult Function(_GetProductsByCategory value)? getProductsByCategory,
     TResult Function(_GetLaptops value)? getLaptops,
@@ -222,6 +241,11 @@ class _$_AddProduct implements _AddProduct {
     required TResult Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)
         addProduct,
+    required TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)
+        editProduct,
+    required TResult Function(String productId, BuildContext context)
+        deleteProduct,
     required TResult Function() getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
@@ -241,6 +265,10 @@ class _$_AddProduct implements _AddProduct {
     TResult? Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)?
         addProduct,
+    TResult? Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult? Function(String productId, BuildContext context)? deleteProduct,
     TResult? Function()? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
@@ -258,6 +286,10 @@ class _$_AddProduct implements _AddProduct {
     TResult Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)?
         addProduct,
+    TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult Function(String productId, BuildContext context)? deleteProduct,
     TResult Function()? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
@@ -277,6 +309,8 @@ class _$_AddProduct implements _AddProduct {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AddProduct value) addProduct,
+    required TResult Function(_EditProduct value) editProduct,
+    required TResult Function(_DeleteProduct value) deleteProduct,
     required TResult Function(_GetAllProduct value) getAllProduct,
     required TResult Function(_GetProductsByCategory value)
         getProductsByCategory,
@@ -292,6 +326,8 @@ class _$_AddProduct implements _AddProduct {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AddProduct value)? addProduct,
+    TResult? Function(_EditProduct value)? editProduct,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
     TResult? Function(_GetAllProduct value)? getAllProduct,
     TResult? Function(_GetProductsByCategory value)? getProductsByCategory,
     TResult? Function(_GetLaptops value)? getLaptops,
@@ -306,6 +342,8 @@ class _$_AddProduct implements _AddProduct {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AddProduct value)? addProduct,
+    TResult Function(_EditProduct value)? editProduct,
+    TResult Function(_DeleteProduct value)? deleteProduct,
     TResult Function(_GetAllProduct value)? getAllProduct,
     TResult Function(_GetProductsByCategory value)? getProductsByCategory,
     TResult Function(_GetLaptops value)? getLaptops,
@@ -332,6 +370,453 @@ abstract class _AddProduct implements ProductEvent {
   BuildContext get context;
   @JsonKey(ignore: true)
   _$$_AddProductCopyWith<_$_AddProduct> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_EditProductCopyWith<$Res> {
+  factory _$$_EditProductCopyWith(
+          _$_EditProduct value, $Res Function(_$_EditProduct) then) =
+      __$$_EditProductCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {ProductModel product,
+      BuildContext context,
+      List<Media>? selectedImages});
+
+  $ProductModelCopyWith<$Res> get product;
+}
+
+/// @nodoc
+class __$$_EditProductCopyWithImpl<$Res>
+    extends _$ProductEventCopyWithImpl<$Res, _$_EditProduct>
+    implements _$$_EditProductCopyWith<$Res> {
+  __$$_EditProductCopyWithImpl(
+      _$_EditProduct _value, $Res Function(_$_EditProduct) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? product = null,
+    Object? context = null,
+    Object? selectedImages = freezed,
+  }) {
+    return _then(_$_EditProduct(
+      product: null == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as ProductModel,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+      selectedImages: freezed == selectedImages
+          ? _value._selectedImages
+          : selectedImages // ignore: cast_nullable_to_non_nullable
+              as List<Media>?,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProductModelCopyWith<$Res> get product {
+    return $ProductModelCopyWith<$Res>(_value.product, (value) {
+      return _then(_value.copyWith(product: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_EditProduct implements _EditProduct {
+  const _$_EditProduct(
+      {required this.product,
+      required this.context,
+      final List<Media>? selectedImages})
+      : _selectedImages = selectedImages;
+
+  @override
+  final ProductModel product;
+  @override
+  final BuildContext context;
+  final List<Media>? _selectedImages;
+  @override
+  List<Media>? get selectedImages {
+    final value = _selectedImages;
+    if (value == null) return null;
+    if (_selectedImages is EqualUnmodifiableListView) return _selectedImages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'ProductEvent.editProduct(product: $product, context: $context, selectedImages: $selectedImages)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_EditProduct &&
+            (identical(other.product, product) || other.product == product) &&
+            (identical(other.context, context) || other.context == context) &&
+            const DeepCollectionEquality()
+                .equals(other._selectedImages, _selectedImages));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, product, context,
+      const DeepCollectionEquality().hash(_selectedImages));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_EditProductCopyWith<_$_EditProduct> get copyWith =>
+      __$$_EditProductCopyWithImpl<_$_EditProduct>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ProductModel product, List<Media> selectedImages,
+            BuildContext context)
+        addProduct,
+    required TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)
+        editProduct,
+    required TResult Function(String productId, BuildContext context)
+        deleteProduct,
+    required TResult Function() getAllProduct,
+    required TResult Function(String category, BuildContext context)
+        getProductsByCategory,
+    required TResult Function(String category, BuildContext context) getLaptops,
+    required TResult Function(String category, BuildContext context)
+        getEarphones,
+    required TResult Function(String category, BuildContext context) getMobiles,
+    required TResult Function(String productId, BuildContext context)
+        getProduct,
+  }) {
+    return editProduct(product, context, selectedImages);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProductModel product, List<Media> selectedImages,
+            BuildContext context)?
+        addProduct,
+    TResult? Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult? Function(String productId, BuildContext context)? deleteProduct,
+    TResult? Function()? getAllProduct,
+    TResult? Function(String category, BuildContext context)?
+        getProductsByCategory,
+    TResult? Function(String category, BuildContext context)? getLaptops,
+    TResult? Function(String category, BuildContext context)? getEarphones,
+    TResult? Function(String category, BuildContext context)? getMobiles,
+    TResult? Function(String productId, BuildContext context)? getProduct,
+  }) {
+    return editProduct?.call(product, context, selectedImages);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProductModel product, List<Media> selectedImages,
+            BuildContext context)?
+        addProduct,
+    TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult Function(String productId, BuildContext context)? deleteProduct,
+    TResult Function()? getAllProduct,
+    TResult Function(String category, BuildContext context)?
+        getProductsByCategory,
+    TResult Function(String category, BuildContext context)? getLaptops,
+    TResult Function(String category, BuildContext context)? getEarphones,
+    TResult Function(String category, BuildContext context)? getMobiles,
+    TResult Function(String productId, BuildContext context)? getProduct,
+    required TResult orElse(),
+  }) {
+    if (editProduct != null) {
+      return editProduct(product, context, selectedImages);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AddProduct value) addProduct,
+    required TResult Function(_EditProduct value) editProduct,
+    required TResult Function(_DeleteProduct value) deleteProduct,
+    required TResult Function(_GetAllProduct value) getAllProduct,
+    required TResult Function(_GetProductsByCategory value)
+        getProductsByCategory,
+    required TResult Function(_GetLaptops value) getLaptops,
+    required TResult Function(_GetEarphones value) getEarphones,
+    required TResult Function(_GetMobiles value) getMobiles,
+    required TResult Function(_GetProduct value) getProduct,
+  }) {
+    return editProduct(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AddProduct value)? addProduct,
+    TResult? Function(_EditProduct value)? editProduct,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
+    TResult? Function(_GetAllProduct value)? getAllProduct,
+    TResult? Function(_GetProductsByCategory value)? getProductsByCategory,
+    TResult? Function(_GetLaptops value)? getLaptops,
+    TResult? Function(_GetEarphones value)? getEarphones,
+    TResult? Function(_GetMobiles value)? getMobiles,
+    TResult? Function(_GetProduct value)? getProduct,
+  }) {
+    return editProduct?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AddProduct value)? addProduct,
+    TResult Function(_EditProduct value)? editProduct,
+    TResult Function(_DeleteProduct value)? deleteProduct,
+    TResult Function(_GetAllProduct value)? getAllProduct,
+    TResult Function(_GetProductsByCategory value)? getProductsByCategory,
+    TResult Function(_GetLaptops value)? getLaptops,
+    TResult Function(_GetEarphones value)? getEarphones,
+    TResult Function(_GetMobiles value)? getMobiles,
+    TResult Function(_GetProduct value)? getProduct,
+    required TResult orElse(),
+  }) {
+    if (editProduct != null) {
+      return editProduct(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _EditProduct implements ProductEvent {
+  const factory _EditProduct(
+      {required final ProductModel product,
+      required final BuildContext context,
+      final List<Media>? selectedImages}) = _$_EditProduct;
+
+  ProductModel get product;
+  BuildContext get context;
+  List<Media>? get selectedImages;
+  @JsonKey(ignore: true)
+  _$$_EditProductCopyWith<_$_EditProduct> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeleteProductCopyWith<$Res> {
+  factory _$$_DeleteProductCopyWith(
+          _$_DeleteProduct value, $Res Function(_$_DeleteProduct) then) =
+      __$$_DeleteProductCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String productId, BuildContext context});
+}
+
+/// @nodoc
+class __$$_DeleteProductCopyWithImpl<$Res>
+    extends _$ProductEventCopyWithImpl<$Res, _$_DeleteProduct>
+    implements _$$_DeleteProductCopyWith<$Res> {
+  __$$_DeleteProductCopyWithImpl(
+      _$_DeleteProduct _value, $Res Function(_$_DeleteProduct) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? productId = null,
+    Object? context = null,
+  }) {
+    return _then(_$_DeleteProduct(
+      productId: null == productId
+          ? _value.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_DeleteProduct implements _DeleteProduct {
+  const _$_DeleteProduct({required this.productId, required this.context});
+
+  @override
+  final String productId;
+  @override
+  final BuildContext context;
+
+  @override
+  String toString() {
+    return 'ProductEvent.deleteProduct(productId: $productId, context: $context)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeleteProduct &&
+            (identical(other.productId, productId) ||
+                other.productId == productId) &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, productId, context);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeleteProductCopyWith<_$_DeleteProduct> get copyWith =>
+      __$$_DeleteProductCopyWithImpl<_$_DeleteProduct>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ProductModel product, List<Media> selectedImages,
+            BuildContext context)
+        addProduct,
+    required TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)
+        editProduct,
+    required TResult Function(String productId, BuildContext context)
+        deleteProduct,
+    required TResult Function() getAllProduct,
+    required TResult Function(String category, BuildContext context)
+        getProductsByCategory,
+    required TResult Function(String category, BuildContext context) getLaptops,
+    required TResult Function(String category, BuildContext context)
+        getEarphones,
+    required TResult Function(String category, BuildContext context) getMobiles,
+    required TResult Function(String productId, BuildContext context)
+        getProduct,
+  }) {
+    return deleteProduct(productId, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProductModel product, List<Media> selectedImages,
+            BuildContext context)?
+        addProduct,
+    TResult? Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult? Function(String productId, BuildContext context)? deleteProduct,
+    TResult? Function()? getAllProduct,
+    TResult? Function(String category, BuildContext context)?
+        getProductsByCategory,
+    TResult? Function(String category, BuildContext context)? getLaptops,
+    TResult? Function(String category, BuildContext context)? getEarphones,
+    TResult? Function(String category, BuildContext context)? getMobiles,
+    TResult? Function(String productId, BuildContext context)? getProduct,
+  }) {
+    return deleteProduct?.call(productId, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProductModel product, List<Media> selectedImages,
+            BuildContext context)?
+        addProduct,
+    TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult Function(String productId, BuildContext context)? deleteProduct,
+    TResult Function()? getAllProduct,
+    TResult Function(String category, BuildContext context)?
+        getProductsByCategory,
+    TResult Function(String category, BuildContext context)? getLaptops,
+    TResult Function(String category, BuildContext context)? getEarphones,
+    TResult Function(String category, BuildContext context)? getMobiles,
+    TResult Function(String productId, BuildContext context)? getProduct,
+    required TResult orElse(),
+  }) {
+    if (deleteProduct != null) {
+      return deleteProduct(productId, context);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AddProduct value) addProduct,
+    required TResult Function(_EditProduct value) editProduct,
+    required TResult Function(_DeleteProduct value) deleteProduct,
+    required TResult Function(_GetAllProduct value) getAllProduct,
+    required TResult Function(_GetProductsByCategory value)
+        getProductsByCategory,
+    required TResult Function(_GetLaptops value) getLaptops,
+    required TResult Function(_GetEarphones value) getEarphones,
+    required TResult Function(_GetMobiles value) getMobiles,
+    required TResult Function(_GetProduct value) getProduct,
+  }) {
+    return deleteProduct(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AddProduct value)? addProduct,
+    TResult? Function(_EditProduct value)? editProduct,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
+    TResult? Function(_GetAllProduct value)? getAllProduct,
+    TResult? Function(_GetProductsByCategory value)? getProductsByCategory,
+    TResult? Function(_GetLaptops value)? getLaptops,
+    TResult? Function(_GetEarphones value)? getEarphones,
+    TResult? Function(_GetMobiles value)? getMobiles,
+    TResult? Function(_GetProduct value)? getProduct,
+  }) {
+    return deleteProduct?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AddProduct value)? addProduct,
+    TResult Function(_EditProduct value)? editProduct,
+    TResult Function(_DeleteProduct value)? deleteProduct,
+    TResult Function(_GetAllProduct value)? getAllProduct,
+    TResult Function(_GetProductsByCategory value)? getProductsByCategory,
+    TResult Function(_GetLaptops value)? getLaptops,
+    TResult Function(_GetEarphones value)? getEarphones,
+    TResult Function(_GetMobiles value)? getMobiles,
+    TResult Function(_GetProduct value)? getProduct,
+    required TResult orElse(),
+  }) {
+    if (deleteProduct != null) {
+      return deleteProduct(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteProduct implements ProductEvent {
+  const factory _DeleteProduct(
+      {required final String productId,
+      required final BuildContext context}) = _$_DeleteProduct;
+
+  String get productId;
+  BuildContext get context;
+  @JsonKey(ignore: true)
+  _$$_DeleteProductCopyWith<_$_DeleteProduct> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -376,6 +861,11 @@ class _$_GetAllProduct implements _GetAllProduct {
     required TResult Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)
         addProduct,
+    required TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)
+        editProduct,
+    required TResult Function(String productId, BuildContext context)
+        deleteProduct,
     required TResult Function() getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
@@ -395,6 +885,10 @@ class _$_GetAllProduct implements _GetAllProduct {
     TResult? Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)?
         addProduct,
+    TResult? Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult? Function(String productId, BuildContext context)? deleteProduct,
     TResult? Function()? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
@@ -412,6 +906,10 @@ class _$_GetAllProduct implements _GetAllProduct {
     TResult Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)?
         addProduct,
+    TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult Function(String productId, BuildContext context)? deleteProduct,
     TResult Function()? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
@@ -431,6 +929,8 @@ class _$_GetAllProduct implements _GetAllProduct {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AddProduct value) addProduct,
+    required TResult Function(_EditProduct value) editProduct,
+    required TResult Function(_DeleteProduct value) deleteProduct,
     required TResult Function(_GetAllProduct value) getAllProduct,
     required TResult Function(_GetProductsByCategory value)
         getProductsByCategory,
@@ -446,6 +946,8 @@ class _$_GetAllProduct implements _GetAllProduct {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AddProduct value)? addProduct,
+    TResult? Function(_EditProduct value)? editProduct,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
     TResult? Function(_GetAllProduct value)? getAllProduct,
     TResult? Function(_GetProductsByCategory value)? getProductsByCategory,
     TResult? Function(_GetLaptops value)? getLaptops,
@@ -460,6 +962,8 @@ class _$_GetAllProduct implements _GetAllProduct {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AddProduct value)? addProduct,
+    TResult Function(_EditProduct value)? editProduct,
+    TResult Function(_DeleteProduct value)? deleteProduct,
     TResult Function(_GetAllProduct value)? getAllProduct,
     TResult Function(_GetProductsByCategory value)? getProductsByCategory,
     TResult Function(_GetLaptops value)? getLaptops,
@@ -557,6 +1061,11 @@ class _$_GetProductsByCategory implements _GetProductsByCategory {
     required TResult Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)
         addProduct,
+    required TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)
+        editProduct,
+    required TResult Function(String productId, BuildContext context)
+        deleteProduct,
     required TResult Function() getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
@@ -576,6 +1085,10 @@ class _$_GetProductsByCategory implements _GetProductsByCategory {
     TResult? Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)?
         addProduct,
+    TResult? Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult? Function(String productId, BuildContext context)? deleteProduct,
     TResult? Function()? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
@@ -593,6 +1106,10 @@ class _$_GetProductsByCategory implements _GetProductsByCategory {
     TResult Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)?
         addProduct,
+    TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult Function(String productId, BuildContext context)? deleteProduct,
     TResult Function()? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
@@ -612,6 +1129,8 @@ class _$_GetProductsByCategory implements _GetProductsByCategory {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AddProduct value) addProduct,
+    required TResult Function(_EditProduct value) editProduct,
+    required TResult Function(_DeleteProduct value) deleteProduct,
     required TResult Function(_GetAllProduct value) getAllProduct,
     required TResult Function(_GetProductsByCategory value)
         getProductsByCategory,
@@ -627,6 +1146,8 @@ class _$_GetProductsByCategory implements _GetProductsByCategory {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AddProduct value)? addProduct,
+    TResult? Function(_EditProduct value)? editProduct,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
     TResult? Function(_GetAllProduct value)? getAllProduct,
     TResult? Function(_GetProductsByCategory value)? getProductsByCategory,
     TResult? Function(_GetLaptops value)? getLaptops,
@@ -641,6 +1162,8 @@ class _$_GetProductsByCategory implements _GetProductsByCategory {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AddProduct value)? addProduct,
+    TResult Function(_EditProduct value)? editProduct,
+    TResult Function(_DeleteProduct value)? deleteProduct,
     TResult Function(_GetAllProduct value)? getAllProduct,
     TResult Function(_GetProductsByCategory value)? getProductsByCategory,
     TResult Function(_GetLaptops value)? getLaptops,
@@ -744,6 +1267,11 @@ class _$_GetLaptops implements _GetLaptops {
     required TResult Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)
         addProduct,
+    required TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)
+        editProduct,
+    required TResult Function(String productId, BuildContext context)
+        deleteProduct,
     required TResult Function() getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
@@ -763,6 +1291,10 @@ class _$_GetLaptops implements _GetLaptops {
     TResult? Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)?
         addProduct,
+    TResult? Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult? Function(String productId, BuildContext context)? deleteProduct,
     TResult? Function()? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
@@ -780,6 +1312,10 @@ class _$_GetLaptops implements _GetLaptops {
     TResult Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)?
         addProduct,
+    TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult Function(String productId, BuildContext context)? deleteProduct,
     TResult Function()? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
@@ -799,6 +1335,8 @@ class _$_GetLaptops implements _GetLaptops {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AddProduct value) addProduct,
+    required TResult Function(_EditProduct value) editProduct,
+    required TResult Function(_DeleteProduct value) deleteProduct,
     required TResult Function(_GetAllProduct value) getAllProduct,
     required TResult Function(_GetProductsByCategory value)
         getProductsByCategory,
@@ -814,6 +1352,8 @@ class _$_GetLaptops implements _GetLaptops {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AddProduct value)? addProduct,
+    TResult? Function(_EditProduct value)? editProduct,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
     TResult? Function(_GetAllProduct value)? getAllProduct,
     TResult? Function(_GetProductsByCategory value)? getProductsByCategory,
     TResult? Function(_GetLaptops value)? getLaptops,
@@ -828,6 +1368,8 @@ class _$_GetLaptops implements _GetLaptops {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AddProduct value)? addProduct,
+    TResult Function(_EditProduct value)? editProduct,
+    TResult Function(_DeleteProduct value)? deleteProduct,
     TResult Function(_GetAllProduct value)? getAllProduct,
     TResult Function(_GetProductsByCategory value)? getProductsByCategory,
     TResult Function(_GetLaptops value)? getLaptops,
@@ -931,6 +1473,11 @@ class _$_GetEarphones implements _GetEarphones {
     required TResult Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)
         addProduct,
+    required TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)
+        editProduct,
+    required TResult Function(String productId, BuildContext context)
+        deleteProduct,
     required TResult Function() getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
@@ -950,6 +1497,10 @@ class _$_GetEarphones implements _GetEarphones {
     TResult? Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)?
         addProduct,
+    TResult? Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult? Function(String productId, BuildContext context)? deleteProduct,
     TResult? Function()? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
@@ -967,6 +1518,10 @@ class _$_GetEarphones implements _GetEarphones {
     TResult Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)?
         addProduct,
+    TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult Function(String productId, BuildContext context)? deleteProduct,
     TResult Function()? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
@@ -986,6 +1541,8 @@ class _$_GetEarphones implements _GetEarphones {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AddProduct value) addProduct,
+    required TResult Function(_EditProduct value) editProduct,
+    required TResult Function(_DeleteProduct value) deleteProduct,
     required TResult Function(_GetAllProduct value) getAllProduct,
     required TResult Function(_GetProductsByCategory value)
         getProductsByCategory,
@@ -1001,6 +1558,8 @@ class _$_GetEarphones implements _GetEarphones {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AddProduct value)? addProduct,
+    TResult? Function(_EditProduct value)? editProduct,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
     TResult? Function(_GetAllProduct value)? getAllProduct,
     TResult? Function(_GetProductsByCategory value)? getProductsByCategory,
     TResult? Function(_GetLaptops value)? getLaptops,
@@ -1015,6 +1574,8 @@ class _$_GetEarphones implements _GetEarphones {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AddProduct value)? addProduct,
+    TResult Function(_EditProduct value)? editProduct,
+    TResult Function(_DeleteProduct value)? deleteProduct,
     TResult Function(_GetAllProduct value)? getAllProduct,
     TResult Function(_GetProductsByCategory value)? getProductsByCategory,
     TResult Function(_GetLaptops value)? getLaptops,
@@ -1118,6 +1679,11 @@ class _$_GetMobiles implements _GetMobiles {
     required TResult Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)
         addProduct,
+    required TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)
+        editProduct,
+    required TResult Function(String productId, BuildContext context)
+        deleteProduct,
     required TResult Function() getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
@@ -1137,6 +1703,10 @@ class _$_GetMobiles implements _GetMobiles {
     TResult? Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)?
         addProduct,
+    TResult? Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult? Function(String productId, BuildContext context)? deleteProduct,
     TResult? Function()? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
@@ -1154,6 +1724,10 @@ class _$_GetMobiles implements _GetMobiles {
     TResult Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)?
         addProduct,
+    TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult Function(String productId, BuildContext context)? deleteProduct,
     TResult Function()? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
@@ -1173,6 +1747,8 @@ class _$_GetMobiles implements _GetMobiles {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AddProduct value) addProduct,
+    required TResult Function(_EditProduct value) editProduct,
+    required TResult Function(_DeleteProduct value) deleteProduct,
     required TResult Function(_GetAllProduct value) getAllProduct,
     required TResult Function(_GetProductsByCategory value)
         getProductsByCategory,
@@ -1188,6 +1764,8 @@ class _$_GetMobiles implements _GetMobiles {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AddProduct value)? addProduct,
+    TResult? Function(_EditProduct value)? editProduct,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
     TResult? Function(_GetAllProduct value)? getAllProduct,
     TResult? Function(_GetProductsByCategory value)? getProductsByCategory,
     TResult? Function(_GetLaptops value)? getLaptops,
@@ -1202,6 +1780,8 @@ class _$_GetMobiles implements _GetMobiles {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AddProduct value)? addProduct,
+    TResult Function(_EditProduct value)? editProduct,
+    TResult Function(_DeleteProduct value)? deleteProduct,
     TResult Function(_GetAllProduct value)? getAllProduct,
     TResult Function(_GetProductsByCategory value)? getProductsByCategory,
     TResult Function(_GetLaptops value)? getLaptops,
@@ -1305,6 +1885,11 @@ class _$_GetProduct implements _GetProduct {
     required TResult Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)
         addProduct,
+    required TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)
+        editProduct,
+    required TResult Function(String productId, BuildContext context)
+        deleteProduct,
     required TResult Function() getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
@@ -1324,6 +1909,10 @@ class _$_GetProduct implements _GetProduct {
     TResult? Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)?
         addProduct,
+    TResult? Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult? Function(String productId, BuildContext context)? deleteProduct,
     TResult? Function()? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
@@ -1341,6 +1930,10 @@ class _$_GetProduct implements _GetProduct {
     TResult Function(ProductModel product, List<Media> selectedImages,
             BuildContext context)?
         addProduct,
+    TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult Function(String productId, BuildContext context)? deleteProduct,
     TResult Function()? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
@@ -1360,6 +1953,8 @@ class _$_GetProduct implements _GetProduct {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AddProduct value) addProduct,
+    required TResult Function(_EditProduct value) editProduct,
+    required TResult Function(_DeleteProduct value) deleteProduct,
     required TResult Function(_GetAllProduct value) getAllProduct,
     required TResult Function(_GetProductsByCategory value)
         getProductsByCategory,
@@ -1375,6 +1970,8 @@ class _$_GetProduct implements _GetProduct {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AddProduct value)? addProduct,
+    TResult? Function(_EditProduct value)? editProduct,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
     TResult? Function(_GetAllProduct value)? getAllProduct,
     TResult? Function(_GetProductsByCategory value)? getProductsByCategory,
     TResult? Function(_GetLaptops value)? getLaptops,
@@ -1389,6 +1986,8 @@ class _$_GetProduct implements _GetProduct {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AddProduct value)? addProduct,
+    TResult Function(_EditProduct value)? editProduct,
+    TResult Function(_DeleteProduct value)? deleteProduct,
     TResult Function(_GetAllProduct value)? getAllProduct,
     TResult Function(_GetProductsByCategory value)? getProductsByCategory,
     TResult Function(_GetLaptops value)? getLaptops,

@@ -13,7 +13,8 @@ _$_ProductModel _$$_ProductModelFromJson(Map<String, dynamic> json) =>
       category: json['category'] as String,
       amount: (json['amount'] as num).toDouble(),
       quantity: json['quantity'] as int,
-      image: (json['image'] as List<dynamic>).map((e) => e as String).toList(),
+      image:
+          (json['image'] as List<dynamic>?)?.map((e) => e as String).toList(),
       id: json['id'] as String?,
     );
 
