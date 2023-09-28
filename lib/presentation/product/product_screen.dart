@@ -68,6 +68,7 @@ class ProductScreen extends StatelessWidget {
                             },
                             controller: pageController,
                             onPageChanged: (value) {
+                              //change index of page
                               BlocProvider.of<PageviewBloc>(context).add(
                                 PageviewEvent.onPageChanged(
                                   currentIndex: value,
@@ -136,6 +137,7 @@ class ProductScreen extends StatelessWidget {
                         const SizedBox(
                           height: 30,
                         ),
+                        // action button
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -153,6 +155,7 @@ class ProductScreen extends StatelessWidget {
                             ),
                           ],
                         ),
+                        // product review section
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
