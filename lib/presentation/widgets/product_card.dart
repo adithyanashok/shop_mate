@@ -36,7 +36,7 @@ class BuildProductCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(top: 10, right: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,37 +63,28 @@ class BuildProductCard extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: 130,
-                            height: 50.sp,
-                            child: Text(
-                              description,
-                              style: TextStyle(
-                                fontSize: 11.sp,
-                                overflow: TextOverflow.clip,
-                                color: AppColor.colorGrey1,
-                              ),
-                            ),
+                      SizedBox(
+                        width: 130,
+                        // height: 50.sp,
+                        child: Text(
+                          description,
+                          style: TextStyle(
+                            fontSize: 11.sp,
+                            overflow: TextOverflow.ellipsis,
+                            color: AppColor.colorGrey1,
                           ),
-                          Container(
-                            width: 25,
-                            height: 25,
-                            decoration: BoxDecoration(
-                              color: AppColor.greenColor,
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: const Center(
-                              child: Icon(
-                                Icons.add,
-                                color: AppColor.whiteColor,
-                                size: 18,
-                              ),
-                            ),
-                          )
-                        ],
+                        ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: AppColor.greenColor,
+                          borderRadius: BorderRadius.circular(3),
+                        ),
+                        child: const Icon(
+                          Icons.add,
+                          color: AppColor.whiteColor,
+                        ),
                       )
                     ],
                   ),

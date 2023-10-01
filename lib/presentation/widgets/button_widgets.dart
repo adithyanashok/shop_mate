@@ -11,32 +11,43 @@ class BuildMediumButton extends StatelessWidget {
     this.borderColor,
     required this.textColor,
     required this.text,
+    this.onTap,
+    this.state,
   });
   final Color backgroundColor;
   final Color? borderColor;
   final Color textColor;
   final String text;
+  final Function()? onTap;
+  final dynamic state;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: .4.sw,
-      height: 50,
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(
-          color: borderColor ?? Colors.transparent,
-        ),
-      ),
-      child: Center(
-        child: Text(
-          text,
-          style: TextStyle(
-            color: textColor,
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w400,
+    return GestureDetector(
+      onTap: () {
+        onTap!();
+      },
+      child: Container(
+        width: .4.sw,
+        height: 50,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(
+            color: borderColor ?? Colors.transparent,
           ),
+        ),
+        child: Center(
+          child: state?.isLoading == true
+              ? const BuildMiniLoader()
+              : Text(
+                  text,
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
         ),
       ),
     );

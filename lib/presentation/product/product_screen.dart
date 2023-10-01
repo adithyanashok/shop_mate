@@ -5,9 +5,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/application/pageview/pageview_bloc.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/application/rating/rating_bloc.dart';
+import 'package:shop_mate/domain/cart/model/cart_model.dart';
+import 'package:shop_mate/domain/product/model/product.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/rating/rating.dart';
 import 'package:shop_mate/presentation/widgets/button_widgets.dart';
@@ -21,6 +24,8 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<CartBloc>(context)
+        .add(CartEvent.getCart(userId: userId!, context: context));
     // set index of pageview 0
     BlocProvider.of<PageviewBloc>(context)
         .add(const PageviewEvent.onPageChanged(currentIndex: 0));
@@ -34,6 +39,8 @@ class ProductScreen extends StatelessWidget {
     // fetch ratings of the product
     BlocProvider.of<RatingBloc>(context)
         .add(RatingEvent.fetchRatings(productId: productId, context: context));
+    final state = BlocProvider.of<CartBloc>(context).state;
+    log("CARTSTATE: $state");
 
     return Scaffold(
       // Appbar
@@ -138,20 +145,54 @@ class ProductScreen extends StatelessWidget {
                           height: 30,
                         ),
                         // action button
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            BuildMediumButton(
+                            const BuildMediumButton(
                               backgroundColor: Colors.transparent,
                               text: "BUY  NOW",
                               textColor: AppColor.greenColor,
                               borderColor: AppColor.greenColor,
                             ),
-                            BuildMediumButton(
-                              backgroundColor: AppColor.greenColor,
-                              text: "ADD TO CART",
-                              textColor: AppColor.whiteColor,
-                              borderColor: AppColor.greenColor,
+                            BlocBuilder<CartBloc, CartState>(
+                              builder: (context, state) {
+                                return BuildMediumButton(
+                                    backgroundColor: AppColor.greenColor,
+                                    text: "ADD TO CART",
+                                    textColor: AppColor.whiteColor,
+                                    borderColor: AppColor.greenColor,
+                                    state: state,
+                                    onTap: () {
+                                      final cartState =
+                                          BlocProvider.of<CartBloc>(context)
+                                              .state;
+                                      log(cartState.toString());
+                                      BlocProvider.of<CartBloc>(context).add(
+                                        CartEvent.addToCart(
+                                          cartModel: CartModel(
+                                            userId: userId!,
+                                            totalPrice: product.amount * 1,
+                                            products: [
+                                              {
+                                                "name": product.name,
+                                                "description":
+                                                    product.description,
+                                                "category": product.category,
+                                                "amount": product.amount,
+                                                "quantity": 1,
+                                                "image": product.image![0],
+                                                "deliveryFee": 50,
+                                                "discount": 10,
+                                              }
+                                            ],
+                                            totalDeliveryFee: 0,
+                                            totalDiscount: 0,
+                                          ),
+                                          context: context,
+                                        ),
+                                      );
+                                    });
+                              },
                             ),
                           ],
                         ),

@@ -7,18 +7,20 @@ part of 'cart_model.dart';
 // **************************************************************************
 
 _$_CartModel _$$_CartModelFromJson(Map<String, dynamic> json) => _$_CartModel(
-      name: json['name'] as String,
-      description: json['description'] as String,
-      quantity: json['quantity'] as int,
-      price: (json['price'] as num).toDouble(),
-      image: json['image'] as String,
+      userId: json['userId'] as String,
+      id: json['id'] as String?,
+      totalPrice: (json['totalPrice'] as num).toDouble(),
+      totalDeliveryFee: (json['totalDeliveryFee'] as num).toDouble(),
+      totalDiscount: (json['totalDiscount'] as num).toDouble(),
+      products: json['products'] as List<dynamic>,
     );
 
 Map<String, dynamic> _$$_CartModelToJson(_$_CartModel instance) =>
     <String, dynamic>{
-      'name': instance.name,
-      'description': instance.description,
-      'quantity': instance.quantity,
-      'price': instance.price,
-      'image': instance.image,
+      'userId': instance.userId,
+      'id': instance.id,
+      'totalPrice': instance.totalPrice,
+      'totalDeliveryFee': instance.totalDeliveryFee,
+      'totalDiscount': instance.totalDiscount,
+      'products': instance.products,
     };

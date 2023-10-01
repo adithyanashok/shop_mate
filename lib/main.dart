@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/auth/auth_bloc.dart';
 import 'package:shop_mate/application/auth/auth_state.dart';
+import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/application/pageview/pageview_bloc.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
 import 'package:shop_mate/application/login/login_bloc.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => getIt<LoginBloc>()),
             BlocProvider(create: (context) => getIt<ProductBloc>()),
             BlocProvider(create: (context) => getIt<RatingBloc>()),
+            BlocProvider(create: (context) => getIt<CartBloc>()),
             BlocProvider<AuthBloc>(
               create: (_) => AuthBloc(),
             ),
