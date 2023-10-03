@@ -28,6 +28,8 @@ mixin _$CartEvent {
     required TResult Function(String userId, String id, int quantity,
             double price, String type, BuildContext context)
         decrementCartQty,
+    required TResult Function(CartModel cartModel, BuildContext context)
+        deleteProduct,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,6 +41,7 @@ mixin _$CartEvent {
     TResult? Function(String userId, String id, int quantity, double price,
             String type, BuildContext context)?
         decrementCartQty,
+    TResult? Function(CartModel cartModel, BuildContext context)? deleteProduct,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +53,7 @@ mixin _$CartEvent {
     TResult Function(String userId, String id, int quantity, double price,
             String type, BuildContext context)?
         decrementCartQty,
+    TResult Function(CartModel cartModel, BuildContext context)? deleteProduct,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +63,7 @@ mixin _$CartEvent {
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_IncrementQty value) incrementQty,
     required TResult Function(_DecrementCartQty value) decrementCartQty,
+    required TResult Function(_DeleteProduct value) deleteProduct,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,6 +72,7 @@ mixin _$CartEvent {
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_IncrementQty value)? incrementQty,
     TResult? Function(_DecrementCartQty value)? decrementCartQty,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +81,7 @@ mixin _$CartEvent {
     TResult Function(_GetCart value)? getCart,
     TResult Function(_IncrementQty value)? incrementQty,
     TResult Function(_DecrementCartQty value)? decrementCartQty,
+    TResult Function(_DeleteProduct value)? deleteProduct,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -209,6 +216,8 @@ class _$_AddToCart implements _AddToCart {
     required TResult Function(String userId, String id, int quantity,
             double price, String type, BuildContext context)
         decrementCartQty,
+    required TResult Function(CartModel cartModel, BuildContext context)
+        deleteProduct,
   }) {
     return addToCart(cartModel, context);
   }
@@ -223,6 +232,7 @@ class _$_AddToCart implements _AddToCart {
     TResult? Function(String userId, String id, int quantity, double price,
             String type, BuildContext context)?
         decrementCartQty,
+    TResult? Function(CartModel cartModel, BuildContext context)? deleteProduct,
   }) {
     return addToCart?.call(cartModel, context);
   }
@@ -237,6 +247,7 @@ class _$_AddToCart implements _AddToCart {
     TResult Function(String userId, String id, int quantity, double price,
             String type, BuildContext context)?
         decrementCartQty,
+    TResult Function(CartModel cartModel, BuildContext context)? deleteProduct,
     required TResult orElse(),
   }) {
     if (addToCart != null) {
@@ -252,6 +263,7 @@ class _$_AddToCart implements _AddToCart {
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_IncrementQty value) incrementQty,
     required TResult Function(_DecrementCartQty value) decrementCartQty,
+    required TResult Function(_DeleteProduct value) deleteProduct,
   }) {
     return addToCart(this);
   }
@@ -263,6 +275,7 @@ class _$_AddToCart implements _AddToCart {
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_IncrementQty value)? incrementQty,
     TResult? Function(_DecrementCartQty value)? decrementCartQty,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
   }) {
     return addToCart?.call(this);
   }
@@ -274,6 +287,7 @@ class _$_AddToCart implements _AddToCart {
     TResult Function(_GetCart value)? getCart,
     TResult Function(_IncrementQty value)? incrementQty,
     TResult Function(_DecrementCartQty value)? decrementCartQty,
+    TResult Function(_DeleteProduct value)? deleteProduct,
     required TResult orElse(),
   }) {
     if (addToCart != null) {
@@ -378,6 +392,8 @@ class _$_GetCart implements _GetCart {
     required TResult Function(String userId, String id, int quantity,
             double price, String type, BuildContext context)
         decrementCartQty,
+    required TResult Function(CartModel cartModel, BuildContext context)
+        deleteProduct,
   }) {
     return getCart(userId, context);
   }
@@ -392,6 +408,7 @@ class _$_GetCart implements _GetCart {
     TResult? Function(String userId, String id, int quantity, double price,
             String type, BuildContext context)?
         decrementCartQty,
+    TResult? Function(CartModel cartModel, BuildContext context)? deleteProduct,
   }) {
     return getCart?.call(userId, context);
   }
@@ -406,6 +423,7 @@ class _$_GetCart implements _GetCart {
     TResult Function(String userId, String id, int quantity, double price,
             String type, BuildContext context)?
         decrementCartQty,
+    TResult Function(CartModel cartModel, BuildContext context)? deleteProduct,
     required TResult orElse(),
   }) {
     if (getCart != null) {
@@ -421,6 +439,7 @@ class _$_GetCart implements _GetCart {
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_IncrementQty value) incrementQty,
     required TResult Function(_DecrementCartQty value) decrementCartQty,
+    required TResult Function(_DeleteProduct value) deleteProduct,
   }) {
     return getCart(this);
   }
@@ -432,6 +451,7 @@ class _$_GetCart implements _GetCart {
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_IncrementQty value)? incrementQty,
     TResult? Function(_DecrementCartQty value)? decrementCartQty,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
   }) {
     return getCart?.call(this);
   }
@@ -443,6 +463,7 @@ class _$_GetCart implements _GetCart {
     TResult Function(_GetCart value)? getCart,
     TResult Function(_IncrementQty value)? incrementQty,
     TResult Function(_DecrementCartQty value)? decrementCartQty,
+    TResult Function(_DeleteProduct value)? deleteProduct,
     required TResult orElse(),
   }) {
     if (getCart != null) {
@@ -569,6 +590,8 @@ class _$_IncrementQty implements _IncrementQty {
     required TResult Function(String userId, String id, int quantity,
             double price, String type, BuildContext context)
         decrementCartQty,
+    required TResult Function(CartModel cartModel, BuildContext context)
+        deleteProduct,
   }) {
     return incrementQty(cartModel, type, context);
   }
@@ -583,6 +606,7 @@ class _$_IncrementQty implements _IncrementQty {
     TResult? Function(String userId, String id, int quantity, double price,
             String type, BuildContext context)?
         decrementCartQty,
+    TResult? Function(CartModel cartModel, BuildContext context)? deleteProduct,
   }) {
     return incrementQty?.call(cartModel, type, context);
   }
@@ -597,6 +621,7 @@ class _$_IncrementQty implements _IncrementQty {
     TResult Function(String userId, String id, int quantity, double price,
             String type, BuildContext context)?
         decrementCartQty,
+    TResult Function(CartModel cartModel, BuildContext context)? deleteProduct,
     required TResult orElse(),
   }) {
     if (incrementQty != null) {
@@ -612,6 +637,7 @@ class _$_IncrementQty implements _IncrementQty {
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_IncrementQty value) incrementQty,
     required TResult Function(_DecrementCartQty value) decrementCartQty,
+    required TResult Function(_DeleteProduct value) deleteProduct,
   }) {
     return incrementQty(this);
   }
@@ -623,6 +649,7 @@ class _$_IncrementQty implements _IncrementQty {
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_IncrementQty value)? incrementQty,
     TResult? Function(_DecrementCartQty value)? decrementCartQty,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
   }) {
     return incrementQty?.call(this);
   }
@@ -634,6 +661,7 @@ class _$_IncrementQty implements _IncrementQty {
     TResult Function(_GetCart value)? getCart,
     TResult Function(_IncrementQty value)? incrementQty,
     TResult Function(_DecrementCartQty value)? decrementCartQty,
+    TResult Function(_DeleteProduct value)? deleteProduct,
     required TResult orElse(),
   }) {
     if (incrementQty != null) {
@@ -788,6 +816,8 @@ class _$_DecrementCartQty implements _DecrementCartQty {
     required TResult Function(String userId, String id, int quantity,
             double price, String type, BuildContext context)
         decrementCartQty,
+    required TResult Function(CartModel cartModel, BuildContext context)
+        deleteProduct,
   }) {
     return decrementCartQty(userId, id, quantity, price, type, context);
   }
@@ -802,6 +832,7 @@ class _$_DecrementCartQty implements _DecrementCartQty {
     TResult? Function(String userId, String id, int quantity, double price,
             String type, BuildContext context)?
         decrementCartQty,
+    TResult? Function(CartModel cartModel, BuildContext context)? deleteProduct,
   }) {
     return decrementCartQty?.call(userId, id, quantity, price, type, context);
   }
@@ -816,6 +847,7 @@ class _$_DecrementCartQty implements _DecrementCartQty {
     TResult Function(String userId, String id, int quantity, double price,
             String type, BuildContext context)?
         decrementCartQty,
+    TResult Function(CartModel cartModel, BuildContext context)? deleteProduct,
     required TResult orElse(),
   }) {
     if (decrementCartQty != null) {
@@ -831,6 +863,7 @@ class _$_DecrementCartQty implements _DecrementCartQty {
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_IncrementQty value) incrementQty,
     required TResult Function(_DecrementCartQty value) decrementCartQty,
+    required TResult Function(_DeleteProduct value) deleteProduct,
   }) {
     return decrementCartQty(this);
   }
@@ -842,6 +875,7 @@ class _$_DecrementCartQty implements _DecrementCartQty {
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_IncrementQty value)? incrementQty,
     TResult? Function(_DecrementCartQty value)? decrementCartQty,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
   }) {
     return decrementCartQty?.call(this);
   }
@@ -853,6 +887,7 @@ class _$_DecrementCartQty implements _DecrementCartQty {
     TResult Function(_GetCart value)? getCart,
     TResult Function(_IncrementQty value)? incrementQty,
     TResult Function(_DecrementCartQty value)? decrementCartQty,
+    TResult Function(_DeleteProduct value)? deleteProduct,
     required TResult orElse(),
   }) {
     if (decrementCartQty != null) {
@@ -881,6 +916,195 @@ abstract class _DecrementCartQty implements CartEvent {
   @override
   @JsonKey(ignore: true)
   _$$_DecrementCartQtyCopyWith<_$_DecrementCartQty> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeleteProductCopyWith<$Res>
+    implements $CartEventCopyWith<$Res> {
+  factory _$$_DeleteProductCopyWith(
+          _$_DeleteProduct value, $Res Function(_$_DeleteProduct) then) =
+      __$$_DeleteProductCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({CartModel cartModel, BuildContext context});
+
+  $CartModelCopyWith<$Res> get cartModel;
+}
+
+/// @nodoc
+class __$$_DeleteProductCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$_DeleteProduct>
+    implements _$$_DeleteProductCopyWith<$Res> {
+  __$$_DeleteProductCopyWithImpl(
+      _$_DeleteProduct _value, $Res Function(_$_DeleteProduct) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cartModel = null,
+    Object? context = null,
+  }) {
+    return _then(_$_DeleteProduct(
+      cartModel: null == cartModel
+          ? _value.cartModel
+          : cartModel // ignore: cast_nullable_to_non_nullable
+              as CartModel,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CartModelCopyWith<$Res> get cartModel {
+    return $CartModelCopyWith<$Res>(_value.cartModel, (value) {
+      return _then(_value.copyWith(cartModel: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_DeleteProduct implements _DeleteProduct {
+  const _$_DeleteProduct({required this.cartModel, required this.context});
+
+  @override
+  final CartModel cartModel;
+  @override
+  final BuildContext context;
+
+  @override
+  String toString() {
+    return 'CartEvent.deleteProduct(cartModel: $cartModel, context: $context)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeleteProduct &&
+            (identical(other.cartModel, cartModel) ||
+                other.cartModel == cartModel) &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, cartModel, context);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeleteProductCopyWith<_$_DeleteProduct> get copyWith =>
+      __$$_DeleteProductCopyWithImpl<_$_DeleteProduct>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(CartModel cartModel, BuildContext context)
+        addToCart,
+    required TResult Function(String userId, BuildContext context) getCart,
+    required TResult Function(
+            CartModel cartModel, String type, BuildContext context)
+        incrementQty,
+    required TResult Function(String userId, String id, int quantity,
+            double price, String type, BuildContext context)
+        decrementCartQty,
+    required TResult Function(CartModel cartModel, BuildContext context)
+        deleteProduct,
+  }) {
+    return deleteProduct(cartModel, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(CartModel cartModel, BuildContext context)? addToCart,
+    TResult? Function(String userId, BuildContext context)? getCart,
+    TResult? Function(CartModel cartModel, String type, BuildContext context)?
+        incrementQty,
+    TResult? Function(String userId, String id, int quantity, double price,
+            String type, BuildContext context)?
+        decrementCartQty,
+    TResult? Function(CartModel cartModel, BuildContext context)? deleteProduct,
+  }) {
+    return deleteProduct?.call(cartModel, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(CartModel cartModel, BuildContext context)? addToCart,
+    TResult Function(String userId, BuildContext context)? getCart,
+    TResult Function(CartModel cartModel, String type, BuildContext context)?
+        incrementQty,
+    TResult Function(String userId, String id, int quantity, double price,
+            String type, BuildContext context)?
+        decrementCartQty,
+    TResult Function(CartModel cartModel, BuildContext context)? deleteProduct,
+    required TResult orElse(),
+  }) {
+    if (deleteProduct != null) {
+      return deleteProduct(cartModel, context);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AddToCart value) addToCart,
+    required TResult Function(_GetCart value) getCart,
+    required TResult Function(_IncrementQty value) incrementQty,
+    required TResult Function(_DecrementCartQty value) decrementCartQty,
+    required TResult Function(_DeleteProduct value) deleteProduct,
+  }) {
+    return deleteProduct(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AddToCart value)? addToCart,
+    TResult? Function(_GetCart value)? getCart,
+    TResult? Function(_IncrementQty value)? incrementQty,
+    TResult? Function(_DecrementCartQty value)? decrementCartQty,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
+  }) {
+    return deleteProduct?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AddToCart value)? addToCart,
+    TResult Function(_GetCart value)? getCart,
+    TResult Function(_IncrementQty value)? incrementQty,
+    TResult Function(_DecrementCartQty value)? decrementCartQty,
+    TResult Function(_DeleteProduct value)? deleteProduct,
+    required TResult orElse(),
+  }) {
+    if (deleteProduct != null) {
+      return deleteProduct(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteProduct implements CartEvent {
+  const factory _DeleteProduct(
+      {required final CartModel cartModel,
+      required final BuildContext context}) = _$_DeleteProduct;
+
+  CartModel get cartModel;
+  @override
+  BuildContext get context;
+  @override
+  @JsonKey(ignore: true)
+  _$$_DeleteProductCopyWith<_$_DeleteProduct> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

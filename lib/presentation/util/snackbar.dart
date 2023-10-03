@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shop_mate/presentation/constants/colors.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 snackBar({
   required BuildContext context,
   required String msg,
+  bool success = false,
 }) {
   final snackBar = SnackBar(
     content: Text(
@@ -14,7 +16,7 @@ snackBar({
       ),
     ),
     elevation: 2,
-    backgroundColor: Colors.red,
+    backgroundColor: success ? AppColor.greenColor : Colors.red,
     duration: const Duration(seconds: 5),
     behavior: SnackBarBehavior.floating,
   );

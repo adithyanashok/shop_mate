@@ -11,4 +11,6 @@ abstract class ICartFacade {
 
   Future<Either<MainFailure, bool>> updateCart(
       CartModel cartModel, String type, context);
+
+  Future<Either<MainFailure, bool>> deleteProduct(CartModel cartModel, context);
 }

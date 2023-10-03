@@ -15,11 +15,13 @@ class CartState with _$CartState {
         isLoading: false,
         cartList: [],
         cart: CartModel(
-            userId: '',
-            totalPrice: 0,
-            products: [],
-            totalDeliveryFee: 0,
-            totalDiscount: 0),
+          userId: '',
+          totalPrice: 0,
+          products: [],
+          totalDeliveryFee: 0,
+          totalDiscount: 0,
+          subTotal: 0,
+        ),
         cartOpt: None(),
         cartBool: false,
         cartListOpt: None());

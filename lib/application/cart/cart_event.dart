@@ -23,4 +23,8 @@ class CartEvent with _$CartEvent {
     required String type,
     required BuildContext context,
   }) = _DecrementCartQty;
+  const factory CartEvent.deleteProduct({
+    required CartModel cartModel,
+    required BuildContext context,
+  }) = _DeleteProduct;
 }

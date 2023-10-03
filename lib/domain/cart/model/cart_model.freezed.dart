@@ -23,6 +23,7 @@ mixin _$CartModel {
   String get userId => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
   double get totalPrice => throw _privateConstructorUsedError;
+  double get subTotal => throw _privateConstructorUsedError;
   double get totalDeliveryFee => throw _privateConstructorUsedError;
   double get totalDiscount => throw _privateConstructorUsedError;
   List<dynamic> get products => throw _privateConstructorUsedError;
@@ -42,6 +43,7 @@ abstract class $CartModelCopyWith<$Res> {
       {String userId,
       String? id,
       double totalPrice,
+      double subTotal,
       double totalDeliveryFee,
       double totalDiscount,
       List<dynamic> products});
@@ -63,6 +65,7 @@ class _$CartModelCopyWithImpl<$Res, $Val extends CartModel>
     Object? userId = null,
     Object? id = freezed,
     Object? totalPrice = null,
+    Object? subTotal = null,
     Object? totalDeliveryFee = null,
     Object? totalDiscount = null,
     Object? products = null,
@@ -79,6 +82,10 @@ class _$CartModelCopyWithImpl<$Res, $Val extends CartModel>
       totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      subTotal: null == subTotal
+          ? _value.subTotal
+          : subTotal // ignore: cast_nullable_to_non_nullable
               as double,
       totalDeliveryFee: null == totalDeliveryFee
           ? _value.totalDeliveryFee
@@ -107,6 +114,7 @@ abstract class _$$_CartModelCopyWith<$Res> implements $CartModelCopyWith<$Res> {
       {String userId,
       String? id,
       double totalPrice,
+      double subTotal,
       double totalDeliveryFee,
       double totalDiscount,
       List<dynamic> products});
@@ -126,6 +134,7 @@ class __$$_CartModelCopyWithImpl<$Res>
     Object? userId = null,
     Object? id = freezed,
     Object? totalPrice = null,
+    Object? subTotal = null,
     Object? totalDeliveryFee = null,
     Object? totalDiscount = null,
     Object? products = null,
@@ -142,6 +151,10 @@ class __$$_CartModelCopyWithImpl<$Res>
       totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      subTotal: null == subTotal
+          ? _value.subTotal
+          : subTotal // ignore: cast_nullable_to_non_nullable
               as double,
       totalDeliveryFee: null == totalDeliveryFee
           ? _value.totalDeliveryFee
@@ -166,6 +179,7 @@ class _$_CartModel implements _CartModel {
       {required this.userId,
       this.id,
       required this.totalPrice,
+      required this.subTotal,
       required this.totalDeliveryFee,
       required this.totalDiscount,
       required final List<dynamic> products})
@@ -181,6 +195,8 @@ class _$_CartModel implements _CartModel {
   @override
   final double totalPrice;
   @override
+  final double subTotal;
+  @override
   final double totalDeliveryFee;
   @override
   final double totalDiscount;
@@ -194,7 +210,7 @@ class _$_CartModel implements _CartModel {
 
   @override
   String toString() {
-    return 'CartModel(userId: $userId, id: $id, totalPrice: $totalPrice, totalDeliveryFee: $totalDeliveryFee, totalDiscount: $totalDiscount, products: $products)';
+    return 'CartModel(userId: $userId, id: $id, totalPrice: $totalPrice, subTotal: $subTotal, totalDeliveryFee: $totalDeliveryFee, totalDiscount: $totalDiscount, products: $products)';
   }
 
   @override
@@ -206,6 +222,8 @@ class _$_CartModel implements _CartModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.totalPrice, totalPrice) ||
                 other.totalPrice == totalPrice) &&
+            (identical(other.subTotal, subTotal) ||
+                other.subTotal == subTotal) &&
             (identical(other.totalDeliveryFee, totalDeliveryFee) ||
                 other.totalDeliveryFee == totalDeliveryFee) &&
             (identical(other.totalDiscount, totalDiscount) ||
@@ -220,6 +238,7 @@ class _$_CartModel implements _CartModel {
       userId,
       id,
       totalPrice,
+      subTotal,
       totalDeliveryFee,
       totalDiscount,
       const DeepCollectionEquality().hash(_products));
@@ -243,6 +262,7 @@ abstract class _CartModel implements CartModel {
       {required final String userId,
       final String? id,
       required final double totalPrice,
+      required final double subTotal,
       required final double totalDeliveryFee,
       required final double totalDiscount,
       required final List<dynamic> products}) = _$_CartModel;
@@ -256,6 +276,8 @@ abstract class _CartModel implements CartModel {
   String? get id;
   @override
   double get totalPrice;
+  @override
+  double get subTotal;
   @override
   double get totalDeliveryFee;
   @override

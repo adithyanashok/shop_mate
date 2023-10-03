@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/domain/cart/model/cart_model.dart';
 import 'package:shop_mate/presentation/checkout/checkout_screen.dart';
@@ -25,17 +26,25 @@ class CartScreen extends StatelessWidget {
         title: const BuildRegularTextWidget(text: 'Cart'),
         centerTitle: true,
       ),
-      body: SafeArea(
-          child: Column(
-        children: [
-          CartProductSection(),
-          const Divider(
-            color: AppColor.greenColor,
-            thickness: 3,
-          ),
-          const CartAmountSection()
-        ],
-      )),
+      body: BlocBuilder<CartBloc, CartState>(
+        builder: (context, state) {
+          return SafeArea(
+              child: state.cart.products.isEmpty
+                  ? const Center(
+                      child: Text('No products'),
+                    )
+                  : Column(
+                      children: [
+                        CartProductSection(),
+                        const Divider(
+                          color: AppColor.greenColor,
+                          thickness: 3,
+                        ),
+                        const CartAmountSection()
+                      ],
+                    ));
+        },
+      ),
     );
   }
 }
@@ -60,6 +69,16 @@ class CartAmountSection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   const BuildRegularTextWidget(text: "Price Details"),
+                  BuildTextRow(
+                    text1: const BuildRegularTextWidget(
+                      text: 'Subtotal:',
+                      fontSize: 15,
+                    ),
+                    text2: BuildRegularTextWidget(
+                      text: '\$${state.cart.subTotal}',
+                      fontSize: 15,
+                    ),
+                  ),
                   BuildTextRow(
                     text1: const BuildRegularTextWidget(
                       text: 'Delivery Fee:',
@@ -120,128 +139,176 @@ class CartProductSection extends StatelessWidget {
           child: ListView.separated(
             itemBuilder: (context, index) {
               final product = state.cart.products[index];
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Row(
-                    children: [
-                      Image.network(
-                        product['image'],
-                        width: 80,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          BuildSmallText(text: product['name']),
-                          SizedBox(
-                            width: 0.5.sw,
-                            child: BuildSmallText(
-                              text: product['description'],
-                              color: AppColor.colorGrey1,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  BlocBuilder<CartBloc, CartState>(
-                    builder: (context, state) {
-                      return Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              BlocProvider.of<CartBloc>(context)
-                                  .add(CartEvent.incrementQty(
-                                      cartModel: CartModel(
-                                        userId: userId!,
-                                        totalPrice: state.cart.totalPrice,
-                                        products: [
-                                          {
-                                            "name": product['name'],
-                                            "description":
-                                                product['description'],
-                                            "category": product['category'],
-                                            "amount": product['amount'],
-                                            "quantity": product['quantity'],
-                                            "image": product['image'],
-                                            "deliveryFee": 10,
-                                            "discount": 50,
-                                          }
-                                        ],
-                                        totalDeliveryFee: 10,
-                                        totalDiscount: 50,
-                                      ),
-                                      type: 'inc',
-                                      context: context));
-                            },
-                            child: Container(
-                              height: 30,
-                              width: 30,
-                              decoration: BoxDecoration(
-                                color: AppColor.greenColor,
-                                borderRadius: BorderRadius.circular(10),
+              print(state.cart.products[index].toString());
+              return Slidable(
+                startActionPane: ActionPane(
+                  motion: const BehindMotion(),
+                  children: [
+                    SlidableAction(
+                      onPressed: (context) {
+                        BlocProvider.of<CartBloc>(context)
+                            .add(CartEvent.deleteProduct(
+                                cartModel: CartModel(
+                                  userId: userId!,
+                                  totalPrice: state.cart.totalPrice,
+                                  products: [
+                                    {
+                                      "name": product['name'],
+                                      "description": product['description'],
+                                      "category": product['category'],
+                                      "amount": product['amount'],
+                                      "quantity": product['quantity'],
+                                      "image": product['image'],
+                                      "productId": product['productId'],
+                                      "deliveryFee": 10,
+                                      "discount": 50,
+                                    }
+                                  ],
+                                  totalDeliveryFee: 10,
+                                  totalDiscount: 50,
+                                  subTotal: state.cart.subTotal,
+                                ),
+                                context: context));
+                      },
+                      backgroundColor: Colors.red,
+                      foregroundColor: AppColor.whiteColor,
+                      icon: Icons.delete,
+                      label: 'Remove',
+                      spacing: 2,
+                      autoClose: false,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      children: [
+                        Image.network(
+                          product['image'],
+                          width: 80,
+                          height: 80,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            BuildSmallText(text: product['name']),
+                            SizedBox(
+                              width: 0.5.sw,
+                              child: BuildSmallText(
+                                text: product['description'],
+                                color: AppColor.colorGrey1,
+                                fontSize: 12,
                               ),
-                              child: const Center(
-                                child: Icon(
-                                  Icons.add,
-                                  size: 15,
-                                  color: AppColor.whiteColor,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    BlocBuilder<CartBloc, CartState>(
+                      builder: (context, state) {
+                        return Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                BlocProvider.of<CartBloc>(context)
+                                    .add(CartEvent.incrementQty(
+                                        cartModel: CartModel(
+                                          userId: userId!,
+                                          totalPrice: state.cart.totalPrice,
+                                          products: [
+                                            {
+                                              "name": product['name'],
+                                              "description":
+                                                  product['description'],
+                                              "category": product['category'],
+                                              "amount": product['amount'],
+                                              "quantity": product['quantity'],
+                                              "image": product['image'],
+                                              "productId": product['productId'],
+                                              "deliveryFee": 10,
+                                              "discount": 50,
+                                            }
+                                          ],
+                                          totalDeliveryFee: 10,
+                                          totalDiscount: 50,
+                                          subTotal: state.cart.subTotal,
+                                        ),
+                                        type: 'inc',
+                                        context: context));
+                              },
+                              child: Container(
+                                height: 30,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                  color: AppColor.greenColor,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.add,
+                                    size: 15,
+                                    color: AppColor.whiteColor,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
-                            child: Text(product['quantity'].toString()),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              BlocProvider.of<CartBloc>(context)
-                                  .add(CartEvent.incrementQty(
-                                      cartModel: CartModel(
-                                        userId: userId!,
-                                        totalPrice: state.cart.totalPrice,
-                                        products: [
-                                          {
-                                            "name": product['name'],
-                                            "description":
-                                                product['description'],
-                                            "category": product['category'],
-                                            "amount": product['amount'],
-                                            "quantity": product['quantity'],
-                                            "image": product['image'],
-                                            "deliveryFee": 10,
-                                            "discount": 50,
-                                          }
-                                        ],
-                                        totalDeliveryFee: 10,
-                                        totalDiscount: 50,
-                                      ),
-                                      type: 'dec',
-                                      context: context));
-                            },
-                            child: Container(
-                              height: 30,
-                              width: 30,
-                              decoration: BoxDecoration(
-                                color: AppColor.greenColor,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Center(
-                                child: Icon(
-                                  Icons.remove,
-                                  size: 15,
-                                  color: AppColor.whiteColor,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5),
+                              child: Text(product['quantity'].toString()),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                BlocProvider.of<CartBloc>(context)
+                                    .add(CartEvent.incrementQty(
+                                        cartModel: CartModel(
+                                          userId: userId!,
+                                          totalPrice: state.cart.totalPrice,
+                                          products: [
+                                            {
+                                              "name": product['name'],
+                                              "description":
+                                                  product['description'],
+                                              "category": product['category'],
+                                              "amount": product['amount'],
+                                              "quantity": product['quantity'],
+                                              "image": product['image'],
+                                              "productId": product['productId'],
+                                              "deliveryFee": 10,
+                                              "discount": 50,
+                                            }
+                                          ],
+                                          totalDeliveryFee: 10,
+                                          totalDiscount: 50,
+                                          subTotal: state.cart.subTotal,
+                                        ),
+                                        type: 'dec',
+                                        context: context));
+                              },
+                              child: Container(
+                                height: 30,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                  color: AppColor.greenColor,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.remove,
+                                    size: 15,
+                                    color: AppColor.whiteColor,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      );
-                    },
-                  )
-                ],
+                          ],
+                        );
+                      },
+                    )
+                  ],
+                ),
               );
             },
             separatorBuilder: (context, index) {

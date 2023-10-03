@@ -10,6 +10,7 @@ class CartModel with _$CartModel {
     required String userId,
     String? id,
     required double totalPrice,
+    required double subTotal,
     required double totalDeliveryFee,
     required double totalDiscount,
     required List products,

@@ -10,8 +10,9 @@ import 'package:shop_mate/application/pageview/pageview_bloc.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/application/rating/rating_bloc.dart';
 import 'package:shop_mate/domain/cart/model/cart_model.dart';
-import 'package:shop_mate/domain/product/model/product.dart';
+import 'package:shop_mate/presentation/cart/cart_screen.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/rating/rating.dart';
 import 'package:shop_mate/presentation/widgets/button_widgets.dart';
 import 'package:shop_mate/presentation/widgets/loading_widget.dart';
@@ -39,8 +40,6 @@ class ProductScreen extends StatelessWidget {
     // fetch ratings of the product
     BlocProvider.of<RatingBloc>(context)
         .add(RatingEvent.fetchRatings(productId: productId, context: context));
-    final state = BlocProvider.of<CartBloc>(context).state;
-    log("CARTSTATE: $state");
 
     return Scaffold(
       // Appbar
@@ -150,48 +149,65 @@ class ProductScreen extends StatelessWidget {
                           children: [
                             const BuildMediumButton(
                               backgroundColor: Colors.transparent,
-                              text: "BUY  NOW",
+                              text: "BUY NOW",
                               textColor: AppColor.greenColor,
                               borderColor: AppColor.greenColor,
                             ),
                             BlocBuilder<CartBloc, CartState>(
                               builder: (context, state) {
-                                return BuildMediumButton(
-                                    backgroundColor: AppColor.greenColor,
-                                    text: "ADD TO CART",
-                                    textColor: AppColor.whiteColor,
-                                    borderColor: AppColor.greenColor,
-                                    state: state,
-                                    onTap: () {
-                                      final cartState =
+                                bool isProductInCart = state.cart.products.any(
+                                    (cartProduct) =>
+                                        cartProduct["productId"] == product.id);
+
+                                return isProductInCart
+                                    ? BuildMediumButton(
+                                        backgroundColor: AppColor.greenColor,
+                                        text: "Go to cart",
+                                        textColor: AppColor.whiteColor,
+                                        borderColor: AppColor.greenColor,
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                              buildNavigation(
+                                                  route: CartScreen()));
+                                        },
+                                      )
+                                    : BuildMediumButton(
+                                        backgroundColor: AppColor.greenColor,
+                                        text: "ADD TO CART",
+                                        textColor: AppColor.whiteColor,
+                                        borderColor: AppColor.greenColor,
+                                        state: state,
+                                        onTap: () {
                                           BlocProvider.of<CartBloc>(context)
-                                              .state;
-                                      log(cartState.toString());
-                                      BlocProvider.of<CartBloc>(context).add(
-                                        CartEvent.addToCart(
-                                          cartModel: CartModel(
-                                            userId: userId!,
-                                            totalPrice: product.amount * 1,
-                                            products: [
-                                              {
-                                                "name": product.name,
-                                                "description":
-                                                    product.description,
-                                                "category": product.category,
-                                                "amount": product.amount,
-                                                "quantity": 1,
-                                                "image": product.image![0],
-                                                "deliveryFee": 50,
-                                                "discount": 10,
-                                              }
-                                            ],
-                                            totalDeliveryFee: 0,
-                                            totalDiscount: 0,
-                                          ),
-                                          context: context,
-                                        ),
+                                              .add(
+                                            CartEvent.addToCart(
+                                              cartModel: CartModel(
+                                                userId: userId!,
+                                                totalPrice: product.amount * 1,
+                                                products: [
+                                                  {
+                                                    "name": product.name,
+                                                    "description":
+                                                        product.description,
+                                                    "category":
+                                                        product.category,
+                                                    "amount": product.amount,
+                                                    "quantity": 1,
+                                                    "image": product.image![0],
+                                                    "productId": product.id,
+                                                    "deliveryFee": 50,
+                                                    "discount": 10,
+                                                  }
+                                                ],
+                                                totalDeliveryFee: 0,
+                                                totalDiscount: 0,
+                                                subTotal: product.amount,
+                                              ),
+                                              context: context,
+                                            ),
+                                          );
+                                        },
                                       );
-                                    });
                               },
                             ),
                           ],
