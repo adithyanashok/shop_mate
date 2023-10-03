@@ -189,6 +189,12 @@ class CartProductSection extends StatelessWidget {
                           product['image'],
                           width: 80,
                           height: 80,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Text('data');
+                          },
+                          loadingBuilder: (context, child, loadingProgress) {
+                            return Text('data');
+                          },
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

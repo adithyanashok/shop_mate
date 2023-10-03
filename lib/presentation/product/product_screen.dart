@@ -70,6 +70,13 @@ class ProductScreen extends StatelessWidget {
                                 product.image![index],
                                 width: 340,
                                 fit: BoxFit.contain,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Text('data');
+                                },
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
+                                  return Text('data');
+                                },
                               );
                             },
                             controller: pageController,
