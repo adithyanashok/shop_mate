@@ -9,6 +9,7 @@ import 'package:shop_mate/presentation/checkout/checkout_screen.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/widgets/button_widgets.dart';
+import 'package:shop_mate/presentation/widgets/loader_widgets.dart';
 import 'package:shop_mate/presentation/widgets/row_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
@@ -29,20 +30,21 @@ class CartScreen extends StatelessWidget {
       body: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
           return SafeArea(
-              child: state.cart.products.isEmpty
-                  ? const Center(
-                      child: Text('No products'),
-                    )
-                  : Column(
-                      children: [
-                        CartProductSection(),
-                        const Divider(
-                          color: AppColor.greenColor,
-                          thickness: 3,
-                        ),
-                        const CartAmountSection()
-                      ],
-                    ));
+            child: state.cart.products.isEmpty
+                ? Center(
+                    child: Image.asset('assets/images/cart-is-empty.png'),
+                  )
+                : Column(
+                    children: [
+                      CartProductSection(),
+                      const Divider(
+                        color: AppColor.greenColor,
+                        thickness: 3,
+                      ),
+                      const CartAmountSection()
+                    ],
+                  ),
+          );
         },
       ),
     );
@@ -108,8 +110,12 @@ class CartAmountSection extends StatelessWidget {
                       Navigator.of(context)
                           .push(buildNavigation(route: CheckoutScreen()));
                     },
-                    child: const BuildButtonWidget(
+                    child: BuildButtonWidget(
                       text: 'Continue',
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(buildNavigation(route: CheckoutScreen()));
+                      },
                     ),
                   )
                 ],
@@ -192,9 +198,9 @@ class CartProductSection extends StatelessWidget {
                           errorBuilder: (context, error, stackTrace) {
                             return Text('data');
                           },
-                          loadingBuilder: (context, child, loadingProgress) {
-                            return Text('data');
-                          },
+                          // loadingBuilder: (context, child, loadingProgress) {
+                          //   return Text('data');
+                          // },
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -263,7 +269,11 @@ class CartProductSection extends StatelessWidget {
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 5),
-                              child: Text(product['quantity'].toString()),
+                              child: state.isLoading
+                                  ? const BuildMiniLoader(
+                                      color: AppColor.greenColor,
+                                    )
+                                  : Text(product['quantity'].toString()),
                             ),
                             GestureDetector(
                               onTap: () {

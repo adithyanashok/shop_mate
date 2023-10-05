@@ -54,12 +54,22 @@ class BuildNavBar extends StatelessWidget {
       },
       currentIndex: state.value,
       items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined), label: "Cart"),
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home_filled),
+            label: "Home"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.person_2_outlined), label: "Profile"),
+            icon: Icon(Icons.search),
+            activeIcon: Icon(Icons.search_rounded),
+            label: "Search"),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart_outlined),
+            activeIcon: Icon(Icons.shopping_cart_rounded),
+            label: "Cart"),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.person_2_outlined),
+            activeIcon: Icon(Icons.person_2_rounded),
+            label: "Profile"),
       ],
     );
   }

@@ -1,21 +1,37 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shop_mate/application/address/address_bloc.dart';
+import 'package:shop_mate/application/cart/cart_bloc.dart';
+import 'package:shop_mate/domain/address/model/address_model.dart';
 import 'package:shop_mate/presentation/checkout/checkout_screens_widgets/checkout_screen_widgets.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/order_successful_screen/order_successful_screen.dart';
+import 'package:shop_mate/presentation/profile/profile_screen.dart';
+import 'package:shop_mate/presentation/util/snackbar.dart';
 import 'package:shop_mate/presentation/widgets/asset_card.dart';
+import 'package:shop_mate/presentation/widgets/button_widgets.dart';
 import 'package:shop_mate/presentation/widgets/row_widget.dart';
+import 'package:shop_mate/presentation/widgets/text_form_field_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class CheckoutScreen extends StatelessWidget {
   CheckoutScreen({super.key});
 
-  int addressCount = 0;
+  int addressCount = 3;
+  String? userId = FirebaseAuth.instance.currentUser?.uid;
+  String? title;
+  String? address;
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<AddressBloc>(context)
+        .add(AddressEvent.getAddress(userId: userId!, context: context));
     return Scaffold(
       appBar: AppBar(
         title: const BuildRegularTextWidget(text: 'Checkout'),
@@ -30,38 +46,83 @@ class CheckoutScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const BuildHeadingText(text: "Shipping Address"),
-                  addressCount >= 2
-                      ? IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.add,
-                            size: 30,
-                            color: AppColor.colorGrey1,
-                          ),
-                        )
-                      : const SizedBox()
+                  IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return SimpleDialog(
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                            title: const Text("Add Shipping address"),
+                            children: [
+                              BuildTextFormField(
+                                label: "Title",
+                                hintText: "Home",
+                                icon: Icons.home,
+                                func: (value) {
+                                  title = value;
+                                },
+                              ),
+                              BuildTextAreaField(
+                                label: "Address",
+                                hintText: 'Enter Address',
+                                icon: Icons.location_city_rounded,
+                                func: (value) {
+                                  address = value;
+                                },
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              BlocBuilder<AddressBloc, AddressState>(
+                                builder: (context, state) {
+                                  return BuildButtonWidget(
+                                    text: "Done",
+                                    state: state,
+                                    onTap: () {
+                                      addAddress(context);
+                                    },
+                                  );
+                                },
+                              )
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.add,
+                      size: 30,
+                      color: AppColor.colorGrey1,
+                    ),
+                  )
                 ],
               ),
             ),
             Expanded(
-              child: ListView.separated(
-                itemBuilder: (context, index) {
-                  addressCount = index;
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: BuildAddressCard(
-                      title: "Home",
-                      text:
-                          'Cecilia Chapman711-2880 Nulla St.Mankato Mississippi 96522(257) 563-7401',
-                    ),
+              child: BlocBuilder<AddressBloc, AddressState>(
+                builder: (context, state) {
+                  return ListView.separated(
+                    itemBuilder: (context, index) {
+                      addressCount = index;
+                      final address = state.addressModelList[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: BuildAddressCard(
+                          title: address.title,
+                          text: address.address,
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(
+                        height: 10,
+                      );
+                    },
+                    itemCount: state.addressModelList.length,
                   );
                 },
-                separatorBuilder: (context, index) {
-                  return const SizedBox(
-                    height: 10,
-                  );
-                },
-                itemCount: 2,
               ),
             ),
             SizedBox(
@@ -76,8 +137,8 @@ class CheckoutScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context)
-                          .push(buildNavigation(route: OrderSuccessScreen()));
+                      Navigator.of(context).push(
+                          buildNavigation(route: const OrderSuccessScreen()));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -109,45 +170,63 @@ class CheckoutScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     child: Card(
                       surfaceTintColor: AppColor.whiteColor,
                       elevation: 2,
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            BuildHeadingText(text: "Price Details"),
-                            BuildTextRow(
-                              text1: BuildRegularTextWidget(
-                                text: "Subtotal:",
-                                fontSize: 16,
-                              ),
-                              text2: BuildRegularTextWidget(
-                                text: "\$100",
-                                fontSize: 16,
-                              ),
+                      child: BlocBuilder<CartBloc, CartState>(
+                        builder: (context, state) {
+                          log(state.cart.toString());
+                          final cart = state.cart;
+                          return Container(
+                            padding: const EdgeInsets.all(10),
+                            width: double.infinity,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                const BuildHeadingText(text: "Price Details"),
+                                BuildTextRow(
+                                  text1: const BuildRegularTextWidget(
+                                    text: "Subtotal:",
+                                    fontSize: 16,
+                                  ),
+                                  text2: BuildRegularTextWidget(
+                                    text: "\$${cart.subTotal}",
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                BuildTextRow(
+                                  text1: const BuildRegularTextWidget(
+                                    text: "Delivery Fee:",
+                                    fontSize: 16,
+                                  ),
+                                  text2: BuildRegularTextWidget(
+                                    text: "\$${cart.totalDeliveryFee}",
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                BuildTextRow(
+                                  text1: const BuildRegularTextWidget(
+                                    text: "Discount:",
+                                    fontSize: 16,
+                                  ),
+                                  text2: BuildRegularTextWidget(
+                                    text: "\$${cart.totalDiscount}",
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                BuildTextRow(
+                                  text1: const BuildRegularTextWidget(
+                                    text: "Total:",
+                                    fontSize: 20,
+                                  ),
+                                  text2: BuildHeadingText(
+                                      text: "\$${cart.totalPrice}"),
+                                ),
+                              ],
                             ),
-                            BuildTextRow(
-                              text1: BuildRegularTextWidget(
-                                text: "Delivery Fee:",
-                                fontSize: 16,
-                              ),
-                              text2: BuildRegularTextWidget(
-                                text: "\$50",
-                                fontSize: 16,
-                              ),
-                            ),
-                            BuildTextRow(
-                              text1: BuildRegularTextWidget(
-                                text: "Total:",
-                                fontSize: 20,
-                              ),
-                              text2: BuildHeadingText(text: "\$150.00"),
-                            ),
-                          ],
-                        ),
+                          );
+                        },
                       ),
                     ),
                   )
@@ -158,5 +237,24 @@ class CheckoutScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void addAddress(BuildContext context) {
+    if (title != null || address != null) {
+      BlocProvider.of<AddressBloc>(context).add(
+        AddressEvent.addAddress(
+          addressModel: AddressModel(
+            userId: userId!,
+            title: title!,
+            address: address!,
+          ),
+          context: context,
+        ),
+      );
+      BlocProvider.of<AddressBloc>(context)
+          .add(AddressEvent.getAddress(userId: userId!, context: context));
+    } else {
+      snackBar(context: context, msg: "Please fill the form");
+    }
   }
 }

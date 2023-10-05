@@ -37,7 +37,7 @@ class BuildAddressCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Home',
+                      title,
                       style: TextStyle(
                         color: AppColor.blackColor,
                         fontSize: 21.sp,
@@ -52,8 +52,7 @@ class BuildAddressCard extends StatelessWidget {
                   ],
                 ),
                 BuildSmallText(
-                  text:
-                      'Cecilia Chapman711-2880 Nulla St.Mankato Mississippi 96522(257) 563-7401',
+                  text: text,
                   textOverflow: TextOverflow.visible,
                   color: AppColor.colorGrey1,
                   fontSize: 11.sp,

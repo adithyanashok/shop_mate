@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -70,13 +68,6 @@ class ProductScreen extends StatelessWidget {
                                 product.image![index],
                                 width: 340,
                                 fit: BoxFit.contain,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Text('data');
-                                },
-                                loadingBuilder:
-                                    (context, child, loadingProgress) {
-                                  return Text('data');
-                                },
                               );
                             },
                             controller: pageController,

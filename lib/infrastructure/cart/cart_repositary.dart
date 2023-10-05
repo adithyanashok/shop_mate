@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +25,6 @@ class CartRepositary implements ICartFacade {
             previousTotal +
             (product['amount'] as double) * (product['quantity'] as int),
       );
-      log("productTotalPrice init: ${productTotalPrice}");
 
       double subTotal = cartModel.products.fold<double>(
         0,
@@ -40,17 +37,15 @@ class CartRepositary implements ICartFacade {
         0,
         (previousTotal, product) => previousTotal + (product['deliveryFee']),
       );
-      log("totaldelivery fee init: ${totalDeliveryFee}");
+      // log("totaldelivery fee init: ${totalDeliveryFee}");
 
       double totalDiscount = cartModel.products.fold<double>(
         0,
         (previousTotal, product) => previousTotal + (product['discount']),
       );
 
-      log("QQQQ: ${cartModel.products[0]['deliveryFee'] - cartModel.products[0]['discount']}");
       final productWithDiscont = cartModel.products[0]['deliveryFee'] -
           cartModel.products[0]['discount'];
-      log("totaldiscount init: ${totalDiscount}");
 
       // Fetch cart
       final currentCart = await db
@@ -62,17 +57,17 @@ class CartRepositary implements ICartFacade {
         final cart = CartModel.fromJson(currentCart.data()!);
         // Update the total delivery fee
         totalDeliveryFee = cart.totalDeliveryFee + totalDeliveryFee;
-        log("totaldelivery fee second: ${totalDeliveryFee}");
+        // log("totaldelivery fee second: ${totalDeliveryFee}");
 
         // Update the total discount
         totalDiscount = cart.totalDiscount + totalDiscount;
-        log("totaldiscount 2: ${totalDiscount}");
+        // log("totaldiscount 2: ${totalDiscount}");
 
         // Update the total price
         productTotalPrice = cart.totalPrice + productTotalPrice;
         subTotal = cart.subTotal + subTotal;
-        log("cart.totalPrice: ${cart.totalPrice}");
-        log("productTotalPrice not null case: ${productTotalPrice}");
+        // log("cart.totalPrice: ${cart.totalPrice}");
+        // log("productTotalPrice not null case: ${productTotalPrice}");
       }
       double totalWithDelivery = productTotalPrice + totalDeliveryFee;
       double totalWithDiscount = totalWithDelivery - totalDiscount;
@@ -80,7 +75,6 @@ class CartRepositary implements ICartFacade {
 
       if (state.cart.products.isEmpty) {
         // If the cart is empty, set the total price directly
-        log("state.cart.product.isEmpty product total price: ${totalWithDiscount}");
 
         cartModel = cartModel.copyWith(
             totalPrice: totalWithDiscount,
@@ -92,14 +86,6 @@ class CartRepositary implements ICartFacade {
             .doc(cartModel.userId)
             .set(cartModel.toJson());
       } else {
-        final cart = CartModel.fromJson(currentCart.data()!);
-        log("productTotalPrice else case1: ${productTotalPrice}");
-
-        double totalWithDelivery = productTotalPrice + totalDeliveryFee;
-
-        double totalWithDiscount = totalWithDelivery - totalDiscount;
-        // log("not empty product total price: ${product['deliveryFee']}");
-
         // If the cart is not empty, update the total price, total delivery fee, and total discount
         await db
             .collection(Collection.collectionCart)
@@ -118,7 +104,6 @@ class CartRepositary implements ICartFacade {
 
       return Right(cartModel);
     } catch (e) {
-      log(e.toString());
       snackBar(context: context, msg: e.toString());
       return const Left(MainFailure.clientFailure());
     }
@@ -128,15 +113,30 @@ class CartRepositary implements ICartFacade {
   Future<Either<MainFailure, CartModel>> getCart(String userId, context) async {
     try {
       final db = FirebaseFirestore.instance;
-      final docRef =
-          await db.collection(Collection.collectionCart).doc(userId).get();
+      final docRef = db.collection(Collection.collectionCart).doc(userId);
 
-      if (docRef.exists) {
-        var doc = docRef.data();
-        final cart = CartModel.fromJson(docRef.data()!);
-        log(doc![0].toString());
+      // Retrieve the document data from Firestore
+      var docData = await docRef.get();
+
+      if (docData.data() != null) {
+        // Check if the 'products' field is empty in the document
+        if (docData.data()?['products'].isEmpty) {
+          // If it's empty, update the document with initial values for cart properties
+          await docRef.update({
+            "totalPrice": 0,
+            "subTotal": 0,
+            "totalDeliveryFee": 0,
+            "totalDiscount": 0,
+          });
+        }
+      }
+
+      if (docData.exists) {
+        // If the document exists, parse it as a CartModel
+        final cart = CartModel.fromJson(docData.data()!);
         return Right(cart);
       } else {
+        // If the document doesn't exist, return an empty CartModel
         return const Right(CartModel(
           userId: '',
           totalPrice: 0,
@@ -147,8 +147,8 @@ class CartRepositary implements ICartFacade {
         ));
       }
     } catch (e) {
-      log(e.toString());
-
+      // Handle any exceptions and display an error message in a snackbar
+      // log('error at getCart $e');
       snackBar(context: context, msg: e.toString());
       return const Left(MainFailure.clientFailure());
     }
@@ -171,6 +171,7 @@ class CartRepositary implements ICartFacade {
           List<Map<String, dynamic>>.from(cartDoc.data()!['products']);
 
       if (type == 'inc') {
+        // Find the index of the specific product in the existing products list
         final productIndex = existingProducts.indexWhere((product) =>
             product['productId'] == cartModel.products[0]['productId']);
 
@@ -194,7 +195,7 @@ class CartRepositary implements ICartFacade {
           });
         }
       } else if (type == 'dec') {
-        // Find the specific product you want to change within existingProducts
+        // Find the index of the specific product in the existing products list
         final productIndex = existingProducts.indexWhere((product) =>
             product['productId'] == cartModel.products[0]['productId']);
 
@@ -226,7 +227,8 @@ class CartRepositary implements ICartFacade {
 
       return const Right(true);
     } catch (e) {
-      log(e.toString());
+      // Handle any exceptions and display an error message in a snackbar
+      // log(e.toString());
       snackBar(context: context, msg: e.toString());
       return const Left(MainFailure.clientFailure());
     }
@@ -250,6 +252,14 @@ class CartRepositary implements ICartFacade {
 
       final productIndex = existingProducts.indexWhere((product) =>
           product['productId'] == cartModel.products[0]['productId']);
+      if (cartData?['products'].isEmpty) {
+        await cartReference.update({
+          "totalPrice": 0,
+          "subTotal": 0,
+          "totalDeliveryFee": 0,
+          "totalDiscount": 0,
+        });
+      }
 
       if (productIndex != -1) {
         // Get the product that is being removed
@@ -275,10 +285,6 @@ class CartRepositary implements ICartFacade {
             cartData?['totalPrice'] - removedAmount - additionalAmount;
         final newSubTotal = cartModel.subTotal - removedAmount;
 
-        log("Initial Subtotal: ${cartModel.subTotal}");
-        log("Removed Amount: $removedAmount");
-        log("New Subtotal: $newSubTotal");
-
         // Update the specific product in Firestore and the other fields
         await cartReference.update({
           "products": FieldValue.arrayRemove([removedProduct]),
@@ -294,7 +300,9 @@ class CartRepositary implements ICartFacade {
 
         return const Right(true);
       } else {
-        print("Product not found in existingProducts"); // Debug print
+        snackBar(
+            context: context, msg: "Product not found in existingProducts");
+
         return const Right(false); // Indicate that the product was not found
       }
     } catch (e) {
