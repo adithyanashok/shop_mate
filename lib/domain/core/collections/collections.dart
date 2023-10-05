@@ -4,4 +4,5 @@ class Collection {
   static const collectionRating = 'rating';
   static const collectionCart = 'cart';
   static const collectionAddress = 'address';
+  static const collectionOrder = 'orders';
 }

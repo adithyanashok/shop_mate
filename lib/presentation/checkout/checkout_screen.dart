@@ -7,7 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shop_mate/application/address/address_bloc.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
+import 'package:shop_mate/application/orders/orders_bloc.dart';
 import 'package:shop_mate/domain/address/model/address_model.dart';
+import 'package:shop_mate/domain/order/model/order_model.dart';
 import 'package:shop_mate/presentation/checkout/checkout_screens_widgets/checkout_screen_widgets.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
@@ -20,13 +22,42 @@ import 'package:shop_mate/presentation/widgets/row_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_form_field_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
-class CheckoutScreen extends StatelessWidget {
+class CheckoutScreen extends StatefulWidget {
   CheckoutScreen({super.key});
 
+  @override
+  State<CheckoutScreen> createState() => _CheckoutScreenState();
+}
+
+class _CheckoutScreenState extends State<CheckoutScreen> {
   int addressCount = 3;
+  String? selectedAddress;
   String? userId = FirebaseAuth.instance.currentUser?.uid;
+
   String? title;
+
   String? address;
+
+  @override
+  void initState() {
+    super.initState();
+    // Set the default value here, e.g., the first address in the list
+    if (BlocProvider.of<AddressBloc>(context)
+        .state
+        .addressModelList
+        .isNotEmpty) {
+      selectedAddress = BlocProvider.of<AddressBloc>(context)
+          .state
+          .addressModelList[0]
+          .address;
+
+      log(BlocProvider.of<AddressBloc>(context)
+          .state
+          .addressModelList[0]
+          .title
+          .toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,13 +136,19 @@ class CheckoutScreen extends StatelessWidget {
                 builder: (context, state) {
                   return ListView.separated(
                     itemBuilder: (context, index) {
-                      addressCount = index;
                       final address = state.addressModelList[index];
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: BuildAddressCard(
+                          key: Key(address.title),
                           title: address.title,
                           text: address.address,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedAddress = value;
+                            });
+                          },
+                          selectedValue: selectedAddress,
                         ),
                       );
                     },
@@ -135,40 +172,61 @@ class CheckoutScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: BuildHeadingText(text: "Payment Methods"),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                          buildNavigation(route: const OrderSuccessScreen()));
+                  BlocBuilder<CartBloc, CartState>(
+                    builder: (context, state) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          BuildAssetCard(
+                            asset: SvgPicture.asset(
+                              'assets/images/stripe-v2.svg',
+                              width: 55,
+                            ),
+                          ),
+                          BuildAssetCard(
+                            asset: SvgPicture.asset(
+                              'assets/images/razorpay.svg',
+                              width: 55,
+                            ),
+                          ),
+                          BuildAssetCard(
+                            asset: Image.asset(
+                              'assets/images/google.com.png',
+                              width: 55,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              BlocProvider.of<OrdersBloc>(context).add(
+                                OrdersEvent.placeOrder(
+                                  orderModel: OrderModel(
+                                    userId: userId!,
+                                    totalPrice: state.cart.totalPrice,
+                                    subTotal: state.cart.subTotal,
+                                    totalDeliveryFee:
+                                        state.cart.totalDeliveryFee,
+                                    totalDiscount: state.cart.totalDiscount,
+                                    products: state.cart.products,
+                                    orderDate: DateTime.now(),
+                                    shippingAddress: selectedAddress!,
+                                    status: 'Pending',
+                                  ),
+                                  context: context,
+                                ),
+                              );
+                              Navigator.of(context).push(buildNavigation(
+                                  route: const OrderSuccessScreen()));
+                            },
+                            child: BuildAssetCard(
+                              asset: Image.asset(
+                                'assets/images/cashondel.png',
+                                width: 55,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
                     },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        BuildAssetCard(
-                          asset: SvgPicture.asset(
-                            'assets/images/stripe-v2.svg',
-                            width: 55,
-                          ),
-                        ),
-                        BuildAssetCard(
-                          asset: SvgPicture.asset(
-                            'assets/images/razorpay.svg',
-                            width: 55,
-                          ),
-                        ),
-                        BuildAssetCard(
-                          asset: Image.asset(
-                            'assets/images/google.com.png',
-                            width: 55,
-                          ),
-                        ),
-                        BuildAssetCard(
-                          asset: Image.asset(
-                            'assets/images/cashondel.png',
-                            width: 55,
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
                   Expanded(
                     child: Card(
@@ -176,7 +234,6 @@ class CheckoutScreen extends StatelessWidget {
                       elevation: 2,
                       child: BlocBuilder<CartBloc, CartState>(
                         builder: (context, state) {
-                          log(state.cart.toString());
                           final cart = state.cart;
                           return Container(
                             padding: const EdgeInsets.all(10),
@@ -187,32 +244,42 @@ class CheckoutScreen extends StatelessWidget {
                                 const BuildHeadingText(text: "Price Details"),
                                 BuildTextRow(
                                   text1: const BuildRegularTextWidget(
+                                    text: "Total Products:",
+                                    fontSize: 15,
+                                  ),
+                                  text2: BuildRegularTextWidget(
+                                    text: "${cart.products.length}",
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                BuildTextRow(
+                                  text1: const BuildRegularTextWidget(
                                     text: "Subtotal:",
-                                    fontSize: 16,
+                                    fontSize: 15,
                                   ),
                                   text2: BuildRegularTextWidget(
                                     text: "\$${cart.subTotal}",
-                                    fontSize: 16,
+                                    fontSize: 15,
                                   ),
                                 ),
                                 BuildTextRow(
                                   text1: const BuildRegularTextWidget(
                                     text: "Delivery Fee:",
-                                    fontSize: 16,
+                                    fontSize: 15,
                                   ),
                                   text2: BuildRegularTextWidget(
                                     text: "\$${cart.totalDeliveryFee}",
-                                    fontSize: 16,
+                                    fontSize: 15,
                                   ),
                                 ),
                                 BuildTextRow(
                                   text1: const BuildRegularTextWidget(
                                     text: "Discount:",
-                                    fontSize: 16,
+                                    fontSize: 15,
                                   ),
                                   text2: BuildRegularTextWidget(
                                     text: "\$${cart.totalDiscount}",
-                                    fontSize: 16,
+                                    fontSize: 15,
                                   ),
                                 ),
                                 BuildTextRow(

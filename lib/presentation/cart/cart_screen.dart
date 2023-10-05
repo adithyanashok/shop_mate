@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:shop_mate/application/address/address_bloc.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/domain/cart/model/cart_model.dart';
 import 'package:shop_mate/presentation/checkout/checkout_screen.dart';
@@ -22,6 +23,8 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     BlocProvider.of<CartBloc>(context)
         .add(CartEvent.getCart(userId: userId!, context: context));
+    BlocProvider.of<AddressBloc>(context)
+        .add(AddressEvent.getAddress(userId: userId!, context: context));
     return Scaffold(
       appBar: AppBar(
         title: const BuildRegularTextWidget(text: 'Cart'),
@@ -145,7 +148,6 @@ class CartProductSection extends StatelessWidget {
           child: ListView.separated(
             itemBuilder: (context, index) {
               final product = state.cart.products[index];
-              print(state.cart.products[index].toString());
               return Slidable(
                 startActionPane: ActionPane(
                   motion: const BehindMotion(),

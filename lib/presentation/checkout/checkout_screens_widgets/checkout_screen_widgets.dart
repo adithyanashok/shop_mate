@@ -1,20 +1,28 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
-class BuildAddressCard extends StatelessWidget {
+class BuildAddressCard extends StatefulWidget {
   BuildAddressCard({
     super.key,
     required this.title,
     required this.text,
+    this.onChanged,
+    this.selectedValue,
   });
   final String title;
   final String text;
-  bool get value => val;
+  final Function(String)? onChanged;
+  String? selectedValue;
 
-  bool val = false;
+  @override
+  State<BuildAddressCard> createState() => _BuildAddressCardState();
+}
 
+class _BuildAddressCardState extends State<BuildAddressCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -23,21 +31,28 @@ class BuildAddressCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Radio(
-            value: true,
-            groupValue: val,
-            onChanged: (value) {},
+            value: widget.text,
+            groupValue: widget.selectedValue,
+            onChanged: (value) {
+              log(value.toString());
+              setState(() {
+                widget.selectedValue = value.toString();
+                widget.onChanged!(value.toString());
+              });
+            },
             activeColor: AppColor.greenColor,
           ),
           SizedBox(
             width: 0.8.sw,
             // height: 60,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      title,
+                      widget.title,
                       style: TextStyle(
                         color: AppColor.blackColor,
                         fontSize: 21.sp,
@@ -52,7 +67,7 @@ class BuildAddressCard extends StatelessWidget {
                   ],
                 ),
                 BuildSmallText(
-                  text: text,
+                  text: widget.text,
                   textOverflow: TextOverflow.visible,
                   color: AppColor.colorGrey1,
                   fontSize: 11.sp,
