@@ -74,7 +74,7 @@ class OrderRepositary implements IOrderFacade {
           .get();
 
       if (totalProfitDoc.exists) {
-        // If it exists, update the existing document.
+        // If it exists, update the existing document
         await totalProfitDoc.reference.update({'totalProfit': totalProfit});
       } else {
         // If it doesn't exist, create a new document.
