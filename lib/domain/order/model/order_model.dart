@@ -6,6 +6,8 @@ part 'order_model.g.dart';
 class OrderModel with _$OrderModel {
   const factory OrderModel({
     required String userId,
+    String? username,
+    String? email,
     String? id,
     required double totalPrice,
     required double subTotal,
@@ -13,6 +15,8 @@ class OrderModel with _$OrderModel {
     required double totalDiscount,
     required List products,
     required DateTime orderDate,
+    DateTime? orderShippedDate,
+    DateTime? orderDeliveredDate,
     required String shippingAddress,
     required String status,
   }) = _OrderModel;

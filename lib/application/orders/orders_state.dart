@@ -5,7 +5,9 @@ class OrdersState with _$OrdersState {
   const factory OrdersState({
     required bool isLoading,
     required OrderModel orderModel,
+    required List<OrderModel> orderModelList,
     required Option<Either<MainFailure, OrderModel>> orderOpt,
+    required Option<Either<MainFailure, List<OrderModel>>> orderOptList,
   }) = _OrdersState;
 
   factory OrdersState.initial() {
@@ -23,6 +25,8 @@ class OrdersState with _$OrdersState {
         status: '',
       ),
       orderOpt: const None(),
+      orderModelList: [],
+      orderOptList: const None(),
     );
   }
 }

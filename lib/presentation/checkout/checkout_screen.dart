@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shop_mate/application/address/address_bloc.dart';
+import 'package:shop_mate/application/auth/auth_bloc.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/application/orders/orders_bloc.dart';
 import 'package:shop_mate/domain/address/model/address_model.dart';
@@ -50,12 +51,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           .state
           .addressModelList[0]
           .address;
-
-      log(BlocProvider.of<AddressBloc>(context)
-          .state
-          .addressModelList[0]
-          .title
-          .toString());
     }
   }
 
@@ -214,8 +209,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                   context: context,
                                 ),
                               );
-                              Navigator.of(context).push(buildNavigation(
-                                  route: const OrderSuccessScreen()));
                             },
                             child: BuildAssetCard(
                               asset: Image.asset(

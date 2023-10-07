@@ -29,7 +29,7 @@ import 'package:shop_mate/infrastructure/address/address_repositary.dart'
     as _i4;
 import 'package:shop_mate/infrastructure/cart/cart_repositary.dart' as _i6;
 import 'package:shop_mate/infrastructure/login/login_repositary.dart' as _i8;
-import 'package:shop_mate/infrastructure/order_repositary/order.dart' as _i10;
+import 'package:shop_mate/infrastructure/orders/order_repositary.dart' as _i10;
 import 'package:shop_mate/infrastructure/product/product_repositary.dart'
     as _i12;
 import 'package:shop_mate/infrastructure/rating/rating_repositary.dart' as _i14;

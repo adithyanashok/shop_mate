@@ -21,6 +21,8 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$OrderModel {
   String get userId => throw _privateConstructorUsedError;
+  String? get username => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
   double get totalPrice => throw _privateConstructorUsedError;
   double get subTotal => throw _privateConstructorUsedError;
@@ -28,6 +30,8 @@ mixin _$OrderModel {
   double get totalDiscount => throw _privateConstructorUsedError;
   List<dynamic> get products => throw _privateConstructorUsedError;
   DateTime get orderDate => throw _privateConstructorUsedError;
+  DateTime? get orderShippedDate => throw _privateConstructorUsedError;
+  DateTime? get orderDeliveredDate => throw _privateConstructorUsedError;
   String get shippingAddress => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
 
@@ -45,6 +49,8 @@ abstract class $OrderModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String userId,
+      String? username,
+      String? email,
       String? id,
       double totalPrice,
       double subTotal,
@@ -52,6 +58,8 @@ abstract class $OrderModelCopyWith<$Res> {
       double totalDiscount,
       List<dynamic> products,
       DateTime orderDate,
+      DateTime? orderShippedDate,
+      DateTime? orderDeliveredDate,
       String shippingAddress,
       String status});
 }
@@ -70,6 +78,8 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
   @override
   $Res call({
     Object? userId = null,
+    Object? username = freezed,
+    Object? email = freezed,
     Object? id = freezed,
     Object? totalPrice = null,
     Object? subTotal = null,
@@ -77,6 +87,8 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
     Object? totalDiscount = null,
     Object? products = null,
     Object? orderDate = null,
+    Object? orderShippedDate = freezed,
+    Object? orderDeliveredDate = freezed,
     Object? shippingAddress = null,
     Object? status = null,
   }) {
@@ -85,6 +97,14 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -113,6 +133,14 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
           ? _value.orderDate
           : orderDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      orderShippedDate: freezed == orderShippedDate
+          ? _value.orderShippedDate
+          : orderShippedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      orderDeliveredDate: freezed == orderDeliveredDate
+          ? _value.orderDeliveredDate
+          : orderDeliveredDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       shippingAddress: null == shippingAddress
           ? _value.shippingAddress
           : shippingAddress // ignore: cast_nullable_to_non_nullable
@@ -135,6 +163,8 @@ abstract class _$$_OrderModelCopyWith<$Res>
   @useResult
   $Res call(
       {String userId,
+      String? username,
+      String? email,
       String? id,
       double totalPrice,
       double subTotal,
@@ -142,6 +172,8 @@ abstract class _$$_OrderModelCopyWith<$Res>
       double totalDiscount,
       List<dynamic> products,
       DateTime orderDate,
+      DateTime? orderShippedDate,
+      DateTime? orderDeliveredDate,
       String shippingAddress,
       String status});
 }
@@ -158,6 +190,8 @@ class __$$_OrderModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
+    Object? username = freezed,
+    Object? email = freezed,
     Object? id = freezed,
     Object? totalPrice = null,
     Object? subTotal = null,
@@ -165,6 +199,8 @@ class __$$_OrderModelCopyWithImpl<$Res>
     Object? totalDiscount = null,
     Object? products = null,
     Object? orderDate = null,
+    Object? orderShippedDate = freezed,
+    Object? orderDeliveredDate = freezed,
     Object? shippingAddress = null,
     Object? status = null,
   }) {
@@ -173,6 +209,14 @@ class __$$_OrderModelCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -201,6 +245,14 @@ class __$$_OrderModelCopyWithImpl<$Res>
           ? _value.orderDate
           : orderDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      orderShippedDate: freezed == orderShippedDate
+          ? _value.orderShippedDate
+          : orderShippedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      orderDeliveredDate: freezed == orderDeliveredDate
+          ? _value.orderDeliveredDate
+          : orderDeliveredDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       shippingAddress: null == shippingAddress
           ? _value.shippingAddress
           : shippingAddress // ignore: cast_nullable_to_non_nullable
@@ -218,6 +270,8 @@ class __$$_OrderModelCopyWithImpl<$Res>
 class _$_OrderModel implements _OrderModel {
   const _$_OrderModel(
       {required this.userId,
+      this.username,
+      this.email,
       this.id,
       required this.totalPrice,
       required this.subTotal,
@@ -225,6 +279,8 @@ class _$_OrderModel implements _OrderModel {
       required this.totalDiscount,
       required final List<dynamic> products,
       required this.orderDate,
+      this.orderShippedDate,
+      this.orderDeliveredDate,
       required this.shippingAddress,
       required this.status})
       : _products = products;
@@ -234,6 +290,10 @@ class _$_OrderModel implements _OrderModel {
 
   @override
   final String userId;
+  @override
+  final String? username;
+  @override
+  final String? email;
   @override
   final String? id;
   @override
@@ -255,13 +315,17 @@ class _$_OrderModel implements _OrderModel {
   @override
   final DateTime orderDate;
   @override
+  final DateTime? orderShippedDate;
+  @override
+  final DateTime? orderDeliveredDate;
+  @override
   final String shippingAddress;
   @override
   final String status;
 
   @override
   String toString() {
-    return 'OrderModel(userId: $userId, id: $id, totalPrice: $totalPrice, subTotal: $subTotal, totalDeliveryFee: $totalDeliveryFee, totalDiscount: $totalDiscount, products: $products, orderDate: $orderDate, shippingAddress: $shippingAddress, status: $status)';
+    return 'OrderModel(userId: $userId, username: $username, email: $email, id: $id, totalPrice: $totalPrice, subTotal: $subTotal, totalDeliveryFee: $totalDeliveryFee, totalDiscount: $totalDiscount, products: $products, orderDate: $orderDate, orderShippedDate: $orderShippedDate, orderDeliveredDate: $orderDeliveredDate, shippingAddress: $shippingAddress, status: $status)';
   }
 
   @override
@@ -270,6 +334,9 @@ class _$_OrderModel implements _OrderModel {
         (other.runtimeType == runtimeType &&
             other is _$_OrderModel &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.email, email) || other.email == email) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.totalPrice, totalPrice) ||
                 other.totalPrice == totalPrice) &&
@@ -282,6 +349,10 @@ class _$_OrderModel implements _OrderModel {
             const DeepCollectionEquality().equals(other._products, _products) &&
             (identical(other.orderDate, orderDate) ||
                 other.orderDate == orderDate) &&
+            (identical(other.orderShippedDate, orderShippedDate) ||
+                other.orderShippedDate == orderShippedDate) &&
+            (identical(other.orderDeliveredDate, orderDeliveredDate) ||
+                other.orderDeliveredDate == orderDeliveredDate) &&
             (identical(other.shippingAddress, shippingAddress) ||
                 other.shippingAddress == shippingAddress) &&
             (identical(other.status, status) || other.status == status));
@@ -292,6 +363,8 @@ class _$_OrderModel implements _OrderModel {
   int get hashCode => Object.hash(
       runtimeType,
       userId,
+      username,
+      email,
       id,
       totalPrice,
       subTotal,
@@ -299,6 +372,8 @@ class _$_OrderModel implements _OrderModel {
       totalDiscount,
       const DeepCollectionEquality().hash(_products),
       orderDate,
+      orderShippedDate,
+      orderDeliveredDate,
       shippingAddress,
       status);
 
@@ -319,6 +394,8 @@ class _$_OrderModel implements _OrderModel {
 abstract class _OrderModel implements OrderModel {
   const factory _OrderModel(
       {required final String userId,
+      final String? username,
+      final String? email,
       final String? id,
       required final double totalPrice,
       required final double subTotal,
@@ -326,6 +403,8 @@ abstract class _OrderModel implements OrderModel {
       required final double totalDiscount,
       required final List<dynamic> products,
       required final DateTime orderDate,
+      final DateTime? orderShippedDate,
+      final DateTime? orderDeliveredDate,
       required final String shippingAddress,
       required final String status}) = _$_OrderModel;
 
@@ -334,6 +413,10 @@ abstract class _OrderModel implements OrderModel {
 
   @override
   String get userId;
+  @override
+  String? get username;
+  @override
+  String? get email;
   @override
   String? get id;
   @override
@@ -348,6 +431,10 @@ abstract class _OrderModel implements OrderModel {
   List<dynamic> get products;
   @override
   DateTime get orderDate;
+  @override
+  DateTime? get orderShippedDate;
+  @override
+  DateTime? get orderDeliveredDate;
   @override
   String get shippingAddress;
   @override

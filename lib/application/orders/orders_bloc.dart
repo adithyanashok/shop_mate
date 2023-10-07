@@ -37,5 +37,90 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
         ),
       );
     });
+
+    // get all orders
+    on<_GetAllOrders>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
+      final orderOpt = await iOrderFacade.getAllOrders(event.context);
+      emit(
+        orderOpt.fold(
+          (failure) => state.copyWith(
+            isLoading: false,
+            orderOpt: Some(
+              Left(failure),
+            ),
+          ),
+          (success) => state.copyWith(
+            isLoading: false,
+            orderModelList: success,
+            orderOptList: Some(
+              Right(success),
+            ),
+          ),
+        ),
+      );
+    });
+
+    // get a order
+    on<_GetAOrder>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
+      final orderOpt = await iOrderFacade.getOrder(event.context, event.id);
+      emit(
+        orderOpt.fold(
+          (failure) => state.copyWith(
+            isLoading: false,
+            orderOpt: Some(
+              Left(failure),
+            ),
+          ),
+          (success) => state.copyWith(
+            isLoading: false,
+            orderModel: success,
+            orderOpt: Some(
+              Right(success),
+            ),
+          ),
+        ),
+      );
+    });
+
+    // update  order status
+    on<_UpdateOrderStatus>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
+      final orderOpt = await iOrderFacade.updateOrderStatus(
+          event.context, event.id, event.value, event.date, event.update);
+      emit(
+        orderOpt.fold(
+          (failure) => state.copyWith(
+            isLoading: false,
+            orderOpt: Some(
+              Left(failure),
+            ),
+          ),
+          (success) => state.copyWith(
+            isLoading: false,
+          ),
+        ),
+      );
+    });
+
+    // on<_UpdateOrderStatusDate>((event, emit) async {
+    //   emit(state.copyWith(isLoading: true));
+    //   final orderOpt = await iOrderFacade.updateOrderStatusDate(
+    //       event.context, event.id, event.date, event.update);
+    //   emit(
+    //     orderOpt.fold(
+    //       (failure) => state.copyWith(
+    //         isLoading: false,
+    //         orderOpt: Some(
+    //           Left(failure),
+    //         ),
+    //       ),
+    //       (success) => state.copyWith(
+    //         isLoading: false,
+    //       ),
+    //     ),
+    //   );
+    // });
   }
 }

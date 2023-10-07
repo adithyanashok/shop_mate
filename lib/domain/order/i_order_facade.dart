@@ -8,4 +8,31 @@ abstract class IOrderFacade {
     OrderModel orderModel,
     BuildContext context,
   );
+  Future<Either<MainFailure, List<OrderModel>>> getAllOrders(
+    BuildContext context,
+  );
+  Future<Either<MainFailure, OrderModel>> getOrder(
+    BuildContext context,
+    String id,
+  );
+  Future<Either<MainFailure, void>> updateOrderStatus(
+    BuildContext context,
+    String id,
+    String value,
+    DateTime date,
+    String update,
+  );
+  // Future<Either<MainFailure, void>> updateOrderStatusDate(
+  //   BuildContext context,
+  //   String id,
+  //   String date,
+  //   String update,
+  // );
+  // Future<Either<MainFailure, void>> updateOrderStatus(
+  //   BuildContext context,
+  //   String id,
+  //   String value,
+  // );
 }
+
+enum Update { pending, shipped, delivered }

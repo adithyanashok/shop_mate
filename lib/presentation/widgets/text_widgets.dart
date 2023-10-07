@@ -34,32 +34,41 @@ class BuildTextWithSignupLink extends StatelessWidget {
     super.key,
     required this.text1,
     required this.text2,
+    this.text1FontSize = 12,
+    this.text1Color = AppColor.colorGrey1,
+    this.text2FontSize = 12,
+    this.text2Color = AppColor.blackColor,
+    this.text1FontWeight = FontWeight.w200,
+    this.text2FontWeight = FontWeight.w600,
   });
   final String text1;
+  final double text1FontSize;
+  final FontWeight text1FontWeight;
+  final Color text1Color;
   final String text2;
-
+  final double text2FontSize;
+  final FontWeight text2FontWeight;
+  final Color text2Color;
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text.rich(
-        TextSpan(
-          text: text1,
-          style: TextStyle(
-            color: AppColor.colorGrey1,
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w200,
-          ),
-          children: [
-            TextSpan(
-              text: text2,
-              style: TextStyle(
-                color: AppColor.blackColor,
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ],
+    return Text.rich(
+      TextSpan(
+        text: text1,
+        style: TextStyle(
+          color: text1Color,
+          fontSize: text1FontSize.sp,
+          fontWeight: text1FontWeight,
         ),
+        children: [
+          TextSpan(
+            text: text2,
+            style: TextStyle(
+              color: text2Color,
+              fontSize: text2FontSize.sp,
+              fontWeight: text2FontWeight,
+            ),
+          ),
+        ],
       ),
     );
   }

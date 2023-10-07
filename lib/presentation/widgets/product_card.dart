@@ -12,6 +12,7 @@ class BuildProductCard extends StatelessWidget {
     required this.title,
     required this.price,
     required this.description,
+    this.showAddtoCart = true,
     this.onTap,
   }) : super(key: key);
 
@@ -20,6 +21,7 @@ class BuildProductCard extends StatelessWidget {
   final String price;
   final String description;
   Function? onTap;
+  bool showAddtoCart;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class BuildProductCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(top: 10, right: 10),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
@@ -75,17 +77,19 @@ class BuildProductCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: AppColor.greenColor,
-                          borderRadius: BorderRadius.circular(3),
-                        ),
-                        child: const Icon(
-                          Icons.add,
-                          color: AppColor.whiteColor,
-                        ),
-                      )
+                      showAddtoCart
+                          ? Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: AppColor.greenColor,
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                              child: const Icon(
+                                Icons.add,
+                                color: AppColor.whiteColor,
+                              ),
+                            )
+                          : const SizedBox()
                     ],
                   ),
                 ),

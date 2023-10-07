@@ -1,7 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shop_mate/application/orders/orders_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/constants/route_animation.dart';
+import 'package:shop_mate/presentation/order/my_orders.dart';
 import 'package:shop_mate/presentation/signup/signup_screen.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
 import 'package:shop_mate/presentation/widgets/app_bar_widget.dart';
@@ -12,19 +16,37 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<OrdersBloc>(context)
+        .add(OrdersEvent.getAllOrders(context: context));
     return Scaffold(
         appBar: AppBar(
           title: const BuildRegularTextWidget(text: "Profile"),
           centerTitle: true,
         ),
-        body: const SafeArea(
+        body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BuildTextButton(icon: Icons.edit, text: "Edit profile"),
-              BuildTextButton(icon: Icons.home_filled, text: "Address"),
-              BuildTextButton(icon: Icons.widgets, text: "Orders"),
-              BuildTextButton(icon: Icons.logout, text: "Logout"),
+              const BuildTextButton(icon: Icons.edit, text: "Edit profile"),
+              const BuildTextButton(icon: Icons.home_filled, text: "Address"),
+              BuildTextButton(
+                icon: Icons.widgets,
+                text: "Orders",
+                onTap: () {
+                  Navigator.of(context).push(
+                    buildNavigation(
+                      route: MyOrders(),
+                    ),
+                  );
+                },
+              ),
+              BuildTextButton(
+                icon: Icons.logout,
+                text: "Logout",
+                onTap: () {
+                  signOut(context);
+                },
+              ),
             ],
           ),
         ));
@@ -36,16 +58,18 @@ class BuildTextButton extends StatelessWidget {
     super.key,
     required this.icon,
     required this.text,
+    this.onTap,
   });
 
   final IconData icon;
   final String text;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
       onPressed: () {
-        signOut(context);
+        onTap!();
       },
       icon: Icon(
         icon,
@@ -62,19 +86,19 @@ class BuildTextButton extends StatelessWidget {
       ),
     );
   }
+}
 
-  Future<void> signOut(context) async {
-    try {
-      await FirebaseAuth.instance.signOut();
+Future<void> signOut(context) async {
+  try {
+    await FirebaseAuth.instance.signOut();
 
-      // Navigate to the onboarding screen.
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) {
-          return SignupScreen();
-        },
-      ));
-    } catch (e) {
-      snackBar(context: context, msg: e.toString());
-    }
+    // Navigate to the onboarding screen.
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (context) {
+        return SignupScreen();
+      },
+    ));
+  } catch (e) {
+    snackBar(context: context, msg: e.toString());
   }
 }
