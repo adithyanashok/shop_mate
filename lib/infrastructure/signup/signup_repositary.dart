@@ -23,6 +23,7 @@ class SignupRepository implements ISignupFacade {
         'username': user.username,
         'password': user.password,
         'isAdmin': true,
+        "date": DateTime.now(),
       };
 
       // Create a user using Firebase Auth

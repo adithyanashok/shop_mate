@@ -9,7 +9,7 @@ import 'package:shop_mate/domain/earnings/i_earnings_facade.dart';
 import 'package:shop_mate/domain/earnings/models/earnings_model.dart';
 import 'package:shop_mate/domain/order/model/order_model.dart';
 
-@Injectable(as: IEarningsFacade)
+@LazySingleton(as: IEarningsFacade)
 class EarningsRepositary implements IEarningsFacade {
   @override
   Future<Either<MainFailure, EarningsModel>> getTotalEarnings() async {

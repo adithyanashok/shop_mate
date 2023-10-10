@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
+import 'package:shop_mate/presentation/admin/bar/bar.dart';
 import 'package:shop_mate/presentation/admin/home_screen.dart';
 import 'package:shop_mate/presentation/admin/order_screen/orders_screen.dart';
 import 'package:shop_mate/presentation/admin/product/product_screen.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/profile/profile_screen.dart';
+import 'package:shop_mate/presentation/users/users.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -16,6 +18,7 @@ class MainScreen extends StatelessWidget {
       AdminHomeScreen(),
       AdminProductScreen(),
       AdminOrdersScreen(),
+      Users(),
       ProfileScreen(),
     ];
     return BlocBuilder<BottomNavBloc, BottomNavState>(
@@ -57,6 +60,8 @@ class BuildNavBar extends StatelessWidget {
         BottomNavigationBarItem(
             icon: Icon(Icons.grid_view_outlined), label: "Products"),
         BottomNavigationBarItem(icon: Icon(Icons.widgets), label: "Orders"),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.people_alt_outlined), label: "Users"),
         BottomNavigationBarItem(
             icon: Icon(Icons.person_2_outlined), label: "Profile"),
       ],

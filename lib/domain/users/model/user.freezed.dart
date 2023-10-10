@@ -23,6 +23,7 @@ mixin _$UserModel {
   String? get email => throw _privateConstructorUsedError;
   String? get username => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
+  DateTime? get date => throw _privateConstructorUsedError;
   bool? get isAdmin => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +37,12 @@ abstract class $UserModelCopyWith<$Res> {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
-  $Res call({String? email, String? username, String? password, bool? isAdmin});
+  $Res call(
+      {String? email,
+      String? username,
+      String? password,
+      DateTime? date,
+      bool? isAdmin});
 }
 
 /// @nodoc
@@ -55,6 +61,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? email = freezed,
     Object? username = freezed,
     Object? password = freezed,
+    Object? date = freezed,
     Object? isAdmin = freezed,
   }) {
     return _then(_value.copyWith(
@@ -70,6 +77,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       isAdmin: freezed == isAdmin
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
@@ -85,7 +96,12 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       __$$_UserModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? email, String? username, String? password, bool? isAdmin});
+  $Res call(
+      {String? email,
+      String? username,
+      String? password,
+      DateTime? date,
+      bool? isAdmin});
 }
 
 /// @nodoc
@@ -102,6 +118,7 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? email = freezed,
     Object? username = freezed,
     Object? password = freezed,
+    Object? date = freezed,
     Object? isAdmin = freezed,
   }) {
     return _then(_$_UserModel(
@@ -117,6 +134,10 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       isAdmin: freezed == isAdmin
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
@@ -128,7 +149,8 @@ class __$$_UserModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UserModel implements _UserModel {
-  const _$_UserModel({this.email, this.username, this.password, this.isAdmin});
+  const _$_UserModel(
+      {this.email, this.username, this.password, this.date, this.isAdmin});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
@@ -140,11 +162,13 @@ class _$_UserModel implements _UserModel {
   @override
   final String? password;
   @override
+  final DateTime? date;
+  @override
   final bool? isAdmin;
 
   @override
   String toString() {
-    return 'UserModel(email: $email, username: $username, password: $password, isAdmin: $isAdmin)';
+    return 'UserModel(email: $email, username: $username, password: $password, date: $date, isAdmin: $isAdmin)';
   }
 
   @override
@@ -157,13 +181,14 @@ class _$_UserModel implements _UserModel {
                 other.username == username) &&
             (identical(other.password, password) ||
                 other.password == password) &&
+            (identical(other.date, date) || other.date == date) &&
             (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, email, username, password, isAdmin);
+      Object.hash(runtimeType, email, username, password, date, isAdmin);
 
   @JsonKey(ignore: true)
   @override
@@ -184,6 +209,7 @@ abstract class _UserModel implements UserModel {
       {final String? email,
       final String? username,
       final String? password,
+      final DateTime? date,
       final bool? isAdmin}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
@@ -195,6 +221,8 @@ abstract class _UserModel implements UserModel {
   String? get username;
   @override
   String? get password;
+  @override
+  DateTime? get date;
   @override
   bool? get isAdmin;
   @override

@@ -8,6 +8,7 @@ class UserModel with _$UserModel {
     String? email,
     String? username,
     String? password,
+    DateTime? date,
     bool? isAdmin,
   }) = _UserModel;
 
