@@ -6,6 +6,7 @@ import 'package:shop_mate/application/address/address_bloc.dart';
 import 'package:shop_mate/application/auth/auth_bloc.dart';
 import 'package:shop_mate/application/auth/auth_state.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
+import 'package:shop_mate/application/earnings/earnings_bloc.dart';
 import 'package:shop_mate/application/orders/orders_bloc.dart';
 import 'package:shop_mate/application/pageview/pageview_bloc.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => getIt<CartBloc>()),
             BlocProvider(create: (context) => getIt<AddressBloc>()),
             BlocProvider(create: (context) => getIt<OrdersBloc>()),
+            BlocProvider(create: (context) => getIt<EarningsBloc>()),
             BlocProvider<AuthBloc>(
               create: (_) => AuthBloc(),
             ),
