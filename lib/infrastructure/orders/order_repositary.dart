@@ -7,13 +7,14 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shop_mate/domain/core/collections/collections.dart';
 import 'package:shop_mate/domain/core/failures/main_failures.dart';
+import 'package:shop_mate/domain/earnings/models/earnings_model.dart';
 import 'package:shop_mate/domain/order/i_order_facade.dart';
 import 'package:shop_mate/domain/order/model/order_model.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/order_successful_screen/order_successful_screen.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
 
-@Injectable(as: IOrderFacade)
+@LazySingleton(as: IOrderFacade)
 class OrderRepositary implements IOrderFacade {
   @override
   Future<Either<MainFailure, OrderModel>> placeOrder(
@@ -78,11 +79,11 @@ class OrderRepositary implements IOrderFacade {
         await totalProfitDoc.reference.update({'totalProfit': totalProfit});
       } else {
         // If it doesn't exist, create a new document.
-        final totalProfitModel = TotalProfitModel(totalProfit);
+        final totalProfitModel = EarningsModel(earnings: totalProfit);
         await db
             .collection(Collection.collectionEarnings)
             .doc('earning')
-            .set(totalProfitModel.toMap());
+            .set(totalProfitModel as Map<String, dynamic>);
       }
 
       // Sort the orderModel list by orderDate (newest first).
@@ -99,35 +100,6 @@ class OrderRepositary implements IOrderFacade {
       return const Left(MainFailure.clientFailure());
     }
   }
-
-  // Future<Either<MainFailure, List<OrderModel>>> getAllOrders(
-  //     BuildContext context) async {
-  //   try {
-  //     final db = FirebaseFirestore.instance;
-  //     // create a empty list for orders
-  //     List<OrderModel> orderModel = [];
-  //     // Get data from collection
-  //     final querySnapshot =
-  //         await db.collection(Collection.collectionOrder).get();
-  //     for (var docSnapshot in querySnapshot.docs) {
-  //       log(docSnapshot.toString());
-  //       final orders = OrderModel.fromJson(docSnapshot.data())
-  //           .copyWith(id: docSnapshot.id);
-  //       orderModel.add(orders);
-  //     }
-  //     orderModel.sort((a, b) {
-  //       final DateTime dateA = a.orderDate;
-  //       final DateTime dateB = b.orderDate;
-  //       return dateB
-  //           .compareTo(dateA); // Sort in descending order (newest first).
-  //     });
-  //     return Right(orderModel);
-  //   } catch (e) {
-  //     log(e.toString());
-  //     snackBar(context: context, msg: e.toString());
-  //     return const Left(MainFailure.clientFailure());
-  //   }
-  // }
 
   @override
   Future<Either<MainFailure, OrderModel>> getOrder(
@@ -188,45 +160,37 @@ class OrderRepositary implements IOrderFacade {
     }
   }
 
-  // @override
-  // Future<Either<MainFailure, void>> updateOrderStatusDate(
-  //   BuildContext context,
-  //   String id,
-  //   String date,
-  //   Update update,
-  // ) async {
-  //   try {
-  //     final db = FirebaseFirestore.instance;
-  //     if (update == Update.pending) {
-  //       db.collection(Collection.collectionOrder).doc(id).update(
-  //         {
-  //           "orderShippedDate": date,
-  //         },
-  //       );
-  //     } else if (update == Update.delivered) {
-  //       db.collection(Collection.collectionOrder).doc(id).update(
-  //         {
-  //           "orderDeliveredDate": date,
-  //         },
-  //       );
-  //     }
+  @override
+  Future<Either<MainFailure, List<OrderModel>>> getAllOrdersOfAUser(
+      String userId, BuildContext context) async {
+    try {
+      final db = FirebaseFirestore.instance;
+      // Create an empty list for orders
+      List<OrderModel> orderModel = [];
+      // Get data from the collection
+      final querySnapshot = await db
+          .collection(Collection.collectionOrder)
+          .where("userId", isEqualTo: userId)
+          .get();
+      for (var docSnapshot in querySnapshot.docs) {
+        log(docSnapshot.toString());
+        final orders = OrderModel.fromJson(docSnapshot.data())
+            .copyWith(id: docSnapshot.id);
+        orderModel.add(orders);
+      }
 
-  //     return const Right(null);
-  //   } catch (e) {
-  //     snackBar(context: context, msg: e.toString());
-  //     return const Left(MainFailure.clientFailure());
-  //   }
-  // }
-}
+      // Sort the orderModel list by orderDate (newest first).
+      orderModel.sort((a, b) {
+        final DateTime dateA = a.orderDate;
+        final DateTime dateB = b.orderDate;
+        return dateB.compareTo(dateA);
+      });
 
-class TotalProfitModel {
-  final double totalProfit;
-
-  TotalProfitModel(this.totalProfit);
-
-  Map<String, dynamic> toMap() {
-    return {
-      'totalProfit': totalProfit,
-    };
+      return Right(orderModel);
+    } catch (e) {
+      log(e.toString());
+      snackBar(context: context, msg: e.toString());
+      return const Left(MainFailure.clientFailure());
+    }
   }
 }

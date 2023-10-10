@@ -22,6 +22,8 @@ mixin _$OrdersEvent {
     required TResult Function(OrderModel orderModel, BuildContext context)
         placeOrder,
     required TResult Function(BuildContext context) getAllOrders,
+    required TResult Function(String userId, BuildContext context)
+        getAllOrdersOfAUser,
     required TResult Function(BuildContext context, String id) getAOrder,
     required TResult Function(BuildContext context, String id, String value,
             DateTime date, String update)
@@ -32,6 +34,7 @@ mixin _$OrdersEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(OrderModel orderModel, BuildContext context)? placeOrder,
     TResult? Function(BuildContext context)? getAllOrders,
+    TResult? Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult? Function(BuildContext context, String id)? getAOrder,
     TResult? Function(BuildContext context, String id, String value,
             DateTime date, String update)?
@@ -42,6 +45,7 @@ mixin _$OrdersEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(OrderModel orderModel, BuildContext context)? placeOrder,
     TResult Function(BuildContext context)? getAllOrders,
+    TResult Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult Function(BuildContext context, String id)? getAOrder,
     TResult Function(BuildContext context, String id, String value,
             DateTime date, String update)?
@@ -53,6 +57,7 @@ mixin _$OrdersEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_PlaceOrder value) placeOrder,
     required TResult Function(_GetAllOrders value) getAllOrders,
+    required TResult Function(_GetAllOrdersOfAUser value) getAllOrdersOfAUser,
     required TResult Function(_GetAOrder value) getAOrder,
     required TResult Function(_UpdateOrderStatus value) updateOrderStatus,
   }) =>
@@ -61,6 +66,7 @@ mixin _$OrdersEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PlaceOrder value)? placeOrder,
     TResult? Function(_GetAllOrders value)? getAllOrders,
+    TResult? Function(_GetAllOrdersOfAUser value)? getAllOrdersOfAUser,
     TResult? Function(_GetAOrder value)? getAOrder,
     TResult? Function(_UpdateOrderStatus value)? updateOrderStatus,
   }) =>
@@ -69,6 +75,7 @@ mixin _$OrdersEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PlaceOrder value)? placeOrder,
     TResult Function(_GetAllOrders value)? getAllOrders,
+    TResult Function(_GetAllOrdersOfAUser value)? getAllOrdersOfAUser,
     TResult Function(_GetAOrder value)? getAOrder,
     TResult Function(_UpdateOrderStatus value)? updateOrderStatus,
     required TResult orElse(),
@@ -201,6 +208,8 @@ class _$_PlaceOrder implements _PlaceOrder {
     required TResult Function(OrderModel orderModel, BuildContext context)
         placeOrder,
     required TResult Function(BuildContext context) getAllOrders,
+    required TResult Function(String userId, BuildContext context)
+        getAllOrdersOfAUser,
     required TResult Function(BuildContext context, String id) getAOrder,
     required TResult Function(BuildContext context, String id, String value,
             DateTime date, String update)
@@ -214,6 +223,7 @@ class _$_PlaceOrder implements _PlaceOrder {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(OrderModel orderModel, BuildContext context)? placeOrder,
     TResult? Function(BuildContext context)? getAllOrders,
+    TResult? Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult? Function(BuildContext context, String id)? getAOrder,
     TResult? Function(BuildContext context, String id, String value,
             DateTime date, String update)?
@@ -227,6 +237,7 @@ class _$_PlaceOrder implements _PlaceOrder {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(OrderModel orderModel, BuildContext context)? placeOrder,
     TResult Function(BuildContext context)? getAllOrders,
+    TResult Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult Function(BuildContext context, String id)? getAOrder,
     TResult Function(BuildContext context, String id, String value,
             DateTime date, String update)?
@@ -244,6 +255,7 @@ class _$_PlaceOrder implements _PlaceOrder {
   TResult map<TResult extends Object?>({
     required TResult Function(_PlaceOrder value) placeOrder,
     required TResult Function(_GetAllOrders value) getAllOrders,
+    required TResult Function(_GetAllOrdersOfAUser value) getAllOrdersOfAUser,
     required TResult Function(_GetAOrder value) getAOrder,
     required TResult Function(_UpdateOrderStatus value) updateOrderStatus,
   }) {
@@ -255,6 +267,7 @@ class _$_PlaceOrder implements _PlaceOrder {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PlaceOrder value)? placeOrder,
     TResult? Function(_GetAllOrders value)? getAllOrders,
+    TResult? Function(_GetAllOrdersOfAUser value)? getAllOrdersOfAUser,
     TResult? Function(_GetAOrder value)? getAOrder,
     TResult? Function(_UpdateOrderStatus value)? updateOrderStatus,
   }) {
@@ -266,6 +279,7 @@ class _$_PlaceOrder implements _PlaceOrder {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PlaceOrder value)? placeOrder,
     TResult Function(_GetAllOrders value)? getAllOrders,
+    TResult Function(_GetAllOrdersOfAUser value)? getAllOrdersOfAUser,
     TResult Function(_GetAOrder value)? getAOrder,
     TResult Function(_UpdateOrderStatus value)? updateOrderStatus,
     required TResult orElse(),
@@ -360,6 +374,8 @@ class _$_GetAllOrders implements _GetAllOrders {
     required TResult Function(OrderModel orderModel, BuildContext context)
         placeOrder,
     required TResult Function(BuildContext context) getAllOrders,
+    required TResult Function(String userId, BuildContext context)
+        getAllOrdersOfAUser,
     required TResult Function(BuildContext context, String id) getAOrder,
     required TResult Function(BuildContext context, String id, String value,
             DateTime date, String update)
@@ -373,6 +389,7 @@ class _$_GetAllOrders implements _GetAllOrders {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(OrderModel orderModel, BuildContext context)? placeOrder,
     TResult? Function(BuildContext context)? getAllOrders,
+    TResult? Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult? Function(BuildContext context, String id)? getAOrder,
     TResult? Function(BuildContext context, String id, String value,
             DateTime date, String update)?
@@ -386,6 +403,7 @@ class _$_GetAllOrders implements _GetAllOrders {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(OrderModel orderModel, BuildContext context)? placeOrder,
     TResult Function(BuildContext context)? getAllOrders,
+    TResult Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult Function(BuildContext context, String id)? getAOrder,
     TResult Function(BuildContext context, String id, String value,
             DateTime date, String update)?
@@ -403,6 +421,7 @@ class _$_GetAllOrders implements _GetAllOrders {
   TResult map<TResult extends Object?>({
     required TResult Function(_PlaceOrder value) placeOrder,
     required TResult Function(_GetAllOrders value) getAllOrders,
+    required TResult Function(_GetAllOrdersOfAUser value) getAllOrdersOfAUser,
     required TResult Function(_GetAOrder value) getAOrder,
     required TResult Function(_UpdateOrderStatus value) updateOrderStatus,
   }) {
@@ -414,6 +433,7 @@ class _$_GetAllOrders implements _GetAllOrders {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PlaceOrder value)? placeOrder,
     TResult? Function(_GetAllOrders value)? getAllOrders,
+    TResult? Function(_GetAllOrdersOfAUser value)? getAllOrdersOfAUser,
     TResult? Function(_GetAOrder value)? getAOrder,
     TResult? Function(_UpdateOrderStatus value)? updateOrderStatus,
   }) {
@@ -425,6 +445,7 @@ class _$_GetAllOrders implements _GetAllOrders {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PlaceOrder value)? placeOrder,
     TResult Function(_GetAllOrders value)? getAllOrders,
+    TResult Function(_GetAllOrdersOfAUser value)? getAllOrdersOfAUser,
     TResult Function(_GetAOrder value)? getAOrder,
     TResult Function(_UpdateOrderStatus value)? updateOrderStatus,
     required TResult orElse(),
@@ -445,6 +466,181 @@ abstract class _GetAllOrders implements OrdersEvent {
   @override
   @JsonKey(ignore: true)
   _$$_GetAllOrdersCopyWith<_$_GetAllOrders> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_GetAllOrdersOfAUserCopyWith<$Res>
+    implements $OrdersEventCopyWith<$Res> {
+  factory _$$_GetAllOrdersOfAUserCopyWith(_$_GetAllOrdersOfAUser value,
+          $Res Function(_$_GetAllOrdersOfAUser) then) =
+      __$$_GetAllOrdersOfAUserCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String userId, BuildContext context});
+}
+
+/// @nodoc
+class __$$_GetAllOrdersOfAUserCopyWithImpl<$Res>
+    extends _$OrdersEventCopyWithImpl<$Res, _$_GetAllOrdersOfAUser>
+    implements _$$_GetAllOrdersOfAUserCopyWith<$Res> {
+  __$$_GetAllOrdersOfAUserCopyWithImpl(_$_GetAllOrdersOfAUser _value,
+      $Res Function(_$_GetAllOrdersOfAUser) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? context = null,
+  }) {
+    return _then(_$_GetAllOrdersOfAUser(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetAllOrdersOfAUser implements _GetAllOrdersOfAUser {
+  const _$_GetAllOrdersOfAUser({required this.userId, required this.context});
+
+  @override
+  final String userId;
+  @override
+  final BuildContext context;
+
+  @override
+  String toString() {
+    return 'OrdersEvent.getAllOrdersOfAUser(userId: $userId, context: $context)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetAllOrdersOfAUser &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userId, context);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetAllOrdersOfAUserCopyWith<_$_GetAllOrdersOfAUser> get copyWith =>
+      __$$_GetAllOrdersOfAUserCopyWithImpl<_$_GetAllOrdersOfAUser>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(OrderModel orderModel, BuildContext context)
+        placeOrder,
+    required TResult Function(BuildContext context) getAllOrders,
+    required TResult Function(String userId, BuildContext context)
+        getAllOrdersOfAUser,
+    required TResult Function(BuildContext context, String id) getAOrder,
+    required TResult Function(BuildContext context, String id, String value,
+            DateTime date, String update)
+        updateOrderStatus,
+  }) {
+    return getAllOrdersOfAUser(userId, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(OrderModel orderModel, BuildContext context)? placeOrder,
+    TResult? Function(BuildContext context)? getAllOrders,
+    TResult? Function(String userId, BuildContext context)? getAllOrdersOfAUser,
+    TResult? Function(BuildContext context, String id)? getAOrder,
+    TResult? Function(BuildContext context, String id, String value,
+            DateTime date, String update)?
+        updateOrderStatus,
+  }) {
+    return getAllOrdersOfAUser?.call(userId, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(OrderModel orderModel, BuildContext context)? placeOrder,
+    TResult Function(BuildContext context)? getAllOrders,
+    TResult Function(String userId, BuildContext context)? getAllOrdersOfAUser,
+    TResult Function(BuildContext context, String id)? getAOrder,
+    TResult Function(BuildContext context, String id, String value,
+            DateTime date, String update)?
+        updateOrderStatus,
+    required TResult orElse(),
+  }) {
+    if (getAllOrdersOfAUser != null) {
+      return getAllOrdersOfAUser(userId, context);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PlaceOrder value) placeOrder,
+    required TResult Function(_GetAllOrders value) getAllOrders,
+    required TResult Function(_GetAllOrdersOfAUser value) getAllOrdersOfAUser,
+    required TResult Function(_GetAOrder value) getAOrder,
+    required TResult Function(_UpdateOrderStatus value) updateOrderStatus,
+  }) {
+    return getAllOrdersOfAUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PlaceOrder value)? placeOrder,
+    TResult? Function(_GetAllOrders value)? getAllOrders,
+    TResult? Function(_GetAllOrdersOfAUser value)? getAllOrdersOfAUser,
+    TResult? Function(_GetAOrder value)? getAOrder,
+    TResult? Function(_UpdateOrderStatus value)? updateOrderStatus,
+  }) {
+    return getAllOrdersOfAUser?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PlaceOrder value)? placeOrder,
+    TResult Function(_GetAllOrders value)? getAllOrders,
+    TResult Function(_GetAllOrdersOfAUser value)? getAllOrdersOfAUser,
+    TResult Function(_GetAOrder value)? getAOrder,
+    TResult Function(_UpdateOrderStatus value)? updateOrderStatus,
+    required TResult orElse(),
+  }) {
+    if (getAllOrdersOfAUser != null) {
+      return getAllOrdersOfAUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetAllOrdersOfAUser implements OrdersEvent {
+  const factory _GetAllOrdersOfAUser(
+      {required final String userId,
+      required final BuildContext context}) = _$_GetAllOrdersOfAUser;
+
+  String get userId;
+  @override
+  BuildContext get context;
+  @override
+  @JsonKey(ignore: true)
+  _$$_GetAllOrdersOfAUserCopyWith<_$_GetAllOrdersOfAUser> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -525,6 +721,8 @@ class _$_GetAOrder implements _GetAOrder {
     required TResult Function(OrderModel orderModel, BuildContext context)
         placeOrder,
     required TResult Function(BuildContext context) getAllOrders,
+    required TResult Function(String userId, BuildContext context)
+        getAllOrdersOfAUser,
     required TResult Function(BuildContext context, String id) getAOrder,
     required TResult Function(BuildContext context, String id, String value,
             DateTime date, String update)
@@ -538,6 +736,7 @@ class _$_GetAOrder implements _GetAOrder {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(OrderModel orderModel, BuildContext context)? placeOrder,
     TResult? Function(BuildContext context)? getAllOrders,
+    TResult? Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult? Function(BuildContext context, String id)? getAOrder,
     TResult? Function(BuildContext context, String id, String value,
             DateTime date, String update)?
@@ -551,6 +750,7 @@ class _$_GetAOrder implements _GetAOrder {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(OrderModel orderModel, BuildContext context)? placeOrder,
     TResult Function(BuildContext context)? getAllOrders,
+    TResult Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult Function(BuildContext context, String id)? getAOrder,
     TResult Function(BuildContext context, String id, String value,
             DateTime date, String update)?
@@ -568,6 +768,7 @@ class _$_GetAOrder implements _GetAOrder {
   TResult map<TResult extends Object?>({
     required TResult Function(_PlaceOrder value) placeOrder,
     required TResult Function(_GetAllOrders value) getAllOrders,
+    required TResult Function(_GetAllOrdersOfAUser value) getAllOrdersOfAUser,
     required TResult Function(_GetAOrder value) getAOrder,
     required TResult Function(_UpdateOrderStatus value) updateOrderStatus,
   }) {
@@ -579,6 +780,7 @@ class _$_GetAOrder implements _GetAOrder {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PlaceOrder value)? placeOrder,
     TResult? Function(_GetAllOrders value)? getAllOrders,
+    TResult? Function(_GetAllOrdersOfAUser value)? getAllOrdersOfAUser,
     TResult? Function(_GetAOrder value)? getAOrder,
     TResult? Function(_UpdateOrderStatus value)? updateOrderStatus,
   }) {
@@ -590,6 +792,7 @@ class _$_GetAOrder implements _GetAOrder {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PlaceOrder value)? placeOrder,
     TResult Function(_GetAllOrders value)? getAllOrders,
+    TResult Function(_GetAllOrdersOfAUser value)? getAllOrdersOfAUser,
     TResult Function(_GetAOrder value)? getAOrder,
     TResult Function(_UpdateOrderStatus value)? updateOrderStatus,
     required TResult orElse(),
@@ -728,6 +931,8 @@ class _$_UpdateOrderStatus implements _UpdateOrderStatus {
     required TResult Function(OrderModel orderModel, BuildContext context)
         placeOrder,
     required TResult Function(BuildContext context) getAllOrders,
+    required TResult Function(String userId, BuildContext context)
+        getAllOrdersOfAUser,
     required TResult Function(BuildContext context, String id) getAOrder,
     required TResult Function(BuildContext context, String id, String value,
             DateTime date, String update)
@@ -741,6 +946,7 @@ class _$_UpdateOrderStatus implements _UpdateOrderStatus {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(OrderModel orderModel, BuildContext context)? placeOrder,
     TResult? Function(BuildContext context)? getAllOrders,
+    TResult? Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult? Function(BuildContext context, String id)? getAOrder,
     TResult? Function(BuildContext context, String id, String value,
             DateTime date, String update)?
@@ -754,6 +960,7 @@ class _$_UpdateOrderStatus implements _UpdateOrderStatus {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(OrderModel orderModel, BuildContext context)? placeOrder,
     TResult Function(BuildContext context)? getAllOrders,
+    TResult Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult Function(BuildContext context, String id)? getAOrder,
     TResult Function(BuildContext context, String id, String value,
             DateTime date, String update)?
@@ -771,6 +978,7 @@ class _$_UpdateOrderStatus implements _UpdateOrderStatus {
   TResult map<TResult extends Object?>({
     required TResult Function(_PlaceOrder value) placeOrder,
     required TResult Function(_GetAllOrders value) getAllOrders,
+    required TResult Function(_GetAllOrdersOfAUser value) getAllOrdersOfAUser,
     required TResult Function(_GetAOrder value) getAOrder,
     required TResult Function(_UpdateOrderStatus value) updateOrderStatus,
   }) {
@@ -782,6 +990,7 @@ class _$_UpdateOrderStatus implements _UpdateOrderStatus {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PlaceOrder value)? placeOrder,
     TResult? Function(_GetAllOrders value)? getAllOrders,
+    TResult? Function(_GetAllOrdersOfAUser value)? getAllOrdersOfAUser,
     TResult? Function(_GetAOrder value)? getAOrder,
     TResult? Function(_UpdateOrderStatus value)? updateOrderStatus,
   }) {
@@ -793,6 +1002,7 @@ class _$_UpdateOrderStatus implements _UpdateOrderStatus {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PlaceOrder value)? placeOrder,
     TResult Function(_GetAllOrders value)? getAllOrders,
+    TResult Function(_GetAllOrdersOfAUser value)? getAllOrdersOfAUser,
     TResult Function(_GetAOrder value)? getAOrder,
     TResult Function(_UpdateOrderStatus value)? updateOrderStatus,
     required TResult orElse(),

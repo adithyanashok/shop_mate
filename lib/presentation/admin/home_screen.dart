@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/earnings/earnings_bloc.dart';
 import 'package:shop_mate/application/orders/orders_bloc.dart';
 import 'package:shop_mate/application/user/user_bloc.dart';
@@ -21,6 +20,8 @@ class AdminHomeScreen extends StatelessWidget {
     BlocProvider.of<OrdersBloc>(context).add(
       OrdersEvent.getAllOrders(context: context),
     );
+    BlocProvider.of<UserBloc>(context)
+        .add(const UserEvent.getUsers(getAllUsers: false));
 
     return Scaffold(
       appBar: AppBar(
@@ -65,7 +66,9 @@ class AdminHomeScreen extends StatelessWidget {
                   height: 30,
                 ),
                 const BuildSmallText(
-                  text: "Earnings Per Month",
+                  text: "Earnings per month",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
                 const EarningsDashboard(),
                 const SizedBox(

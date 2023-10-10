@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +24,6 @@ class OrderScreen extends StatelessWidget {
       body: SafeArea(
         child: BlocBuilder<OrdersBloc, OrdersState>(
           builder: (context, state) {
-            log(state.orderModel.email.toString());
             return state.isLoading
                 ? const BuildLoadingWidget()
                 : Column(
@@ -39,7 +36,6 @@ class OrderScreen extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             final product = state.orderModel.products[index];
-                            log(state.orderModel.toString());
                             return BuildProductCard(
                               image: Image.network(
                                 product['image'],

@@ -61,6 +61,30 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
       );
     });
 
+    // get all orders of a user
+    on<_GetAllOrdersOfAUser>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
+      final orderOpt =
+          await iOrderFacade.getAllOrdersOfAUser(event.userId, event.context);
+      emit(
+        orderOpt.fold(
+          (failure) => state.copyWith(
+            isLoading: false,
+            orderOpt: Some(
+              Left(failure),
+            ),
+          ),
+          (success) => state.copyWith(
+            isLoading: false,
+            orderModelList: success,
+            orderOptList: Some(
+              Right(success),
+            ),
+          ),
+        ),
+      );
+    });
+
     // get a order
     on<_GetAOrder>((event, emit) async {
       emit(state.copyWith(isLoading: true));

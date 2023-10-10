@@ -58,7 +58,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i7.ICartFacade>(() => _i8.CartRepositary());
     gh.lazySingleton<_i9.IEarningsFacade>(() => _i10.EarningsRepositary());
     gh.lazySingleton<_i11.ILoginFacade>(() => _i12.LoginRepositary());
-    gh.factory<_i13.IOrderFacade>(() => _i14.OrderRepositary());
+    gh.lazySingleton<_i13.IOrderFacade>(() => _i14.OrderRepositary());
     gh.lazySingleton<_i15.IProductFacade>(() => _i16.ProductRepository());
     gh.lazySingleton<_i17.IRatingFacade>(() => _i18.RatingRepositary());
     gh.lazySingleton<_i19.ISignupFacade>(() => _i20.SignupRepository());

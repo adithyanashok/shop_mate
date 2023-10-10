@@ -14,11 +14,13 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<BottomNavBloc>(context)
+        .add(const BottomNavEvent.homeEvent(value: 0));
     final screens = [
-      HomeScreen(),
-      SearchScreen(),
+      const HomeScreen(),
+      const SearchScreen(),
       CartScreen(),
-      ProfileScreen(),
+      const ProfileScreen(),
     ];
     return BlocBuilder<BottomNavBloc, BottomNavState>(
       builder: (context, state) {

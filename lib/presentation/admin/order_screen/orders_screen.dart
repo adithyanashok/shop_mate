@@ -1,15 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:order_tracker/order_tracker.dart';
 import 'package:shop_mate/application/orders/orders_bloc.dart';
 import 'package:shop_mate/presentation/admin/order_screen/order_screen.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
-import 'package:shop_mate/presentation/order/order_tracking.dart';
 import 'package:shop_mate/presentation/widgets/loading_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
@@ -58,7 +54,6 @@ class AdminOrdersScreen extends StatelessWidget {
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) {
                                         final values = order.products[index];
-                                        log(values['image'].toString());
                                         return Image.network(
                                           values['image'],
                                           width: 50,
