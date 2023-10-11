@@ -2,9 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
 import 'package:shop_mate/application/orders/orders_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
+import 'package:shop_mate/presentation/login/login_screen.dart';
 import 'package:shop_mate/presentation/order/my_orders.dart';
 import 'package:shop_mate/presentation/signup/signup_screen.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
@@ -93,11 +95,13 @@ Future<void> signOut(context) async {
     await FirebaseAuth.instance.signOut();
 
     // Navigate to the onboarding screen.
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
+    await Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (context) {
-        return SignupScreen();
+        return LoginScreen();
       },
     ));
+    BlocProvider.of<BottomNavBloc>(context)
+        .add(const BottomNavEvent.homeEvent(value: 0));
   } catch (e) {
     snackBar(context: context, msg: e.toString());
   }
