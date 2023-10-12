@@ -104,10 +104,11 @@ class _$CartModelCopyWithImpl<$Res, $Val extends CartModel>
 }
 
 /// @nodoc
-abstract class _$$_CartModelCopyWith<$Res> implements $CartModelCopyWith<$Res> {
-  factory _$$_CartModelCopyWith(
-          _$_CartModel value, $Res Function(_$_CartModel) then) =
-      __$$_CartModelCopyWithImpl<$Res>;
+abstract class _$$CartModelImplCopyWith<$Res>
+    implements $CartModelCopyWith<$Res> {
+  factory _$$CartModelImplCopyWith(
+          _$CartModelImpl value, $Res Function(_$CartModelImpl) then) =
+      __$$CartModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -121,11 +122,11 @@ abstract class _$$_CartModelCopyWith<$Res> implements $CartModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_CartModelCopyWithImpl<$Res>
-    extends _$CartModelCopyWithImpl<$Res, _$_CartModel>
-    implements _$$_CartModelCopyWith<$Res> {
-  __$$_CartModelCopyWithImpl(
-      _$_CartModel _value, $Res Function(_$_CartModel) _then)
+class __$$CartModelImplCopyWithImpl<$Res>
+    extends _$CartModelCopyWithImpl<$Res, _$CartModelImpl>
+    implements _$$CartModelImplCopyWith<$Res> {
+  __$$CartModelImplCopyWithImpl(
+      _$CartModelImpl _value, $Res Function(_$CartModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -139,7 +140,7 @@ class __$$_CartModelCopyWithImpl<$Res>
     Object? totalDiscount = null,
     Object? products = null,
   }) {
-    return _then(_$_CartModel(
+    return _then(_$CartModelImpl(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -174,8 +175,8 @@ class __$$_CartModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CartModel implements _CartModel {
-  const _$_CartModel(
+class _$CartModelImpl implements _CartModel {
+  const _$CartModelImpl(
       {required this.userId,
       this.id,
       required this.totalPrice,
@@ -185,8 +186,8 @@ class _$_CartModel implements _CartModel {
       required final List<dynamic> products})
       : _products = products;
 
-  factory _$_CartModel.fromJson(Map<String, dynamic> json) =>
-      _$$_CartModelFromJson(json);
+  factory _$CartModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CartModelImplFromJson(json);
 
   @override
   final String userId;
@@ -217,7 +218,7 @@ class _$_CartModel implements _CartModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CartModel &&
+            other is _$CartModelImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.totalPrice, totalPrice) ||
@@ -246,12 +247,12 @@ class _$_CartModel implements _CartModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CartModelCopyWith<_$_CartModel> get copyWith =>
-      __$$_CartModelCopyWithImpl<_$_CartModel>(this, _$identity);
+  _$$CartModelImplCopyWith<_$CartModelImpl> get copyWith =>
+      __$$CartModelImplCopyWithImpl<_$CartModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CartModelToJson(
+    return _$$CartModelImplToJson(
       this,
     );
   }
@@ -265,10 +266,10 @@ abstract class _CartModel implements CartModel {
       required final double subTotal,
       required final double totalDeliveryFee,
       required final double totalDiscount,
-      required final List<dynamic> products}) = _$_CartModel;
+      required final List<dynamic> products}) = _$CartModelImpl;
 
   factory _CartModel.fromJson(Map<String, dynamic> json) =
-      _$_CartModel.fromJson;
+      _$CartModelImpl.fromJson;
 
   @override
   String get userId;
@@ -286,6 +287,6 @@ abstract class _CartModel implements CartModel {
   List<dynamic> get products;
   @override
   @JsonKey(ignore: true)
-  _$$_CartModelCopyWith<_$_CartModel> get copyWith =>
+  _$$CartModelImplCopyWith<_$CartModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

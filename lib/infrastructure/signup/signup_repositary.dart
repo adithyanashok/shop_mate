@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shop_mate/domain/core/collections/collections.dart';
 import 'package:shop_mate/domain/core/failures/main_failures.dart';
+import 'package:shop_mate/domain/notifications/notifications.dart';
 import 'package:shop_mate/domain/signup/i_signup_facade.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,13 +18,18 @@ class SignupRepository implements ISignupFacade {
 
     final db = FirebaseFirestore.instance;
     try {
+      FirebaseNotificationService firebaseNotificationService =
+          FirebaseNotificationService();
+      final String fcmToken =
+          await firebaseNotificationService.getDeviceToken();
       // Create user data to be stored in Firestore
       final Map<String, dynamic> userData = {
         'email': user.email,
         'username': user.username,
         'password': user.password,
         'isAdmin': true,
-        "date": DateTime.now(),
+        'fcmToken': fcmToken,
+        "date": DateTime.now().toString(),
       };
 
       // Create a user using Firebase Auth

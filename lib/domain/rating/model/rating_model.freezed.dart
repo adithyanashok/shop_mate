@@ -98,11 +98,11 @@ class _$RatingModelCopyWithImpl<$Res, $Val extends RatingModel>
 }
 
 /// @nodoc
-abstract class _$$_RatingModelCopyWith<$Res>
+abstract class _$$RatingModelImplCopyWith<$Res>
     implements $RatingModelCopyWith<$Res> {
-  factory _$$_RatingModelCopyWith(
-          _$_RatingModel value, $Res Function(_$_RatingModel) then) =
-      __$$_RatingModelCopyWithImpl<$Res>;
+  factory _$$RatingModelImplCopyWith(
+          _$RatingModelImpl value, $Res Function(_$RatingModelImpl) then) =
+      __$$RatingModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,11 +115,11 @@ abstract class _$$_RatingModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RatingModelCopyWithImpl<$Res>
-    extends _$RatingModelCopyWithImpl<$Res, _$_RatingModel>
-    implements _$$_RatingModelCopyWith<$Res> {
-  __$$_RatingModelCopyWithImpl(
-      _$_RatingModel _value, $Res Function(_$_RatingModel) _then)
+class __$$RatingModelImplCopyWithImpl<$Res>
+    extends _$RatingModelCopyWithImpl<$Res, _$RatingModelImpl>
+    implements _$$RatingModelImplCopyWith<$Res> {
+  __$$RatingModelImplCopyWithImpl(
+      _$RatingModelImpl _value, $Res Function(_$RatingModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +132,7 @@ class __$$_RatingModelCopyWithImpl<$Res>
     Object? description = null,
     Object? id = freezed,
   }) {
-    return _then(_$_RatingModel(
+    return _then(_$RatingModelImpl(
       productId: null == productId
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
@@ -163,8 +163,8 @@ class __$$_RatingModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RatingModel implements _RatingModel {
-  const _$_RatingModel(
+class _$RatingModelImpl implements _RatingModel {
+  const _$RatingModelImpl(
       {required this.productId,
       required this.userId,
       required this.rating,
@@ -172,8 +172,8 @@ class _$_RatingModel implements _RatingModel {
       required this.description,
       this.id});
 
-  factory _$_RatingModel.fromJson(Map<String, dynamic> json) =>
-      _$$_RatingModelFromJson(json);
+  factory _$RatingModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RatingModelImplFromJson(json);
 
   @override
   final String productId;
@@ -197,7 +197,7 @@ class _$_RatingModel implements _RatingModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RatingModel &&
+            other is _$RatingModelImpl &&
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
             (identical(other.userId, userId) || other.userId == userId) &&
@@ -216,12 +216,12 @@ class _$_RatingModel implements _RatingModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RatingModelCopyWith<_$_RatingModel> get copyWith =>
-      __$$_RatingModelCopyWithImpl<_$_RatingModel>(this, _$identity);
+  _$$RatingModelImplCopyWith<_$RatingModelImpl> get copyWith =>
+      __$$RatingModelImplCopyWithImpl<_$RatingModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RatingModelToJson(
+    return _$$RatingModelImplToJson(
       this,
     );
   }
@@ -234,10 +234,10 @@ abstract class _RatingModel implements RatingModel {
       required final double rating,
       required final String title,
       required final String description,
-      final String? id}) = _$_RatingModel;
+      final String? id}) = _$RatingModelImpl;
 
   factory _RatingModel.fromJson(Map<String, dynamic> json) =
-      _$_RatingModel.fromJson;
+      _$RatingModelImpl.fromJson;
 
   @override
   String get productId;
@@ -253,6 +253,6 @@ abstract class _RatingModel implements RatingModel {
   String? get id;
   @override
   @JsonKey(ignore: true)
-  _$$_RatingModelCopyWith<_$_RatingModel> get copyWith =>
+  _$$RatingModelImplCopyWith<_$RatingModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

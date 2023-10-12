@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
 import 'package:shop_mate/application/orders/orders_bloc.dart';
+import 'package:shop_mate/infrastructure/notification/notification_repositary.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/login/login_screen.dart';
@@ -29,8 +30,28 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const BuildTextButton(icon: Icons.edit, text: "Edit profile"),
-              const BuildTextButton(icon: Icons.home_filled, text: "Address"),
+              BuildTextButton(
+                icon: Icons.edit,
+                text: "Send Notifications",
+                onTap: () {
+                  NotificationRepositary().sendPushMessage(
+                    fcmToken:
+                        'e9HK9umUR7-CjGJo8mMyRs:APA91bE8CA65dzzW6GqqaktMx95q4fu1_g_RTS-r4YTalRLTvNezmCROCSKK0A0DVd-wAAJEJgipDjxZ9B_yEXF1YRwO_7iUTLVY17i_XJZ4bVQQU9tjLfy3LGEGHLq8_MwnG-S84M4l',
+                    body: "New Order",
+                    title: "Order",
+                  );
+                },
+              ),
+              BuildTextButton(
+                icon: Icons.home_filled,
+                text: "Address",
+                onTap: () {
+                  NotificationRepositary().sendNotificationToAdmin(
+                    title: "title",
+                    message: "message",
+                  );
+                },
+              ),
               BuildTextButton(
                 icon: Icons.widgets,
                 text: "Orders",

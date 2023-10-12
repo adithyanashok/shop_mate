@@ -74,22 +74,22 @@ class _$AddressModelCopyWithImpl<$Res, $Val extends AddressModel>
 }
 
 /// @nodoc
-abstract class _$$_AddressModelCopyWith<$Res>
+abstract class _$$AddressModelImplCopyWith<$Res>
     implements $AddressModelCopyWith<$Res> {
-  factory _$$_AddressModelCopyWith(
-          _$_AddressModel value, $Res Function(_$_AddressModel) then) =
-      __$$_AddressModelCopyWithImpl<$Res>;
+  factory _$$AddressModelImplCopyWith(
+          _$AddressModelImpl value, $Res Function(_$AddressModelImpl) then) =
+      __$$AddressModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String userId, String title, String address});
 }
 
 /// @nodoc
-class __$$_AddressModelCopyWithImpl<$Res>
-    extends _$AddressModelCopyWithImpl<$Res, _$_AddressModel>
-    implements _$$_AddressModelCopyWith<$Res> {
-  __$$_AddressModelCopyWithImpl(
-      _$_AddressModel _value, $Res Function(_$_AddressModel) _then)
+class __$$AddressModelImplCopyWithImpl<$Res>
+    extends _$AddressModelCopyWithImpl<$Res, _$AddressModelImpl>
+    implements _$$AddressModelImplCopyWith<$Res> {
+  __$$AddressModelImplCopyWithImpl(
+      _$AddressModelImpl _value, $Res Function(_$AddressModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_AddressModelCopyWithImpl<$Res>
     Object? title = null,
     Object? address = null,
   }) {
-    return _then(_$_AddressModel(
+    return _then(_$AddressModelImpl(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -118,12 +118,12 @@ class __$$_AddressModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AddressModel implements _AddressModel {
-  const _$_AddressModel(
+class _$AddressModelImpl implements _AddressModel {
+  const _$AddressModelImpl(
       {required this.userId, required this.title, required this.address});
 
-  factory _$_AddressModel.fromJson(Map<String, dynamic> json) =>
-      _$$_AddressModelFromJson(json);
+  factory _$AddressModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AddressModelImplFromJson(json);
 
   @override
   final String userId;
@@ -141,7 +141,7 @@ class _$_AddressModel implements _AddressModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddressModel &&
+            other is _$AddressModelImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.address, address) || other.address == address));
@@ -154,12 +154,12 @@ class _$_AddressModel implements _AddressModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddressModelCopyWith<_$_AddressModel> get copyWith =>
-      __$$_AddressModelCopyWithImpl<_$_AddressModel>(this, _$identity);
+  _$$AddressModelImplCopyWith<_$AddressModelImpl> get copyWith =>
+      __$$AddressModelImplCopyWithImpl<_$AddressModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AddressModelToJson(
+    return _$$AddressModelImplToJson(
       this,
     );
   }
@@ -169,10 +169,10 @@ abstract class _AddressModel implements AddressModel {
   const factory _AddressModel(
       {required final String userId,
       required final String title,
-      required final String address}) = _$_AddressModel;
+      required final String address}) = _$AddressModelImpl;
 
   factory _AddressModel.fromJson(Map<String, dynamic> json) =
-      _$_AddressModel.fromJson;
+      _$AddressModelImpl.fromJson;
 
   @override
   String get userId;
@@ -182,6 +182,6 @@ abstract class _AddressModel implements AddressModel {
   String get address;
   @override
   @JsonKey(ignore: true)
-  _$$_AddressModelCopyWith<_$_AddressModel> get copyWith =>
+  _$$AddressModelImplCopyWith<_$AddressModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -89,22 +89,22 @@ class _$PageviewEventCopyWithImpl<$Res, $Val extends PageviewEvent>
 }
 
 /// @nodoc
-abstract class _$$_OnPageChangedCopyWith<$Res>
+abstract class _$$OnPageChangedImplCopyWith<$Res>
     implements $PageviewEventCopyWith<$Res> {
-  factory _$$_OnPageChangedCopyWith(
-          _$_OnPageChanged value, $Res Function(_$_OnPageChanged) then) =
-      __$$_OnPageChangedCopyWithImpl<$Res>;
+  factory _$$OnPageChangedImplCopyWith(
+          _$OnPageChangedImpl value, $Res Function(_$OnPageChangedImpl) then) =
+      __$$OnPageChangedImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int currentIndex});
 }
 
 /// @nodoc
-class __$$_OnPageChangedCopyWithImpl<$Res>
-    extends _$PageviewEventCopyWithImpl<$Res, _$_OnPageChanged>
-    implements _$$_OnPageChangedCopyWith<$Res> {
-  __$$_OnPageChangedCopyWithImpl(
-      _$_OnPageChanged _value, $Res Function(_$_OnPageChanged) _then)
+class __$$OnPageChangedImplCopyWithImpl<$Res>
+    extends _$PageviewEventCopyWithImpl<$Res, _$OnPageChangedImpl>
+    implements _$$OnPageChangedImplCopyWith<$Res> {
+  __$$OnPageChangedImplCopyWithImpl(
+      _$OnPageChangedImpl _value, $Res Function(_$OnPageChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -112,7 +112,7 @@ class __$$_OnPageChangedCopyWithImpl<$Res>
   $Res call({
     Object? currentIndex = null,
   }) {
-    return _then(_$_OnPageChanged(
+    return _then(_$OnPageChangedImpl(
       currentIndex: null == currentIndex
           ? _value.currentIndex
           : currentIndex // ignore: cast_nullable_to_non_nullable
@@ -123,8 +123,8 @@ class __$$_OnPageChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OnPageChanged implements _OnPageChanged {
-  const _$_OnPageChanged({required this.currentIndex});
+class _$OnPageChangedImpl implements _OnPageChanged {
+  const _$OnPageChangedImpl({required this.currentIndex});
 
   @override
   final int currentIndex;
@@ -138,7 +138,7 @@ class _$_OnPageChanged implements _OnPageChanged {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OnPageChanged &&
+            other is _$OnPageChangedImpl &&
             (identical(other.currentIndex, currentIndex) ||
                 other.currentIndex == currentIndex));
   }
@@ -149,8 +149,8 @@ class _$_OnPageChanged implements _OnPageChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OnPageChangedCopyWith<_$_OnPageChanged> get copyWith =>
-      __$$_OnPageChangedCopyWithImpl<_$_OnPageChanged>(this, _$identity);
+  _$$OnPageChangedImplCopyWith<_$OnPageChangedImpl> get copyWith =>
+      __$$OnPageChangedImplCopyWithImpl<_$OnPageChangedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -211,13 +211,13 @@ class _$_OnPageChanged implements _OnPageChanged {
 
 abstract class _OnPageChanged implements PageviewEvent {
   const factory _OnPageChanged({required final int currentIndex}) =
-      _$_OnPageChanged;
+      _$OnPageChangedImpl;
 
   @override
   int get currentIndex;
   @override
   @JsonKey(ignore: true)
-  _$$_OnPageChangedCopyWith<_$_OnPageChanged> get copyWith =>
+  _$$OnPageChangedImplCopyWith<_$OnPageChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -264,22 +264,22 @@ class _$PageviewStateCopyWithImpl<$Res, $Val extends PageviewState>
 }
 
 /// @nodoc
-abstract class _$$_PageviewStateCopyWith<$Res>
+abstract class _$$PageviewStateImplCopyWith<$Res>
     implements $PageviewStateCopyWith<$Res> {
-  factory _$$_PageviewStateCopyWith(
-          _$_PageviewState value, $Res Function(_$_PageviewState) then) =
-      __$$_PageviewStateCopyWithImpl<$Res>;
+  factory _$$PageviewStateImplCopyWith(
+          _$PageviewStateImpl value, $Res Function(_$PageviewStateImpl) then) =
+      __$$PageviewStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int currentIndex});
 }
 
 /// @nodoc
-class __$$_PageviewStateCopyWithImpl<$Res>
-    extends _$PageviewStateCopyWithImpl<$Res, _$_PageviewState>
-    implements _$$_PageviewStateCopyWith<$Res> {
-  __$$_PageviewStateCopyWithImpl(
-      _$_PageviewState _value, $Res Function(_$_PageviewState) _then)
+class __$$PageviewStateImplCopyWithImpl<$Res>
+    extends _$PageviewStateCopyWithImpl<$Res, _$PageviewStateImpl>
+    implements _$$PageviewStateImplCopyWith<$Res> {
+  __$$PageviewStateImplCopyWithImpl(
+      _$PageviewStateImpl _value, $Res Function(_$PageviewStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -287,7 +287,7 @@ class __$$_PageviewStateCopyWithImpl<$Res>
   $Res call({
     Object? currentIndex = null,
   }) {
-    return _then(_$_PageviewState(
+    return _then(_$PageviewStateImpl(
       currentIndex: null == currentIndex
           ? _value.currentIndex
           : currentIndex // ignore: cast_nullable_to_non_nullable
@@ -298,8 +298,8 @@ class __$$_PageviewStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PageviewState implements _PageviewState {
-  const _$_PageviewState({required this.currentIndex});
+class _$PageviewStateImpl implements _PageviewState {
+  const _$PageviewStateImpl({required this.currentIndex});
 
   @override
   final int currentIndex;
@@ -313,7 +313,7 @@ class _$_PageviewState implements _PageviewState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PageviewState &&
+            other is _$PageviewStateImpl &&
             (identical(other.currentIndex, currentIndex) ||
                 other.currentIndex == currentIndex));
   }
@@ -324,18 +324,18 @@ class _$_PageviewState implements _PageviewState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PageviewStateCopyWith<_$_PageviewState> get copyWith =>
-      __$$_PageviewStateCopyWithImpl<_$_PageviewState>(this, _$identity);
+  _$$PageviewStateImplCopyWith<_$PageviewStateImpl> get copyWith =>
+      __$$PageviewStateImplCopyWithImpl<_$PageviewStateImpl>(this, _$identity);
 }
 
 abstract class _PageviewState implements PageviewState {
   const factory _PageviewState({required final int currentIndex}) =
-      _$_PageviewState;
+      _$PageviewStateImpl;
 
   @override
   int get currentIndex;
   @override
   @JsonKey(ignore: true)
-  _$$_PageviewStateCopyWith<_$_PageviewState> get copyWith =>
+  _$$PageviewStateImplCopyWith<_$PageviewStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

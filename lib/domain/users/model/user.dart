@@ -10,6 +10,7 @@ class UserModel with _$UserModel {
     String? password,
     DateTime? date,
     bool? isAdmin,
+    String? fcmToken,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

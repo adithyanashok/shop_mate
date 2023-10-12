@@ -99,11 +99,11 @@ class _$RatingEventCopyWithImpl<$Res, $Val extends RatingEvent>
 }
 
 /// @nodoc
-abstract class _$$_RateProductCopyWith<$Res>
+abstract class _$$RateProductImplCopyWith<$Res>
     implements $RatingEventCopyWith<$Res> {
-  factory _$$_RateProductCopyWith(
-          _$_RateProduct value, $Res Function(_$_RateProduct) then) =
-      __$$_RateProductCopyWithImpl<$Res>;
+  factory _$$RateProductImplCopyWith(
+          _$RateProductImpl value, $Res Function(_$RateProductImpl) then) =
+      __$$RateProductImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({RatingModel ratingModel, BuildContext context});
@@ -112,11 +112,11 @@ abstract class _$$_RateProductCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RateProductCopyWithImpl<$Res>
-    extends _$RatingEventCopyWithImpl<$Res, _$_RateProduct>
-    implements _$$_RateProductCopyWith<$Res> {
-  __$$_RateProductCopyWithImpl(
-      _$_RateProduct _value, $Res Function(_$_RateProduct) _then)
+class __$$RateProductImplCopyWithImpl<$Res>
+    extends _$RatingEventCopyWithImpl<$Res, _$RateProductImpl>
+    implements _$$RateProductImplCopyWith<$Res> {
+  __$$RateProductImplCopyWithImpl(
+      _$RateProductImpl _value, $Res Function(_$RateProductImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -125,7 +125,7 @@ class __$$_RateProductCopyWithImpl<$Res>
     Object? ratingModel = null,
     Object? context = null,
   }) {
-    return _then(_$_RateProduct(
+    return _then(_$RateProductImpl(
       ratingModel: null == ratingModel
           ? _value.ratingModel
           : ratingModel // ignore: cast_nullable_to_non_nullable
@@ -148,8 +148,8 @@ class __$$_RateProductCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RateProduct implements _RateProduct {
-  const _$_RateProduct({required this.ratingModel, required this.context});
+class _$RateProductImpl implements _RateProduct {
+  const _$RateProductImpl({required this.ratingModel, required this.context});
 
   @override
   final RatingModel ratingModel;
@@ -165,7 +165,7 @@ class _$_RateProduct implements _RateProduct {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RateProduct &&
+            other is _$RateProductImpl &&
             (identical(other.ratingModel, ratingModel) ||
                 other.ratingModel == ratingModel) &&
             (identical(other.context, context) || other.context == context));
@@ -177,8 +177,8 @@ class _$_RateProduct implements _RateProduct {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RateProductCopyWith<_$_RateProduct> get copyWith =>
-      __$$_RateProductCopyWithImpl<_$_RateProduct>(this, _$identity);
+  _$$RateProductImplCopyWith<_$RateProductImpl> get copyWith =>
+      __$$RateProductImplCopyWithImpl<_$RateProductImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -250,34 +250,34 @@ class _$_RateProduct implements _RateProduct {
 abstract class _RateProduct implements RatingEvent {
   const factory _RateProduct(
       {required final RatingModel ratingModel,
-      required final BuildContext context}) = _$_RateProduct;
+      required final BuildContext context}) = _$RateProductImpl;
 
   RatingModel get ratingModel;
   @override
   BuildContext get context;
   @override
   @JsonKey(ignore: true)
-  _$$_RateProductCopyWith<_$_RateProduct> get copyWith =>
+  _$$RateProductImplCopyWith<_$RateProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchRatingsCopyWith<$Res>
+abstract class _$$FetchRatingsImplCopyWith<$Res>
     implements $RatingEventCopyWith<$Res> {
-  factory _$$_FetchRatingsCopyWith(
-          _$_FetchRatings value, $Res Function(_$_FetchRatings) then) =
-      __$$_FetchRatingsCopyWithImpl<$Res>;
+  factory _$$FetchRatingsImplCopyWith(
+          _$FetchRatingsImpl value, $Res Function(_$FetchRatingsImpl) then) =
+      __$$FetchRatingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String productId, BuildContext context});
 }
 
 /// @nodoc
-class __$$_FetchRatingsCopyWithImpl<$Res>
-    extends _$RatingEventCopyWithImpl<$Res, _$_FetchRatings>
-    implements _$$_FetchRatingsCopyWith<$Res> {
-  __$$_FetchRatingsCopyWithImpl(
-      _$_FetchRatings _value, $Res Function(_$_FetchRatings) _then)
+class __$$FetchRatingsImplCopyWithImpl<$Res>
+    extends _$RatingEventCopyWithImpl<$Res, _$FetchRatingsImpl>
+    implements _$$FetchRatingsImplCopyWith<$Res> {
+  __$$FetchRatingsImplCopyWithImpl(
+      _$FetchRatingsImpl _value, $Res Function(_$FetchRatingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -286,7 +286,7 @@ class __$$_FetchRatingsCopyWithImpl<$Res>
     Object? productId = null,
     Object? context = null,
   }) {
-    return _then(_$_FetchRatings(
+    return _then(_$FetchRatingsImpl(
       productId: null == productId
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
@@ -301,8 +301,8 @@ class __$$_FetchRatingsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchRatings implements _FetchRatings {
-  const _$_FetchRatings({required this.productId, required this.context});
+class _$FetchRatingsImpl implements _FetchRatings {
+  const _$FetchRatingsImpl({required this.productId, required this.context});
 
   @override
   final String productId;
@@ -318,7 +318,7 @@ class _$_FetchRatings implements _FetchRatings {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchRatings &&
+            other is _$FetchRatingsImpl &&
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
             (identical(other.context, context) || other.context == context));
@@ -330,8 +330,8 @@ class _$_FetchRatings implements _FetchRatings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchRatingsCopyWith<_$_FetchRatings> get copyWith =>
-      __$$_FetchRatingsCopyWithImpl<_$_FetchRatings>(this, _$identity);
+  _$$FetchRatingsImplCopyWith<_$FetchRatingsImpl> get copyWith =>
+      __$$FetchRatingsImplCopyWithImpl<_$FetchRatingsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -403,14 +403,14 @@ class _$_FetchRatings implements _FetchRatings {
 abstract class _FetchRatings implements RatingEvent {
   const factory _FetchRatings(
       {required final String productId,
-      required final BuildContext context}) = _$_FetchRatings;
+      required final BuildContext context}) = _$FetchRatingsImpl;
 
   String get productId;
   @override
   BuildContext get context;
   @override
   @JsonKey(ignore: true)
-  _$$_FetchRatingsCopyWith<_$_FetchRatings> get copyWith =>
+  _$$FetchRatingsImplCopyWith<_$FetchRatingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -498,11 +498,11 @@ class _$RatingStateCopyWithImpl<$Res, $Val extends RatingState>
 }
 
 /// @nodoc
-abstract class _$$_RatingStateCopyWith<$Res>
+abstract class _$$RatingStateImplCopyWith<$Res>
     implements $RatingStateCopyWith<$Res> {
-  factory _$$_RatingStateCopyWith(
-          _$_RatingState value, $Res Function(_$_RatingState) then) =
-      __$$_RatingStateCopyWithImpl<$Res>;
+  factory _$$RatingStateImplCopyWith(
+          _$RatingStateImpl value, $Res Function(_$RatingStateImpl) then) =
+      __$$RatingStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -517,11 +517,11 @@ abstract class _$$_RatingStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RatingStateCopyWithImpl<$Res>
-    extends _$RatingStateCopyWithImpl<$Res, _$_RatingState>
-    implements _$$_RatingStateCopyWith<$Res> {
-  __$$_RatingStateCopyWithImpl(
-      _$_RatingState _value, $Res Function(_$_RatingState) _then)
+class __$$RatingStateImplCopyWithImpl<$Res>
+    extends _$RatingStateCopyWithImpl<$Res, _$RatingStateImpl>
+    implements _$$RatingStateImplCopyWith<$Res> {
+  __$$RatingStateImplCopyWithImpl(
+      _$RatingStateImpl _value, $Res Function(_$RatingStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -533,7 +533,7 @@ class __$$_RatingStateCopyWithImpl<$Res>
     Object? ratingOpt = null,
     Object? ratingListOpt = null,
   }) {
-    return _then(_$_RatingState(
+    return _then(_$RatingStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -560,8 +560,8 @@ class __$$_RatingStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RatingState implements _RatingState {
-  const _$_RatingState(
+class _$RatingStateImpl implements _RatingState {
+  const _$RatingStateImpl(
       {required this.isLoading,
       required this.rating,
       required final List<RatingModel> ratings,
@@ -595,7 +595,7 @@ class _$_RatingState implements _RatingState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RatingState &&
+            other is _$RatingStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.rating, rating) || other.rating == rating) &&
@@ -613,8 +613,8 @@ class _$_RatingState implements _RatingState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RatingStateCopyWith<_$_RatingState> get copyWith =>
-      __$$_RatingStateCopyWithImpl<_$_RatingState>(this, _$identity);
+  _$$RatingStateImplCopyWith<_$RatingStateImpl> get copyWith =>
+      __$$RatingStateImplCopyWithImpl<_$RatingStateImpl>(this, _$identity);
 }
 
 abstract class _RatingState implements RatingState {
@@ -624,7 +624,7 @@ abstract class _RatingState implements RatingState {
       required final List<RatingModel> ratings,
       required final Option<Either<MainFailure, RatingModel>> ratingOpt,
       required final Option<Either<MainFailure, List<RatingModel>>>
-          ratingListOpt}) = _$_RatingState;
+          ratingListOpt}) = _$RatingStateImpl;
 
   @override
   bool get isLoading;
@@ -638,6 +638,6 @@ abstract class _RatingState implements RatingState {
   Option<Either<MainFailure, List<RatingModel>>> get ratingListOpt;
   @override
   @JsonKey(ignore: true)
-  _$$_RatingStateCopyWith<_$_RatingState> get copyWith =>
+  _$$RatingStateImplCopyWith<_$RatingStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

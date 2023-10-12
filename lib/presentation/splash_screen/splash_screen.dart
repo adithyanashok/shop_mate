@@ -1,10 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shop_mate/domain/core/role_based_login/lole_based_login.dart';
+import 'package:shop_mate/domain/core/role_based_login/role_based_login.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
-import 'package:shop_mate/presentation/constants/route_animation.dart';
-import 'package:shop_mate/presentation/main_page.dart';
-import 'package:shop_mate/presentation/signup/signup_screen.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class SplashScreen extends StatelessWidget {

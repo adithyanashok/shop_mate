@@ -105,19 +105,21 @@ class _$LoginEventCopyWithImpl<$Res, $Val extends LoginEvent>
 }
 
 /// @nodoc
-abstract class _$$_LoginCopyWith<$Res> implements $LoginEventCopyWith<$Res> {
-  factory _$$_LoginCopyWith(_$_Login value, $Res Function(_$_Login) then) =
-      __$$_LoginCopyWithImpl<$Res>;
+abstract class _$$LoginImplCopyWith<$Res> implements $LoginEventCopyWith<$Res> {
+  factory _$$LoginImplCopyWith(
+          _$LoginImpl value, $Res Function(_$LoginImpl) then) =
+      __$$LoginImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String email, String password, BuildContext buildContext});
 }
 
 /// @nodoc
-class __$$_LoginCopyWithImpl<$Res>
-    extends _$LoginEventCopyWithImpl<$Res, _$_Login>
-    implements _$$_LoginCopyWith<$Res> {
-  __$$_LoginCopyWithImpl(_$_Login _value, $Res Function(_$_Login) _then)
+class __$$LoginImplCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$LoginImpl>
+    implements _$$LoginImplCopyWith<$Res> {
+  __$$LoginImplCopyWithImpl(
+      _$LoginImpl _value, $Res Function(_$LoginImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -127,7 +129,7 @@ class __$$_LoginCopyWithImpl<$Res>
     Object? password = null,
     Object? buildContext = null,
   }) {
-    return _then(_$_Login(
+    return _then(_$LoginImpl(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -146,8 +148,8 @@ class __$$_LoginCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Login implements _Login {
-  const _$_Login(
+class _$LoginImpl implements _Login {
+  const _$LoginImpl(
       {required this.email,
       required this.password,
       required this.buildContext});
@@ -168,7 +170,7 @@ class _$_Login implements _Login {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Login &&
+            other is _$LoginImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password) &&
@@ -182,8 +184,8 @@ class _$_Login implements _Login {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoginCopyWith<_$_Login> get copyWith =>
-      __$$_LoginCopyWithImpl<_$_Login>(this, _$identity);
+  _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
+      __$$LoginImplCopyWithImpl<_$LoginImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -250,7 +252,7 @@ abstract class _Login implements LoginEvent {
   const factory _Login(
       {required final String email,
       required final String password,
-      required final BuildContext buildContext}) = _$_Login;
+      required final BuildContext buildContext}) = _$LoginImpl;
 
   @override
   String get email;
@@ -260,7 +262,7 @@ abstract class _Login implements LoginEvent {
   BuildContext get buildContext;
   @override
   @JsonKey(ignore: true)
-  _$$_LoginCopyWith<_$_Login> get copyWith =>
+  _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -321,11 +323,11 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
 }
 
 /// @nodoc
-abstract class _$$_LoginStateCopyWith<$Res>
+abstract class _$$LoginStateImplCopyWith<$Res>
     implements $LoginStateCopyWith<$Res> {
-  factory _$$_LoginStateCopyWith(
-          _$_LoginState value, $Res Function(_$_LoginState) then) =
-      __$$_LoginStateCopyWithImpl<$Res>;
+  factory _$$LoginStateImplCopyWith(
+          _$LoginStateImpl value, $Res Function(_$LoginStateImpl) then) =
+      __$$LoginStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -333,11 +335,11 @@ abstract class _$$_LoginStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LoginStateCopyWithImpl<$Res>
-    extends _$LoginStateCopyWithImpl<$Res, _$_LoginState>
-    implements _$$_LoginStateCopyWith<$Res> {
-  __$$_LoginStateCopyWithImpl(
-      _$_LoginState _value, $Res Function(_$_LoginState) _then)
+class __$$LoginStateImplCopyWithImpl<$Res>
+    extends _$LoginStateCopyWithImpl<$Res, _$LoginStateImpl>
+    implements _$$LoginStateImplCopyWith<$Res> {
+  __$$LoginStateImplCopyWithImpl(
+      _$LoginStateImpl _value, $Res Function(_$LoginStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -347,7 +349,7 @@ class __$$_LoginStateCopyWithImpl<$Res>
     Object? user = freezed,
     Object? loginOpt = null,
   }) {
-    return _then(_$_LoginState(
+    return _then(_$LoginStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -366,8 +368,8 @@ class __$$_LoginStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoginState implements _LoginState {
-  const _$_LoginState(
+class _$LoginStateImpl implements _LoginState {
+  const _$LoginStateImpl(
       {required this.isLoading, this.user, required this.loginOpt});
 
   @override
@@ -386,7 +388,7 @@ class _$_LoginState implements _LoginState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoginState &&
+            other is _$LoginStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.user, user) || other.user == user) &&
@@ -400,8 +402,8 @@ class _$_LoginState implements _LoginState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoginStateCopyWith<_$_LoginState> get copyWith =>
-      __$$_LoginStateCopyWithImpl<_$_LoginState>(this, _$identity);
+  _$$LoginStateImplCopyWith<_$LoginStateImpl> get copyWith =>
+      __$$LoginStateImplCopyWithImpl<_$LoginStateImpl>(this, _$identity);
 }
 
 abstract class _LoginState implements LoginState {
@@ -409,7 +411,7 @@ abstract class _LoginState implements LoginState {
           {required final bool isLoading,
           final User? user,
           required final Option<Either<MainFailure, User>> loginOpt}) =
-      _$_LoginState;
+      _$LoginStateImpl;
 
   @override
   bool get isLoading;
@@ -419,6 +421,6 @@ abstract class _LoginState implements LoginState {
   Option<Either<MainFailure, User>> get loginOpt;
   @override
   @JsonKey(ignore: true)
-  _$$_LoginStateCopyWith<_$_LoginState> get copyWith =>
+  _$$LoginStateImplCopyWith<_$LoginStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

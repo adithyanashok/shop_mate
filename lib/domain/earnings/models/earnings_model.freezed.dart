@@ -62,22 +62,22 @@ class _$EarningsModelCopyWithImpl<$Res, $Val extends EarningsModel>
 }
 
 /// @nodoc
-abstract class _$$_EarningsModelCopyWith<$Res>
+abstract class _$$EarningsModelImplCopyWith<$Res>
     implements $EarningsModelCopyWith<$Res> {
-  factory _$$_EarningsModelCopyWith(
-          _$_EarningsModel value, $Res Function(_$_EarningsModel) then) =
-      __$$_EarningsModelCopyWithImpl<$Res>;
+  factory _$$EarningsModelImplCopyWith(
+          _$EarningsModelImpl value, $Res Function(_$EarningsModelImpl) then) =
+      __$$EarningsModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({double earnings});
 }
 
 /// @nodoc
-class __$$_EarningsModelCopyWithImpl<$Res>
-    extends _$EarningsModelCopyWithImpl<$Res, _$_EarningsModel>
-    implements _$$_EarningsModelCopyWith<$Res> {
-  __$$_EarningsModelCopyWithImpl(
-      _$_EarningsModel _value, $Res Function(_$_EarningsModel) _then)
+class __$$EarningsModelImplCopyWithImpl<$Res>
+    extends _$EarningsModelCopyWithImpl<$Res, _$EarningsModelImpl>
+    implements _$$EarningsModelImplCopyWith<$Res> {
+  __$$EarningsModelImplCopyWithImpl(
+      _$EarningsModelImpl _value, $Res Function(_$EarningsModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +85,7 @@ class __$$_EarningsModelCopyWithImpl<$Res>
   $Res call({
     Object? earnings = null,
   }) {
-    return _then(_$_EarningsModel(
+    return _then(_$EarningsModelImpl(
       earnings: null == earnings
           ? _value.earnings
           : earnings // ignore: cast_nullable_to_non_nullable
@@ -96,11 +96,11 @@ class __$$_EarningsModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_EarningsModel implements _EarningsModel {
-  const _$_EarningsModel({required this.earnings});
+class _$EarningsModelImpl implements _EarningsModel {
+  const _$EarningsModelImpl({required this.earnings});
 
-  factory _$_EarningsModel.fromJson(Map<String, dynamic> json) =>
-      _$$_EarningsModelFromJson(json);
+  factory _$EarningsModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$EarningsModelImplFromJson(json);
 
   @override
   final double earnings;
@@ -114,7 +114,7 @@ class _$_EarningsModel implements _EarningsModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EarningsModel &&
+            other is _$EarningsModelImpl &&
             (identical(other.earnings, earnings) ||
                 other.earnings == earnings));
   }
@@ -126,12 +126,12 @@ class _$_EarningsModel implements _EarningsModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EarningsModelCopyWith<_$_EarningsModel> get copyWith =>
-      __$$_EarningsModelCopyWithImpl<_$_EarningsModel>(this, _$identity);
+  _$$EarningsModelImplCopyWith<_$EarningsModelImpl> get copyWith =>
+      __$$EarningsModelImplCopyWithImpl<_$EarningsModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_EarningsModelToJson(
+    return _$$EarningsModelImplToJson(
       this,
     );
   }
@@ -139,15 +139,15 @@ class _$_EarningsModel implements _EarningsModel {
 
 abstract class _EarningsModel implements EarningsModel {
   const factory _EarningsModel({required final double earnings}) =
-      _$_EarningsModel;
+      _$EarningsModelImpl;
 
   factory _EarningsModel.fromJson(Map<String, dynamic> json) =
-      _$_EarningsModel.fromJson;
+      _$EarningsModelImpl.fromJson;
 
   @override
   double get earnings;
   @override
   @JsonKey(ignore: true)
-  _$$_EarningsModelCopyWith<_$_EarningsModel> get copyWith =>
+  _$$EarningsModelImplCopyWith<_$EarningsModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

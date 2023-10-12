@@ -25,6 +25,7 @@ mixin _$UserModel {
   String? get password => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
   bool? get isAdmin => throw _privateConstructorUsedError;
+  String? get fcmToken => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +43,8 @@ abstract class $UserModelCopyWith<$Res> {
       String? username,
       String? password,
       DateTime? date,
-      bool? isAdmin});
+      bool? isAdmin,
+      String? fcmToken});
 }
 
 /// @nodoc
@@ -63,6 +65,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? password = freezed,
     Object? date = freezed,
     Object? isAdmin = freezed,
+    Object? fcmToken = freezed,
   }) {
     return _then(_value.copyWith(
       email: freezed == email
@@ -85,15 +88,20 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
               as bool?,
+      fcmToken: freezed == fcmToken
+          ? _value.fcmToken
+          : fcmToken // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
-  factory _$$_UserModelCopyWith(
-          _$_UserModel value, $Res Function(_$_UserModel) then) =
-      __$$_UserModelCopyWithImpl<$Res>;
+abstract class _$$UserModelImplCopyWith<$Res>
+    implements $UserModelCopyWith<$Res> {
+  factory _$$UserModelImplCopyWith(
+          _$UserModelImpl value, $Res Function(_$UserModelImpl) then) =
+      __$$UserModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -101,15 +109,16 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       String? username,
       String? password,
       DateTime? date,
-      bool? isAdmin});
+      bool? isAdmin,
+      String? fcmToken});
 }
 
 /// @nodoc
-class __$$_UserModelCopyWithImpl<$Res>
-    extends _$UserModelCopyWithImpl<$Res, _$_UserModel>
-    implements _$$_UserModelCopyWith<$Res> {
-  __$$_UserModelCopyWithImpl(
-      _$_UserModel _value, $Res Function(_$_UserModel) _then)
+class __$$UserModelImplCopyWithImpl<$Res>
+    extends _$UserModelCopyWithImpl<$Res, _$UserModelImpl>
+    implements _$$UserModelImplCopyWith<$Res> {
+  __$$UserModelImplCopyWithImpl(
+      _$UserModelImpl _value, $Res Function(_$UserModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -120,8 +129,9 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? password = freezed,
     Object? date = freezed,
     Object? isAdmin = freezed,
+    Object? fcmToken = freezed,
   }) {
-    return _then(_$_UserModel(
+    return _then(_$UserModelImpl(
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -142,18 +152,27 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
               as bool?,
+      fcmToken: freezed == fcmToken
+          ? _value.fcmToken
+          : fcmToken // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserModel implements _UserModel {
-  const _$_UserModel(
-      {this.email, this.username, this.password, this.date, this.isAdmin});
+class _$UserModelImpl implements _UserModel {
+  const _$UserModelImpl(
+      {this.email,
+      this.username,
+      this.password,
+      this.date,
+      this.isAdmin,
+      this.fcmToken});
 
-  factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
-      _$$_UserModelFromJson(json);
+  factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserModelImplFromJson(json);
 
   @override
   final String? email;
@@ -165,40 +184,44 @@ class _$_UserModel implements _UserModel {
   final DateTime? date;
   @override
   final bool? isAdmin;
+  @override
+  final String? fcmToken;
 
   @override
   String toString() {
-    return 'UserModel(email: $email, username: $username, password: $password, date: $date, isAdmin: $isAdmin)';
+    return 'UserModel(email: $email, username: $username, password: $password, date: $date, isAdmin: $isAdmin, fcmToken: $fcmToken)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserModel &&
+            other is _$UserModelImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.password, password) ||
                 other.password == password) &&
             (identical(other.date, date) || other.date == date) &&
-            (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin));
+            (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin) &&
+            (identical(other.fcmToken, fcmToken) ||
+                other.fcmToken == fcmToken));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, email, username, password, date, isAdmin);
+  int get hashCode => Object.hash(
+      runtimeType, email, username, password, date, isAdmin, fcmToken);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserModelCopyWith<_$_UserModel> get copyWith =>
-      __$$_UserModelCopyWithImpl<_$_UserModel>(this, _$identity);
+  _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>
+      __$$UserModelImplCopyWithImpl<_$UserModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserModelToJson(
+    return _$$UserModelImplToJson(
       this,
     );
   }
@@ -210,10 +233,11 @@ abstract class _UserModel implements UserModel {
       final String? username,
       final String? password,
       final DateTime? date,
-      final bool? isAdmin}) = _$_UserModel;
+      final bool? isAdmin,
+      final String? fcmToken}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
-      _$_UserModel.fromJson;
+      _$UserModelImpl.fromJson;
 
   @override
   String? get email;
@@ -226,7 +250,9 @@ abstract class _UserModel implements UserModel {
   @override
   bool? get isAdmin;
   @override
+  String? get fcmToken;
+  @override
   @JsonKey(ignore: true)
-  _$$_UserModelCopyWith<_$_UserModel> get copyWith =>
+  _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

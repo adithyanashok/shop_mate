@@ -136,10 +136,10 @@ class _$ProductEventCopyWithImpl<$Res, $Val extends ProductEvent>
 }
 
 /// @nodoc
-abstract class _$$_AddProductCopyWith<$Res> {
-  factory _$$_AddProductCopyWith(
-          _$_AddProduct value, $Res Function(_$_AddProduct) then) =
-      __$$_AddProductCopyWithImpl<$Res>;
+abstract class _$$AddProductImplCopyWith<$Res> {
+  factory _$$AddProductImplCopyWith(
+          _$AddProductImpl value, $Res Function(_$AddProductImpl) then) =
+      __$$AddProductImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {ProductModel product, List<Media> selectedImages, BuildContext context});
@@ -148,11 +148,11 @@ abstract class _$$_AddProductCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AddProductCopyWithImpl<$Res>
-    extends _$ProductEventCopyWithImpl<$Res, _$_AddProduct>
-    implements _$$_AddProductCopyWith<$Res> {
-  __$$_AddProductCopyWithImpl(
-      _$_AddProduct _value, $Res Function(_$_AddProduct) _then)
+class __$$AddProductImplCopyWithImpl<$Res>
+    extends _$ProductEventCopyWithImpl<$Res, _$AddProductImpl>
+    implements _$$AddProductImplCopyWith<$Res> {
+  __$$AddProductImplCopyWithImpl(
+      _$AddProductImpl _value, $Res Function(_$AddProductImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -162,7 +162,7 @@ class __$$_AddProductCopyWithImpl<$Res>
     Object? selectedImages = null,
     Object? context = null,
   }) {
-    return _then(_$_AddProduct(
+    return _then(_$AddProductImpl(
       product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
@@ -189,8 +189,8 @@ class __$$_AddProductCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddProduct implements _AddProduct {
-  const _$_AddProduct(
+class _$AddProductImpl implements _AddProduct {
+  const _$AddProductImpl(
       {required this.product,
       required final List<Media> selectedImages,
       required this.context})
@@ -218,7 +218,7 @@ class _$_AddProduct implements _AddProduct {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddProduct &&
+            other is _$AddProductImpl &&
             (identical(other.product, product) || other.product == product) &&
             const DeepCollectionEquality()
                 .equals(other._selectedImages, _selectedImages) &&
@@ -232,8 +232,8 @@ class _$_AddProduct implements _AddProduct {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddProductCopyWith<_$_AddProduct> get copyWith =>
-      __$$_AddProductCopyWithImpl<_$_AddProduct>(this, _$identity);
+  _$$AddProductImplCopyWith<_$AddProductImpl> get copyWith =>
+      __$$AddProductImplCopyWithImpl<_$AddProductImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -363,21 +363,21 @@ abstract class _AddProduct implements ProductEvent {
   const factory _AddProduct(
       {required final ProductModel product,
       required final List<Media> selectedImages,
-      required final BuildContext context}) = _$_AddProduct;
+      required final BuildContext context}) = _$AddProductImpl;
 
   ProductModel get product;
   List<Media> get selectedImages;
   BuildContext get context;
   @JsonKey(ignore: true)
-  _$$_AddProductCopyWith<_$_AddProduct> get copyWith =>
+  _$$AddProductImplCopyWith<_$AddProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_EditProductCopyWith<$Res> {
-  factory _$$_EditProductCopyWith(
-          _$_EditProduct value, $Res Function(_$_EditProduct) then) =
-      __$$_EditProductCopyWithImpl<$Res>;
+abstract class _$$EditProductImplCopyWith<$Res> {
+  factory _$$EditProductImplCopyWith(
+          _$EditProductImpl value, $Res Function(_$EditProductImpl) then) =
+      __$$EditProductImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {ProductModel product,
@@ -388,11 +388,11 @@ abstract class _$$_EditProductCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_EditProductCopyWithImpl<$Res>
-    extends _$ProductEventCopyWithImpl<$Res, _$_EditProduct>
-    implements _$$_EditProductCopyWith<$Res> {
-  __$$_EditProductCopyWithImpl(
-      _$_EditProduct _value, $Res Function(_$_EditProduct) _then)
+class __$$EditProductImplCopyWithImpl<$Res>
+    extends _$ProductEventCopyWithImpl<$Res, _$EditProductImpl>
+    implements _$$EditProductImplCopyWith<$Res> {
+  __$$EditProductImplCopyWithImpl(
+      _$EditProductImpl _value, $Res Function(_$EditProductImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -402,7 +402,7 @@ class __$$_EditProductCopyWithImpl<$Res>
     Object? context = null,
     Object? selectedImages = freezed,
   }) {
-    return _then(_$_EditProduct(
+    return _then(_$EditProductImpl(
       product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
@@ -429,8 +429,8 @@ class __$$_EditProductCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_EditProduct implements _EditProduct {
-  const _$_EditProduct(
+class _$EditProductImpl implements _EditProduct {
+  const _$EditProductImpl(
       {required this.product,
       required this.context,
       final List<Media>? selectedImages})
@@ -459,7 +459,7 @@ class _$_EditProduct implements _EditProduct {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EditProduct &&
+            other is _$EditProductImpl &&
             (identical(other.product, product) || other.product == product) &&
             (identical(other.context, context) || other.context == context) &&
             const DeepCollectionEquality()
@@ -473,8 +473,8 @@ class _$_EditProduct implements _EditProduct {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EditProductCopyWith<_$_EditProduct> get copyWith =>
-      __$$_EditProductCopyWithImpl<_$_EditProduct>(this, _$identity);
+  _$$EditProductImplCopyWith<_$EditProductImpl> get copyWith =>
+      __$$EditProductImplCopyWithImpl<_$EditProductImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -604,31 +604,31 @@ abstract class _EditProduct implements ProductEvent {
   const factory _EditProduct(
       {required final ProductModel product,
       required final BuildContext context,
-      final List<Media>? selectedImages}) = _$_EditProduct;
+      final List<Media>? selectedImages}) = _$EditProductImpl;
 
   ProductModel get product;
   BuildContext get context;
   List<Media>? get selectedImages;
   @JsonKey(ignore: true)
-  _$$_EditProductCopyWith<_$_EditProduct> get copyWith =>
+  _$$EditProductImplCopyWith<_$EditProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeleteProductCopyWith<$Res> {
-  factory _$$_DeleteProductCopyWith(
-          _$_DeleteProduct value, $Res Function(_$_DeleteProduct) then) =
-      __$$_DeleteProductCopyWithImpl<$Res>;
+abstract class _$$DeleteProductImplCopyWith<$Res> {
+  factory _$$DeleteProductImplCopyWith(
+          _$DeleteProductImpl value, $Res Function(_$DeleteProductImpl) then) =
+      __$$DeleteProductImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String productId, BuildContext context});
 }
 
 /// @nodoc
-class __$$_DeleteProductCopyWithImpl<$Res>
-    extends _$ProductEventCopyWithImpl<$Res, _$_DeleteProduct>
-    implements _$$_DeleteProductCopyWith<$Res> {
-  __$$_DeleteProductCopyWithImpl(
-      _$_DeleteProduct _value, $Res Function(_$_DeleteProduct) _then)
+class __$$DeleteProductImplCopyWithImpl<$Res>
+    extends _$ProductEventCopyWithImpl<$Res, _$DeleteProductImpl>
+    implements _$$DeleteProductImplCopyWith<$Res> {
+  __$$DeleteProductImplCopyWithImpl(
+      _$DeleteProductImpl _value, $Res Function(_$DeleteProductImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -637,7 +637,7 @@ class __$$_DeleteProductCopyWithImpl<$Res>
     Object? productId = null,
     Object? context = null,
   }) {
-    return _then(_$_DeleteProduct(
+    return _then(_$DeleteProductImpl(
       productId: null == productId
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
@@ -652,8 +652,8 @@ class __$$_DeleteProductCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DeleteProduct implements _DeleteProduct {
-  const _$_DeleteProduct({required this.productId, required this.context});
+class _$DeleteProductImpl implements _DeleteProduct {
+  const _$DeleteProductImpl({required this.productId, required this.context});
 
   @override
   final String productId;
@@ -669,7 +669,7 @@ class _$_DeleteProduct implements _DeleteProduct {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeleteProduct &&
+            other is _$DeleteProductImpl &&
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
             (identical(other.context, context) || other.context == context));
@@ -681,8 +681,8 @@ class _$_DeleteProduct implements _DeleteProduct {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeleteProductCopyWith<_$_DeleteProduct> get copyWith =>
-      __$$_DeleteProductCopyWithImpl<_$_DeleteProduct>(this, _$identity);
+  _$$DeleteProductImplCopyWith<_$DeleteProductImpl> get copyWith =>
+      __$$DeleteProductImplCopyWithImpl<_$DeleteProductImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -811,35 +811,35 @@ class _$_DeleteProduct implements _DeleteProduct {
 abstract class _DeleteProduct implements ProductEvent {
   const factory _DeleteProduct(
       {required final String productId,
-      required final BuildContext context}) = _$_DeleteProduct;
+      required final BuildContext context}) = _$DeleteProductImpl;
 
   String get productId;
   BuildContext get context;
   @JsonKey(ignore: true)
-  _$$_DeleteProductCopyWith<_$_DeleteProduct> get copyWith =>
+  _$$DeleteProductImplCopyWith<_$DeleteProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GetAllProductCopyWith<$Res> {
-  factory _$$_GetAllProductCopyWith(
-          _$_GetAllProduct value, $Res Function(_$_GetAllProduct) then) =
-      __$$_GetAllProductCopyWithImpl<$Res>;
+abstract class _$$GetAllProductImplCopyWith<$Res> {
+  factory _$$GetAllProductImplCopyWith(
+          _$GetAllProductImpl value, $Res Function(_$GetAllProductImpl) then) =
+      __$$GetAllProductImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_GetAllProductCopyWithImpl<$Res>
-    extends _$ProductEventCopyWithImpl<$Res, _$_GetAllProduct>
-    implements _$$_GetAllProductCopyWith<$Res> {
-  __$$_GetAllProductCopyWithImpl(
-      _$_GetAllProduct _value, $Res Function(_$_GetAllProduct) _then)
+class __$$GetAllProductImplCopyWithImpl<$Res>
+    extends _$ProductEventCopyWithImpl<$Res, _$GetAllProductImpl>
+    implements _$$GetAllProductImplCopyWith<$Res> {
+  __$$GetAllProductImplCopyWithImpl(
+      _$GetAllProductImpl _value, $Res Function(_$GetAllProductImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_GetAllProduct implements _GetAllProduct {
-  const _$_GetAllProduct();
+class _$GetAllProductImpl implements _GetAllProduct {
+  const _$GetAllProductImpl();
 
   @override
   String toString() {
@@ -849,7 +849,7 @@ class _$_GetAllProduct implements _GetAllProduct {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GetAllProduct);
+        (other.runtimeType == runtimeType && other is _$GetAllProductImpl);
   }
 
   @override
@@ -980,24 +980,25 @@ class _$_GetAllProduct implements _GetAllProduct {
 }
 
 abstract class _GetAllProduct implements ProductEvent {
-  const factory _GetAllProduct() = _$_GetAllProduct;
+  const factory _GetAllProduct() = _$GetAllProductImpl;
 }
 
 /// @nodoc
-abstract class _$$_GetProductsByCategoryCopyWith<$Res> {
-  factory _$$_GetProductsByCategoryCopyWith(_$_GetProductsByCategory value,
-          $Res Function(_$_GetProductsByCategory) then) =
-      __$$_GetProductsByCategoryCopyWithImpl<$Res>;
+abstract class _$$GetProductsByCategoryImplCopyWith<$Res> {
+  factory _$$GetProductsByCategoryImplCopyWith(
+          _$GetProductsByCategoryImpl value,
+          $Res Function(_$GetProductsByCategoryImpl) then) =
+      __$$GetProductsByCategoryImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String category, BuildContext context});
 }
 
 /// @nodoc
-class __$$_GetProductsByCategoryCopyWithImpl<$Res>
-    extends _$ProductEventCopyWithImpl<$Res, _$_GetProductsByCategory>
-    implements _$$_GetProductsByCategoryCopyWith<$Res> {
-  __$$_GetProductsByCategoryCopyWithImpl(_$_GetProductsByCategory _value,
-      $Res Function(_$_GetProductsByCategory) _then)
+class __$$GetProductsByCategoryImplCopyWithImpl<$Res>
+    extends _$ProductEventCopyWithImpl<$Res, _$GetProductsByCategoryImpl>
+    implements _$$GetProductsByCategoryImplCopyWith<$Res> {
+  __$$GetProductsByCategoryImplCopyWithImpl(_$GetProductsByCategoryImpl _value,
+      $Res Function(_$GetProductsByCategoryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1006,7 +1007,7 @@ class __$$_GetProductsByCategoryCopyWithImpl<$Res>
     Object? category = null,
     Object? context = null,
   }) {
-    return _then(_$_GetProductsByCategory(
+    return _then(_$GetProductsByCategoryImpl(
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -1021,8 +1022,8 @@ class __$$_GetProductsByCategoryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetProductsByCategory implements _GetProductsByCategory {
-  const _$_GetProductsByCategory(
+class _$GetProductsByCategoryImpl implements _GetProductsByCategory {
+  const _$GetProductsByCategoryImpl(
       {required this.category, required this.context});
 
   @override
@@ -1039,7 +1040,7 @@ class _$_GetProductsByCategory implements _GetProductsByCategory {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetProductsByCategory &&
+            other is _$GetProductsByCategoryImpl &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.context, context) || other.context == context));
@@ -1051,9 +1052,9 @@ class _$_GetProductsByCategory implements _GetProductsByCategory {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetProductsByCategoryCopyWith<_$_GetProductsByCategory> get copyWith =>
-      __$$_GetProductsByCategoryCopyWithImpl<_$_GetProductsByCategory>(
-          this, _$identity);
+  _$$GetProductsByCategoryImplCopyWith<_$GetProductsByCategoryImpl>
+      get copyWith => __$$GetProductsByCategoryImplCopyWithImpl<
+          _$GetProductsByCategoryImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1182,30 +1183,30 @@ class _$_GetProductsByCategory implements _GetProductsByCategory {
 abstract class _GetProductsByCategory implements ProductEvent {
   const factory _GetProductsByCategory(
       {required final String category,
-      required final BuildContext context}) = _$_GetProductsByCategory;
+      required final BuildContext context}) = _$GetProductsByCategoryImpl;
 
   String get category;
   BuildContext get context;
   @JsonKey(ignore: true)
-  _$$_GetProductsByCategoryCopyWith<_$_GetProductsByCategory> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$GetProductsByCategoryImplCopyWith<_$GetProductsByCategoryImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GetLaptopsCopyWith<$Res> {
-  factory _$$_GetLaptopsCopyWith(
-          _$_GetLaptops value, $Res Function(_$_GetLaptops) then) =
-      __$$_GetLaptopsCopyWithImpl<$Res>;
+abstract class _$$GetLaptopsImplCopyWith<$Res> {
+  factory _$$GetLaptopsImplCopyWith(
+          _$GetLaptopsImpl value, $Res Function(_$GetLaptopsImpl) then) =
+      __$$GetLaptopsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String category, BuildContext context});
 }
 
 /// @nodoc
-class __$$_GetLaptopsCopyWithImpl<$Res>
-    extends _$ProductEventCopyWithImpl<$Res, _$_GetLaptops>
-    implements _$$_GetLaptopsCopyWith<$Res> {
-  __$$_GetLaptopsCopyWithImpl(
-      _$_GetLaptops _value, $Res Function(_$_GetLaptops) _then)
+class __$$GetLaptopsImplCopyWithImpl<$Res>
+    extends _$ProductEventCopyWithImpl<$Res, _$GetLaptopsImpl>
+    implements _$$GetLaptopsImplCopyWith<$Res> {
+  __$$GetLaptopsImplCopyWithImpl(
+      _$GetLaptopsImpl _value, $Res Function(_$GetLaptopsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1214,7 +1215,7 @@ class __$$_GetLaptopsCopyWithImpl<$Res>
     Object? category = null,
     Object? context = null,
   }) {
-    return _then(_$_GetLaptops(
+    return _then(_$GetLaptopsImpl(
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -1229,8 +1230,8 @@ class __$$_GetLaptopsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetLaptops implements _GetLaptops {
-  const _$_GetLaptops({required this.category, required this.context});
+class _$GetLaptopsImpl implements _GetLaptops {
+  const _$GetLaptopsImpl({required this.category, required this.context});
 
   @override
   final String category;
@@ -1246,7 +1247,7 @@ class _$_GetLaptops implements _GetLaptops {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetLaptops &&
+            other is _$GetLaptopsImpl &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.context, context) || other.context == context));
@@ -1258,8 +1259,8 @@ class _$_GetLaptops implements _GetLaptops {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetLaptopsCopyWith<_$_GetLaptops> get copyWith =>
-      __$$_GetLaptopsCopyWithImpl<_$_GetLaptops>(this, _$identity);
+  _$$GetLaptopsImplCopyWith<_$GetLaptopsImpl> get copyWith =>
+      __$$GetLaptopsImplCopyWithImpl<_$GetLaptopsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1388,30 +1389,30 @@ class _$_GetLaptops implements _GetLaptops {
 abstract class _GetLaptops implements ProductEvent {
   const factory _GetLaptops(
       {required final String category,
-      required final BuildContext context}) = _$_GetLaptops;
+      required final BuildContext context}) = _$GetLaptopsImpl;
 
   String get category;
   BuildContext get context;
   @JsonKey(ignore: true)
-  _$$_GetLaptopsCopyWith<_$_GetLaptops> get copyWith =>
+  _$$GetLaptopsImplCopyWith<_$GetLaptopsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GetEarphonesCopyWith<$Res> {
-  factory _$$_GetEarphonesCopyWith(
-          _$_GetEarphones value, $Res Function(_$_GetEarphones) then) =
-      __$$_GetEarphonesCopyWithImpl<$Res>;
+abstract class _$$GetEarphonesImplCopyWith<$Res> {
+  factory _$$GetEarphonesImplCopyWith(
+          _$GetEarphonesImpl value, $Res Function(_$GetEarphonesImpl) then) =
+      __$$GetEarphonesImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String category, BuildContext context});
 }
 
 /// @nodoc
-class __$$_GetEarphonesCopyWithImpl<$Res>
-    extends _$ProductEventCopyWithImpl<$Res, _$_GetEarphones>
-    implements _$$_GetEarphonesCopyWith<$Res> {
-  __$$_GetEarphonesCopyWithImpl(
-      _$_GetEarphones _value, $Res Function(_$_GetEarphones) _then)
+class __$$GetEarphonesImplCopyWithImpl<$Res>
+    extends _$ProductEventCopyWithImpl<$Res, _$GetEarphonesImpl>
+    implements _$$GetEarphonesImplCopyWith<$Res> {
+  __$$GetEarphonesImplCopyWithImpl(
+      _$GetEarphonesImpl _value, $Res Function(_$GetEarphonesImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1420,7 +1421,7 @@ class __$$_GetEarphonesCopyWithImpl<$Res>
     Object? category = null,
     Object? context = null,
   }) {
-    return _then(_$_GetEarphones(
+    return _then(_$GetEarphonesImpl(
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -1435,8 +1436,8 @@ class __$$_GetEarphonesCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetEarphones implements _GetEarphones {
-  const _$_GetEarphones({required this.category, required this.context});
+class _$GetEarphonesImpl implements _GetEarphones {
+  const _$GetEarphonesImpl({required this.category, required this.context});
 
   @override
   final String category;
@@ -1452,7 +1453,7 @@ class _$_GetEarphones implements _GetEarphones {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetEarphones &&
+            other is _$GetEarphonesImpl &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.context, context) || other.context == context));
@@ -1464,8 +1465,8 @@ class _$_GetEarphones implements _GetEarphones {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetEarphonesCopyWith<_$_GetEarphones> get copyWith =>
-      __$$_GetEarphonesCopyWithImpl<_$_GetEarphones>(this, _$identity);
+  _$$GetEarphonesImplCopyWith<_$GetEarphonesImpl> get copyWith =>
+      __$$GetEarphonesImplCopyWithImpl<_$GetEarphonesImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1594,30 +1595,30 @@ class _$_GetEarphones implements _GetEarphones {
 abstract class _GetEarphones implements ProductEvent {
   const factory _GetEarphones(
       {required final String category,
-      required final BuildContext context}) = _$_GetEarphones;
+      required final BuildContext context}) = _$GetEarphonesImpl;
 
   String get category;
   BuildContext get context;
   @JsonKey(ignore: true)
-  _$$_GetEarphonesCopyWith<_$_GetEarphones> get copyWith =>
+  _$$GetEarphonesImplCopyWith<_$GetEarphonesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GetMobilesCopyWith<$Res> {
-  factory _$$_GetMobilesCopyWith(
-          _$_GetMobiles value, $Res Function(_$_GetMobiles) then) =
-      __$$_GetMobilesCopyWithImpl<$Res>;
+abstract class _$$GetMobilesImplCopyWith<$Res> {
+  factory _$$GetMobilesImplCopyWith(
+          _$GetMobilesImpl value, $Res Function(_$GetMobilesImpl) then) =
+      __$$GetMobilesImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String category, BuildContext context});
 }
 
 /// @nodoc
-class __$$_GetMobilesCopyWithImpl<$Res>
-    extends _$ProductEventCopyWithImpl<$Res, _$_GetMobiles>
-    implements _$$_GetMobilesCopyWith<$Res> {
-  __$$_GetMobilesCopyWithImpl(
-      _$_GetMobiles _value, $Res Function(_$_GetMobiles) _then)
+class __$$GetMobilesImplCopyWithImpl<$Res>
+    extends _$ProductEventCopyWithImpl<$Res, _$GetMobilesImpl>
+    implements _$$GetMobilesImplCopyWith<$Res> {
+  __$$GetMobilesImplCopyWithImpl(
+      _$GetMobilesImpl _value, $Res Function(_$GetMobilesImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1626,7 +1627,7 @@ class __$$_GetMobilesCopyWithImpl<$Res>
     Object? category = null,
     Object? context = null,
   }) {
-    return _then(_$_GetMobiles(
+    return _then(_$GetMobilesImpl(
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -1641,8 +1642,8 @@ class __$$_GetMobilesCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetMobiles implements _GetMobiles {
-  const _$_GetMobiles({required this.category, required this.context});
+class _$GetMobilesImpl implements _GetMobiles {
+  const _$GetMobilesImpl({required this.category, required this.context});
 
   @override
   final String category;
@@ -1658,7 +1659,7 @@ class _$_GetMobiles implements _GetMobiles {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetMobiles &&
+            other is _$GetMobilesImpl &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.context, context) || other.context == context));
@@ -1670,8 +1671,8 @@ class _$_GetMobiles implements _GetMobiles {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetMobilesCopyWith<_$_GetMobiles> get copyWith =>
-      __$$_GetMobilesCopyWithImpl<_$_GetMobiles>(this, _$identity);
+  _$$GetMobilesImplCopyWith<_$GetMobilesImpl> get copyWith =>
+      __$$GetMobilesImplCopyWithImpl<_$GetMobilesImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1800,30 +1801,30 @@ class _$_GetMobiles implements _GetMobiles {
 abstract class _GetMobiles implements ProductEvent {
   const factory _GetMobiles(
       {required final String category,
-      required final BuildContext context}) = _$_GetMobiles;
+      required final BuildContext context}) = _$GetMobilesImpl;
 
   String get category;
   BuildContext get context;
   @JsonKey(ignore: true)
-  _$$_GetMobilesCopyWith<_$_GetMobiles> get copyWith =>
+  _$$GetMobilesImplCopyWith<_$GetMobilesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GetProductCopyWith<$Res> {
-  factory _$$_GetProductCopyWith(
-          _$_GetProduct value, $Res Function(_$_GetProduct) then) =
-      __$$_GetProductCopyWithImpl<$Res>;
+abstract class _$$GetProductImplCopyWith<$Res> {
+  factory _$$GetProductImplCopyWith(
+          _$GetProductImpl value, $Res Function(_$GetProductImpl) then) =
+      __$$GetProductImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String productId, BuildContext context});
 }
 
 /// @nodoc
-class __$$_GetProductCopyWithImpl<$Res>
-    extends _$ProductEventCopyWithImpl<$Res, _$_GetProduct>
-    implements _$$_GetProductCopyWith<$Res> {
-  __$$_GetProductCopyWithImpl(
-      _$_GetProduct _value, $Res Function(_$_GetProduct) _then)
+class __$$GetProductImplCopyWithImpl<$Res>
+    extends _$ProductEventCopyWithImpl<$Res, _$GetProductImpl>
+    implements _$$GetProductImplCopyWith<$Res> {
+  __$$GetProductImplCopyWithImpl(
+      _$GetProductImpl _value, $Res Function(_$GetProductImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1832,7 +1833,7 @@ class __$$_GetProductCopyWithImpl<$Res>
     Object? productId = null,
     Object? context = null,
   }) {
-    return _then(_$_GetProduct(
+    return _then(_$GetProductImpl(
       productId: null == productId
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
@@ -1847,8 +1848,8 @@ class __$$_GetProductCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetProduct implements _GetProduct {
-  const _$_GetProduct({required this.productId, required this.context});
+class _$GetProductImpl implements _GetProduct {
+  const _$GetProductImpl({required this.productId, required this.context});
 
   @override
   final String productId;
@@ -1864,7 +1865,7 @@ class _$_GetProduct implements _GetProduct {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetProduct &&
+            other is _$GetProductImpl &&
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
             (identical(other.context, context) || other.context == context));
@@ -1876,8 +1877,8 @@ class _$_GetProduct implements _GetProduct {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetProductCopyWith<_$_GetProduct> get copyWith =>
-      __$$_GetProductCopyWithImpl<_$_GetProduct>(this, _$identity);
+  _$$GetProductImplCopyWith<_$GetProductImpl> get copyWith =>
+      __$$GetProductImplCopyWithImpl<_$GetProductImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2006,12 +2007,12 @@ class _$_GetProduct implements _GetProduct {
 abstract class _GetProduct implements ProductEvent {
   const factory _GetProduct(
       {required final String productId,
-      required final BuildContext context}) = _$_GetProduct;
+      required final BuildContext context}) = _$GetProductImpl;
 
   String get productId;
   BuildContext get context;
   @JsonKey(ignore: true)
-  _$$_GetProductCopyWith<_$_GetProduct> get copyWith =>
+  _$$GetProductImplCopyWith<_$GetProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2120,11 +2121,11 @@ class _$ProductStateCopyWithImpl<$Res, $Val extends ProductState>
 }
 
 /// @nodoc
-abstract class _$$_ProductStateCopyWith<$Res>
+abstract class _$$ProductStateImplCopyWith<$Res>
     implements $ProductStateCopyWith<$Res> {
-  factory _$$_ProductStateCopyWith(
-          _$_ProductState value, $Res Function(_$_ProductState) then) =
-      __$$_ProductStateCopyWithImpl<$Res>;
+  factory _$$ProductStateImplCopyWith(
+          _$ProductStateImpl value, $Res Function(_$ProductStateImpl) then) =
+      __$$ProductStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2142,11 +2143,11 @@ abstract class _$$_ProductStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProductStateCopyWithImpl<$Res>
-    extends _$ProductStateCopyWithImpl<$Res, _$_ProductState>
-    implements _$$_ProductStateCopyWith<$Res> {
-  __$$_ProductStateCopyWithImpl(
-      _$_ProductState _value, $Res Function(_$_ProductState) _then)
+class __$$ProductStateImplCopyWithImpl<$Res>
+    extends _$ProductStateCopyWithImpl<$Res, _$ProductStateImpl>
+    implements _$$ProductStateImplCopyWith<$Res> {
+  __$$ProductStateImplCopyWithImpl(
+      _$ProductStateImpl _value, $Res Function(_$ProductStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2161,7 +2162,7 @@ class __$$_ProductStateCopyWithImpl<$Res>
     Object? earphoneListOpt = null,
     Object? mobileListOpt = null,
   }) {
-    return _then(_$_ProductState(
+    return _then(_$ProductStateImpl(
       product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
@@ -2200,8 +2201,8 @@ class __$$_ProductStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ProductState implements _ProductState {
-  const _$_ProductState(
+class _$ProductStateImpl implements _ProductState {
+  const _$ProductStateImpl(
       {required this.product,
       final List<ProductModel> products = const [],
       required this.isLoading,
@@ -2268,7 +2269,7 @@ class _$_ProductState implements _ProductState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProductState &&
+            other is _$ProductStateImpl &&
             (identical(other.product, product) || other.product == product) &&
             const DeepCollectionEquality().equals(other._products, _products) &&
             (identical(other.isLoading, isLoading) ||
@@ -2300,8 +2301,8 @@ class _$_ProductState implements _ProductState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductStateCopyWith<_$_ProductState> get copyWith =>
-      __$$_ProductStateCopyWithImpl<_$_ProductState>(this, _$identity);
+  _$$ProductStateImplCopyWith<_$ProductStateImpl> get copyWith =>
+      __$$ProductStateImplCopyWithImpl<_$ProductStateImpl>(this, _$identity);
 }
 
 abstract class _ProductState implements ProductState {
@@ -2313,7 +2314,7 @@ abstract class _ProductState implements ProductState {
       final Option<Either<MainFailure, List<ProductModel>>>? productList,
       final List<ProductModel> laptopListOpt,
       final List<ProductModel> earphoneListOpt,
-      final List<ProductModel> mobileListOpt}) = _$_ProductState;
+      final List<ProductModel> mobileListOpt}) = _$ProductStateImpl;
 
   @override
   ProductModel get product;
@@ -2333,6 +2334,6 @@ abstract class _ProductState implements ProductState {
   List<ProductModel> get mobileListOpt;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductStateCopyWith<_$_ProductState> get copyWith =>
+  _$$ProductStateImplCopyWith<_$ProductStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

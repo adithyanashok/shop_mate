@@ -16,13 +16,13 @@ class BuildTextFormField extends StatefulWidget {
       this.initialValue = '',
       this.obscureText = false,
       this.keyboardType = TextInputType.multiline,
-      this.func});
+      required this.func});
   final String label;
   final String hintText;
   final IconData icon;
   final bool obscureText;
   final TextInputType keyboardType;
-  final Function(String value)? func;
+  final Function(String value) func;
   final String initialValue;
 
   @override
@@ -73,8 +73,8 @@ class _BuildTextFormFieldState extends State<BuildTextFormField> {
               Expanded(
                 child: TextField(
                   onChanged: (value) {
+                    widget.func(value);
                     log(value);
-                    widget.func!(value);
                   },
                   keyboardType: widget.keyboardType,
                   obscureText: widget.obscureText,

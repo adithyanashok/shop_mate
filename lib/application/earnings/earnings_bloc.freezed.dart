@@ -69,25 +69,25 @@ class _$EarningsEventCopyWithImpl<$Res, $Val extends EarningsEvent>
 }
 
 /// @nodoc
-abstract class _$$_GetTotalEarningsCopyWith<$Res> {
-  factory _$$_GetTotalEarningsCopyWith(
-          _$_GetTotalEarnings value, $Res Function(_$_GetTotalEarnings) then) =
-      __$$_GetTotalEarningsCopyWithImpl<$Res>;
+abstract class _$$GetTotalEarningsImplCopyWith<$Res> {
+  factory _$$GetTotalEarningsImplCopyWith(_$GetTotalEarningsImpl value,
+          $Res Function(_$GetTotalEarningsImpl) then) =
+      __$$GetTotalEarningsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_GetTotalEarningsCopyWithImpl<$Res>
-    extends _$EarningsEventCopyWithImpl<$Res, _$_GetTotalEarnings>
-    implements _$$_GetTotalEarningsCopyWith<$Res> {
-  __$$_GetTotalEarningsCopyWithImpl(
-      _$_GetTotalEarnings _value, $Res Function(_$_GetTotalEarnings) _then)
+class __$$GetTotalEarningsImplCopyWithImpl<$Res>
+    extends _$EarningsEventCopyWithImpl<$Res, _$GetTotalEarningsImpl>
+    implements _$$GetTotalEarningsImplCopyWith<$Res> {
+  __$$GetTotalEarningsImplCopyWithImpl(_$GetTotalEarningsImpl _value,
+      $Res Function(_$GetTotalEarningsImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_GetTotalEarnings implements _GetTotalEarnings {
-  const _$_GetTotalEarnings();
+class _$GetTotalEarningsImpl implements _GetTotalEarnings {
+  const _$GetTotalEarningsImpl();
 
   @override
   String toString() {
@@ -97,7 +97,7 @@ class _$_GetTotalEarnings implements _GetTotalEarnings {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GetTotalEarnings);
+        (other.runtimeType == runtimeType && other is _$GetTotalEarningsImpl);
   }
 
   @override
@@ -161,7 +161,7 @@ class _$_GetTotalEarnings implements _GetTotalEarnings {
 }
 
 abstract class _GetTotalEarnings implements EarningsEvent {
-  const factory _GetTotalEarnings() = _$_GetTotalEarnings;
+  const factory _GetTotalEarnings() = _$GetTotalEarningsImpl;
 }
 
 /// @nodoc
@@ -233,11 +233,11 @@ class _$EarningsStateCopyWithImpl<$Res, $Val extends EarningsState>
 }
 
 /// @nodoc
-abstract class _$$_EarningsStateCopyWith<$Res>
+abstract class _$$EarningsStateImplCopyWith<$Res>
     implements $EarningsStateCopyWith<$Res> {
-  factory _$$_EarningsStateCopyWith(
-          _$_EarningsState value, $Res Function(_$_EarningsState) then) =
-      __$$_EarningsStateCopyWithImpl<$Res>;
+  factory _$$EarningsStateImplCopyWith(
+          _$EarningsStateImpl value, $Res Function(_$EarningsStateImpl) then) =
+      __$$EarningsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -250,11 +250,11 @@ abstract class _$$_EarningsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_EarningsStateCopyWithImpl<$Res>
-    extends _$EarningsStateCopyWithImpl<$Res, _$_EarningsState>
-    implements _$$_EarningsStateCopyWith<$Res> {
-  __$$_EarningsStateCopyWithImpl(
-      _$_EarningsState _value, $Res Function(_$_EarningsState) _then)
+class __$$EarningsStateImplCopyWithImpl<$Res>
+    extends _$EarningsStateCopyWithImpl<$Res, _$EarningsStateImpl>
+    implements _$$EarningsStateImplCopyWith<$Res> {
+  __$$EarningsStateImplCopyWithImpl(
+      _$EarningsStateImpl _value, $Res Function(_$EarningsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -264,7 +264,7 @@ class __$$_EarningsStateCopyWithImpl<$Res>
     Object? earningModelOpt = null,
     Object? earningsModel = null,
   }) {
-    return _then(_$_EarningsState(
+    return _then(_$EarningsStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -283,8 +283,8 @@ class __$$_EarningsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_EarningsState implements _EarningsState {
-  const _$_EarningsState(
+class _$EarningsStateImpl implements _EarningsState {
+  const _$EarningsStateImpl(
       {required this.isLoading,
       required this.earningModelOpt,
       required this.earningsModel});
@@ -305,7 +305,7 @@ class _$_EarningsState implements _EarningsState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EarningsState &&
+            other is _$EarningsStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.earningModelOpt, earningModelOpt) ||
@@ -321,15 +321,15 @@ class _$_EarningsState implements _EarningsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EarningsStateCopyWith<_$_EarningsState> get copyWith =>
-      __$$_EarningsStateCopyWithImpl<_$_EarningsState>(this, _$identity);
+  _$$EarningsStateImplCopyWith<_$EarningsStateImpl> get copyWith =>
+      __$$EarningsStateImplCopyWithImpl<_$EarningsStateImpl>(this, _$identity);
 }
 
 abstract class _EarningsState implements EarningsState {
   const factory _EarningsState(
       {required final bool isLoading,
       required final Option<Either<MainFailure, EarningsModel>> earningModelOpt,
-      required final EarningsModel earningsModel}) = _$_EarningsState;
+      required final EarningsModel earningsModel}) = _$EarningsStateImpl;
 
   @override
   bool get isLoading;
@@ -339,6 +339,6 @@ abstract class _EarningsState implements EarningsState {
   EarningsModel get earningsModel;
   @override
   @JsonKey(ignore: true)
-  _$$_EarningsStateCopyWith<_$_EarningsState> get copyWith =>
+  _$$EarningsStateImplCopyWith<_$EarningsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

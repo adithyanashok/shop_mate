@@ -89,22 +89,22 @@ class _$BottomNavEventCopyWithImpl<$Res, $Val extends BottomNavEvent>
 }
 
 /// @nodoc
-abstract class _$$HomeEventCopyWith<$Res>
+abstract class _$$HomeEventImplCopyWith<$Res>
     implements $BottomNavEventCopyWith<$Res> {
-  factory _$$HomeEventCopyWith(
-          _$HomeEvent value, $Res Function(_$HomeEvent) then) =
-      __$$HomeEventCopyWithImpl<$Res>;
+  factory _$$HomeEventImplCopyWith(
+          _$HomeEventImpl value, $Res Function(_$HomeEventImpl) then) =
+      __$$HomeEventImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int value});
 }
 
 /// @nodoc
-class __$$HomeEventCopyWithImpl<$Res>
-    extends _$BottomNavEventCopyWithImpl<$Res, _$HomeEvent>
-    implements _$$HomeEventCopyWith<$Res> {
-  __$$HomeEventCopyWithImpl(
-      _$HomeEvent _value, $Res Function(_$HomeEvent) _then)
+class __$$HomeEventImplCopyWithImpl<$Res>
+    extends _$BottomNavEventCopyWithImpl<$Res, _$HomeEventImpl>
+    implements _$$HomeEventImplCopyWith<$Res> {
+  __$$HomeEventImplCopyWithImpl(
+      _$HomeEventImpl _value, $Res Function(_$HomeEventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -112,7 +112,7 @@ class __$$HomeEventCopyWithImpl<$Res>
   $Res call({
     Object? value = null,
   }) {
-    return _then(_$HomeEvent(
+    return _then(_$HomeEventImpl(
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -123,8 +123,8 @@ class __$$HomeEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$HomeEvent implements HomeEvent {
-  const _$HomeEvent({required this.value});
+class _$HomeEventImpl implements HomeEvent {
+  const _$HomeEventImpl({required this.value});
 
   @override
   final int value;
@@ -138,7 +138,7 @@ class _$HomeEvent implements HomeEvent {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HomeEvent &&
+            other is _$HomeEventImpl &&
             (identical(other.value, value) || other.value == value));
   }
 
@@ -148,8 +148,8 @@ class _$HomeEvent implements HomeEvent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$HomeEventCopyWith<_$HomeEvent> get copyWith =>
-      __$$HomeEventCopyWithImpl<_$HomeEvent>(this, _$identity);
+  _$$HomeEventImplCopyWith<_$HomeEventImpl> get copyWith =>
+      __$$HomeEventImplCopyWithImpl<_$HomeEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -209,13 +209,13 @@ class _$HomeEvent implements HomeEvent {
 }
 
 abstract class HomeEvent implements BottomNavEvent {
-  const factory HomeEvent({required final int value}) = _$HomeEvent;
+  const factory HomeEvent({required final int value}) = _$HomeEventImpl;
 
   @override
   int get value;
   @override
   @JsonKey(ignore: true)
-  _$$HomeEventCopyWith<_$HomeEvent> get copyWith =>
+  _$$HomeEventImplCopyWith<_$HomeEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -262,22 +262,22 @@ class _$BottomNavStateCopyWithImpl<$Res, $Val extends BottomNavState>
 }
 
 /// @nodoc
-abstract class _$$_BottomNavStateCopyWith<$Res>
+abstract class _$$BottomNavStateImplCopyWith<$Res>
     implements $BottomNavStateCopyWith<$Res> {
-  factory _$$_BottomNavStateCopyWith(
-          _$_BottomNavState value, $Res Function(_$_BottomNavState) then) =
-      __$$_BottomNavStateCopyWithImpl<$Res>;
+  factory _$$BottomNavStateImplCopyWith(_$BottomNavStateImpl value,
+          $Res Function(_$BottomNavStateImpl) then) =
+      __$$BottomNavStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int value});
 }
 
 /// @nodoc
-class __$$_BottomNavStateCopyWithImpl<$Res>
-    extends _$BottomNavStateCopyWithImpl<$Res, _$_BottomNavState>
-    implements _$$_BottomNavStateCopyWith<$Res> {
-  __$$_BottomNavStateCopyWithImpl(
-      _$_BottomNavState _value, $Res Function(_$_BottomNavState) _then)
+class __$$BottomNavStateImplCopyWithImpl<$Res>
+    extends _$BottomNavStateCopyWithImpl<$Res, _$BottomNavStateImpl>
+    implements _$$BottomNavStateImplCopyWith<$Res> {
+  __$$BottomNavStateImplCopyWithImpl(
+      _$BottomNavStateImpl _value, $Res Function(_$BottomNavStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -285,7 +285,7 @@ class __$$_BottomNavStateCopyWithImpl<$Res>
   $Res call({
     Object? value = null,
   }) {
-    return _then(_$_BottomNavState(
+    return _then(_$BottomNavStateImpl(
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -296,8 +296,8 @@ class __$$_BottomNavStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BottomNavState implements _BottomNavState {
-  const _$_BottomNavState({required this.value});
+class _$BottomNavStateImpl implements _BottomNavState {
+  const _$BottomNavStateImpl({required this.value});
 
   @override
   final int value;
@@ -311,7 +311,7 @@ class _$_BottomNavState implements _BottomNavState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BottomNavState &&
+            other is _$BottomNavStateImpl &&
             (identical(other.value, value) || other.value == value));
   }
 
@@ -321,17 +321,19 @@ class _$_BottomNavState implements _BottomNavState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BottomNavStateCopyWith<_$_BottomNavState> get copyWith =>
-      __$$_BottomNavStateCopyWithImpl<_$_BottomNavState>(this, _$identity);
+  _$$BottomNavStateImplCopyWith<_$BottomNavStateImpl> get copyWith =>
+      __$$BottomNavStateImplCopyWithImpl<_$BottomNavStateImpl>(
+          this, _$identity);
 }
 
 abstract class _BottomNavState implements BottomNavState {
-  const factory _BottomNavState({required final int value}) = _$_BottomNavState;
+  const factory _BottomNavState({required final int value}) =
+      _$BottomNavStateImpl;
 
   @override
   int get value;
   @override
   @JsonKey(ignore: true)
-  _$$_BottomNavStateCopyWith<_$_BottomNavState> get copyWith =>
+  _$$BottomNavStateImplCopyWith<_$BottomNavStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

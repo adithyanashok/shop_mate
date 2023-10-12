@@ -121,11 +121,11 @@ class _$OrdersEventCopyWithImpl<$Res, $Val extends OrdersEvent>
 }
 
 /// @nodoc
-abstract class _$$_PlaceOrderCopyWith<$Res>
+abstract class _$$PlaceOrderImplCopyWith<$Res>
     implements $OrdersEventCopyWith<$Res> {
-  factory _$$_PlaceOrderCopyWith(
-          _$_PlaceOrder value, $Res Function(_$_PlaceOrder) then) =
-      __$$_PlaceOrderCopyWithImpl<$Res>;
+  factory _$$PlaceOrderImplCopyWith(
+          _$PlaceOrderImpl value, $Res Function(_$PlaceOrderImpl) then) =
+      __$$PlaceOrderImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({OrderModel orderModel, BuildContext context});
@@ -134,11 +134,11 @@ abstract class _$$_PlaceOrderCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PlaceOrderCopyWithImpl<$Res>
-    extends _$OrdersEventCopyWithImpl<$Res, _$_PlaceOrder>
-    implements _$$_PlaceOrderCopyWith<$Res> {
-  __$$_PlaceOrderCopyWithImpl(
-      _$_PlaceOrder _value, $Res Function(_$_PlaceOrder) _then)
+class __$$PlaceOrderImplCopyWithImpl<$Res>
+    extends _$OrdersEventCopyWithImpl<$Res, _$PlaceOrderImpl>
+    implements _$$PlaceOrderImplCopyWith<$Res> {
+  __$$PlaceOrderImplCopyWithImpl(
+      _$PlaceOrderImpl _value, $Res Function(_$PlaceOrderImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -147,7 +147,7 @@ class __$$_PlaceOrderCopyWithImpl<$Res>
     Object? orderModel = null,
     Object? context = null,
   }) {
-    return _then(_$_PlaceOrder(
+    return _then(_$PlaceOrderImpl(
       orderModel: null == orderModel
           ? _value.orderModel
           : orderModel // ignore: cast_nullable_to_non_nullable
@@ -170,8 +170,8 @@ class __$$_PlaceOrderCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PlaceOrder implements _PlaceOrder {
-  const _$_PlaceOrder({required this.orderModel, required this.context});
+class _$PlaceOrderImpl implements _PlaceOrder {
+  const _$PlaceOrderImpl({required this.orderModel, required this.context});
 
   @override
   final OrderModel orderModel;
@@ -187,7 +187,7 @@ class _$_PlaceOrder implements _PlaceOrder {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PlaceOrder &&
+            other is _$PlaceOrderImpl &&
             (identical(other.orderModel, orderModel) ||
                 other.orderModel == orderModel) &&
             (identical(other.context, context) || other.context == context));
@@ -199,8 +199,8 @@ class _$_PlaceOrder implements _PlaceOrder {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PlaceOrderCopyWith<_$_PlaceOrder> get copyWith =>
-      __$$_PlaceOrderCopyWithImpl<_$_PlaceOrder>(this, _$identity);
+  _$$PlaceOrderImplCopyWith<_$PlaceOrderImpl> get copyWith =>
+      __$$PlaceOrderImplCopyWithImpl<_$PlaceOrderImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -294,34 +294,34 @@ class _$_PlaceOrder implements _PlaceOrder {
 abstract class _PlaceOrder implements OrdersEvent {
   const factory _PlaceOrder(
       {required final OrderModel orderModel,
-      required final BuildContext context}) = _$_PlaceOrder;
+      required final BuildContext context}) = _$PlaceOrderImpl;
 
   OrderModel get orderModel;
   @override
   BuildContext get context;
   @override
   @JsonKey(ignore: true)
-  _$$_PlaceOrderCopyWith<_$_PlaceOrder> get copyWith =>
+  _$$PlaceOrderImplCopyWith<_$PlaceOrderImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GetAllOrdersCopyWith<$Res>
+abstract class _$$GetAllOrdersImplCopyWith<$Res>
     implements $OrdersEventCopyWith<$Res> {
-  factory _$$_GetAllOrdersCopyWith(
-          _$_GetAllOrders value, $Res Function(_$_GetAllOrders) then) =
-      __$$_GetAllOrdersCopyWithImpl<$Res>;
+  factory _$$GetAllOrdersImplCopyWith(
+          _$GetAllOrdersImpl value, $Res Function(_$GetAllOrdersImpl) then) =
+      __$$GetAllOrdersImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({BuildContext context});
 }
 
 /// @nodoc
-class __$$_GetAllOrdersCopyWithImpl<$Res>
-    extends _$OrdersEventCopyWithImpl<$Res, _$_GetAllOrders>
-    implements _$$_GetAllOrdersCopyWith<$Res> {
-  __$$_GetAllOrdersCopyWithImpl(
-      _$_GetAllOrders _value, $Res Function(_$_GetAllOrders) _then)
+class __$$GetAllOrdersImplCopyWithImpl<$Res>
+    extends _$OrdersEventCopyWithImpl<$Res, _$GetAllOrdersImpl>
+    implements _$$GetAllOrdersImplCopyWith<$Res> {
+  __$$GetAllOrdersImplCopyWithImpl(
+      _$GetAllOrdersImpl _value, $Res Function(_$GetAllOrdersImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -329,7 +329,7 @@ class __$$_GetAllOrdersCopyWithImpl<$Res>
   $Res call({
     Object? context = null,
   }) {
-    return _then(_$_GetAllOrders(
+    return _then(_$GetAllOrdersImpl(
       context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
@@ -340,8 +340,8 @@ class __$$_GetAllOrdersCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetAllOrders implements _GetAllOrders {
-  const _$_GetAllOrders({required this.context});
+class _$GetAllOrdersImpl implements _GetAllOrders {
+  const _$GetAllOrdersImpl({required this.context});
 
   @override
   final BuildContext context;
@@ -355,7 +355,7 @@ class _$_GetAllOrders implements _GetAllOrders {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetAllOrders &&
+            other is _$GetAllOrdersImpl &&
             (identical(other.context, context) || other.context == context));
   }
 
@@ -365,8 +365,8 @@ class _$_GetAllOrders implements _GetAllOrders {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetAllOrdersCopyWith<_$_GetAllOrders> get copyWith =>
-      __$$_GetAllOrdersCopyWithImpl<_$_GetAllOrders>(this, _$identity);
+  _$$GetAllOrdersImplCopyWith<_$GetAllOrdersImpl> get copyWith =>
+      __$$GetAllOrdersImplCopyWithImpl<_$GetAllOrdersImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -459,33 +459,33 @@ class _$_GetAllOrders implements _GetAllOrders {
 
 abstract class _GetAllOrders implements OrdersEvent {
   const factory _GetAllOrders({required final BuildContext context}) =
-      _$_GetAllOrders;
+      _$GetAllOrdersImpl;
 
   @override
   BuildContext get context;
   @override
   @JsonKey(ignore: true)
-  _$$_GetAllOrdersCopyWith<_$_GetAllOrders> get copyWith =>
+  _$$GetAllOrdersImplCopyWith<_$GetAllOrdersImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GetAllOrdersOfAUserCopyWith<$Res>
+abstract class _$$GetAllOrdersOfAUserImplCopyWith<$Res>
     implements $OrdersEventCopyWith<$Res> {
-  factory _$$_GetAllOrdersOfAUserCopyWith(_$_GetAllOrdersOfAUser value,
-          $Res Function(_$_GetAllOrdersOfAUser) then) =
-      __$$_GetAllOrdersOfAUserCopyWithImpl<$Res>;
+  factory _$$GetAllOrdersOfAUserImplCopyWith(_$GetAllOrdersOfAUserImpl value,
+          $Res Function(_$GetAllOrdersOfAUserImpl) then) =
+      __$$GetAllOrdersOfAUserImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String userId, BuildContext context});
 }
 
 /// @nodoc
-class __$$_GetAllOrdersOfAUserCopyWithImpl<$Res>
-    extends _$OrdersEventCopyWithImpl<$Res, _$_GetAllOrdersOfAUser>
-    implements _$$_GetAllOrdersOfAUserCopyWith<$Res> {
-  __$$_GetAllOrdersOfAUserCopyWithImpl(_$_GetAllOrdersOfAUser _value,
-      $Res Function(_$_GetAllOrdersOfAUser) _then)
+class __$$GetAllOrdersOfAUserImplCopyWithImpl<$Res>
+    extends _$OrdersEventCopyWithImpl<$Res, _$GetAllOrdersOfAUserImpl>
+    implements _$$GetAllOrdersOfAUserImplCopyWith<$Res> {
+  __$$GetAllOrdersOfAUserImplCopyWithImpl(_$GetAllOrdersOfAUserImpl _value,
+      $Res Function(_$GetAllOrdersOfAUserImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -494,7 +494,7 @@ class __$$_GetAllOrdersOfAUserCopyWithImpl<$Res>
     Object? userId = null,
     Object? context = null,
   }) {
-    return _then(_$_GetAllOrdersOfAUser(
+    return _then(_$GetAllOrdersOfAUserImpl(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -509,8 +509,9 @@ class __$$_GetAllOrdersOfAUserCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetAllOrdersOfAUser implements _GetAllOrdersOfAUser {
-  const _$_GetAllOrdersOfAUser({required this.userId, required this.context});
+class _$GetAllOrdersOfAUserImpl implements _GetAllOrdersOfAUser {
+  const _$GetAllOrdersOfAUserImpl(
+      {required this.userId, required this.context});
 
   @override
   final String userId;
@@ -526,7 +527,7 @@ class _$_GetAllOrdersOfAUser implements _GetAllOrdersOfAUser {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetAllOrdersOfAUser &&
+            other is _$GetAllOrdersOfAUserImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.context, context) || other.context == context));
   }
@@ -537,8 +538,8 @@ class _$_GetAllOrdersOfAUser implements _GetAllOrdersOfAUser {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetAllOrdersOfAUserCopyWith<_$_GetAllOrdersOfAUser> get copyWith =>
-      __$$_GetAllOrdersOfAUserCopyWithImpl<_$_GetAllOrdersOfAUser>(
+  _$$GetAllOrdersOfAUserImplCopyWith<_$GetAllOrdersOfAUserImpl> get copyWith =>
+      __$$GetAllOrdersOfAUserImplCopyWithImpl<_$GetAllOrdersOfAUserImpl>(
           this, _$identity);
 
   @override
@@ -633,34 +634,34 @@ class _$_GetAllOrdersOfAUser implements _GetAllOrdersOfAUser {
 abstract class _GetAllOrdersOfAUser implements OrdersEvent {
   const factory _GetAllOrdersOfAUser(
       {required final String userId,
-      required final BuildContext context}) = _$_GetAllOrdersOfAUser;
+      required final BuildContext context}) = _$GetAllOrdersOfAUserImpl;
 
   String get userId;
   @override
   BuildContext get context;
   @override
   @JsonKey(ignore: true)
-  _$$_GetAllOrdersOfAUserCopyWith<_$_GetAllOrdersOfAUser> get copyWith =>
+  _$$GetAllOrdersOfAUserImplCopyWith<_$GetAllOrdersOfAUserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GetAOrderCopyWith<$Res>
+abstract class _$$GetAOrderImplCopyWith<$Res>
     implements $OrdersEventCopyWith<$Res> {
-  factory _$$_GetAOrderCopyWith(
-          _$_GetAOrder value, $Res Function(_$_GetAOrder) then) =
-      __$$_GetAOrderCopyWithImpl<$Res>;
+  factory _$$GetAOrderImplCopyWith(
+          _$GetAOrderImpl value, $Res Function(_$GetAOrderImpl) then) =
+      __$$GetAOrderImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({BuildContext context, String id});
 }
 
 /// @nodoc
-class __$$_GetAOrderCopyWithImpl<$Res>
-    extends _$OrdersEventCopyWithImpl<$Res, _$_GetAOrder>
-    implements _$$_GetAOrderCopyWith<$Res> {
-  __$$_GetAOrderCopyWithImpl(
-      _$_GetAOrder _value, $Res Function(_$_GetAOrder) _then)
+class __$$GetAOrderImplCopyWithImpl<$Res>
+    extends _$OrdersEventCopyWithImpl<$Res, _$GetAOrderImpl>
+    implements _$$GetAOrderImplCopyWith<$Res> {
+  __$$GetAOrderImplCopyWithImpl(
+      _$GetAOrderImpl _value, $Res Function(_$GetAOrderImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -669,7 +670,7 @@ class __$$_GetAOrderCopyWithImpl<$Res>
     Object? context = null,
     Object? id = null,
   }) {
-    return _then(_$_GetAOrder(
+    return _then(_$GetAOrderImpl(
       context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
@@ -684,8 +685,8 @@ class __$$_GetAOrderCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetAOrder implements _GetAOrder {
-  const _$_GetAOrder({required this.context, required this.id});
+class _$GetAOrderImpl implements _GetAOrder {
+  const _$GetAOrderImpl({required this.context, required this.id});
 
   @override
   final BuildContext context;
@@ -701,7 +702,7 @@ class _$_GetAOrder implements _GetAOrder {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetAOrder &&
+            other is _$GetAOrderImpl &&
             (identical(other.context, context) || other.context == context) &&
             (identical(other.id, id) || other.id == id));
   }
@@ -712,8 +713,8 @@ class _$_GetAOrder implements _GetAOrder {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetAOrderCopyWith<_$_GetAOrder> get copyWith =>
-      __$$_GetAOrderCopyWithImpl<_$_GetAOrder>(this, _$identity);
+  _$$GetAOrderImplCopyWith<_$GetAOrderImpl> get copyWith =>
+      __$$GetAOrderImplCopyWithImpl<_$GetAOrderImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -807,23 +808,23 @@ class _$_GetAOrder implements _GetAOrder {
 abstract class _GetAOrder implements OrdersEvent {
   const factory _GetAOrder(
       {required final BuildContext context,
-      required final String id}) = _$_GetAOrder;
+      required final String id}) = _$GetAOrderImpl;
 
   @override
   BuildContext get context;
   String get id;
   @override
   @JsonKey(ignore: true)
-  _$$_GetAOrderCopyWith<_$_GetAOrder> get copyWith =>
+  _$$GetAOrderImplCopyWith<_$GetAOrderImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateOrderStatusCopyWith<$Res>
+abstract class _$$UpdateOrderStatusImplCopyWith<$Res>
     implements $OrdersEventCopyWith<$Res> {
-  factory _$$_UpdateOrderStatusCopyWith(_$_UpdateOrderStatus value,
-          $Res Function(_$_UpdateOrderStatus) then) =
-      __$$_UpdateOrderStatusCopyWithImpl<$Res>;
+  factory _$$UpdateOrderStatusImplCopyWith(_$UpdateOrderStatusImpl value,
+          $Res Function(_$UpdateOrderStatusImpl) then) =
+      __$$UpdateOrderStatusImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -835,11 +836,11 @@ abstract class _$$_UpdateOrderStatusCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UpdateOrderStatusCopyWithImpl<$Res>
-    extends _$OrdersEventCopyWithImpl<$Res, _$_UpdateOrderStatus>
-    implements _$$_UpdateOrderStatusCopyWith<$Res> {
-  __$$_UpdateOrderStatusCopyWithImpl(
-      _$_UpdateOrderStatus _value, $Res Function(_$_UpdateOrderStatus) _then)
+class __$$UpdateOrderStatusImplCopyWithImpl<$Res>
+    extends _$OrdersEventCopyWithImpl<$Res, _$UpdateOrderStatusImpl>
+    implements _$$UpdateOrderStatusImplCopyWith<$Res> {
+  __$$UpdateOrderStatusImplCopyWithImpl(_$UpdateOrderStatusImpl _value,
+      $Res Function(_$UpdateOrderStatusImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -851,7 +852,7 @@ class __$$_UpdateOrderStatusCopyWithImpl<$Res>
     Object? date = null,
     Object? update = null,
   }) {
-    return _then(_$_UpdateOrderStatus(
+    return _then(_$UpdateOrderStatusImpl(
       context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
@@ -878,8 +879,8 @@ class __$$_UpdateOrderStatusCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateOrderStatus implements _UpdateOrderStatus {
-  const _$_UpdateOrderStatus(
+class _$UpdateOrderStatusImpl implements _UpdateOrderStatus {
+  const _$UpdateOrderStatusImpl(
       {required this.context,
       required this.id,
       required this.value,
@@ -906,7 +907,7 @@ class _$_UpdateOrderStatus implements _UpdateOrderStatus {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateOrderStatus &&
+            other is _$UpdateOrderStatusImpl &&
             (identical(other.context, context) || other.context == context) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.value, value) || other.value == value) &&
@@ -921,8 +922,8 @@ class _$_UpdateOrderStatus implements _UpdateOrderStatus {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateOrderStatusCopyWith<_$_UpdateOrderStatus> get copyWith =>
-      __$$_UpdateOrderStatusCopyWithImpl<_$_UpdateOrderStatus>(
+  _$$UpdateOrderStatusImplCopyWith<_$UpdateOrderStatusImpl> get copyWith =>
+      __$$UpdateOrderStatusImplCopyWithImpl<_$UpdateOrderStatusImpl>(
           this, _$identity);
 
   @override
@@ -1020,7 +1021,7 @@ abstract class _UpdateOrderStatus implements OrdersEvent {
       required final String id,
       required final String value,
       required final DateTime date,
-      required final String update}) = _$_UpdateOrderStatus;
+      required final String update}) = _$UpdateOrderStatusImpl;
 
   @override
   BuildContext get context;
@@ -1030,7 +1031,7 @@ abstract class _UpdateOrderStatus implements OrdersEvent {
   String get update;
   @override
   @JsonKey(ignore: true)
-  _$$_UpdateOrderStatusCopyWith<_$_UpdateOrderStatus> get copyWith =>
+  _$$UpdateOrderStatusImplCopyWith<_$UpdateOrderStatusImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1118,11 +1119,11 @@ class _$OrdersStateCopyWithImpl<$Res, $Val extends OrdersState>
 }
 
 /// @nodoc
-abstract class _$$_OrdersStateCopyWith<$Res>
+abstract class _$$OrdersStateImplCopyWith<$Res>
     implements $OrdersStateCopyWith<$Res> {
-  factory _$$_OrdersStateCopyWith(
-          _$_OrdersState value, $Res Function(_$_OrdersState) then) =
-      __$$_OrdersStateCopyWithImpl<$Res>;
+  factory _$$OrdersStateImplCopyWith(
+          _$OrdersStateImpl value, $Res Function(_$OrdersStateImpl) then) =
+      __$$OrdersStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1137,11 +1138,11 @@ abstract class _$$_OrdersStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrdersStateCopyWithImpl<$Res>
-    extends _$OrdersStateCopyWithImpl<$Res, _$_OrdersState>
-    implements _$$_OrdersStateCopyWith<$Res> {
-  __$$_OrdersStateCopyWithImpl(
-      _$_OrdersState _value, $Res Function(_$_OrdersState) _then)
+class __$$OrdersStateImplCopyWithImpl<$Res>
+    extends _$OrdersStateCopyWithImpl<$Res, _$OrdersStateImpl>
+    implements _$$OrdersStateImplCopyWith<$Res> {
+  __$$OrdersStateImplCopyWithImpl(
+      _$OrdersStateImpl _value, $Res Function(_$OrdersStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1153,7 +1154,7 @@ class __$$_OrdersStateCopyWithImpl<$Res>
     Object? orderOpt = null,
     Object? orderOptList = null,
   }) {
-    return _then(_$_OrdersState(
+    return _then(_$OrdersStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -1180,8 +1181,8 @@ class __$$_OrdersStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrdersState implements _OrdersState {
-  const _$_OrdersState(
+class _$OrdersStateImpl implements _OrdersState {
+  const _$OrdersStateImpl(
       {required this.isLoading,
       required this.orderModel,
       required final List<OrderModel> orderModelList,
@@ -1215,7 +1216,7 @@ class _$_OrdersState implements _OrdersState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrdersState &&
+            other is _$OrdersStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.orderModel, orderModel) ||
@@ -1240,8 +1241,8 @@ class _$_OrdersState implements _OrdersState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrdersStateCopyWith<_$_OrdersState> get copyWith =>
-      __$$_OrdersStateCopyWithImpl<_$_OrdersState>(this, _$identity);
+  _$$OrdersStateImplCopyWith<_$OrdersStateImpl> get copyWith =>
+      __$$OrdersStateImplCopyWithImpl<_$OrdersStateImpl>(this, _$identity);
 }
 
 abstract class _OrdersState implements OrdersState {
@@ -1251,7 +1252,7 @@ abstract class _OrdersState implements OrdersState {
       required final List<OrderModel> orderModelList,
       required final Option<Either<MainFailure, OrderModel>> orderOpt,
       required final Option<Either<MainFailure, List<OrderModel>>>
-          orderOptList}) = _$_OrdersState;
+          orderOptList}) = _$OrdersStateImpl;
 
   @override
   bool get isLoading;
@@ -1265,6 +1266,6 @@ abstract class _OrdersState implements OrdersState {
   Option<Either<MainFailure, List<OrderModel>>> get orderOptList;
   @override
   @JsonKey(ignore: true)
-  _$$_OrdersStateCopyWith<_$_OrdersState> get copyWith =>
+  _$$OrdersStateImplCopyWith<_$OrdersStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

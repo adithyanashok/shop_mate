@@ -89,29 +89,29 @@ class _$MainFailureCopyWithImpl<$Res, $Val extends MainFailure>
 }
 
 /// @nodoc
-abstract class _$$_ClientFailureCopyWith<$Res> {
-  factory _$$_ClientFailureCopyWith(
-          _$_ClientFailure value, $Res Function(_$_ClientFailure) then) =
-      __$$_ClientFailureCopyWithImpl<$Res>;
+abstract class _$$ClientFailureImplCopyWith<$Res> {
+  factory _$$ClientFailureImplCopyWith(
+          _$ClientFailureImpl value, $Res Function(_$ClientFailureImpl) then) =
+      __$$ClientFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ClientFailureCopyWithImpl<$Res>
-    extends _$MainFailureCopyWithImpl<$Res, _$_ClientFailure>
-    implements _$$_ClientFailureCopyWith<$Res> {
-  __$$_ClientFailureCopyWithImpl(
-      _$_ClientFailure _value, $Res Function(_$_ClientFailure) _then)
+class __$$ClientFailureImplCopyWithImpl<$Res>
+    extends _$MainFailureCopyWithImpl<$Res, _$ClientFailureImpl>
+    implements _$$ClientFailureImplCopyWith<$Res> {
+  __$$ClientFailureImplCopyWithImpl(
+      _$ClientFailureImpl _value, $Res Function(_$ClientFailureImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_ClientFailure implements _ClientFailure {
-  const _$_ClientFailure({final String? $type})
+class _$ClientFailureImpl implements _ClientFailure {
+  const _$ClientFailureImpl({final String? $type})
       : $type = $type ?? 'clientFailure';
 
-  factory _$_ClientFailure.fromJson(Map<String, dynamic> json) =>
-      _$$_ClientFailureFromJson(json);
+  factory _$ClientFailureImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ClientFailureImplFromJson(json);
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -124,7 +124,7 @@ class _$_ClientFailure implements _ClientFailure {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ClientFailure);
+        (other.runtimeType == runtimeType && other is _$ClientFailureImpl);
   }
 
   @JsonKey(ignore: true)
@@ -195,43 +195,43 @@ class _$_ClientFailure implements _ClientFailure {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ClientFailureToJson(
+    return _$$ClientFailureImplToJson(
       this,
     );
   }
 }
 
 abstract class _ClientFailure implements MainFailure {
-  const factory _ClientFailure() = _$_ClientFailure;
+  const factory _ClientFailure() = _$ClientFailureImpl;
 
   factory _ClientFailure.fromJson(Map<String, dynamic> json) =
-      _$_ClientFailure.fromJson;
+      _$ClientFailureImpl.fromJson;
 }
 
 /// @nodoc
-abstract class _$$_ServerFailureCopyWith<$Res> {
-  factory _$$_ServerFailureCopyWith(
-          _$_ServerFailure value, $Res Function(_$_ServerFailure) then) =
-      __$$_ServerFailureCopyWithImpl<$Res>;
+abstract class _$$ServerFailureImplCopyWith<$Res> {
+  factory _$$ServerFailureImplCopyWith(
+          _$ServerFailureImpl value, $Res Function(_$ServerFailureImpl) then) =
+      __$$ServerFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ServerFailureCopyWithImpl<$Res>
-    extends _$MainFailureCopyWithImpl<$Res, _$_ServerFailure>
-    implements _$$_ServerFailureCopyWith<$Res> {
-  __$$_ServerFailureCopyWithImpl(
-      _$_ServerFailure _value, $Res Function(_$_ServerFailure) _then)
+class __$$ServerFailureImplCopyWithImpl<$Res>
+    extends _$MainFailureCopyWithImpl<$Res, _$ServerFailureImpl>
+    implements _$$ServerFailureImplCopyWith<$Res> {
+  __$$ServerFailureImplCopyWithImpl(
+      _$ServerFailureImpl _value, $Res Function(_$ServerFailureImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_ServerFailure implements _ServerFailure {
-  const _$_ServerFailure({final String? $type})
+class _$ServerFailureImpl implements _ServerFailure {
+  const _$ServerFailureImpl({final String? $type})
       : $type = $type ?? 'serverFailure';
 
-  factory _$_ServerFailure.fromJson(Map<String, dynamic> json) =>
-      _$$_ServerFailureFromJson(json);
+  factory _$ServerFailureImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ServerFailureImplFromJson(json);
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -244,7 +244,7 @@ class _$_ServerFailure implements _ServerFailure {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ServerFailure);
+        (other.runtimeType == runtimeType && other is _$ServerFailureImpl);
   }
 
   @JsonKey(ignore: true)
@@ -315,15 +315,15 @@ class _$_ServerFailure implements _ServerFailure {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ServerFailureToJson(
+    return _$$ServerFailureImplToJson(
       this,
     );
   }
 }
 
 abstract class _ServerFailure implements MainFailure {
-  const factory _ServerFailure() = _$_ServerFailure;
+  const factory _ServerFailure() = _$ServerFailureImpl;
 
   factory _ServerFailure.fromJson(Map<String, dynamic> json) =
-      _$_ServerFailure.fromJson;
+      _$ServerFailureImpl.fromJson;
 }

@@ -154,11 +154,11 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
 }
 
 /// @nodoc
-abstract class _$$_OrderModelCopyWith<$Res>
+abstract class _$$OrderModelImplCopyWith<$Res>
     implements $OrderModelCopyWith<$Res> {
-  factory _$$_OrderModelCopyWith(
-          _$_OrderModel value, $Res Function(_$_OrderModel) then) =
-      __$$_OrderModelCopyWithImpl<$Res>;
+  factory _$$OrderModelImplCopyWith(
+          _$OrderModelImpl value, $Res Function(_$OrderModelImpl) then) =
+      __$$OrderModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -179,11 +179,11 @@ abstract class _$$_OrderModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderModelCopyWithImpl<$Res>
-    extends _$OrderModelCopyWithImpl<$Res, _$_OrderModel>
-    implements _$$_OrderModelCopyWith<$Res> {
-  __$$_OrderModelCopyWithImpl(
-      _$_OrderModel _value, $Res Function(_$_OrderModel) _then)
+class __$$OrderModelImplCopyWithImpl<$Res>
+    extends _$OrderModelCopyWithImpl<$Res, _$OrderModelImpl>
+    implements _$$OrderModelImplCopyWith<$Res> {
+  __$$OrderModelImplCopyWithImpl(
+      _$OrderModelImpl _value, $Res Function(_$OrderModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -204,7 +204,7 @@ class __$$_OrderModelCopyWithImpl<$Res>
     Object? shippingAddress = null,
     Object? status = null,
   }) {
-    return _then(_$_OrderModel(
+    return _then(_$OrderModelImpl(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -267,8 +267,8 @@ class __$$_OrderModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OrderModel implements _OrderModel {
-  const _$_OrderModel(
+class _$OrderModelImpl implements _OrderModel {
+  const _$OrderModelImpl(
       {required this.userId,
       this.username,
       this.email,
@@ -285,8 +285,8 @@ class _$_OrderModel implements _OrderModel {
       required this.status})
       : _products = products;
 
-  factory _$_OrderModel.fromJson(Map<String, dynamic> json) =>
-      _$$_OrderModelFromJson(json);
+  factory _$OrderModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OrderModelImplFromJson(json);
 
   @override
   final String userId;
@@ -332,7 +332,7 @@ class _$_OrderModel implements _OrderModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderModel &&
+            other is _$OrderModelImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.username, username) ||
                 other.username == username) &&
@@ -380,12 +380,12 @@ class _$_OrderModel implements _OrderModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderModelCopyWith<_$_OrderModel> get copyWith =>
-      __$$_OrderModelCopyWithImpl<_$_OrderModel>(this, _$identity);
+  _$$OrderModelImplCopyWith<_$OrderModelImpl> get copyWith =>
+      __$$OrderModelImplCopyWithImpl<_$OrderModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OrderModelToJson(
+    return _$$OrderModelImplToJson(
       this,
     );
   }
@@ -406,10 +406,10 @@ abstract class _OrderModel implements OrderModel {
       final DateTime? orderShippedDate,
       final DateTime? orderDeliveredDate,
       required final String shippingAddress,
-      required final String status}) = _$_OrderModel;
+      required final String status}) = _$OrderModelImpl;
 
   factory _OrderModel.fromJson(Map<String, dynamic> json) =
-      _$_OrderModel.fromJson;
+      _$OrderModelImpl.fromJson;
 
   @override
   String get userId;
@@ -441,6 +441,6 @@ abstract class _OrderModel implements OrderModel {
   String get status;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderModelCopyWith<_$_OrderModel> get copyWith =>
+  _$$OrderModelImplCopyWith<_$OrderModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

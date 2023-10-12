@@ -105,11 +105,11 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
 }
 
 /// @nodoc
-abstract class _$$_ProductModelCopyWith<$Res>
+abstract class _$$ProductModelImplCopyWith<$Res>
     implements $ProductModelCopyWith<$Res> {
-  factory _$$_ProductModelCopyWith(
-          _$_ProductModel value, $Res Function(_$_ProductModel) then) =
-      __$$_ProductModelCopyWithImpl<$Res>;
+  factory _$$ProductModelImplCopyWith(
+          _$ProductModelImpl value, $Res Function(_$ProductModelImpl) then) =
+      __$$ProductModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -123,11 +123,11 @@ abstract class _$$_ProductModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProductModelCopyWithImpl<$Res>
-    extends _$ProductModelCopyWithImpl<$Res, _$_ProductModel>
-    implements _$$_ProductModelCopyWith<$Res> {
-  __$$_ProductModelCopyWithImpl(
-      _$_ProductModel _value, $Res Function(_$_ProductModel) _then)
+class __$$ProductModelImplCopyWithImpl<$Res>
+    extends _$ProductModelCopyWithImpl<$Res, _$ProductModelImpl>
+    implements _$$ProductModelImplCopyWith<$Res> {
+  __$$ProductModelImplCopyWithImpl(
+      _$ProductModelImpl _value, $Res Function(_$ProductModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -141,7 +141,7 @@ class __$$_ProductModelCopyWithImpl<$Res>
     Object? image = freezed,
     Object? id = freezed,
   }) {
-    return _then(_$_ProductModel(
+    return _then(_$ProductModelImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -176,8 +176,8 @@ class __$$_ProductModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProductModel implements _ProductModel {
-  const _$_ProductModel(
+class _$ProductModelImpl implements _ProductModel {
+  const _$ProductModelImpl(
       {required this.name,
       required this.description,
       required this.category,
@@ -187,8 +187,8 @@ class _$_ProductModel implements _ProductModel {
       this.id})
       : _image = image;
 
-  factory _$_ProductModel.fromJson(Map<String, dynamic> json) =>
-      _$$_ProductModelFromJson(json);
+  factory _$ProductModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProductModelImplFromJson(json);
 
   @override
   final String name;
@@ -222,7 +222,7 @@ class _$_ProductModel implements _ProductModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProductModel &&
+            other is _$ProductModelImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -243,12 +243,12 @@ class _$_ProductModel implements _ProductModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductModelCopyWith<_$_ProductModel> get copyWith =>
-      __$$_ProductModelCopyWithImpl<_$_ProductModel>(this, _$identity);
+  _$$ProductModelImplCopyWith<_$ProductModelImpl> get copyWith =>
+      __$$ProductModelImplCopyWithImpl<_$ProductModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProductModelToJson(
+    return _$$ProductModelImplToJson(
       this,
     );
   }
@@ -262,10 +262,10 @@ abstract class _ProductModel implements ProductModel {
       required final double amount,
       required final int quantity,
       final List<String>? image,
-      final String? id}) = _$_ProductModel;
+      final String? id}) = _$ProductModelImpl;
 
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
-      _$_ProductModel.fromJson;
+      _$ProductModelImpl.fromJson;
 
   @override
   String get name;
@@ -283,6 +283,6 @@ abstract class _ProductModel implements ProductModel {
   String? get id;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductModelCopyWith<_$_ProductModel> get copyWith =>
+  _$$ProductModelImplCopyWith<_$ProductModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

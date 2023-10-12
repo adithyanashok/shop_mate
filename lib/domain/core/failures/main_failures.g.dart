@@ -6,22 +6,22 @@ part of 'main_failures.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ClientFailure _$$_ClientFailureFromJson(Map<String, dynamic> json) =>
-    _$_ClientFailure(
+_$ClientFailureImpl _$$ClientFailureImplFromJson(Map<String, dynamic> json) =>
+    _$ClientFailureImpl(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$_ClientFailureToJson(_$_ClientFailure instance) =>
+Map<String, dynamic> _$$ClientFailureImplToJson(_$ClientFailureImpl instance) =>
     <String, dynamic>{
       'runtimeType': instance.$type,
     };
 
-_$_ServerFailure _$$_ServerFailureFromJson(Map<String, dynamic> json) =>
-    _$_ServerFailure(
+_$ServerFailureImpl _$$ServerFailureImplFromJson(Map<String, dynamic> json) =>
+    _$ServerFailureImpl(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$_ServerFailureToJson(_$_ServerFailure instance) =>
+Map<String, dynamic> _$$ServerFailureImplToJson(_$ServerFailureImpl instance) =>
     <String, dynamic>{
       'runtimeType': instance.$type,
     };

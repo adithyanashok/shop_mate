@@ -1,10 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shop_mate/domain/core/collections/collections.dart';
 import 'package:shop_mate/domain/core/failures/main_failures.dart';
-import 'package:shop_mate/domain/core/role_based_login/lole_based_login.dart';
+import 'package:shop_mate/domain/core/role_based_login/role_based_login.dart';
 import 'package:shop_mate/domain/login/i_login_facade.dart';
+import 'package:shop_mate/domain/notifications/notifications.dart';
 import 'package:shop_mate/presentation/main_page.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
 
@@ -14,9 +17,11 @@ class LoginRepositary implements ILoginFacade {
   Future<Either<MainFailure, User>> loginMethod(
       email, password, context) async {
     try {
+      FirebaseNotificationService firebaseNotificationService =
+          FirebaseNotificationService();
       // Initialize Firebase Authentication
       final FirebaseAuth auth = FirebaseAuth.instance;
-
+      final FirebaseFirestore db = FirebaseFirestore.instance;
       // Attempt to sign in with the provided email and password
       final credential = await auth.signInWithEmailAndPassword(
         email: email,
@@ -37,6 +42,10 @@ class LoginRepositary implements ILoginFacade {
         // Show a snackbar indicating that the user needs to verify their email
         snackBar(context: context, msg: "You need to verify your email");
       }
+      final fcmToken = await firebaseNotificationService.getDeviceToken();
+      await db.collection(Collection.collectionUser).doc(user.uid).update({
+        'fcmToken': fcmToken,
+      });
 
       // Navigate to the MainPage on successful login
       route(context);

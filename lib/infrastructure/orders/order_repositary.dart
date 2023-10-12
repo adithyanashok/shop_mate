@@ -7,8 +7,10 @@ import 'package:injectable/injectable.dart';
 import 'package:shop_mate/domain/core/collections/collections.dart';
 import 'package:shop_mate/domain/core/failures/main_failures.dart';
 import 'package:shop_mate/domain/earnings/models/earnings_model.dart';
+import 'package:shop_mate/domain/notifications/notifications.dart';
 import 'package:shop_mate/domain/order/i_order_facade.dart';
 import 'package:shop_mate/domain/order/model/order_model.dart';
+import 'package:shop_mate/infrastructure/notification/notification_repositary.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/order_successful_screen/order_successful_screen.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
@@ -42,6 +44,10 @@ class OrderRepositary implements IOrderFacade {
       final orderMap = docSnapshot.data();
 
       final order = OrderModel.fromJson(orderMap!);
+      await NotificationRepositary().sendNotificationToAdmin(
+        title: "New Order",
+        message: "You have a new order let's checkout!",
+      );
 
       await db
           .collection(Collection.collectionCart)
