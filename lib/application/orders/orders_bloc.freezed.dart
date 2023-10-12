@@ -26,7 +26,7 @@ mixin _$OrdersEvent {
         getAllOrdersOfAUser,
     required TResult Function(BuildContext context, String id) getAOrder,
     required TResult Function(BuildContext context, String id, String value,
-            DateTime date, String update)
+            DateTime date, String update, String userId)
         updateOrderStatus,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,7 +37,7 @@ mixin _$OrdersEvent {
     TResult? Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult? Function(BuildContext context, String id)? getAOrder,
     TResult? Function(BuildContext context, String id, String value,
-            DateTime date, String update)?
+            DateTime date, String update, String userId)?
         updateOrderStatus,
   }) =>
       throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ mixin _$OrdersEvent {
     TResult Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult Function(BuildContext context, String id)? getAOrder,
     TResult Function(BuildContext context, String id, String value,
-            DateTime date, String update)?
+            DateTime date, String update, String userId)?
         updateOrderStatus,
     required TResult orElse(),
   }) =>
@@ -212,7 +212,7 @@ class _$PlaceOrderImpl implements _PlaceOrder {
         getAllOrdersOfAUser,
     required TResult Function(BuildContext context, String id) getAOrder,
     required TResult Function(BuildContext context, String id, String value,
-            DateTime date, String update)
+            DateTime date, String update, String userId)
         updateOrderStatus,
   }) {
     return placeOrder(orderModel, context);
@@ -226,7 +226,7 @@ class _$PlaceOrderImpl implements _PlaceOrder {
     TResult? Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult? Function(BuildContext context, String id)? getAOrder,
     TResult? Function(BuildContext context, String id, String value,
-            DateTime date, String update)?
+            DateTime date, String update, String userId)?
         updateOrderStatus,
   }) {
     return placeOrder?.call(orderModel, context);
@@ -240,7 +240,7 @@ class _$PlaceOrderImpl implements _PlaceOrder {
     TResult Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult Function(BuildContext context, String id)? getAOrder,
     TResult Function(BuildContext context, String id, String value,
-            DateTime date, String update)?
+            DateTime date, String update, String userId)?
         updateOrderStatus,
     required TResult orElse(),
   }) {
@@ -378,7 +378,7 @@ class _$GetAllOrdersImpl implements _GetAllOrders {
         getAllOrdersOfAUser,
     required TResult Function(BuildContext context, String id) getAOrder,
     required TResult Function(BuildContext context, String id, String value,
-            DateTime date, String update)
+            DateTime date, String update, String userId)
         updateOrderStatus,
   }) {
     return getAllOrders(context);
@@ -392,7 +392,7 @@ class _$GetAllOrdersImpl implements _GetAllOrders {
     TResult? Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult? Function(BuildContext context, String id)? getAOrder,
     TResult? Function(BuildContext context, String id, String value,
-            DateTime date, String update)?
+            DateTime date, String update, String userId)?
         updateOrderStatus,
   }) {
     return getAllOrders?.call(context);
@@ -406,7 +406,7 @@ class _$GetAllOrdersImpl implements _GetAllOrders {
     TResult Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult Function(BuildContext context, String id)? getAOrder,
     TResult Function(BuildContext context, String id, String value,
-            DateTime date, String update)?
+            DateTime date, String update, String userId)?
         updateOrderStatus,
     required TResult orElse(),
   }) {
@@ -552,7 +552,7 @@ class _$GetAllOrdersOfAUserImpl implements _GetAllOrdersOfAUser {
         getAllOrdersOfAUser,
     required TResult Function(BuildContext context, String id) getAOrder,
     required TResult Function(BuildContext context, String id, String value,
-            DateTime date, String update)
+            DateTime date, String update, String userId)
         updateOrderStatus,
   }) {
     return getAllOrdersOfAUser(userId, context);
@@ -566,7 +566,7 @@ class _$GetAllOrdersOfAUserImpl implements _GetAllOrdersOfAUser {
     TResult? Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult? Function(BuildContext context, String id)? getAOrder,
     TResult? Function(BuildContext context, String id, String value,
-            DateTime date, String update)?
+            DateTime date, String update, String userId)?
         updateOrderStatus,
   }) {
     return getAllOrdersOfAUser?.call(userId, context);
@@ -580,7 +580,7 @@ class _$GetAllOrdersOfAUserImpl implements _GetAllOrdersOfAUser {
     TResult Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult Function(BuildContext context, String id)? getAOrder,
     TResult Function(BuildContext context, String id, String value,
-            DateTime date, String update)?
+            DateTime date, String update, String userId)?
         updateOrderStatus,
     required TResult orElse(),
   }) {
@@ -726,7 +726,7 @@ class _$GetAOrderImpl implements _GetAOrder {
         getAllOrdersOfAUser,
     required TResult Function(BuildContext context, String id) getAOrder,
     required TResult Function(BuildContext context, String id, String value,
-            DateTime date, String update)
+            DateTime date, String update, String userId)
         updateOrderStatus,
   }) {
     return getAOrder(context, id);
@@ -740,7 +740,7 @@ class _$GetAOrderImpl implements _GetAOrder {
     TResult? Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult? Function(BuildContext context, String id)? getAOrder,
     TResult? Function(BuildContext context, String id, String value,
-            DateTime date, String update)?
+            DateTime date, String update, String userId)?
         updateOrderStatus,
   }) {
     return getAOrder?.call(context, id);
@@ -754,7 +754,7 @@ class _$GetAOrderImpl implements _GetAOrder {
     TResult Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult Function(BuildContext context, String id)? getAOrder,
     TResult Function(BuildContext context, String id, String value,
-            DateTime date, String update)?
+            DateTime date, String update, String userId)?
         updateOrderStatus,
     required TResult orElse(),
   }) {
@@ -832,7 +832,8 @@ abstract class _$$UpdateOrderStatusImplCopyWith<$Res>
       String id,
       String value,
       DateTime date,
-      String update});
+      String update,
+      String userId});
 }
 
 /// @nodoc
@@ -851,6 +852,7 @@ class __$$UpdateOrderStatusImplCopyWithImpl<$Res>
     Object? value = null,
     Object? date = null,
     Object? update = null,
+    Object? userId = null,
   }) {
     return _then(_$UpdateOrderStatusImpl(
       context: null == context
@@ -873,6 +875,10 @@ class __$$UpdateOrderStatusImplCopyWithImpl<$Res>
           ? _value.update
           : update // ignore: cast_nullable_to_non_nullable
               as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -885,7 +891,8 @@ class _$UpdateOrderStatusImpl implements _UpdateOrderStatus {
       required this.id,
       required this.value,
       required this.date,
-      required this.update});
+      required this.update,
+      required this.userId});
 
   @override
   final BuildContext context;
@@ -897,10 +904,12 @@ class _$UpdateOrderStatusImpl implements _UpdateOrderStatus {
   final DateTime date;
   @override
   final String update;
+  @override
+  final String userId;
 
   @override
   String toString() {
-    return 'OrdersEvent.updateOrderStatus(context: $context, id: $id, value: $value, date: $date, update: $update)';
+    return 'OrdersEvent.updateOrderStatus(context: $context, id: $id, value: $value, date: $date, update: $update, userId: $userId)';
   }
 
   @override
@@ -912,12 +921,13 @@ class _$UpdateOrderStatusImpl implements _UpdateOrderStatus {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.value, value) || other.value == value) &&
             (identical(other.date, date) || other.date == date) &&
-            (identical(other.update, update) || other.update == update));
+            (identical(other.update, update) || other.update == update) &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, context, id, value, date, update);
+      Object.hash(runtimeType, context, id, value, date, update, userId);
 
   @JsonKey(ignore: true)
   @override
@@ -936,10 +946,10 @@ class _$UpdateOrderStatusImpl implements _UpdateOrderStatus {
         getAllOrdersOfAUser,
     required TResult Function(BuildContext context, String id) getAOrder,
     required TResult Function(BuildContext context, String id, String value,
-            DateTime date, String update)
+            DateTime date, String update, String userId)
         updateOrderStatus,
   }) {
-    return updateOrderStatus(context, id, value, date, update);
+    return updateOrderStatus(context, id, value, date, update, userId);
   }
 
   @override
@@ -950,10 +960,10 @@ class _$UpdateOrderStatusImpl implements _UpdateOrderStatus {
     TResult? Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult? Function(BuildContext context, String id)? getAOrder,
     TResult? Function(BuildContext context, String id, String value,
-            DateTime date, String update)?
+            DateTime date, String update, String userId)?
         updateOrderStatus,
   }) {
-    return updateOrderStatus?.call(context, id, value, date, update);
+    return updateOrderStatus?.call(context, id, value, date, update, userId);
   }
 
   @override
@@ -964,12 +974,12 @@ class _$UpdateOrderStatusImpl implements _UpdateOrderStatus {
     TResult Function(String userId, BuildContext context)? getAllOrdersOfAUser,
     TResult Function(BuildContext context, String id)? getAOrder,
     TResult Function(BuildContext context, String id, String value,
-            DateTime date, String update)?
+            DateTime date, String update, String userId)?
         updateOrderStatus,
     required TResult orElse(),
   }) {
     if (updateOrderStatus != null) {
-      return updateOrderStatus(context, id, value, date, update);
+      return updateOrderStatus(context, id, value, date, update, userId);
     }
     return orElse();
   }
@@ -1021,7 +1031,8 @@ abstract class _UpdateOrderStatus implements OrdersEvent {
       required final String id,
       required final String value,
       required final DateTime date,
-      required final String update}) = _$UpdateOrderStatusImpl;
+      required final String update,
+      required final String userId}) = _$UpdateOrderStatusImpl;
 
   @override
   BuildContext get context;
@@ -1029,6 +1040,7 @@ abstract class _UpdateOrderStatus implements OrdersEvent {
   String get value;
   DateTime get date;
   String get update;
+  String get userId;
   @override
   @JsonKey(ignore: true)
   _$$UpdateOrderStatusImplCopyWith<_$UpdateOrderStatusImpl> get copyWith =>

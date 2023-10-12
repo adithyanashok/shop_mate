@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
@@ -11,6 +12,7 @@ class NotificationRepositary {
   Future<void> sendPushMessage(
       {String? body, String? title, required String fcmToken}) async {
     try {
+      log(fcmToken.toString());
       await http.post(Uri.parse('https://fcm.googleapis.com/fcm/send'),
           headers: <String, String>{
             'content-type': 'application/json',

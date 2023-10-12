@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
+import 'package:shop_mate/domain/notifications/notifications.dart';
 import 'package:shop_mate/presentation/admin/bar/bar.dart';
 import 'package:shop_mate/presentation/admin/home_screen.dart';
 import 'package:shop_mate/presentation/admin/order_screen/orders_screen.dart';
@@ -9,8 +12,26 @@ import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/profile/profile_screen.dart';
 import 'package:shop_mate/presentation/users/users.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  FirebaseNotificationService notifications = FirebaseNotificationService();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    notifications.getNotificationPermission();
+    notifications.firebaseInit(context);
+    notifications.getDeviceToken().then((value) {
+      log(value.toString());
+    });
+    notifications.onTokenRefresh();
+  }
 
   @override
   Widget build(BuildContext context) {

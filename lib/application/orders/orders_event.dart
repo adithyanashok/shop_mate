@@ -18,5 +18,6 @@ class OrdersEvent with _$OrdersEvent {
     required String value,
     required DateTime date,
     required String update,
+    required String userId,
   }) = _UpdateOrderStatus;
 }

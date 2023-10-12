@@ -149,14 +149,29 @@ class OrderRepositary implements IOrderFacade {
     String value,
     DateTime date,
     String update,
+    String userId,
   ) async {
     try {
       final db = FirebaseFirestore.instance;
-      db.collection(Collection.collectionOrder).doc(id).update(
+      await db.collection(Collection.collectionOrder).doc(id).update(
         {
           "status": value,
         },
       );
+      await db
+          .collection(Collection.collectionUser)
+          .doc(userId)
+          .get()
+          .then((user) {
+        var userData = user.data();
+        print("Your order is $value");
+        NotificationRepositary().sendPushMessage(
+          title: "Status Changed",
+          body: "Your order is $value",
+          fcmToken: userData!['fcmToken'],
+        );
+      });
+
       if (update == 'shipped') {
         db.collection(Collection.collectionOrder).doc(id).update(
           {

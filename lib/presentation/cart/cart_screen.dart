@@ -11,6 +11,7 @@ import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/widgets/button_widgets.dart';
 import 'package:shop_mate/presentation/widgets/loader_widgets.dart';
+import 'package:shop_mate/presentation/widgets/loading_widget.dart';
 import 'package:shop_mate/presentation/widgets/row_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
@@ -32,22 +33,26 @@ class CartScreen extends StatelessWidget {
       ),
       body: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
-          return SafeArea(
-            child: state.cart.products.isEmpty
-                ? Center(
-                    child: Image.asset('assets/images/cart-is-empty.png'),
-                  )
-                : Column(
-                    children: [
-                      CartProductSection(),
-                      const Divider(
-                        color: AppColor.greenColor,
-                        thickness: 3,
-                      ),
-                      const CartAmountSection()
-                    ],
-                  ),
-          );
+          return state.isLoading
+              ? const Center(
+                  child: BuildLoadingWidget(),
+                )
+              : SafeArea(
+                  child: state.cart.products.isEmpty
+                      ? Center(
+                          child: Image.asset('assets/images/cart-is-empty.png'),
+                        )
+                      : Column(
+                          children: [
+                            CartProductSection(),
+                            const Divider(
+                              color: AppColor.greenColor,
+                              thickness: 3,
+                            ),
+                            const CartAmountSection()
+                          ],
+                        ),
+                );
         },
       ),
     );

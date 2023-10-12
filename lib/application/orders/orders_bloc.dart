@@ -111,8 +111,8 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     // update  order status
     on<_UpdateOrderStatus>((event, emit) async {
       emit(state.copyWith(isLoading: true));
-      final orderOpt = await iOrderFacade.updateOrderStatus(
-          event.context, event.id, event.value, event.date, event.update);
+      final orderOpt = await iOrderFacade.updateOrderStatus(event.context,
+          event.id, event.value, event.date, event.update, event.userId);
       emit(
         orderOpt.fold(
           (failure) => state.copyWith(

@@ -179,8 +179,12 @@ class OrderScreen extends StatelessWidget {
                                 value: value.toString(),
                                 date: DateTime.now(),
                                 update: value!,
+                                userId: state.orderModel.userId,
                               ),
                             );
+                            BlocProvider.of<OrdersBloc>(context).add(
+                                OrdersEvent.getAOrder(
+                                    context: context, id: id.toString()));
                           },
                         ),
                       )
