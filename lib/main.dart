@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:shop_mate/application/address/address_bloc.dart';
 import 'package:shop_mate/application/auth/auth_bloc.dart';
 import 'package:shop_mate/application/auth/auth_state.dart';
@@ -16,6 +17,7 @@ import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/application/rating/rating_bloc.dart';
 import 'package:shop_mate/application/signup/signup_bloc.dart';
 import 'package:shop_mate/application/user/user_bloc.dart';
+import 'package:shop_mate/domain/core/api/api.dart';
 import 'package:shop_mate/domain/core/di/injectable.dart';
 import 'package:shop_mate/presentation/login/login_screen.dart';
 import 'package:shop_mate/presentation/main_page.dart';
@@ -25,6 +27,8 @@ import 'package:shop_mate/presentation/splash_screen/splash_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureInjection();
+  // Set Stripe publishable key
+  Stripe.publishableKey = Api.stripePk;
   await ScreenUtil.ensureScreenSize();
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(_firebaseBackgroundNotificationHandler);

@@ -10,7 +10,9 @@ import 'package:shop_mate/application/auth/auth_bloc.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/application/orders/orders_bloc.dart';
 import 'package:shop_mate/domain/address/model/address_model.dart';
+import 'package:shop_mate/domain/core/api/api.dart';
 import 'package:shop_mate/domain/order/model/order_model.dart';
+import 'package:shop_mate/domain/payments/payments.dart';
 import 'package:shop_mate/presentation/checkout/checkout_screens_widgets/checkout_screen_widgets.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
@@ -172,10 +174,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          BuildAssetCard(
-                            asset: SvgPicture.asset(
-                              'assets/images/stripe-v2.svg',
-                              width: 55,
+                          GestureDetector(
+                            onTap: () {
+                              Payments().makePayment(
+                                  context,
+                                  state.cart.totalPrice.round().toString(),
+                                  userId);
+                            },
+                            child: BuildAssetCard(
+                              asset: SvgPicture.asset(
+                                'assets/images/stripe-v2.svg',
+                                width: 55,
+                              ),
                             ),
                           ),
                           BuildAssetCard(

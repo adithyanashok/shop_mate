@@ -70,8 +70,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<_GetLaptops>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
-        final productOpt =
-            await iProductFacade.getLaptops(event.category, event.context);
+        final productOpt = await iProductFacade.getProductsByCategory(
+            event.category, event.context);
         emit(
           productOpt.fold(
             (failure) => state.copyWith(
@@ -82,6 +82,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             (success) => state.copyWith(
               isLoading: false,
               laptopListOpt: success,
+              productList: Some(
+                Right(success),
+              ),
             ),
           ),
         );
@@ -90,8 +93,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<_GetEarphones>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
-        final productOpt =
-            await iProductFacade.getEarphones(event.category, event.context);
+        final productOpt = await iProductFacade.getProductsByCategory(
+            event.category, event.context);
         emit(
           productOpt.fold(
             (failure) => state.copyWith(
@@ -102,6 +105,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             (success) => state.copyWith(
               isLoading: false,
               earphoneListOpt: success,
+              productList: Some(
+                Right(success),
+              ),
             ),
           ),
         );
@@ -111,8 +117,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<_GetMobiles>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
-        final productOpt =
-            await iProductFacade.getMobiles(event.category, event.context);
+        final productOpt = await iProductFacade.getProductsByCategory(
+            event.category, event.context);
         emit(
           productOpt.fold(
             (failure) => state.copyWith(

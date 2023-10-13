@@ -6,16 +6,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shop_mate/application/pageview/pageview_bloc.dart';
+import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
-import 'package:shop_mate/presentation/home/earphone_section.dart';
-import 'package:shop_mate/presentation/home/laptop_section.dart';
-import 'package:shop_mate/presentation/home/mobile_section.dart';
+
+import 'package:shop_mate/presentation/home/productlist_section.dart';
 import 'package:shop_mate/presentation/signup/signup_screen.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
 import 'package:shop_mate/presentation/widgets/app_bar_widget.dart';
 import 'package:shop_mate/presentation/widgets/banner_widget.dart';
-import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -67,6 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<ProductBloc>(context)
+        .add(ProductEvent.getMobiles(category: 'mobile', context: context));
+    BlocProvider.of<ProductBloc>(context)
+        .add(ProductEvent.getLaptops(category: 'laptop', context: context));
+    BlocProvider.of<ProductBloc>(context)
+        .add(ProductEvent.getEarphones(category: 'earphone', context: context));
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(0.1.sh),
@@ -149,27 +153,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: 50,
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.all(20.0),
-                child: BuildHeadingText(
-                  text: "Laptops",
-                ),
+              BlocBuilder<ProductBloc, ProductState>(
+                builder: (context, state) {
+                  return ProductList(
+                    state: state,
+                    text: "Laptops",
+                    productList: state.laptopListOpt,
+                  );
+                },
               ),
-              const LaptopSection(),
-              const Padding(
-                padding: EdgeInsets.all(20.0),
-                child: BuildHeadingText(
-                  text: "Earphones",
-                ),
+              BlocBuilder<ProductBloc, ProductState>(
+                builder: (context, state) {
+                  return ProductList(
+                    state: state,
+                    text: "Earphones",
+                    productList: state.earphoneListOpt,
+                  );
+                },
               ),
-              const EarphonesSection(),
-              const Padding(
-                padding: EdgeInsets.all(20.0),
-                child: BuildHeadingText(
-                  text: "Mobiles",
-                ),
+              BlocBuilder<ProductBloc, ProductState>(
+                builder: (context, state) {
+                  return state.mobileListOpt.isEmpty
+                      ? const SizedBox()
+                      : ProductList(
+                          state: state,
+                          text: "Mobiles",
+                          productList: state.laptopListOpt,
+                        );
+                },
               ),
-              const MobileSection(),
             ],
           ),
         ),

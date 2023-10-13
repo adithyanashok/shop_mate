@@ -19,54 +19,58 @@ class BuildBannerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 0.2.sh,
-      width: 0.1.sw,
-      color: backgroundColor,
-      child: Stack(
-        children: [
-          Positioned(
-            top: 10,
-            left: 30,
-            child: Text(
-              text,
-              style: TextStyle(
-                fontSize: 22.sp,
-                fontWeight: FontWeight.w400,
-                color: textColor,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              top: 15,
+              left: 30,
+              child: Text(
+                text,
+                style: TextStyle(
+                  fontSize: 22.sp,
+                  fontWeight: FontWeight.w400,
+                  color: textColor,
+                ),
               ),
             ),
-          ),
-          Positioned(
-            bottom: 35,
-            left: 28,
-            child: Container(
-              width: 100,
-              height: 45,
-              decoration: BoxDecoration(
-                color: AppColor.whiteColor,
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: Center(
-                child: Text(
-                  "Get Now",
-                  style: TextStyle(
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w600,
-                    color: buttonTextColor,
+            Positioned(
+              bottom: 25,
+              left: 28,
+              child: Container(
+                width: 100,
+                height: 45,
+                decoration: BoxDecoration(
+                  color: AppColor.whiteColor,
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: Center(
+                  child: Text(
+                    "Get Now",
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w600,
+                      color: buttonTextColor,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          Positioned(
-            right: 1,
-            child: Image.asset(
-              image,
-              width: 120,
+            Positioned(
+              right: 1,
+              child: Image.asset(
+                image,
+                width: 120,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

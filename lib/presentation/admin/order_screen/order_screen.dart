@@ -183,8 +183,11 @@ class OrderScreen extends StatelessWidget {
                               ),
                             );
                             BlocProvider.of<OrdersBloc>(context).add(
-                                OrdersEvent.getAOrder(
-                                    context: context, id: id.toString()));
+                              OrdersEvent.getAOrder(
+                                context: context,
+                                id: id.toString(),
+                              ),
+                            );
                           },
                         ),
                       )
