@@ -16,6 +16,7 @@ import 'package:shop_mate/application/login/login_bloc.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/application/rating/rating_bloc.dart';
 import 'package:shop_mate/application/signup/signup_bloc.dart';
+import 'package:shop_mate/application/transaction/transaction_bloc.dart';
 import 'package:shop_mate/application/user/user_bloc.dart';
 import 'package:shop_mate/domain/core/api/api.dart';
 import 'package:shop_mate/domain/core/di/injectable.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => getIt<OrdersBloc>()),
             BlocProvider(create: (context) => getIt<EarningsBloc>()),
             BlocProvider(create: (context) => getIt<UserBloc>()),
+            BlocProvider(create: (context) => getIt<TransactionBloc>()),
             BlocProvider<AuthBloc>(
               create: (_) => AuthBloc(),
             ),

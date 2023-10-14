@@ -1,4 +1,4 @@
-import 'dart:developer';
+// ignore_for_file: use_build_context_synchronously
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,18 +6,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shop_mate/application/address/address_bloc.dart';
-import 'package:shop_mate/application/auth/auth_bloc.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/application/orders/orders_bloc.dart';
+import 'package:shop_mate/application/transaction/transaction_bloc.dart';
 import 'package:shop_mate/domain/address/model/address_model.dart';
-import 'package:shop_mate/domain/core/api/api.dart';
 import 'package:shop_mate/domain/order/model/order_model.dart';
 import 'package:shop_mate/domain/payments/payments.dart';
+import 'package:shop_mate/domain/transactions/model/transaction_model.dart';
 import 'package:shop_mate/presentation/checkout/checkout_screens_widgets/checkout_screen_widgets.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
-import 'package:shop_mate/presentation/constants/route_animation.dart';
-import 'package:shop_mate/presentation/order_successful_screen/order_successful_screen.dart';
-import 'package:shop_mate/presentation/profile/profile_screen.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
 import 'package:shop_mate/presentation/widgets/asset_card.dart';
 import 'package:shop_mate/presentation/widgets/button_widgets.dart';
@@ -175,11 +172,23 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           GestureDetector(
-                            onTap: () {
-                              Payments().makePayment(
-                                  context,
-                                  state.cart.totalPrice.round().toString(),
-                                  userId);
+                            onTap: () async {
+                              await Payments().makePayment(
+                                context,
+                                state.cart.totalPrice.round().toString(),
+                                userId,
+                                OrderModel(
+                                  userId: userId!,
+                                  totalPrice: state.cart.totalPrice,
+                                  subTotal: state.cart.subTotal,
+                                  totalDeliveryFee: state.cart.totalDeliveryFee,
+                                  totalDiscount: state.cart.totalDiscount,
+                                  products: state.cart.products,
+                                  orderDate: DateTime.now(),
+                                  shippingAddress: selectedAddress!,
+                                  status: 'Pending',
+                                ),
+                              );
                             },
                             child: BuildAssetCard(
                               asset: SvgPicture.asset(
@@ -201,7 +210,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               BlocProvider.of<OrdersBloc>(context).add(
                                 OrdersEvent.placeOrder(
                                   orderModel: OrderModel(

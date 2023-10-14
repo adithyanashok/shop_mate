@@ -2,14 +2,17 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart' as http;
+import 'package:shop_mate/application/orders/orders_bloc.dart';
 import 'package:shop_mate/domain/core/api/api.dart';
+import 'package:shop_mate/domain/order/model/order_model.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
 
 class Payments {
   // Function to initiate the payment process using Stripe
-  Future<void> makePayment(context, amount, userId) async {
+  Future<void> makePayment(context, amount, userId, OrderModel order) async {
     try {
       Map<String, dynamic>? paymentIntentData;
       // Create a payment intent using Stripe API
@@ -24,7 +27,10 @@ class Payments {
       );
 
       // Display the payment sheet to the user
-      displayPaymentSheet(context, paymentIntentData, userId);
+      await displayPaymentSheet(context, paymentIntentData, userId);
+      BlocProvider.of<OrdersBloc>(context).add(
+        OrdersEvent.placeOrder(orderModel: order, context: context),
+      );
     } catch (e) {
       log("Exception at makePayment(): $e");
     }
@@ -37,6 +43,7 @@ class Payments {
         final paymentId = paymentIntentData!['id'];
         log('payment intentsss ${paymentIntentData!['id']}');
         log('payment intent $paymentIntentData');
+
         snackBar(context: context, msg: "Payment Completed");
 
         paymentIntentData = null;

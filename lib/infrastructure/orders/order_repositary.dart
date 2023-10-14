@@ -3,19 +3,21 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shop_mate/application/transaction/transaction_bloc.dart';
 import 'package:shop_mate/domain/core/collections/collections.dart';
 import 'package:shop_mate/domain/core/failures/main_failures.dart';
 import 'package:shop_mate/domain/earnings/models/earnings_model.dart';
 import 'package:shop_mate/domain/notifications/notifications.dart';
 import 'package:shop_mate/domain/order/i_order_facade.dart';
 import 'package:shop_mate/domain/order/model/order_model.dart';
+import 'package:shop_mate/domain/transactions/model/transaction_model.dart';
 import 'package:shop_mate/infrastructure/notification/notification_repositary.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/order_successful_screen/order_successful_screen.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
 
-//Consolas, 'Courier New', monospace
 @LazySingleton(as: IOrderFacade)
 class OrderRepositary implements IOrderFacade {
   @override
@@ -42,24 +44,35 @@ class OrderRepositary implements IOrderFacade {
       final docSnapshot = await docRef.get();
 
       final orderMap = docSnapshot.data();
-
       final order = OrderModel.fromJson(orderMap!);
+
       await NotificationRepositary().sendNotificationToAdmin(
         title: "New Order",
         message: "You have a new order let's checkout!",
       );
 
+      Navigator.of(context)
+          .push(buildNavigation(route: const OrderSuccessScreen()));
+      BlocProvider.of<TransactionBloc>(context).add(
+        TransactionEvent.createTransaction(
+          TransactionModel(
+            userId: order.userId,
+            amount: order.totalPrice,
+            email: order.email!,
+            name: order.username!,
+            date: DateTime.now(),
+          ),
+        ),
+      );
       await db
           .collection(Collection.collectionCart)
           .doc(orderModel.userId)
           .delete();
 
-      Navigator.of(context)
-          .push(buildNavigation(route: const OrderSuccessScreen()));
-
       return Right(order);
     } catch (e) {
       snackBar(context: context, msg: e.toString());
+      print(e.toString());
       return const Left(MainFailure.clientFailure());
     }
   }
@@ -164,7 +177,6 @@ class OrderRepositary implements IOrderFacade {
           .get()
           .then((user) {
         var userData = user.data();
-        print("Your order is $value");
         NotificationRepositary().sendPushMessage(
           title: "Status Changed",
           body: "Your order is $value",

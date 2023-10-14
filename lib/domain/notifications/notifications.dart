@@ -2,13 +2,18 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shop_mate/domain/core/collections/collections.dart';
 
 class FirebaseNotificationService {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
+  String? user = FirebaseAuth.instance.currentUser?.uid;
+  FirebaseFirestore db = FirebaseFirestore.instance;
 
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -95,9 +100,12 @@ class FirebaseNotificationService {
     return token!;
   }
 
-  void onTokenRefresh() {
-    messaging.onTokenRefresh.listen((event) {
+  void onTokenRefresh() async {
+    messaging.onTokenRefresh.listen((event) async {
       print(event.toString());
+      await db.collection(Collection.collectionUser).doc(user).update({
+        'fcmToken': event.toString(),
+      });
     });
   }
 }

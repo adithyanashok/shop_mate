@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
 import 'package:shop_mate/application/orders/orders_bloc.dart';
 import 'package:shop_mate/infrastructure/notification/notification_repositary.dart';
+import 'package:shop_mate/presentation/admin/transactions/transactions.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/login/login_screen.dart';
@@ -59,6 +60,17 @@ class ProfileScreen extends StatelessWidget {
                   Navigator.of(context).push(
                     buildNavigation(
                       route: MyOrders(),
+                    ),
+                  );
+                },
+              ),
+              BuildTextButton(
+                icon: Icons.money,
+                text: "Transactions",
+                onTap: () {
+                  Navigator.of(context).push(
+                    buildNavigation(
+                      route: const Transactions(),
                     ),
                   );
                 },
