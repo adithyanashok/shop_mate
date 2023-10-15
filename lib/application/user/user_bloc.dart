@@ -36,5 +36,27 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         ),
       );
     });
+
+    on<_GetUser>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
+      final usersOpt = await iAuthFacade.getCurrentUser();
+      emit(
+        usersOpt.fold(
+          (failure) => state.copyWith(
+            isLoading: false,
+            userModelListOpt: Some(
+              Left(failure),
+            ),
+          ),
+          (success) => state.copyWith(
+            isLoading: false,
+            user: success,
+            userModelListOpt: Some(
+              Right(success),
+            ),
+          ),
+        ),
+      );
+    });
   }
 }

@@ -26,6 +26,7 @@ class OrderRepositary implements IOrderFacade {
     BuildContext context,
   ) async {
     try {
+      log("ORDER PLACED ==> orderPlaced");
       final db = FirebaseFirestore.instance;
       final user = await db
           .collection(Collection.collectionUser)

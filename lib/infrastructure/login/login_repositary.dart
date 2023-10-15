@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shop_mate/application/user/user_bloc.dart';
 import 'package:shop_mate/domain/core/collections/collections.dart';
 import 'package:shop_mate/domain/core/failures/main_failures.dart';
 import 'package:shop_mate/domain/core/role_based_login/role_based_login.dart';
@@ -46,6 +48,7 @@ class LoginRepositary implements ILoginFacade {
       await db.collection(Collection.collectionUser).doc(user.uid).update({
         'fcmToken': fcmToken,
       });
+      BlocProvider.of<UserBloc>(context).add(const UserEvent.getUser());
 
       // Navigate to the MainPage on successful login
       route(context);

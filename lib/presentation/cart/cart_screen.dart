@@ -33,26 +33,22 @@ class CartScreen extends StatelessWidget {
       ),
       body: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
-          return state.isLoading
-              ? const Center(
-                  child: BuildLoadingWidget(),
-                )
-              : SafeArea(
-                  child: state.cart.products.isEmpty
-                      ? Center(
-                          child: Image.asset('assets/images/cart-is-empty.png'),
-                        )
-                      : Column(
-                          children: [
-                            CartProductSection(),
-                            const Divider(
-                              color: AppColor.greenColor,
-                              thickness: 3,
-                            ),
-                            const CartAmountSection()
-                          ],
-                        ),
-                );
+          return SafeArea(
+            child: state.cart.products.isEmpty
+                ? Center(
+                    child: Image.asset('assets/images/cart-is-empty.png'),
+                  )
+                : Column(
+                    children: [
+                      CartProductSection(),
+                      const Divider(
+                        color: AppColor.greenColor,
+                        thickness: 3,
+                      ),
+                      const CartAmountSection()
+                    ],
+                  ),
+          );
         },
       ),
     );

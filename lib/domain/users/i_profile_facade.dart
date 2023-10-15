@@ -5,4 +5,5 @@ import 'package:shop_mate/domain/users/model/user.dart';
 abstract class IAuthFacade {
   Future<Either<MainFailure, List<UserModel>>> getUsers(
       {required bool getAllUsers});
+  Future<Either<MainFailure, UserModel>> getCurrentUser();
 }

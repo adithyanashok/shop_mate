@@ -133,8 +133,6 @@ Future<void> signOut(context) async {
         return LoginScreen();
       },
     ));
-    BlocProvider.of<BottomNavBloc>(context)
-        .add(const BottomNavEvent.homeEvent(value: 0));
   } catch (e) {
     snackBar(context: context, msg: e.toString());
   }

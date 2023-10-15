@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shop_mate/domain/core/collections/collections.dart';
 import 'package:shop_mate/domain/core/failures/main_failures.dart';
@@ -55,6 +56,20 @@ class UsersRepositary implements IAuthFacade {
     } catch (e) {
       // Handle any errors that occur during the fetch
       log('Error fetching users: $e');
+      return const Left(MainFailure.clientFailure());
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, UserModel>> getCurrentUser() async {
+    try {
+      String userId = FirebaseAuth.instance.currentUser!.uid;
+      final db = FirebaseFirestore.instance;
+      final docRef =
+          await db.collection(Collection.collectionUser).doc(userId).get();
+      final model = UserModel.fromJson(docRef.data()!);
+      return Right(model);
+    } catch (e) {
       return const Left(MainFailure.clientFailure());
     }
   }

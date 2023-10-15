@@ -1,18 +1,22 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pay/pay.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:shop_mate/application/address/address_bloc.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/application/orders/orders_bloc.dart';
-import 'package:shop_mate/application/transaction/transaction_bloc.dart';
+import 'package:shop_mate/application/user/user_bloc.dart';
 import 'package:shop_mate/domain/address/model/address_model.dart';
 import 'package:shop_mate/domain/order/model/order_model.dart';
+import 'package:shop_mate/domain/payments/default_payment_profile_google_pay.dart';
 import 'package:shop_mate/domain/payments/payments.dart';
-import 'package:shop_mate/domain/transactions/model/transaction_model.dart';
 import 'package:shop_mate/presentation/checkout/checkout_screens_widgets/checkout_screen_widgets.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
@@ -35,12 +39,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   String? userId = FirebaseAuth.instance.currentUser?.uid;
 
   String? title;
-
+  late Razorpay _razorpay;
   String? address;
-
+  final _paymentItems = <PaymentItem>[];
+  late final Future<PaymentConfiguration> _googlePayConfigFuture;
   @override
   void initState() {
     super.initState();
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, handleExternalWallet);
+    _googlePayConfigFuture = PaymentConfiguration.fromAsset(
+        'default_payment_profile_google_pay.json');
     // Set the default value here, e.g., the first address in the list
     if (BlocProvider.of<AddressBloc>(context)
         .state
@@ -55,8 +66,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize payment items for Google Pay
     BlocProvider.of<AddressBloc>(context)
         .add(AddressEvent.getAddress(userId: userId!, context: context));
+    final user = BlocProvider.of<UserBloc>(context).state.user;
+    log("USER ==> ${user.username}");
     return Scaffold(
       appBar: AppBar(
         title: const BuildRegularTextWidget(text: 'Checkout'),
@@ -168,12 +182,28 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   ),
                   BlocBuilder<CartBloc, CartState>(
                     builder: (context, state) {
+                      _paymentItems.add(PaymentItem(
+                          amount: state.cart.totalPrice.toString(),
+                          label: 'Product'));
+
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           GestureDetector(
                             onTap: () async {
-                              await Payments().makePayment(
+                              await Payments(
+                                orderModel: OrderModel(
+                                  userId: userId!,
+                                  totalPrice: state.cart.totalPrice,
+                                  subTotal: state.cart.subTotal,
+                                  totalDeliveryFee: state.cart.totalDeliveryFee,
+                                  totalDiscount: state.cart.totalDiscount,
+                                  products: state.cart.products,
+                                  orderDate: DateTime.now(),
+                                  shippingAddress: selectedAddress!,
+                                  status: 'Pending',
+                                ),
+                              ).makePayment(
                                 context,
                                 state.cart.totalPrice.round().toString(),
                                 userId,
@@ -197,10 +227,44 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               ),
                             ),
                           ),
-                          BuildAssetCard(
-                            asset: SvgPicture.asset(
-                              'assets/images/razorpay.svg',
-                              width: 55,
+                          GestureDetector(
+                            onTap: () {
+                              Payments(
+                                orderModel: OrderModel(
+                                  userId: userId!,
+                                  totalPrice: state.cart.totalPrice,
+                                  subTotal: state.cart.subTotal,
+                                  totalDeliveryFee: state.cart.totalDeliveryFee,
+                                  totalDiscount: state.cart.totalDiscount,
+                                  products: state.cart.products,
+                                  orderDate: DateTime.now(),
+                                  shippingAddress: selectedAddress!,
+                                  status: 'Pending',
+                                ),
+                              ).openCheckout(
+                                state.cart.totalPrice.round().toString(),
+                                _razorpay,
+                                OrderModel(
+                                  userId: userId!,
+                                  totalPrice: state.cart.totalPrice,
+                                  subTotal: state.cart.subTotal,
+                                  totalDeliveryFee: state.cart.totalDeliveryFee,
+                                  totalDiscount: state.cart.totalDiscount,
+                                  products: state.cart.products,
+                                  orderDate: DateTime.now(),
+                                  shippingAddress: selectedAddress!,
+                                  status: 'Pending',
+                                ),
+                                user.username,
+                                user.email,
+                                context,
+                              );
+                            },
+                            child: BuildAssetCard(
+                              asset: SvgPicture.asset(
+                                'assets/images/razorpay.svg',
+                                width: 55,
+                              ),
                             ),
                           ),
                           BuildAssetCard(
@@ -209,37 +273,54 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               width: 55,
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () async {
-                              BlocProvider.of<OrdersBloc>(context).add(
-                                OrdersEvent.placeOrder(
-                                  orderModel: OrderModel(
-                                    userId: userId!,
-                                    totalPrice: state.cart.totalPrice,
-                                    subTotal: state.cart.subTotal,
-                                    totalDeliveryFee:
-                                        state.cart.totalDeliveryFee,
-                                    totalDiscount: state.cart.totalDiscount,
-                                    products: state.cart.products,
-                                    orderDate: DateTime.now(),
-                                    shippingAddress: selectedAddress!,
-                                    status: 'Pending',
-                                  ),
-                                  context: context,
-                                ),
-                              );
+                          // GestureDetector(
+                          //   onTap: () async {
+                          //     BlocProvider.of<OrdersBloc>(context).add(
+                          //       OrdersEvent.placeOrder(
+                          //         orderModel: OrderModel(
+                          //           userId: userId!,
+                          //           totalPrice: state.cart.totalPrice,
+                          //           subTotal: state.cart.subTotal,
+                          //           totalDeliveryFee:
+                          //               state.cart.totalDeliveryFee,
+                          //           totalDiscount: state.cart.totalDiscount,
+                          //           products: state.cart.products,
+                          //           orderDate: DateTime.now(),
+                          //           shippingAddress: selectedAddress!,
+                          //           status: 'Pending',
+                          //         ),
+                          //         context: context,
+                          //       ),
+                          //     );
+                          //   },
+                          //   child: BuildAssetCard(
+                          //     asset: Image.asset(
+                          //       'assets/images/cashondel.png',
+                          //       width: 55,
+                          //     ),
+                          //   ),
+                          // ),
+                          // Google Pay Button
+                          GooglePayButton(
+                            paymentConfiguration:
+                                PaymentConfiguration.fromJsonString(
+                                    defaultGooglePay),
+                            paymentItems: _paymentItems,
+                            type: GooglePayButtonType.buy,
+                            margin: const EdgeInsets.only(top: 15.0),
+                            onPaymentResult: (value) {
+                              log(value.toString());
                             },
-                            child: BuildAssetCard(
-                              asset: Image.asset(
-                                'assets/images/cashondel.png',
-                                width: 55,
-                              ),
+                            loadingIndicator: const Center(
+                              child: CircularProgressIndicator(),
                             ),
-                          ),
+                          )
                         ],
                       );
                     },
                   ),
+                  // Google Pay Button
+
                   Expanded(
                     child: Card(
                       surfaceTintColor: AppColor.whiteColor,
@@ -335,5 +416,35 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     } else {
       snackBar(context: context, msg: "Please fill the form");
     }
+  }
+
+  // Handle successful payment response
+  void handlePaymentSuccess(PaymentSuccessResponse response) async {
+    final state = BlocProvider.of<CartBloc>(context).state.cart;
+    Payments(
+      orderModel: OrderModel(
+          userId: userId!,
+          totalPrice: state.totalPrice,
+          subTotal: state.subTotal,
+          totalDeliveryFee: state.totalDeliveryFee,
+          totalDiscount: state.totalDiscount,
+          products: state.products,
+          orderDate: DateTime.now(),
+          shippingAddress: selectedAddress!,
+          status: 'Pending'),
+    ).placeOrder(context);
+  }
+
+// Handle payment failure response
+  void handlePaymentError(PaymentFailureResponse response) {
+    log("response ${response.message}");
+    // Handle payment failure
+  }
+
+// Handle external wallet response
+  void handleExternalWallet(ExternalWalletResponse response) {
+    log(response.toString());
+    log("response ${response.walletName}");
+    // Handle external wallet
   }
 }

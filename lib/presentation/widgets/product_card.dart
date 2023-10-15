@@ -30,12 +30,11 @@ class BuildProductCard extends StatelessWidget {
         onTap!();
       },
       child: Card(
-        elevation: 2,
         child: Container(
           width: 165.sp,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(
             padding: const EdgeInsets.only(top: 10, right: 10),
