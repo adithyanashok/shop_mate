@@ -267,39 +267,39 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               ),
                             ),
                           ),
-                          BuildAssetCard(
-                            asset: Image.asset(
-                              'assets/images/google.com.png',
-                              width: 55,
-                            ),
-                          ),
-                          // GestureDetector(
-                          //   onTap: () async {
-                          //     BlocProvider.of<OrdersBloc>(context).add(
-                          //       OrdersEvent.placeOrder(
-                          //         orderModel: OrderModel(
-                          //           userId: userId!,
-                          //           totalPrice: state.cart.totalPrice,
-                          //           subTotal: state.cart.subTotal,
-                          //           totalDeliveryFee:
-                          //               state.cart.totalDeliveryFee,
-                          //           totalDiscount: state.cart.totalDiscount,
-                          //           products: state.cart.products,
-                          //           orderDate: DateTime.now(),
-                          //           shippingAddress: selectedAddress!,
-                          //           status: 'Pending',
-                          //         ),
-                          //         context: context,
-                          //       ),
-                          //     );
-                          //   },
-                          //   child: BuildAssetCard(
-                          //     asset: Image.asset(
-                          //       'assets/images/cashondel.png',
-                          //       width: 55,
-                          //     ),
+                          // BuildAssetCard(
+                          //   asset: Image.asset(
+                          //     'assets/images/google.com.png',
+                          //     width: 55,
                           //   ),
                           // ),
+                          GestureDetector(
+                            onTap: () async {
+                              BlocProvider.of<OrdersBloc>(context).add(
+                                OrdersEvent.placeOrder(
+                                  orderModel: OrderModel(
+                                    userId: userId!,
+                                    totalPrice: state.cart.totalPrice,
+                                    subTotal: state.cart.subTotal,
+                                    totalDeliveryFee:
+                                        state.cart.totalDeliveryFee,
+                                    totalDiscount: state.cart.totalDiscount,
+                                    products: state.cart.products,
+                                    orderDate: DateTime.now(),
+                                    shippingAddress: selectedAddress!,
+                                    status: 'Pending',
+                                  ),
+                                  context: context,
+                                ),
+                              );
+                            },
+                            child: BuildAssetCard(
+                              asset: Image.asset(
+                                'assets/images/cashondel.png',
+                                width: 55,
+                              ),
+                            ),
+                          ),
                           // Google Pay Button
                           GooglePayButton(
                             paymentConfiguration:

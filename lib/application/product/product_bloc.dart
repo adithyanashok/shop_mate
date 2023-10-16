@@ -198,5 +198,30 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
       },
     );
+
+    on<_SearchProduct>(
+      (event, emit) async {
+        emit(state.copyWith(isLoading: true));
+        final productOpt = await iProductFacade.searchProducts(event.query);
+
+        emit(
+          productOpt.fold(
+            (failure) => state.copyWith(
+              isLoading: false,
+              productOpt: Some(
+                Left(failure),
+              ),
+            ),
+            (success) => state.copyWith(
+              isLoading: false,
+              products: success,
+              productList: Some(
+                Right(success),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }

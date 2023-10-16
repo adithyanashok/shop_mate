@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 
-class BuildSearchBarWidget extends StatelessWidget {
-  const BuildSearchBarWidget({
+class BuildSearchBarWidget extends StatefulWidget {
+  BuildSearchBarWidget({
     super.key,
+    required this.onSubmitted,
   });
+  final Function(String query) onSubmitted;
+
+  @override
+  State<BuildSearchBarWidget> createState() => _BuildSearchBarWidgetState();
+}
+
+class _BuildSearchBarWidgetState extends State<BuildSearchBarWidget> {
+  TextEditingController queryController = TextEditingController();
+
+  @override
+  void dispose() {
+    queryController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +40,13 @@ class BuildSearchBarWidget extends StatelessWidget {
             // Use Expanded to constrain the TextField width
             child: Container(
               margin: const EdgeInsets.only(left: 10),
-              child: const TextField(
-                style: TextStyle(fontSize: 13, height: 1),
-                decoration: InputDecoration(
+              child: TextField(
+                controller: queryController,
+                onSubmitted: (value) {
+                  widget.onSubmitted(value);
+                },
+                style: const TextStyle(fontSize: 13, height: 1),
+                decoration: const InputDecoration(
                   hintText: "Search...",
                   border: InputBorder.none,
                 ),
@@ -33,7 +54,11 @@ class BuildSearchBarWidget extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              BlocProvider.of<ProductBloc>(context).add(
+                ProductEvent.searchProduct(query: queryController.text),
+              );
+            },
             icon: const Icon(Icons.search),
           ),
         ],

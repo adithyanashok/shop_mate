@@ -32,4 +32,5 @@ abstract class IProductFacade {
     String productId,
     context,
   );
+  Future<Either<MainFailure, List<ProductModel>>> searchProducts(String query);
 }

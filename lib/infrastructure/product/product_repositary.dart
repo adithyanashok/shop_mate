@@ -1,5 +1,6 @@
 // import 'dart:developer';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
@@ -197,5 +198,31 @@ class ProductRepository implements IProductFacade {
   Future<Either<MainFailure, List<ProductModel>>> getMobiles(
       String category, context) {
     return getProductsByCategory(category, context);
+  }
+
+  @override
+  Future<Either<MainFailure, List<ProductModel>>> searchProducts(
+      String searchQuery) async {
+    try {
+      final db = FirebaseFirestore.instance;
+
+      QuerySnapshot querySnapshot = await db
+          .collection(Collection.collectionProduct)
+          .where("name", isGreaterThanOrEqualTo: searchQuery)
+          .where('name', isLessThanOrEqualTo: '$searchQuery\uf7ff')
+          .get();
+
+      List<ProductModel> products = [];
+      for (var docSnapshot in querySnapshot.docs) {
+        var productData = docSnapshot.data() as Map<String, dynamic>;
+        var user = ProductModel.fromJson(productData);
+        products.add(user);
+      }
+
+      return Right(products);
+    } catch (e) {
+      print(e.toString());
+      return Left(MainFailure.clientFailure());
+    }
   }
 }

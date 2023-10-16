@@ -45,4 +45,8 @@ class ProductEvent with _$ProductEvent {
     required String productId,
     required BuildContext context,
   }) = _GetProduct;
+
+  const factory ProductEvent.searchProduct({
+    required String query,
+  }) = _SearchProduct;
 }

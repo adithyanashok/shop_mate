@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shop_mate/application/orders/orders_bloc.dart';
+import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/search/widgets/search_screen_widgets.dart';
 import 'package:shop_mate/presentation/widgets/product_card.dart';
@@ -13,65 +15,52 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: BlocBuilder<OrdersBloc, OrdersState>(
-          builder: (context, state) {
-            final orderModelList = state.orderModelList;
-
-            return SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: orderModelList.map((orderModel) {
-                  return Column(
-                    children: orderModel.products.map((product) {
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            BuildSearchBarWidget(
+              onSubmitted: (query) {
+                BlocProvider.of<ProductBloc>(context).add(
+                  ProductEvent.searchProduct(query: query),
+                );
+              },
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: BuildMiniText(fontSize: 13, text: 'Results'),
+            ),
+            Expanded(
+              child: BlocBuilder<ProductBloc, ProductState>(
+                builder: (context, state) {
+                  return GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      childAspectRatio: .5,
+                      // crossAxisSpacing: 2,
+                      // mainAxisSpacing: 10,
+                    ),
+                    itemBuilder: (context, index) {
+                      final product = state.products[index];
                       return BuildProductCard(
-                          image: Image.network(
-                            product['image'],
-                            width: 80,
-                            height: 80,
-                          ),
-                          title: product['name'],
-                          price: product['amount'].toString(),
-                          description: product['description']);
-                    }).toList(),
+                        image: Image.network(
+                          product.image![0],
+                          width: 80,
+                        ),
+                        title: product.name,
+                        price: product.amount.toString(),
+                        description: product.description,
+                      );
+                    },
+                    itemCount: state.products.length,
                   );
-                }).toList(),
+                },
               ),
-            );
-          },
+            )
+          ],
         ),
       ),
-
-      // body: SafeArea(
-      //   child: Column(
-      //     crossAxisAlignment: CrossAxisAlignment.start,
-      //     children: [
-      //       const BuildSearchBarWidget(),
-      //       const Padding(
-      //         padding: EdgeInsets.all(8.0),
-      //         child: BuildMiniText(fontSize: 13, text: 'Results'),
-      //       ),
-      //       Expanded(
-      //         child: GridView.builder(
-      //           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-      //             crossAxisCount: 2,
-      //             childAspectRatio: 0.8,
-      //             crossAxisSpacing: 1,
-      //             mainAxisSpacing: 3,
-      //           ),
-      //           itemBuilder: (context, index) {
-      //             return BuildProductCard(
-      //                 image: Image.asset('assets/images/macbook.png'),
-      //                 title: 'Macbook Pro M2',
-      //                 price: '1000',
-      //                 description: 'Brand new Macbook Pro with M2 chipset');
-      //           },
-      //           itemCount: 6,
-      //         ),
-      //       )
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
