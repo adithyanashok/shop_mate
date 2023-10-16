@@ -8,8 +8,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/constants/route_animation.dart';
 
 import 'package:shop_mate/presentation/home/productlist_section.dart';
+import 'package:shop_mate/presentation/product/products_screen.dart';
 import 'package:shop_mate/presentation/signup/signup_screen.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
 import 'package:shop_mate/presentation/widgets/app_bar_widget.dart';
@@ -113,44 +115,60 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 50.h,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 15, left: 10),
-                      child: Container(
-                        height: 5.h,
-                        width: 120.w,
-                        decoration: BoxDecoration(
-                          color: AppColor.lightGrey,
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'assets/images/macbook.png',
-                                width: 40,
-                              ),
-                              Text(
-                                "Laptops",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w700,
-                                  color: AppColor.blackColor,
-                                ),
-                              ),
-                            ],
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 25),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CategoryCard(
+                          image: Image.asset(
+                            'assets/images/macbook.png',
+                            width: 40,
                           ),
+                          text: "Laptops",
+                          onTap: () {
+                            Navigator.of(context).push(
+                              buildNavigation(
+                                route: const ProductsScreen(),
+                                arguments: "laptop",
+                              ),
+                            );
+                          },
                         ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return const SizedBox();
-                  },
-                  itemCount: 50,
+                        CategoryCard(
+                          image: Image.asset(
+                            'assets/images/beats.png',
+                            width: 40,
+                          ),
+                          text: "Earphones",
+                          onTap: () {
+                            Navigator.of(context).push(
+                              buildNavigation(
+                                route: const ProductsScreen(),
+                                arguments: "earphone",
+                              ),
+                            );
+                          },
+                        ),
+                        CategoryCard(
+                          image: Image.asset(
+                            'assets/images/iphone.png',
+                            width: 40,
+                          ),
+                          text: "Mobiles",
+                          onTap: () {
+                            Navigator.of(context).push(
+                              buildNavigation(
+                                route: const ProductsScreen(),
+                                arguments: "mobile",
+                              ),
+                            );
+                          },
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
               BlocBuilder<ProductBloc, ProductState>(
@@ -203,5 +221,46 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (e) {
       snackBar(context: context, msg: e.toString());
     }
+  }
+}
+
+class CategoryCard extends StatelessWidget {
+  const CategoryCard({
+    super.key,
+    required this.image,
+    required this.text,
+    this.onTap,
+  });
+  final Image image;
+  final String text;
+  final Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        onTap!();
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColor.colorGrey4,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          children: [
+            image,
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w700,
+                color: AppColor.blackColor,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
