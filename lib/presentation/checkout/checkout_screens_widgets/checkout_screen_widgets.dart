@@ -9,19 +9,21 @@ import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 class BuildAddressCard extends StatefulWidget {
   BuildAddressCard({
     super.key,
-    required this.title,
+    this.title,
     required this.text,
     this.onChanged,
     this.selectedValue,
     this.showRadioButton = true,
     this.deleteAddress,
+    this.showActionButton = true,
   });
-  final String title;
+  final String? title;
   final String text;
   final Function(String)? onChanged;
   final Function()? deleteAddress;
   String? selectedValue;
   final bool showRadioButton;
+  final bool showActionButton;
 
   @override
   State<BuildAddressCard> createState() => _BuildAddressCardState();
@@ -55,26 +57,30 @@ class _BuildAddressCardState extends State<BuildAddressCard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      widget.title,
-                      style: TextStyle(
-                        color: AppColor.blackColor,
-                        fontSize: 21.sp,
-                        fontWeight: FontWeight.w300,
+                widget.title == null
+                    ? const SizedBox()
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            widget.title!,
+                            style: TextStyle(
+                              color: AppColor.blackColor,
+                              fontSize: 21.sp,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                          const Spacer(),
+                          widget.showActionButton
+                              ? IconButton(
+                                  onPressed: () {
+                                    widget.deleteAddress!();
+                                  },
+                                  icon: const Icon(Icons.delete),
+                                )
+                              : const SizedBox()
+                        ],
                       ),
-                    ),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        widget.deleteAddress!();
-                      },
-                      icon: const Icon(Icons.delete),
-                    ),
-                  ],
-                ),
                 BuildSmallText(
                   text: widget.text,
                   textOverflow: TextOverflow.visible,
