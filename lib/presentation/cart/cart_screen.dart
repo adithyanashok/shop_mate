@@ -26,6 +26,7 @@ class CartScreen extends StatelessWidget {
         .add(CartEvent.getCart(userId: userId!, context: context));
     BlocProvider.of<AddressBloc>(context)
         .add(AddressEvent.getAddress(userId: userId!, context: context));
+
     return Scaffold(
       appBar: AppBar(
         title: const BuildRegularTextWidget(text: 'Cart'),
@@ -34,20 +35,24 @@ class CartScreen extends StatelessWidget {
       body: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
           return SafeArea(
-            child: state.cart.products.isEmpty
-                ? Center(
-                    child: Image.asset('assets/images/cart-is-empty.png'),
+            child: state.isLoading
+                ? const Center(
+                    child: BuildLoadingWidget(),
                   )
-                : Column(
-                    children: [
-                      CartProductSection(),
-                      const Divider(
-                        color: AppColor.greenColor,
-                        thickness: 3,
+                : state.cart.products.isEmpty
+                    ? Center(
+                        child: Image.asset('assets/images/cart-is-empty.png'),
+                      )
+                    : Column(
+                        children: [
+                          CartProductSection(),
+                          const Divider(
+                            color: AppColor.greenColor,
+                            thickness: 3,
+                          ),
+                          const CartAmountSection()
+                        ],
                       ),
-                      const CartAmountSection()
-                    ],
-                  ),
           );
         },
       ),
@@ -137,7 +142,7 @@ class CartProductSection extends StatelessWidget {
     super.key,
   });
 
-  String? userId = FirebaseAuth.instance.currentUser?.uid;
+  final String? userId = FirebaseAuth.instance.currentUser?.uid;
 
   @override
   Widget build(BuildContext context) {

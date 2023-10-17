@@ -8,4 +8,8 @@ abstract class IAddressFacade {
       AddressModel addressModel, BuildContext context);
   Future<Either<MainFailure, List<AddressModel>>> getAddress(
       String userId, BuildContext context);
+  Future<Either<MainFailure, void>> updateAddress(
+      AddressModel addressModel, BuildContext context);
+  Future<Either<MainFailure, void>> deleteAddress(
+      String id, String userId, BuildContext context);
 }

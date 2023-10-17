@@ -4,12 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
 import 'package:shop_mate/application/orders/orders_bloc.dart';
+import 'package:shop_mate/application/user/user_bloc.dart';
 import 'package:shop_mate/infrastructure/notification/notification_repositary.dart';
 import 'package:shop_mate/presentation/admin/transactions/transactions.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/login/login_screen.dart';
 import 'package:shop_mate/presentation/order/my_orders.dart';
+import 'package:shop_mate/presentation/address/address.dart';
 import 'package:shop_mate/presentation/signup/signup_screen.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
 import 'package:shop_mate/presentation/widgets/app_bar_widget.dart';
@@ -22,6 +24,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     BlocProvider.of<OrdersBloc>(context)
         .add(OrdersEvent.getAllOrders(context: context));
+    final state = BlocProvider.of<UserBloc>(context).state.user;
     return Scaffold(
         appBar: AppBar(
           title: const BuildRegularTextWidget(text: "Profile"),
@@ -32,24 +35,11 @@ class ProfileScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BuildTextButton(
-                icon: Icons.edit,
-                text: "Send Notifications",
-                onTap: () {
-                  NotificationRepositary().sendPushMessage(
-                    fcmToken:
-                        'e9HK9umUR7-CjGJo8mMyRs:APA91bE8CA65dzzW6GqqaktMx95q4fu1_g_RTS-r4YTalRLTvNezmCROCSKK0A0DVd-wAAJEJgipDjxZ9B_yEXF1YRwO_7iUTLVY17i_XJZ4bVQQU9tjLfy3LGEGHLq8_MwnG-S84M4l',
-                    body: "New Order",
-                    title: "Order",
-                  );
-                },
-              ),
-              BuildTextButton(
                 icon: Icons.home_filled,
                 text: "Address",
                 onTap: () {
-                  NotificationRepositary().sendNotificationToAdmin(
-                    title: "title",
-                    message: "message",
+                  Navigator.of(context).push(
+                    buildNavigation(route: Address()),
                   );
                 },
               ),
@@ -64,17 +54,19 @@ class ProfileScreen extends StatelessWidget {
                   );
                 },
               ),
-              BuildTextButton(
-                icon: Icons.money,
-                text: "Transactions",
-                onTap: () {
-                  Navigator.of(context).push(
-                    buildNavigation(
-                      route: const Transactions(),
-                    ),
-                  );
-                },
-              ),
+              state.isAdmin == true
+                  ? BuildTextButton(
+                      icon: Icons.money,
+                      text: "Transactions",
+                      onTap: () {
+                        Navigator.of(context).push(
+                          buildNavigation(
+                            route: const Transactions(),
+                          ),
+                        );
+                      },
+                    )
+                  : const SizedBox(),
               BuildTextButton(
                 icon: Icons.logout,
                 text: "Logout",

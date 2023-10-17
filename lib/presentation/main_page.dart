@@ -36,8 +36,8 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<BottomNavBloc>(context)
-        .add(const BottomNavEvent.homeEvent(value: 0));
+    // BlocProvider.of<BottomNavBloc>(context)
+    //     .add(const BottomNavEvent.homeEvent(value: 0));
     final screens = [
       const HomeScreen(),
       const SearchScreen(),

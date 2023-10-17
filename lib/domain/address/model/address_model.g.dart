@@ -11,6 +11,7 @@ _$AddressModelImpl _$$AddressModelImplFromJson(Map<String, dynamic> json) =>
       userId: json['userId'] as String,
       title: json['title'] as String,
       address: json['address'] as String,
+      id: json['id'] as String?,
     );
 
 Map<String, dynamic> _$$AddressModelImplToJson(_$AddressModelImpl instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$AddressModelImplToJson(_$AddressModelImpl instance) =>
       'userId': instance.userId,
       'title': instance.title,
       'address': instance.address,
+      'id': instance.id,
     };

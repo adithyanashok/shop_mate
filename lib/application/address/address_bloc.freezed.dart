@@ -22,6 +22,10 @@ mixin _$AddressEvent {
     required TResult Function(AddressModel addressModel, BuildContext context)
         addAddress,
     required TResult Function(String userId, BuildContext context) getAddress,
+    required TResult Function(AddressModel addressModel, BuildContext context)
+        updateAddress,
+    required TResult Function(String id, String userId, BuildContext context)
+        deleteAddress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,6 +33,10 @@ mixin _$AddressEvent {
     TResult? Function(AddressModel addressModel, BuildContext context)?
         addAddress,
     TResult? Function(String userId, BuildContext context)? getAddress,
+    TResult? Function(AddressModel addressModel, BuildContext context)?
+        updateAddress,
+    TResult? Function(String id, String userId, BuildContext context)?
+        deleteAddress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +44,10 @@ mixin _$AddressEvent {
     TResult Function(AddressModel addressModel, BuildContext context)?
         addAddress,
     TResult Function(String userId, BuildContext context)? getAddress,
+    TResult Function(AddressModel addressModel, BuildContext context)?
+        updateAddress,
+    TResult Function(String id, String userId, BuildContext context)?
+        deleteAddress,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,18 +55,24 @@ mixin _$AddressEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_AddAddress value) addAddress,
     required TResult Function(_GetAddress value) getAddress,
+    required TResult Function(_UpdateAddress value) updateAddress,
+    required TResult Function(_DeleteAddress value) deleteAddress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AddAddress value)? addAddress,
     TResult? Function(_GetAddress value)? getAddress,
+    TResult? Function(_UpdateAddress value)? updateAddress,
+    TResult? Function(_DeleteAddress value)? deleteAddress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AddAddress value)? addAddress,
     TResult Function(_GetAddress value)? getAddress,
+    TResult Function(_UpdateAddress value)? updateAddress,
+    TResult Function(_DeleteAddress value)? deleteAddress,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -185,6 +203,10 @@ class _$AddAddressImpl implements _AddAddress {
     required TResult Function(AddressModel addressModel, BuildContext context)
         addAddress,
     required TResult Function(String userId, BuildContext context) getAddress,
+    required TResult Function(AddressModel addressModel, BuildContext context)
+        updateAddress,
+    required TResult Function(String id, String userId, BuildContext context)
+        deleteAddress,
   }) {
     return addAddress(addressModel, context);
   }
@@ -195,6 +217,10 @@ class _$AddAddressImpl implements _AddAddress {
     TResult? Function(AddressModel addressModel, BuildContext context)?
         addAddress,
     TResult? Function(String userId, BuildContext context)? getAddress,
+    TResult? Function(AddressModel addressModel, BuildContext context)?
+        updateAddress,
+    TResult? Function(String id, String userId, BuildContext context)?
+        deleteAddress,
   }) {
     return addAddress?.call(addressModel, context);
   }
@@ -205,6 +231,10 @@ class _$AddAddressImpl implements _AddAddress {
     TResult Function(AddressModel addressModel, BuildContext context)?
         addAddress,
     TResult Function(String userId, BuildContext context)? getAddress,
+    TResult Function(AddressModel addressModel, BuildContext context)?
+        updateAddress,
+    TResult Function(String id, String userId, BuildContext context)?
+        deleteAddress,
     required TResult orElse(),
   }) {
     if (addAddress != null) {
@@ -218,6 +248,8 @@ class _$AddAddressImpl implements _AddAddress {
   TResult map<TResult extends Object?>({
     required TResult Function(_AddAddress value) addAddress,
     required TResult Function(_GetAddress value) getAddress,
+    required TResult Function(_UpdateAddress value) updateAddress,
+    required TResult Function(_DeleteAddress value) deleteAddress,
   }) {
     return addAddress(this);
   }
@@ -227,6 +259,8 @@ class _$AddAddressImpl implements _AddAddress {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AddAddress value)? addAddress,
     TResult? Function(_GetAddress value)? getAddress,
+    TResult? Function(_UpdateAddress value)? updateAddress,
+    TResult? Function(_DeleteAddress value)? deleteAddress,
   }) {
     return addAddress?.call(this);
   }
@@ -236,6 +270,8 @@ class _$AddAddressImpl implements _AddAddress {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AddAddress value)? addAddress,
     TResult Function(_GetAddress value)? getAddress,
+    TResult Function(_UpdateAddress value)? updateAddress,
+    TResult Function(_DeleteAddress value)? deleteAddress,
     required TResult orElse(),
   }) {
     if (addAddress != null) {
@@ -336,6 +372,10 @@ class _$GetAddressImpl implements _GetAddress {
     required TResult Function(AddressModel addressModel, BuildContext context)
         addAddress,
     required TResult Function(String userId, BuildContext context) getAddress,
+    required TResult Function(AddressModel addressModel, BuildContext context)
+        updateAddress,
+    required TResult Function(String id, String userId, BuildContext context)
+        deleteAddress,
   }) {
     return getAddress(userId, context);
   }
@@ -346,6 +386,10 @@ class _$GetAddressImpl implements _GetAddress {
     TResult? Function(AddressModel addressModel, BuildContext context)?
         addAddress,
     TResult? Function(String userId, BuildContext context)? getAddress,
+    TResult? Function(AddressModel addressModel, BuildContext context)?
+        updateAddress,
+    TResult? Function(String id, String userId, BuildContext context)?
+        deleteAddress,
   }) {
     return getAddress?.call(userId, context);
   }
@@ -356,6 +400,10 @@ class _$GetAddressImpl implements _GetAddress {
     TResult Function(AddressModel addressModel, BuildContext context)?
         addAddress,
     TResult Function(String userId, BuildContext context)? getAddress,
+    TResult Function(AddressModel addressModel, BuildContext context)?
+        updateAddress,
+    TResult Function(String id, String userId, BuildContext context)?
+        deleteAddress,
     required TResult orElse(),
   }) {
     if (getAddress != null) {
@@ -369,6 +417,8 @@ class _$GetAddressImpl implements _GetAddress {
   TResult map<TResult extends Object?>({
     required TResult Function(_AddAddress value) addAddress,
     required TResult Function(_GetAddress value) getAddress,
+    required TResult Function(_UpdateAddress value) updateAddress,
+    required TResult Function(_DeleteAddress value) deleteAddress,
   }) {
     return getAddress(this);
   }
@@ -378,6 +428,8 @@ class _$GetAddressImpl implements _GetAddress {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AddAddress value)? addAddress,
     TResult? Function(_GetAddress value)? getAddress,
+    TResult? Function(_UpdateAddress value)? updateAddress,
+    TResult? Function(_DeleteAddress value)? deleteAddress,
   }) {
     return getAddress?.call(this);
   }
@@ -387,6 +439,8 @@ class _$GetAddressImpl implements _GetAddress {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AddAddress value)? addAddress,
     TResult Function(_GetAddress value)? getAddress,
+    TResult Function(_UpdateAddress value)? updateAddress,
+    TResult Function(_DeleteAddress value)? deleteAddress,
     required TResult orElse(),
   }) {
     if (getAddress != null) {
@@ -407,6 +461,367 @@ abstract class _GetAddress implements AddressEvent {
   @override
   @JsonKey(ignore: true)
   _$$GetAddressImplCopyWith<_$GetAddressImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateAddressImplCopyWith<$Res>
+    implements $AddressEventCopyWith<$Res> {
+  factory _$$UpdateAddressImplCopyWith(
+          _$UpdateAddressImpl value, $Res Function(_$UpdateAddressImpl) then) =
+      __$$UpdateAddressImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({AddressModel addressModel, BuildContext context});
+
+  $AddressModelCopyWith<$Res> get addressModel;
+}
+
+/// @nodoc
+class __$$UpdateAddressImplCopyWithImpl<$Res>
+    extends _$AddressEventCopyWithImpl<$Res, _$UpdateAddressImpl>
+    implements _$$UpdateAddressImplCopyWith<$Res> {
+  __$$UpdateAddressImplCopyWithImpl(
+      _$UpdateAddressImpl _value, $Res Function(_$UpdateAddressImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? addressModel = null,
+    Object? context = null,
+  }) {
+    return _then(_$UpdateAddressImpl(
+      addressModel: null == addressModel
+          ? _value.addressModel
+          : addressModel // ignore: cast_nullable_to_non_nullable
+              as AddressModel,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AddressModelCopyWith<$Res> get addressModel {
+    return $AddressModelCopyWith<$Res>(_value.addressModel, (value) {
+      return _then(_value.copyWith(addressModel: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$UpdateAddressImpl implements _UpdateAddress {
+  const _$UpdateAddressImpl(
+      {required this.addressModel, required this.context});
+
+  @override
+  final AddressModel addressModel;
+  @override
+  final BuildContext context;
+
+  @override
+  String toString() {
+    return 'AddressEvent.updateAddress(addressModel: $addressModel, context: $context)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateAddressImpl &&
+            (identical(other.addressModel, addressModel) ||
+                other.addressModel == addressModel) &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, addressModel, context);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateAddressImplCopyWith<_$UpdateAddressImpl> get copyWith =>
+      __$$UpdateAddressImplCopyWithImpl<_$UpdateAddressImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(AddressModel addressModel, BuildContext context)
+        addAddress,
+    required TResult Function(String userId, BuildContext context) getAddress,
+    required TResult Function(AddressModel addressModel, BuildContext context)
+        updateAddress,
+    required TResult Function(String id, String userId, BuildContext context)
+        deleteAddress,
+  }) {
+    return updateAddress(addressModel, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(AddressModel addressModel, BuildContext context)?
+        addAddress,
+    TResult? Function(String userId, BuildContext context)? getAddress,
+    TResult? Function(AddressModel addressModel, BuildContext context)?
+        updateAddress,
+    TResult? Function(String id, String userId, BuildContext context)?
+        deleteAddress,
+  }) {
+    return updateAddress?.call(addressModel, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(AddressModel addressModel, BuildContext context)?
+        addAddress,
+    TResult Function(String userId, BuildContext context)? getAddress,
+    TResult Function(AddressModel addressModel, BuildContext context)?
+        updateAddress,
+    TResult Function(String id, String userId, BuildContext context)?
+        deleteAddress,
+    required TResult orElse(),
+  }) {
+    if (updateAddress != null) {
+      return updateAddress(addressModel, context);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AddAddress value) addAddress,
+    required TResult Function(_GetAddress value) getAddress,
+    required TResult Function(_UpdateAddress value) updateAddress,
+    required TResult Function(_DeleteAddress value) deleteAddress,
+  }) {
+    return updateAddress(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AddAddress value)? addAddress,
+    TResult? Function(_GetAddress value)? getAddress,
+    TResult? Function(_UpdateAddress value)? updateAddress,
+    TResult? Function(_DeleteAddress value)? deleteAddress,
+  }) {
+    return updateAddress?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AddAddress value)? addAddress,
+    TResult Function(_GetAddress value)? getAddress,
+    TResult Function(_UpdateAddress value)? updateAddress,
+    TResult Function(_DeleteAddress value)? deleteAddress,
+    required TResult orElse(),
+  }) {
+    if (updateAddress != null) {
+      return updateAddress(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateAddress implements AddressEvent {
+  const factory _UpdateAddress(
+      {required final AddressModel addressModel,
+      required final BuildContext context}) = _$UpdateAddressImpl;
+
+  AddressModel get addressModel;
+  @override
+  BuildContext get context;
+  @override
+  @JsonKey(ignore: true)
+  _$$UpdateAddressImplCopyWith<_$UpdateAddressImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeleteAddressImplCopyWith<$Res>
+    implements $AddressEventCopyWith<$Res> {
+  factory _$$DeleteAddressImplCopyWith(
+          _$DeleteAddressImpl value, $Res Function(_$DeleteAddressImpl) then) =
+      __$$DeleteAddressImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String id, String userId, BuildContext context});
+}
+
+/// @nodoc
+class __$$DeleteAddressImplCopyWithImpl<$Res>
+    extends _$AddressEventCopyWithImpl<$Res, _$DeleteAddressImpl>
+    implements _$$DeleteAddressImplCopyWith<$Res> {
+  __$$DeleteAddressImplCopyWithImpl(
+      _$DeleteAddressImpl _value, $Res Function(_$DeleteAddressImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? userId = null,
+    Object? context = null,
+  }) {
+    return _then(_$DeleteAddressImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteAddressImpl implements _DeleteAddress {
+  const _$DeleteAddressImpl(
+      {required this.id, required this.userId, required this.context});
+
+  @override
+  final String id;
+  @override
+  final String userId;
+  @override
+  final BuildContext context;
+
+  @override
+  String toString() {
+    return 'AddressEvent.deleteAddress(id: $id, userId: $userId, context: $context)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteAddressImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, userId, context);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteAddressImplCopyWith<_$DeleteAddressImpl> get copyWith =>
+      __$$DeleteAddressImplCopyWithImpl<_$DeleteAddressImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(AddressModel addressModel, BuildContext context)
+        addAddress,
+    required TResult Function(String userId, BuildContext context) getAddress,
+    required TResult Function(AddressModel addressModel, BuildContext context)
+        updateAddress,
+    required TResult Function(String id, String userId, BuildContext context)
+        deleteAddress,
+  }) {
+    return deleteAddress(id, userId, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(AddressModel addressModel, BuildContext context)?
+        addAddress,
+    TResult? Function(String userId, BuildContext context)? getAddress,
+    TResult? Function(AddressModel addressModel, BuildContext context)?
+        updateAddress,
+    TResult? Function(String id, String userId, BuildContext context)?
+        deleteAddress,
+  }) {
+    return deleteAddress?.call(id, userId, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(AddressModel addressModel, BuildContext context)?
+        addAddress,
+    TResult Function(String userId, BuildContext context)? getAddress,
+    TResult Function(AddressModel addressModel, BuildContext context)?
+        updateAddress,
+    TResult Function(String id, String userId, BuildContext context)?
+        deleteAddress,
+    required TResult orElse(),
+  }) {
+    if (deleteAddress != null) {
+      return deleteAddress(id, userId, context);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AddAddress value) addAddress,
+    required TResult Function(_GetAddress value) getAddress,
+    required TResult Function(_UpdateAddress value) updateAddress,
+    required TResult Function(_DeleteAddress value) deleteAddress,
+  }) {
+    return deleteAddress(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AddAddress value)? addAddress,
+    TResult? Function(_GetAddress value)? getAddress,
+    TResult? Function(_UpdateAddress value)? updateAddress,
+    TResult? Function(_DeleteAddress value)? deleteAddress,
+  }) {
+    return deleteAddress?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AddAddress value)? addAddress,
+    TResult Function(_GetAddress value)? getAddress,
+    TResult Function(_UpdateAddress value)? updateAddress,
+    TResult Function(_DeleteAddress value)? deleteAddress,
+    required TResult orElse(),
+  }) {
+    if (deleteAddress != null) {
+      return deleteAddress(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteAddress implements AddressEvent {
+  const factory _DeleteAddress(
+      {required final String id,
+      required final String userId,
+      required final BuildContext context}) = _$DeleteAddressImpl;
+
+  String get id;
+  String get userId;
+  @override
+  BuildContext get context;
+  @override
+  @JsonKey(ignore: true)
+  _$$DeleteAddressImplCopyWith<_$DeleteAddressImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

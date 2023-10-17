@@ -3,7 +3,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shop_mate/application/address/address_bloc.dart';
 import 'package:shop_mate/domain/address/i_address_facade.dart';
 import 'package:shop_mate/domain/address/model/address_model.dart';
 import 'package:shop_mate/domain/core/collections/collections.dart';
@@ -62,7 +64,9 @@ class AddressRepositary implements IAddressFacade {
       // Iterate through each document in the query snapshot
       for (var docSnapshot in querySnapshot.docs) {
         // Convert the document data to an AddressModel object
-        final address = AddressModel.fromJson(docSnapshot.data());
+        final address = AddressModel.fromJson(docSnapshot.data()).copyWith(
+          id: docSnapshot.id,
+        );
 
         // Add the AddressModel object to the list
         addressList.add(address);
@@ -75,6 +79,45 @@ class AddressRepositary implements IAddressFacade {
       snackBar(context: context, msg: e.toString());
 
       // Return a Left Either indicating a client failure
+      return const Left(MainFailure.clientFailure());
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, void>> updateAddress(
+      AddressModel addressModel, BuildContext context) async {
+    try {
+      final db = FirebaseFirestore.instance;
+
+      db.collection(Collection.collectionAddress).doc(addressModel.id).update(
+        {
+          "title": addressModel.title,
+          "address": addressModel.address,
+        },
+      );
+      BlocProvider.of<AddressBloc>(context).add(
+        AddressEvent.getAddress(userId: addressModel.userId, context: context),
+      );
+      Navigator.of(context).pop();
+      return const Right(null);
+    } catch (e) {
+      return const Left(MainFailure.clientFailure());
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, void>> deleteAddress(
+      String id, String userId, BuildContext context) async {
+    try {
+      final db = FirebaseFirestore.instance;
+
+      db.collection(Collection.collectionAddress).doc(id).delete();
+      BlocProvider.of<AddressBloc>(context).add(
+        AddressEvent.getAddress(userId: userId, context: context),
+      );
+      Navigator.of(context).pop();
+      return const Right(null);
+    } catch (e) {
       return const Left(MainFailure.clientFailure());
     }
   }

@@ -23,6 +23,7 @@ mixin _$AddressModel {
   String get userId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,7 @@ abstract class $AddressModelCopyWith<$Res> {
           AddressModel value, $Res Function(AddressModel) then) =
       _$AddressModelCopyWithImpl<$Res, AddressModel>;
   @useResult
-  $Res call({String userId, String title, String address});
+  $Res call({String userId, String title, String address, String? id});
 }
 
 /// @nodoc
@@ -55,6 +56,7 @@ class _$AddressModelCopyWithImpl<$Res, $Val extends AddressModel>
     Object? userId = null,
     Object? title = null,
     Object? address = null,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -69,6 +71,10 @@ class _$AddressModelCopyWithImpl<$Res, $Val extends AddressModel>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -81,7 +87,7 @@ abstract class _$$AddressModelImplCopyWith<$Res>
       __$$AddressModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String userId, String title, String address});
+  $Res call({String userId, String title, String address, String? id});
 }
 
 /// @nodoc
@@ -98,6 +104,7 @@ class __$$AddressModelImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? title = null,
     Object? address = null,
+    Object? id = freezed,
   }) {
     return _then(_$AddressModelImpl(
       userId: null == userId
@@ -112,6 +119,10 @@ class __$$AddressModelImplCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -120,7 +131,10 @@ class __$$AddressModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AddressModelImpl implements _AddressModel {
   const _$AddressModelImpl(
-      {required this.userId, required this.title, required this.address});
+      {required this.userId,
+      required this.title,
+      required this.address,
+      this.id});
 
   factory _$AddressModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$AddressModelImplFromJson(json);
@@ -131,10 +145,12 @@ class _$AddressModelImpl implements _AddressModel {
   final String title;
   @override
   final String address;
+  @override
+  final String? id;
 
   @override
   String toString() {
-    return 'AddressModel(userId: $userId, title: $title, address: $address)';
+    return 'AddressModel(userId: $userId, title: $title, address: $address, id: $id)';
   }
 
   @override
@@ -144,12 +160,13 @@ class _$AddressModelImpl implements _AddressModel {
             other is _$AddressModelImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.address, address) || other.address == address));
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, title, address);
+  int get hashCode => Object.hash(runtimeType, userId, title, address, id);
 
   @JsonKey(ignore: true)
   @override
@@ -169,7 +186,8 @@ abstract class _AddressModel implements AddressModel {
   const factory _AddressModel(
       {required final String userId,
       required final String title,
-      required final String address}) = _$AddressModelImpl;
+      required final String address,
+      final String? id}) = _$AddressModelImpl;
 
   factory _AddressModel.fromJson(Map<String, dynamic> json) =
       _$AddressModelImpl.fromJson;
@@ -180,6 +198,8 @@ abstract class _AddressModel implements AddressModel {
   String get title;
   @override
   String get address;
+  @override
+  String? get id;
   @override
   @JsonKey(ignore: true)
   _$$AddressModelImplCopyWith<_$AddressModelImpl> get copyWith =>

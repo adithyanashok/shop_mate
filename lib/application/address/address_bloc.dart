@@ -58,5 +58,37 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
         ),
       );
     });
+
+    on<_UpdateAddress>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
+      final addressOpt =
+          await iAddressFacade.updateAddress(event.addressModel, event.context);
+      emit(
+        addressOpt.fold(
+          (failure) => state.copyWith(
+            isLoading: false,
+          ),
+          (success) => state.copyWith(
+            isLoading: false,
+          ),
+        ),
+      );
+    });
+
+    on<_DeleteAddress>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
+      final addressOpt = await iAddressFacade.deleteAddress(
+          event.id, event.userId, event.context);
+      emit(
+        addressOpt.fold(
+          (failure) => state.copyWith(
+            isLoading: false,
+          ),
+          (success) => state.copyWith(
+            isLoading: false,
+          ),
+        ),
+      );
+    });
   }
 }

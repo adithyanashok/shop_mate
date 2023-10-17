@@ -13,17 +13,14 @@ import 'package:shop_mate/application/address/address_bloc.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/application/orders/orders_bloc.dart';
 import 'package:shop_mate/application/user/user_bloc.dart';
-import 'package:shop_mate/domain/address/model/address_model.dart';
 import 'package:shop_mate/domain/order/model/order_model.dart';
 import 'package:shop_mate/domain/payments/default_payment_profile_google_pay.dart';
 import 'package:shop_mate/domain/payments/payments.dart';
 import 'package:shop_mate/presentation/checkout/checkout_screens_widgets/checkout_screen_widgets.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
-import 'package:shop_mate/presentation/util/snackbar.dart';
+import 'package:shop_mate/presentation/widgets/address_widgets.dart';
 import 'package:shop_mate/presentation/widgets/asset_card.dart';
-import 'package:shop_mate/presentation/widgets/button_widgets.dart';
 import 'package:shop_mate/presentation/widgets/row_widget.dart';
-import 'package:shop_mate/presentation/widgets/text_form_field_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class CheckoutScreen extends StatefulWidget {
@@ -38,9 +35,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   String? selectedAddress;
   String? userId = FirebaseAuth.instance.currentUser?.uid;
 
-  String? title;
   late Razorpay _razorpay;
-  String? address;
   final _paymentItems = <PaymentItem>[];
   late final Future<PaymentConfiguration> _googlePayConfigFuture;
   @override
@@ -66,11 +61,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize payment items for Google Pay
     BlocProvider.of<AddressBloc>(context)
         .add(AddressEvent.getAddress(userId: userId!, context: context));
     final user = BlocProvider.of<UserBloc>(context).state.user;
-    log("USER ==> ${user.username}");
     return Scaffold(
       appBar: AppBar(
         title: const BuildRegularTextWidget(text: 'Checkout'),
@@ -87,48 +80,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   const BuildHeadingText(text: "Shipping Address"),
                   IconButton(
                     onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return SimpleDialog(
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
-                            title: const Text("Add Shipping address"),
-                            children: [
-                              BuildTextFormField(
-                                label: "Title",
-                                hintText: "Home",
-                                icon: Icons.home,
-                                func: (value) {
-                                  title = value;
-                                },
-                              ),
-                              BuildTextAreaField(
-                                label: "Address",
-                                hintText: 'Enter Address',
-                                icon: Icons.location_city_rounded,
-                                func: (value) {
-                                  address = value;
-                                },
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              BlocBuilder<AddressBloc, AddressState>(
-                                builder: (context, state) {
-                                  return BuildButtonWidget(
-                                    text: "Done",
-                                    state: state,
-                                    onTap: () {
-                                      addAddress(context);
-                                    },
-                                  );
-                                },
-                              )
-                            ],
-                          );
-                        },
-                      );
+                      addressDialog(context, userId!);
                     },
                     icon: const Icon(
                       Icons.add,
@@ -397,25 +349,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         ),
       ),
     );
-  }
-
-  void addAddress(BuildContext context) {
-    if (title != null || address != null) {
-      BlocProvider.of<AddressBloc>(context).add(
-        AddressEvent.addAddress(
-          addressModel: AddressModel(
-            userId: userId!,
-            title: title!,
-            address: address!,
-          ),
-          context: context,
-        ),
-      );
-      BlocProvider.of<AddressBloc>(context)
-          .add(AddressEvent.getAddress(userId: userId!, context: context));
-    } else {
-      snackBar(context: context, msg: "Please fill the form");
-    }
   }
 
   // Handle successful payment response

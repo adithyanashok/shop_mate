@@ -8,6 +8,7 @@ class AddressModel with _$AddressModel {
     required String userId,
     required String title,
     required String address,
+    String? id,
   }) = _AddressModel;
 
   factory AddressModel.fromJson(Map<String, dynamic> json) =>
