@@ -7,4 +7,8 @@ class LoginEvent with _$LoginEvent {
     required String password,
     required BuildContext buildContext,
   }) = _Login;
+
+  const factory LoginEvent.signInWithGoogle({
+    required BuildContext buildContext,
+  }) = _SignInWithGoogle;
 }

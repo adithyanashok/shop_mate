@@ -16,42 +16,46 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LoginEvent {
-  String get email => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
   BuildContext get buildContext => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
             String email, String password, BuildContext buildContext)
         login,
+    required TResult Function(BuildContext buildContext) signInWithGoogle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password, BuildContext buildContext)?
         login,
+    TResult? Function(BuildContext buildContext)? signInWithGoogle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password, BuildContext buildContext)?
         login,
+    TResult Function(BuildContext buildContext)? signInWithGoogle,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
+    required TResult Function(_SignInWithGoogle value) signInWithGoogle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Login value)? login,
+    TResult? Function(_SignInWithGoogle value)? signInWithGoogle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_SignInWithGoogle value)? signInWithGoogle,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -67,7 +71,7 @@ abstract class $LoginEventCopyWith<$Res> {
           LoginEvent value, $Res Function(LoginEvent) then) =
       _$LoginEventCopyWithImpl<$Res, LoginEvent>;
   @useResult
-  $Res call({String email, String password, BuildContext buildContext});
+  $Res call({BuildContext buildContext});
 }
 
 /// @nodoc
@@ -83,19 +87,9 @@ class _$LoginEventCopyWithImpl<$Res, $Val extends LoginEvent>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
-    Object? password = null,
     Object? buildContext = null,
   }) {
     return _then(_value.copyWith(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
       buildContext: null == buildContext
           ? _value.buildContext
           : buildContext // ignore: cast_nullable_to_non_nullable
@@ -193,6 +187,7 @@ class _$LoginImpl implements _Login {
     required TResult Function(
             String email, String password, BuildContext buildContext)
         login,
+    required TResult Function(BuildContext buildContext) signInWithGoogle,
   }) {
     return login(email, password, buildContext);
   }
@@ -202,6 +197,7 @@ class _$LoginImpl implements _Login {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password, BuildContext buildContext)?
         login,
+    TResult? Function(BuildContext buildContext)? signInWithGoogle,
   }) {
     return login?.call(email, password, buildContext);
   }
@@ -211,6 +207,7 @@ class _$LoginImpl implements _Login {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password, BuildContext buildContext)?
         login,
+    TResult Function(BuildContext buildContext)? signInWithGoogle,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -223,6 +220,7 @@ class _$LoginImpl implements _Login {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
+    required TResult Function(_SignInWithGoogle value) signInWithGoogle,
   }) {
     return login(this);
   }
@@ -231,6 +229,7 @@ class _$LoginImpl implements _Login {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Login value)? login,
+    TResult? Function(_SignInWithGoogle value)? signInWithGoogle,
   }) {
     return login?.call(this);
   }
@@ -239,6 +238,7 @@ class _$LoginImpl implements _Login {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_SignInWithGoogle value)? signInWithGoogle,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -254,15 +254,157 @@ abstract class _Login implements LoginEvent {
       required final String password,
       required final BuildContext buildContext}) = _$LoginImpl;
 
-  @override
   String get email;
-  @override
   String get password;
   @override
   BuildContext get buildContext;
   @override
   @JsonKey(ignore: true)
   _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SignInWithGoogleImplCopyWith<$Res>
+    implements $LoginEventCopyWith<$Res> {
+  factory _$$SignInWithGoogleImplCopyWith(_$SignInWithGoogleImpl value,
+          $Res Function(_$SignInWithGoogleImpl) then) =
+      __$$SignInWithGoogleImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({BuildContext buildContext});
+}
+
+/// @nodoc
+class __$$SignInWithGoogleImplCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$SignInWithGoogleImpl>
+    implements _$$SignInWithGoogleImplCopyWith<$Res> {
+  __$$SignInWithGoogleImplCopyWithImpl(_$SignInWithGoogleImpl _value,
+      $Res Function(_$SignInWithGoogleImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? buildContext = null,
+  }) {
+    return _then(_$SignInWithGoogleImpl(
+      buildContext: null == buildContext
+          ? _value.buildContext
+          : buildContext // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SignInWithGoogleImpl implements _SignInWithGoogle {
+  const _$SignInWithGoogleImpl({required this.buildContext});
+
+  @override
+  final BuildContext buildContext;
+
+  @override
+  String toString() {
+    return 'LoginEvent.signInWithGoogle(buildContext: $buildContext)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SignInWithGoogleImpl &&
+            (identical(other.buildContext, buildContext) ||
+                other.buildContext == buildContext));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, buildContext);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SignInWithGoogleImplCopyWith<_$SignInWithGoogleImpl> get copyWith =>
+      __$$SignInWithGoogleImplCopyWithImpl<_$SignInWithGoogleImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String email, String password, BuildContext buildContext)
+        login,
+    required TResult Function(BuildContext buildContext) signInWithGoogle,
+  }) {
+    return signInWithGoogle(buildContext);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password, BuildContext buildContext)?
+        login,
+    TResult? Function(BuildContext buildContext)? signInWithGoogle,
+  }) {
+    return signInWithGoogle?.call(buildContext);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password, BuildContext buildContext)?
+        login,
+    TResult Function(BuildContext buildContext)? signInWithGoogle,
+    required TResult orElse(),
+  }) {
+    if (signInWithGoogle != null) {
+      return signInWithGoogle(buildContext);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Login value) login,
+    required TResult Function(_SignInWithGoogle value) signInWithGoogle,
+  }) {
+    return signInWithGoogle(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Login value)? login,
+    TResult? Function(_SignInWithGoogle value)? signInWithGoogle,
+  }) {
+    return signInWithGoogle?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Login value)? login,
+    TResult Function(_SignInWithGoogle value)? signInWithGoogle,
+    required TResult orElse(),
+  }) {
+    if (signInWithGoogle != null) {
+      return signInWithGoogle(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SignInWithGoogle implements LoginEvent {
+  const factory _SignInWithGoogle({required final BuildContext buildContext}) =
+      _$SignInWithGoogleImpl;
+
+  @override
+  BuildContext get buildContext;
+  @override
+  @JsonKey(ignore: true)
+  _$$SignInWithGoogleImplCopyWith<_$SignInWithGoogleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

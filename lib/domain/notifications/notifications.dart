@@ -102,7 +102,6 @@ class FirebaseNotificationService {
 
   void onTokenRefresh() async {
     messaging.onTokenRefresh.listen((event) async {
-      print(event.toString());
       await db.collection(Collection.collectionUser).doc(user).update({
         'fcmToken': event.toString(),
       });

@@ -38,5 +38,27 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         ),
       );
     });
+
+    on<_SignInWithGoogle>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
+      final loginOpt = await iLoginFacade.signinWithGoogle(event.buildContext);
+      emit(
+        loginOpt.fold(
+          (failure) => state.copyWith(
+            isLoading: false,
+            loginOpt: Some(
+              Left(failure),
+            ),
+          ),
+          (success) => state.copyWith(
+            isLoading: false,
+            loginOpt: Some(
+              Right(success),
+            ),
+            user: success,
+          ),
+        ),
+      );
+    });
   }
 }

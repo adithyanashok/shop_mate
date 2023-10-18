@@ -109,17 +109,42 @@ class LoginScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    BuildAssetCard(
-                      asset: Image.asset(
-                        'assets/images/google.com.png',
-                        width: 50,
+                    GestureDetector(
+                      onTap: () {
+                        BlocProvider.of<LoginBloc>(context).add(
+                          LoginEvent.signInWithGoogle(buildContext: context),
+                        );
+                      },
+                      child: Card(
+                        color: AppColor.whiteColor,
+                        surfaceTintColor: AppColor.whiteColor,
+                        child: SizedBox(
+                          width: 0.8.sw,
+                          height: 70,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/images/google.com.png',
+                                width: 50,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const BuildSmallText(text: "Signin with google")
+                            ],
+                          ),
+                        ),
                       ),
                     ),
+                    // BuildAssetCard(
+                    //   asset: Image.asset(
+                    //     'assets/images/google.com.png',
+                    //     width: 50,
+                    //   ),
+                    // ),
                     const SizedBox(
                       width: 10,
-                    ),
-                    BuildAssetCard(
-                      asset: SvgPicture.asset('assets/images/fb.svg'),
                     ),
                   ],
                 ),

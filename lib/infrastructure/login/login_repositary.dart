@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shop_mate/application/user/user_bloc.dart';
 import 'package:shop_mate/domain/core/collections/collections.dart';
@@ -10,7 +11,6 @@ import 'package:shop_mate/domain/core/failures/main_failures.dart';
 import 'package:shop_mate/domain/core/role_based_login/role_based_login.dart';
 import 'package:shop_mate/domain/login/i_login_facade.dart';
 import 'package:shop_mate/domain/notifications/notifications.dart';
-import 'package:shop_mate/presentation/main_page.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
 
 @LazySingleton(as: ILoginFacade)
@@ -65,6 +65,33 @@ class LoginRepositary implements ILoginFacade {
       } else {
         snackBar(context: context, msg: e.code);
       }
+      return const Left(MainFailure.clientFailure());
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, User>> signinWithGoogle(context) async {
+    try {
+      final FirebaseAuth _auth = FirebaseAuth.instance;
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      if (googleAuth?.accessToken != null && googleAuth?.idToken != null) {
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth?.accessToken,
+          idToken: googleAuth?.idToken,
+        );
+        UserCredential userCredential =
+            await _auth.signInWithCredential(credential);
+        route(context);
+        final User? user = userCredential.user;
+        return Right(user!);
+      } else {
+        return const Left(MainFailure.clientFailure());
+      }
+    } on FirebaseAuthException catch (e) {
+      snackBar(context: context, msg: e.message.toString());
       return const Left(MainFailure.clientFailure());
     }
   }
