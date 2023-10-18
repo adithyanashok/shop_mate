@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_mate/domain/core/role_based_login/role_based_login.dart';
+import 'package:shop_mate/domain/local_auth/local_auth.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
@@ -11,8 +12,15 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Future.delayed(
       const Duration(seconds: 3),
-      () => {
-        if (user == true) {route(context)} else {route(context)}
+      () async {
+        final isAuthenticated = await LocalAuthApi.authenticate();
+        if (isAuthenticated) {
+          if (user == true) {
+            route(context);
+          } else {
+            route(context);
+          }
+        }
       },
     );
     return Scaffold(
