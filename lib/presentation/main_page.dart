@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
+import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/application/user/user_bloc.dart';
 import 'package:shop_mate/domain/notifications/notifications.dart';
 import 'package:shop_mate/presentation/cart/cart_screen.dart';
@@ -10,6 +11,7 @@ import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/home/home_screen.dart';
 import 'package:shop_mate/presentation/profile/profile_screen.dart';
 import 'package:shop_mate/presentation/search/search_screen.dart';
+import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key, this.user});
@@ -79,20 +81,48 @@ class BuildNavBar extends StatelessWidget {
             .add(BottomNavEvent.homeEvent(value: value));
       },
       currentIndex: state.value,
-      items: const [
-        BottomNavigationBarItem(
+      items: [
+        const BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             activeIcon: Icon(Icons.home_filled),
             label: "Home"),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
             icon: Icon(Icons.search),
             activeIcon: Icon(Icons.search_rounded),
             label: "Search"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            activeIcon: Icon(Icons.shopping_cart_rounded),
+            icon: Stack(
+              children: [
+                const Icon(Icons.shopping_cart_outlined),
+                Positioned(
+                  right: 0,
+                  bottom: 10,
+                  child: Container(
+                    height: 15,
+                    width: 15,
+                    decoration: BoxDecoration(
+                      color: AppColor.greenColor,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Center(
+                      child: BlocBuilder<CartBloc, CartState>(
+                        builder: (context, state) {
+                          return BuildSmallText(
+                            text: "${state.cartList.length + 1}",
+                            fontWeight: FontWeight.bold,
+                            color: AppColor.whiteColor,
+                            fontSize: 10,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+            activeIcon: const Icon(Icons.shopping_cart_rounded),
             label: "Cart"),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
             icon: Icon(Icons.person_2_outlined),
             activeIcon: Icon(Icons.person_2_rounded),
             label: "Profile"),
