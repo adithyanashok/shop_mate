@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:injectable/injectable.dart';
-import 'package:shop_mate/application/orders/orders_bloc.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/search/widgets/search_screen_widgets.dart';
@@ -21,8 +18,9 @@ class SearchScreen extends StatelessWidget {
           children: [
             BuildSearchBarWidget(
               onSubmitted: (query) {
+                query = query;
                 BlocProvider.of<ProductBloc>(context).add(
-                  ProductEvent.searchProduct(query: query),
+                  ProductEvent.searchProduct(query: query, sort: 'new'),
                 );
               },
             ),
@@ -38,8 +36,6 @@ class SearchScreen extends StatelessWidget {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       childAspectRatio: .5,
-                      // crossAxisSpacing: 2,
-                      // mainAxisSpacing: 10,
                     ),
                     itemBuilder: (context, index) {
                       final product = state.products[index];
@@ -59,6 +55,47 @@ class SearchScreen extends StatelessWidget {
               ),
             )
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class SortingWidget extends StatefulWidget {
+  SortingWidget({
+    Key? key,
+    this.selected = false,
+  }) : super(key: key);
+
+  bool selected;
+
+  @override
+  _SortingWidgetState createState() => _SortingWidgetState();
+}
+
+class _SortingWidgetState extends State<SortingWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          widget.selected = !widget.selected;
+        });
+        print(widget.selected);
+      },
+      child: Container(
+        color: widget.selected ? AppColor.greenColor : AppColor.whiteColor,
+        width: double.infinity,
+        height: 60,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          child: Text(
+            "Popular",
+            style: TextStyle(
+              color:
+                  widget.selected ? AppColor.whiteColor : AppColor.blackColor,
+            ),
+          ),
         ),
       ),
     );

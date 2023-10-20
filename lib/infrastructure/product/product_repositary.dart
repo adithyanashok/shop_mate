@@ -202,23 +202,41 @@ class ProductRepository implements IProductFacade {
 
   @override
   Future<Either<MainFailure, List<ProductModel>>> searchProducts(
-      String searchQuery) async {
+      String searchQuery, String sort) async {
     try {
       final db = FirebaseFirestore.instance;
-
+      print("Sort: $sort");
       QuerySnapshot querySnapshot = await db
           .collection(Collection.collectionProduct)
-          .where("name", isGreaterThanOrEqualTo: searchQuery)
-          .where('name', isLessThanOrEqualTo: '$searchQuery\uf7ff')
+          .where("category", isGreaterThanOrEqualTo: searchQuery)
+          .where('category', isLessThanOrEqualTo: '$searchQuery\uf7ff')
           .get();
 
       List<ProductModel> products = [];
       for (var docSnapshot in querySnapshot.docs) {
         var productData = docSnapshot.data() as Map<String, dynamic>;
+
         var user = ProductModel.fromJson(productData);
+
         products.add(user);
       }
-
+      if (sort == "low") {
+        products.sort(
+          (a, b) {
+            final double amountA = a.amount;
+            final double amountB = b.amount;
+            return amountA.compareTo(amountB);
+          },
+        );
+      } else if (sort == "high") {
+        products.sort(
+          (a, b) {
+            final double amountA = a.amount;
+            final double amountB = b.amount;
+            return amountB.compareTo(amountA);
+          },
+        );
+      }
       return Right(products);
     } catch (e) {
       print(e.toString());

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +37,8 @@ class RatingRepositary implements IRatingFacade {
     try {
       final db = FirebaseFirestore.instance;
       // create a empty array for ratings
-      List<RatingModel> ratings = [];
+      List<RatingModel> reviews = [];
+      List ratings = [];
       // db query
       final querySnapshot = await db
           .collection(Collection.collectionRating)
@@ -44,15 +47,26 @@ class RatingRepositary implements IRatingFacade {
       for (var docSnapshot in querySnapshot.docs) {
         // put docSnapshot to a new variable
         final ratingData = docSnapshot.data();
+        ratings.add(ratingData['rating']);
+        final totalRatings =
+            ratings.map((e) => e).reduce((value, element) => value + element) /
+                ratings.length;
+
+        db.collection(Collection.collectionProduct).doc(productId).update(
+          {
+            "rating": totalRatings,
+          },
+        );
         // add ratingData to ProductModel.fromJson to get product model as return
         final rating =
             RatingModel.fromJson(ratingData).copyWith(id: docSnapshot.id);
         // add rating to ratings array
-        ratings.add(rating);
+        reviews.add(rating);
       }
       // return result
-      return Right(ratings);
+      return Right(reviews);
     } catch (e) {
+      log(e.toString());
       snackBar(context: context, msg: e.toString());
       return const Left(MainFailure.clientFailure());
     }

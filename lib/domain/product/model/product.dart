@@ -7,6 +7,7 @@ part 'product.g.dart';
 class ProductModel with _$ProductModel {
   const factory ProductModel({
     required String name,
+    @Default(0) double rating,
     required String description,
     required String category,
     required double amount,

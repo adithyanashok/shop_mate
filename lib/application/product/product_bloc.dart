@@ -225,7 +225,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<_SearchProduct>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
-        final productOpt = await iProductFacade.searchProducts(event.query);
+        final productOpt =
+            await iProductFacade.searchProducts(event.query, event.sort!);
 
         emit(
           productOpt.fold(

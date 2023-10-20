@@ -48,5 +48,6 @@ class ProductEvent with _$ProductEvent {
 
   const factory ProductEvent.searchProduct({
     required String query,
+    String? sort,
   }) = _SearchProduct;
 }

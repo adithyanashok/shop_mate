@@ -135,7 +135,10 @@ class ProductScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            StarRatingWidget(initialRating: 4, readOnly: true),
+                            StarRatingWidget(
+                              initialRating: product.rating!.toDouble(),
+                              readOnly: true,
+                            ),
                           ],
                         ),
                         const SizedBox(

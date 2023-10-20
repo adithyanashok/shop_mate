@@ -21,6 +21,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ProductModel {
   String get name => throw _privateConstructorUsedError;
+  double get rating => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
@@ -42,6 +43,7 @@ abstract class $ProductModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String name,
+      double rating,
       String description,
       String category,
       double amount,
@@ -64,6 +66,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
   @override
   $Res call({
     Object? name = null,
+    Object? rating = null,
     Object? description = null,
     Object? category = null,
     Object? amount = null,
@@ -76,6 +79,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -114,6 +121,7 @@ abstract class _$$ProductModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String name,
+      double rating,
       String description,
       String category,
       double amount,
@@ -134,6 +142,7 @@ class __$$ProductModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
+    Object? rating = null,
     Object? description = null,
     Object? category = null,
     Object? amount = null,
@@ -146,6 +155,10 @@ class __$$ProductModelImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -179,6 +192,7 @@ class __$$ProductModelImplCopyWithImpl<$Res>
 class _$ProductModelImpl implements _ProductModel {
   const _$ProductModelImpl(
       {required this.name,
+      this.rating = 0,
       required this.description,
       required this.category,
       required this.amount,
@@ -192,6 +206,9 @@ class _$ProductModelImpl implements _ProductModel {
 
   @override
   final String name;
+  @override
+  @JsonKey()
+  final double rating;
   @override
   final String description;
   @override
@@ -215,7 +232,7 @@ class _$ProductModelImpl implements _ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(name: $name, description: $description, category: $category, amount: $amount, quantity: $quantity, image: $image, id: $id)';
+    return 'ProductModel(name: $name, rating: $rating, description: $description, category: $category, amount: $amount, quantity: $quantity, image: $image, id: $id)';
   }
 
   @override
@@ -224,6 +241,7 @@ class _$ProductModelImpl implements _ProductModel {
         (other.runtimeType == runtimeType &&
             other is _$ProductModelImpl &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.rating, rating) || other.rating == rating) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.category, category) ||
@@ -237,8 +255,16 @@ class _$ProductModelImpl implements _ProductModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, description, category,
-      amount, quantity, const DeepCollectionEquality().hash(_image), id);
+  int get hashCode => Object.hash(
+      runtimeType,
+      name,
+      rating,
+      description,
+      category,
+      amount,
+      quantity,
+      const DeepCollectionEquality().hash(_image),
+      id);
 
   @JsonKey(ignore: true)
   @override
@@ -257,6 +283,7 @@ class _$ProductModelImpl implements _ProductModel {
 abstract class _ProductModel implements ProductModel {
   const factory _ProductModel(
       {required final String name,
+      final double rating,
       required final String description,
       required final String category,
       required final double amount,
@@ -269,6 +296,8 @@ abstract class _ProductModel implements ProductModel {
 
   @override
   String get name;
+  @override
+  double get rating;
   @override
   String get description;
   @override
