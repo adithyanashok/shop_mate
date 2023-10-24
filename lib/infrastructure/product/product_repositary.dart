@@ -66,6 +66,7 @@ class ProductRepository implements IProductFacade {
           "amount": product.amount,
           "quantity": product.quantity,
           "category": product.category,
+          "deliveryFee": product.deliveryFee,
         },
       );
 
@@ -211,7 +212,16 @@ class ProductRepository implements IProductFacade {
         id = doc.id;
         return doc.data();
       });
-      final product = ProductModel.fromJson(docRef!).copyWith(id: id);
+      final discountPerc = docRef?['discount'];
+      final productActualAmount = docRef?['amount'];
+      //calculate discount
+      final discount = (discountPerc / 100) * productActualAmount;
+      //totaling the amount
+      final discountAmount = productActualAmount - discount;
+      final product = ProductModel.fromJson(docRef!).copyWith(
+        id: id,
+        discountedTotal: discountAmount,
+      );
 
       return Right(product);
     } catch (e) {
@@ -241,9 +251,11 @@ class ProductRepository implements IProductFacade {
       for (var docSnapshot in querySnapshot.docs) {
         var productData = docSnapshot.data() as Map<String, dynamic>;
 
-        var user = ProductModel.fromJson(productData);
+        var product = ProductModel.fromJson(productData).copyWith(
+          id: docSnapshot.id,
+        );
 
-        products.add(user);
+        products.add(product);
       }
       if (sort == "low") {
         products.sort(

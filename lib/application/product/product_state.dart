@@ -5,12 +5,14 @@ class ProductState with _$ProductState {
   const factory ProductState({
     required ProductModel product,
     @Default([]) List<ProductModel> products,
+    @Default([]) List<ProductModel> searchResults,
     required bool isLoading,
     required Option<Either<MainFailure, ProductModel>> productOpt,
     Option<Either<MainFailure, List<ProductModel>>>? productList,
     @Default([]) List<ProductModel> laptopListOpt,
     @Default([]) List<ProductModel> earphoneListOpt,
     @Default([]) List<ProductModel> mobileListOpt,
+    @Default([]) List<ProductModel> watchListOpt,
   }) = _ProductState;
 
   factory ProductState.initial() {

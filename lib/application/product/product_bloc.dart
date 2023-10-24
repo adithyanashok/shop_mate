@@ -158,6 +158,26 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       },
     );
 
+    on<_GetWatches>(
+      (event, emit) async {
+        emit(state.copyWith(isLoading: true));
+        final productOpt = await iProductFacade.getProductsByCategory(
+            event.category, event.context);
+        emit(
+          productOpt.fold(
+            (failure) => state.copyWith(
+                isLoading: false,
+                productList: Some(
+                  Left(failure),
+                )),
+            (success) => state.copyWith(
+              isLoading: false,
+              watchListOpt: success,
+            ),
+          ),
+        );
+      },
+    );
     on<_GetProduct>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
@@ -238,7 +258,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             ),
             (success) => state.copyWith(
               isLoading: false,
-              products: success,
+              searchResults: success,
               productList: Some(
                 Right(success),
               ),

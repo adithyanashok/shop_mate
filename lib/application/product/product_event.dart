@@ -42,6 +42,11 @@ class ProductEvent with _$ProductEvent {
     required BuildContext context,
   }) = _GetMobiles;
 
+  const factory ProductEvent.getWatches({
+    required String category,
+    required BuildContext context,
+  }) = _GetWatches;
+
   const factory ProductEvent.getProduct({
     required String productId,
     required BuildContext context,

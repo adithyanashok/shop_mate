@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class BuildProductCard extends StatelessWidget {
   BuildProductCard({
@@ -58,13 +59,11 @@ class BuildProductCard extends StatelessWidget {
                               .w400, // Set the font weight for the title
                         ),
                       ),
-                      Text(
-                        "\$$price", // Display the product price
-                        style: TextStyle(
-                          fontSize: 20.sp, // Set the font size for the price
-                          fontWeight: FontWeight
-                              .w400, // Set the font weight for the price
-                        ),
+                      BuildSmallText(
+                        text: "\$$price",
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                        textOverflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(
                         width: 130,

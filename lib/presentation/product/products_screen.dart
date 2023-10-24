@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
+import 'package:shop_mate/presentation/constants/route_animation.dart';
+import 'package:shop_mate/presentation/product/product_screen.dart';
 import 'package:shop_mate/presentation/widgets/loading_widget.dart';
 import 'package:shop_mate/presentation/widgets/product_card.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -20,7 +22,7 @@ class ProductsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: BuildRegularTextWidget(
-          text: '${productCat.toUpperCase()}S',
+          text: productCat.toUpperCase(),
         ),
         centerTitle: true,
       ),
@@ -57,6 +59,14 @@ class ProductsScreen extends StatelessWidget {
                                   title: product.name,
                                   price: product.amount.toString(),
                                   description: product.description,
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      buildNavigation(
+                                        route: ProductScreen(),
+                                        arguments: product.id,
+                                      ),
+                                    );
+                                  },
                                 );
                               },
                               childCount: state.products.length,

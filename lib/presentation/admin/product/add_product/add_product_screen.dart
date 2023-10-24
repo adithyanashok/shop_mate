@@ -123,6 +123,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   DropdownMenuEntry(value: 'laptop', label: 'Laptops'),
                   DropdownMenuEntry(value: 'mobile', label: 'Mobiles'),
                   DropdownMenuEntry(value: 'earphone', label: 'Earphones'),
+                  DropdownMenuEntry(value: 'watch', label: 'Watches'),
                 ],
               ),
               TextButton.icon(
@@ -246,6 +247,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     } else {
       final am = double.parse(amount!);
       final qty = int.parse(quantity!);
+      final delfee = double.parse(delivery!);
       BlocProvider.of<ProductBloc>(context).add(
         ProductEvent.addProduct(
           product: ProductModel(
@@ -256,6 +258,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
             category: category!,
             image: [],
             date: DateTime.now(),
+            deliveryFee: delfee,
           ),
           selectedImages: image!,
           context: context,

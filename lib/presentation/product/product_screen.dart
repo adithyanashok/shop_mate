@@ -137,22 +137,42 @@ class ProductScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              margin: const EdgeInsets.only(left: 20),
-                              child: Text(
-                                "\$${product.amount.round()}",
-                                style: TextStyle(
-                                  fontSize: 35.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColor.greenColor,
+                            Row(
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(left: 10),
+                                  child: BuildRegularTextWidget(
+                                    text:
+                                        "\$${product.discountedTotal.round()}",
+                                    fontSize: 35.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColor.greenColor,
+                                  ),
                                 ),
-                              ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                BuildRegularTextWidget(
+                                  text: "\$${product.amount.round()}",
+                                  fontSize: 12.sp,
+                                  color: AppColor.colorGrey1,
+                                  textDecoration: TextDecoration.lineThrough,
+                                ),
+                              ],
                             ),
                             StarRatingWidget(
                               initialRating: product.rating.toDouble(),
                               readOnly: true,
                             ),
                           ],
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(left: 10),
+                          child: BuildRegularTextWidget(
+                            text: "${product.discount}% off",
+                            fontSize: 12.sp,
+                            color: const Color.fromARGB(255, 40, 204, 48),
+                          ),
                         ),
                         const SizedBox(
                           height: 30,
@@ -181,8 +201,8 @@ class ProductScreen extends StatelessWidget {
                                           "quantity": 1,
                                           "image": product.image![0],
                                           "productId": product.id,
-                                          "deliveryFee": 50,
-                                          "discount": 10,
+                                          "deliveryFee": product.deliveryFee,
+                                          "discount": product.discount,
                                         }
                                       ],
                                       totalDeliveryFee: 0,
@@ -194,7 +214,7 @@ class ProductScreen extends StatelessWidget {
                                 );
                                 Navigator.of(context).push(
                                   buildNavigation(
-                                    route: CheckoutScreen(),
+                                    route: const CheckoutScreen(),
                                   ),
                                 );
                               },
@@ -243,8 +263,10 @@ class ProductScreen extends StatelessWidget {
                                                     "quantity": 1,
                                                     "image": product.image![0],
                                                     "productId": product.id,
-                                                    "deliveryFee": 50,
-                                                    "discount": 10,
+                                                    "deliveryFee":
+                                                        product.deliveryFee,
+                                                    "discount":
+                                                        product.discount,
                                                   }
                                                 ],
                                                 totalDeliveryFee: 0,

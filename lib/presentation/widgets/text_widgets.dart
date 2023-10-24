@@ -176,12 +176,14 @@ class BuildRegularTextWidget extends StatelessWidget {
     this.letterSpacing = 0,
     this.color = AppColor.blackColor,
     this.fontWeight = FontWeight.w400,
+    this.textDecoration = TextDecoration.none,
   });
   final String text;
   final double fontSize;
   final double letterSpacing;
   final Color color;
   final FontWeight fontWeight;
+  final TextDecoration textDecoration;
 
   @override
   Widget build(BuildContext context) {
@@ -192,6 +194,7 @@ class BuildRegularTextWidget extends StatelessWidget {
         fontSize: fontSize.sp,
         fontWeight: fontWeight,
         letterSpacing: letterSpacing,
+        decoration: textDecoration,
       ),
     );
   }

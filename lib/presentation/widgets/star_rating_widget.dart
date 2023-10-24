@@ -8,7 +8,7 @@ class StarRatingWidget extends StatelessWidget {
     required this.initialRating,
     required this.readOnly,
     this.onChanged,
-    this.starSize = 20,
+    this.starSize = 18,
     this.filledColor = AppColor.greenColor,
   }) : super(key: key);
 

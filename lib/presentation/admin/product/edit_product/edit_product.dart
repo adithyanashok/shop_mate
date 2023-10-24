@@ -34,6 +34,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   String? amount;
 
   String? quantity;
+  String? delivery;
 
   String? category;
 
@@ -47,11 +48,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
     amount = widget.product.amount.toString();
     quantity = widget.product.quantity.toString();
     category = widget.product.category;
+    delivery = widget.product.deliveryFee.toString();
   }
 
   @override
   Widget build(BuildContext context) {
-    log(widget.product.id.toString());
+    log(widget.product.toString());
     return Container(
       color: AppColor.whiteColor,
       width: 1.sw,
@@ -116,6 +118,17 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       value.isNotEmpty ? value : widget.product.quantity;
                 },
               ),
+              BuildTextFormField(
+                label: "Delivery Fee",
+                hintText: 'Enter delivery fee',
+                icon: Icons.delivery_dining_outlined,
+                initialValue: widget.product.deliveryFee.toString(),
+                keyboardType: TextInputType.number,
+                func: (value) {
+                  delivery = value =
+                      value.isNotEmpty ? value : widget.product.deliveryFee;
+                },
+              ),
               const SizedBox(
                 height: 10,
               ),
@@ -131,9 +144,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 ),
                 hintText: "Category",
                 dropdownMenuEntries: const [
-                  DropdownMenuEntry(value: 'laptop', label: 'Laptops'),
-                  DropdownMenuEntry(value: 'mobile', label: 'Mobiles'),
-                  DropdownMenuEntry(value: 'earphone', label: 'Earphones'),
+                  DropdownMenuEntry(value: 'laptops', label: 'Laptops'),
+                  DropdownMenuEntry(value: 'mobiles', label: 'Mobiles'),
+                  DropdownMenuEntry(value: 'earphones', label: 'Earphones'),
+                  DropdownMenuEntry(value: 'watches', label: 'Watches'),
                 ],
                 initialSelection: widget.product.category,
               ),
@@ -170,6 +184,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         quantity,
                         category,
                         amount,
+                        delivery,
                         context,
                       );
                       BlocProvider.of<ProductBloc>(context).add(
@@ -202,16 +217,20 @@ class _EditProductScreenState extends State<EditProductScreen> {
     }
   }
 
-  void uploadData(name, description, quantity, category, amount, context) {
+  void uploadData(
+      name, description, quantity, category, amount, delivery, context) {
     if (name == null ||
         description == null ||
         quantity == null ||
         category == null ||
-        amount == null) {
+        amount == null ||
+        delivery == null) {
       snackBar(context: context, msg: 'Please fill the form');
     } else {
       final parsedAmount = double.parse(amount!);
       final parsedQty = int.parse(quantity!);
+      final parsedDelivery = double.parse(delivery!);
+      print(parsedDelivery);
       BlocProvider.of<ProductBloc>(context).add(
         ProductEvent.editProduct(
           product: ProductModel(
@@ -221,6 +240,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
             amount: parsedAmount,
             quantity: parsedQty,
             id: widget.product.id,
+            deliveryFee: parsedDelivery,
           ),
           selectedImages: image,
           context: context,

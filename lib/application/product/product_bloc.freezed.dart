@@ -33,6 +33,7 @@ mixin _$ProductEvent {
     required TResult Function(String category, BuildContext context)
         getEarphones,
     required TResult Function(String category, BuildContext context) getMobiles,
+    required TResult Function(String category, BuildContext context) getWatches,
     required TResult Function(String productId, BuildContext context)
         getProduct,
     required TResult Function(String query, String? sort) searchProduct,
@@ -53,6 +54,7 @@ mixin _$ProductEvent {
     TResult? Function(String category, BuildContext context)? getLaptops,
     TResult? Function(String category, BuildContext context)? getEarphones,
     TResult? Function(String category, BuildContext context)? getMobiles,
+    TResult? Function(String category, BuildContext context)? getWatches,
     TResult? Function(String productId, BuildContext context)? getProduct,
     TResult? Function(String query, String? sort)? searchProduct,
   }) =>
@@ -72,6 +74,7 @@ mixin _$ProductEvent {
     TResult Function(String category, BuildContext context)? getLaptops,
     TResult Function(String category, BuildContext context)? getEarphones,
     TResult Function(String category, BuildContext context)? getMobiles,
+    TResult Function(String category, BuildContext context)? getWatches,
     TResult Function(String productId, BuildContext context)? getProduct,
     TResult Function(String query, String? sort)? searchProduct,
     required TResult orElse(),
@@ -88,6 +91,7 @@ mixin _$ProductEvent {
     required TResult Function(_GetLaptops value) getLaptops,
     required TResult Function(_GetEarphones value) getEarphones,
     required TResult Function(_GetMobiles value) getMobiles,
+    required TResult Function(_GetWatches value) getWatches,
     required TResult Function(_GetProduct value) getProduct,
     required TResult Function(_SearchProduct value) searchProduct,
   }) =>
@@ -102,6 +106,7 @@ mixin _$ProductEvent {
     TResult? Function(_GetLaptops value)? getLaptops,
     TResult? Function(_GetEarphones value)? getEarphones,
     TResult? Function(_GetMobiles value)? getMobiles,
+    TResult? Function(_GetWatches value)? getWatches,
     TResult? Function(_GetProduct value)? getProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
   }) =>
@@ -116,6 +121,7 @@ mixin _$ProductEvent {
     TResult Function(_GetLaptops value)? getLaptops,
     TResult Function(_GetEarphones value)? getEarphones,
     TResult Function(_GetMobiles value)? getMobiles,
+    TResult Function(_GetWatches value)? getWatches,
     TResult Function(_GetProduct value)? getProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     required TResult orElse(),
@@ -259,6 +265,7 @@ class _$AddProductImpl implements _AddProduct {
     required TResult Function(String category, BuildContext context)
         getEarphones,
     required TResult Function(String category, BuildContext context) getMobiles,
+    required TResult Function(String category, BuildContext context) getWatches,
     required TResult Function(String productId, BuildContext context)
         getProduct,
     required TResult Function(String query, String? sort) searchProduct,
@@ -282,6 +289,7 @@ class _$AddProductImpl implements _AddProduct {
     TResult? Function(String category, BuildContext context)? getLaptops,
     TResult? Function(String category, BuildContext context)? getEarphones,
     TResult? Function(String category, BuildContext context)? getMobiles,
+    TResult? Function(String category, BuildContext context)? getWatches,
     TResult? Function(String productId, BuildContext context)? getProduct,
     TResult? Function(String query, String? sort)? searchProduct,
   }) {
@@ -304,6 +312,7 @@ class _$AddProductImpl implements _AddProduct {
     TResult Function(String category, BuildContext context)? getLaptops,
     TResult Function(String category, BuildContext context)? getEarphones,
     TResult Function(String category, BuildContext context)? getMobiles,
+    TResult Function(String category, BuildContext context)? getWatches,
     TResult Function(String productId, BuildContext context)? getProduct,
     TResult Function(String query, String? sort)? searchProduct,
     required TResult orElse(),
@@ -326,6 +335,7 @@ class _$AddProductImpl implements _AddProduct {
     required TResult Function(_GetLaptops value) getLaptops,
     required TResult Function(_GetEarphones value) getEarphones,
     required TResult Function(_GetMobiles value) getMobiles,
+    required TResult Function(_GetWatches value) getWatches,
     required TResult Function(_GetProduct value) getProduct,
     required TResult Function(_SearchProduct value) searchProduct,
   }) {
@@ -343,6 +353,7 @@ class _$AddProductImpl implements _AddProduct {
     TResult? Function(_GetLaptops value)? getLaptops,
     TResult? Function(_GetEarphones value)? getEarphones,
     TResult? Function(_GetMobiles value)? getMobiles,
+    TResult? Function(_GetWatches value)? getWatches,
     TResult? Function(_GetProduct value)? getProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
   }) {
@@ -360,6 +371,7 @@ class _$AddProductImpl implements _AddProduct {
     TResult Function(_GetLaptops value)? getLaptops,
     TResult Function(_GetEarphones value)? getEarphones,
     TResult Function(_GetMobiles value)? getMobiles,
+    TResult Function(_GetWatches value)? getWatches,
     TResult Function(_GetProduct value)? getProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     required TResult orElse(),
@@ -506,6 +518,7 @@ class _$EditProductImpl implements _EditProduct {
     required TResult Function(String category, BuildContext context)
         getEarphones,
     required TResult Function(String category, BuildContext context) getMobiles,
+    required TResult Function(String category, BuildContext context) getWatches,
     required TResult Function(String productId, BuildContext context)
         getProduct,
     required TResult Function(String query, String? sort) searchProduct,
@@ -529,6 +542,7 @@ class _$EditProductImpl implements _EditProduct {
     TResult? Function(String category, BuildContext context)? getLaptops,
     TResult? Function(String category, BuildContext context)? getEarphones,
     TResult? Function(String category, BuildContext context)? getMobiles,
+    TResult? Function(String category, BuildContext context)? getWatches,
     TResult? Function(String productId, BuildContext context)? getProduct,
     TResult? Function(String query, String? sort)? searchProduct,
   }) {
@@ -551,6 +565,7 @@ class _$EditProductImpl implements _EditProduct {
     TResult Function(String category, BuildContext context)? getLaptops,
     TResult Function(String category, BuildContext context)? getEarphones,
     TResult Function(String category, BuildContext context)? getMobiles,
+    TResult Function(String category, BuildContext context)? getWatches,
     TResult Function(String productId, BuildContext context)? getProduct,
     TResult Function(String query, String? sort)? searchProduct,
     required TResult orElse(),
@@ -573,6 +588,7 @@ class _$EditProductImpl implements _EditProduct {
     required TResult Function(_GetLaptops value) getLaptops,
     required TResult Function(_GetEarphones value) getEarphones,
     required TResult Function(_GetMobiles value) getMobiles,
+    required TResult Function(_GetWatches value) getWatches,
     required TResult Function(_GetProduct value) getProduct,
     required TResult Function(_SearchProduct value) searchProduct,
   }) {
@@ -590,6 +606,7 @@ class _$EditProductImpl implements _EditProduct {
     TResult? Function(_GetLaptops value)? getLaptops,
     TResult? Function(_GetEarphones value)? getEarphones,
     TResult? Function(_GetMobiles value)? getMobiles,
+    TResult? Function(_GetWatches value)? getWatches,
     TResult? Function(_GetProduct value)? getProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
   }) {
@@ -607,6 +624,7 @@ class _$EditProductImpl implements _EditProduct {
     TResult Function(_GetLaptops value)? getLaptops,
     TResult Function(_GetEarphones value)? getEarphones,
     TResult Function(_GetMobiles value)? getMobiles,
+    TResult Function(_GetWatches value)? getWatches,
     TResult Function(_GetProduct value)? getProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     required TResult orElse(),
@@ -720,6 +738,7 @@ class _$DeleteProductImpl implements _DeleteProduct {
     required TResult Function(String category, BuildContext context)
         getEarphones,
     required TResult Function(String category, BuildContext context) getMobiles,
+    required TResult Function(String category, BuildContext context) getWatches,
     required TResult Function(String productId, BuildContext context)
         getProduct,
     required TResult Function(String query, String? sort) searchProduct,
@@ -743,6 +762,7 @@ class _$DeleteProductImpl implements _DeleteProduct {
     TResult? Function(String category, BuildContext context)? getLaptops,
     TResult? Function(String category, BuildContext context)? getEarphones,
     TResult? Function(String category, BuildContext context)? getMobiles,
+    TResult? Function(String category, BuildContext context)? getWatches,
     TResult? Function(String productId, BuildContext context)? getProduct,
     TResult? Function(String query, String? sort)? searchProduct,
   }) {
@@ -765,6 +785,7 @@ class _$DeleteProductImpl implements _DeleteProduct {
     TResult Function(String category, BuildContext context)? getLaptops,
     TResult Function(String category, BuildContext context)? getEarphones,
     TResult Function(String category, BuildContext context)? getMobiles,
+    TResult Function(String category, BuildContext context)? getWatches,
     TResult Function(String productId, BuildContext context)? getProduct,
     TResult Function(String query, String? sort)? searchProduct,
     required TResult orElse(),
@@ -787,6 +808,7 @@ class _$DeleteProductImpl implements _DeleteProduct {
     required TResult Function(_GetLaptops value) getLaptops,
     required TResult Function(_GetEarphones value) getEarphones,
     required TResult Function(_GetMobiles value) getMobiles,
+    required TResult Function(_GetWatches value) getWatches,
     required TResult Function(_GetProduct value) getProduct,
     required TResult Function(_SearchProduct value) searchProduct,
   }) {
@@ -804,6 +826,7 @@ class _$DeleteProductImpl implements _DeleteProduct {
     TResult? Function(_GetLaptops value)? getLaptops,
     TResult? Function(_GetEarphones value)? getEarphones,
     TResult? Function(_GetMobiles value)? getMobiles,
+    TResult? Function(_GetWatches value)? getWatches,
     TResult? Function(_GetProduct value)? getProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
   }) {
@@ -821,6 +844,7 @@ class _$DeleteProductImpl implements _DeleteProduct {
     TResult Function(_GetLaptops value)? getLaptops,
     TResult Function(_GetEarphones value)? getEarphones,
     TResult Function(_GetMobiles value)? getMobiles,
+    TResult Function(_GetWatches value)? getWatches,
     TResult Function(_GetProduct value)? getProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     required TResult orElse(),
@@ -924,6 +948,7 @@ class _$GetAllProductImpl implements _GetAllProduct {
     required TResult Function(String category, BuildContext context)
         getEarphones,
     required TResult Function(String category, BuildContext context) getMobiles,
+    required TResult Function(String category, BuildContext context) getWatches,
     required TResult Function(String productId, BuildContext context)
         getProduct,
     required TResult Function(String query, String? sort) searchProduct,
@@ -947,6 +972,7 @@ class _$GetAllProductImpl implements _GetAllProduct {
     TResult? Function(String category, BuildContext context)? getLaptops,
     TResult? Function(String category, BuildContext context)? getEarphones,
     TResult? Function(String category, BuildContext context)? getMobiles,
+    TResult? Function(String category, BuildContext context)? getWatches,
     TResult? Function(String productId, BuildContext context)? getProduct,
     TResult? Function(String query, String? sort)? searchProduct,
   }) {
@@ -969,6 +995,7 @@ class _$GetAllProductImpl implements _GetAllProduct {
     TResult Function(String category, BuildContext context)? getLaptops,
     TResult Function(String category, BuildContext context)? getEarphones,
     TResult Function(String category, BuildContext context)? getMobiles,
+    TResult Function(String category, BuildContext context)? getWatches,
     TResult Function(String productId, BuildContext context)? getProduct,
     TResult Function(String query, String? sort)? searchProduct,
     required TResult orElse(),
@@ -991,6 +1018,7 @@ class _$GetAllProductImpl implements _GetAllProduct {
     required TResult Function(_GetLaptops value) getLaptops,
     required TResult Function(_GetEarphones value) getEarphones,
     required TResult Function(_GetMobiles value) getMobiles,
+    required TResult Function(_GetWatches value) getWatches,
     required TResult Function(_GetProduct value) getProduct,
     required TResult Function(_SearchProduct value) searchProduct,
   }) {
@@ -1008,6 +1036,7 @@ class _$GetAllProductImpl implements _GetAllProduct {
     TResult? Function(_GetLaptops value)? getLaptops,
     TResult? Function(_GetEarphones value)? getEarphones,
     TResult? Function(_GetMobiles value)? getMobiles,
+    TResult? Function(_GetWatches value)? getWatches,
     TResult? Function(_GetProduct value)? getProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
   }) {
@@ -1025,6 +1054,7 @@ class _$GetAllProductImpl implements _GetAllProduct {
     TResult Function(_GetLaptops value)? getLaptops,
     TResult Function(_GetEarphones value)? getEarphones,
     TResult Function(_GetMobiles value)? getMobiles,
+    TResult Function(_GetWatches value)? getWatches,
     TResult Function(_GetProduct value)? getProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     required TResult orElse(),
@@ -1137,6 +1167,7 @@ class _$GetProductsByCategoryImpl implements _GetProductsByCategory {
     required TResult Function(String category, BuildContext context)
         getEarphones,
     required TResult Function(String category, BuildContext context) getMobiles,
+    required TResult Function(String category, BuildContext context) getWatches,
     required TResult Function(String productId, BuildContext context)
         getProduct,
     required TResult Function(String query, String? sort) searchProduct,
@@ -1160,6 +1191,7 @@ class _$GetProductsByCategoryImpl implements _GetProductsByCategory {
     TResult? Function(String category, BuildContext context)? getLaptops,
     TResult? Function(String category, BuildContext context)? getEarphones,
     TResult? Function(String category, BuildContext context)? getMobiles,
+    TResult? Function(String category, BuildContext context)? getWatches,
     TResult? Function(String productId, BuildContext context)? getProduct,
     TResult? Function(String query, String? sort)? searchProduct,
   }) {
@@ -1182,6 +1214,7 @@ class _$GetProductsByCategoryImpl implements _GetProductsByCategory {
     TResult Function(String category, BuildContext context)? getLaptops,
     TResult Function(String category, BuildContext context)? getEarphones,
     TResult Function(String category, BuildContext context)? getMobiles,
+    TResult Function(String category, BuildContext context)? getWatches,
     TResult Function(String productId, BuildContext context)? getProduct,
     TResult Function(String query, String? sort)? searchProduct,
     required TResult orElse(),
@@ -1204,6 +1237,7 @@ class _$GetProductsByCategoryImpl implements _GetProductsByCategory {
     required TResult Function(_GetLaptops value) getLaptops,
     required TResult Function(_GetEarphones value) getEarphones,
     required TResult Function(_GetMobiles value) getMobiles,
+    required TResult Function(_GetWatches value) getWatches,
     required TResult Function(_GetProduct value) getProduct,
     required TResult Function(_SearchProduct value) searchProduct,
   }) {
@@ -1221,6 +1255,7 @@ class _$GetProductsByCategoryImpl implements _GetProductsByCategory {
     TResult? Function(_GetLaptops value)? getLaptops,
     TResult? Function(_GetEarphones value)? getEarphones,
     TResult? Function(_GetMobiles value)? getMobiles,
+    TResult? Function(_GetWatches value)? getWatches,
     TResult? Function(_GetProduct value)? getProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
   }) {
@@ -1238,6 +1273,7 @@ class _$GetProductsByCategoryImpl implements _GetProductsByCategory {
     TResult Function(_GetLaptops value)? getLaptops,
     TResult Function(_GetEarphones value)? getEarphones,
     TResult Function(_GetMobiles value)? getMobiles,
+    TResult Function(_GetWatches value)? getWatches,
     TResult Function(_GetProduct value)? getProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     required TResult orElse(),
@@ -1349,6 +1385,7 @@ class _$GetLaptopsImpl implements _GetLaptops {
     required TResult Function(String category, BuildContext context)
         getEarphones,
     required TResult Function(String category, BuildContext context) getMobiles,
+    required TResult Function(String category, BuildContext context) getWatches,
     required TResult Function(String productId, BuildContext context)
         getProduct,
     required TResult Function(String query, String? sort) searchProduct,
@@ -1372,6 +1409,7 @@ class _$GetLaptopsImpl implements _GetLaptops {
     TResult? Function(String category, BuildContext context)? getLaptops,
     TResult? Function(String category, BuildContext context)? getEarphones,
     TResult? Function(String category, BuildContext context)? getMobiles,
+    TResult? Function(String category, BuildContext context)? getWatches,
     TResult? Function(String productId, BuildContext context)? getProduct,
     TResult? Function(String query, String? sort)? searchProduct,
   }) {
@@ -1394,6 +1432,7 @@ class _$GetLaptopsImpl implements _GetLaptops {
     TResult Function(String category, BuildContext context)? getLaptops,
     TResult Function(String category, BuildContext context)? getEarphones,
     TResult Function(String category, BuildContext context)? getMobiles,
+    TResult Function(String category, BuildContext context)? getWatches,
     TResult Function(String productId, BuildContext context)? getProduct,
     TResult Function(String query, String? sort)? searchProduct,
     required TResult orElse(),
@@ -1416,6 +1455,7 @@ class _$GetLaptopsImpl implements _GetLaptops {
     required TResult Function(_GetLaptops value) getLaptops,
     required TResult Function(_GetEarphones value) getEarphones,
     required TResult Function(_GetMobiles value) getMobiles,
+    required TResult Function(_GetWatches value) getWatches,
     required TResult Function(_GetProduct value) getProduct,
     required TResult Function(_SearchProduct value) searchProduct,
   }) {
@@ -1433,6 +1473,7 @@ class _$GetLaptopsImpl implements _GetLaptops {
     TResult? Function(_GetLaptops value)? getLaptops,
     TResult? Function(_GetEarphones value)? getEarphones,
     TResult? Function(_GetMobiles value)? getMobiles,
+    TResult? Function(_GetWatches value)? getWatches,
     TResult? Function(_GetProduct value)? getProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
   }) {
@@ -1450,6 +1491,7 @@ class _$GetLaptopsImpl implements _GetLaptops {
     TResult Function(_GetLaptops value)? getLaptops,
     TResult Function(_GetEarphones value)? getEarphones,
     TResult Function(_GetMobiles value)? getMobiles,
+    TResult Function(_GetWatches value)? getWatches,
     TResult Function(_GetProduct value)? getProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     required TResult orElse(),
@@ -1561,6 +1603,7 @@ class _$GetEarphonesImpl implements _GetEarphones {
     required TResult Function(String category, BuildContext context)
         getEarphones,
     required TResult Function(String category, BuildContext context) getMobiles,
+    required TResult Function(String category, BuildContext context) getWatches,
     required TResult Function(String productId, BuildContext context)
         getProduct,
     required TResult Function(String query, String? sort) searchProduct,
@@ -1584,6 +1627,7 @@ class _$GetEarphonesImpl implements _GetEarphones {
     TResult? Function(String category, BuildContext context)? getLaptops,
     TResult? Function(String category, BuildContext context)? getEarphones,
     TResult? Function(String category, BuildContext context)? getMobiles,
+    TResult? Function(String category, BuildContext context)? getWatches,
     TResult? Function(String productId, BuildContext context)? getProduct,
     TResult? Function(String query, String? sort)? searchProduct,
   }) {
@@ -1606,6 +1650,7 @@ class _$GetEarphonesImpl implements _GetEarphones {
     TResult Function(String category, BuildContext context)? getLaptops,
     TResult Function(String category, BuildContext context)? getEarphones,
     TResult Function(String category, BuildContext context)? getMobiles,
+    TResult Function(String category, BuildContext context)? getWatches,
     TResult Function(String productId, BuildContext context)? getProduct,
     TResult Function(String query, String? sort)? searchProduct,
     required TResult orElse(),
@@ -1628,6 +1673,7 @@ class _$GetEarphonesImpl implements _GetEarphones {
     required TResult Function(_GetLaptops value) getLaptops,
     required TResult Function(_GetEarphones value) getEarphones,
     required TResult Function(_GetMobiles value) getMobiles,
+    required TResult Function(_GetWatches value) getWatches,
     required TResult Function(_GetProduct value) getProduct,
     required TResult Function(_SearchProduct value) searchProduct,
   }) {
@@ -1645,6 +1691,7 @@ class _$GetEarphonesImpl implements _GetEarphones {
     TResult? Function(_GetLaptops value)? getLaptops,
     TResult? Function(_GetEarphones value)? getEarphones,
     TResult? Function(_GetMobiles value)? getMobiles,
+    TResult? Function(_GetWatches value)? getWatches,
     TResult? Function(_GetProduct value)? getProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
   }) {
@@ -1662,6 +1709,7 @@ class _$GetEarphonesImpl implements _GetEarphones {
     TResult Function(_GetLaptops value)? getLaptops,
     TResult Function(_GetEarphones value)? getEarphones,
     TResult Function(_GetMobiles value)? getMobiles,
+    TResult Function(_GetWatches value)? getWatches,
     TResult Function(_GetProduct value)? getProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     required TResult orElse(),
@@ -1773,6 +1821,7 @@ class _$GetMobilesImpl implements _GetMobiles {
     required TResult Function(String category, BuildContext context)
         getEarphones,
     required TResult Function(String category, BuildContext context) getMobiles,
+    required TResult Function(String category, BuildContext context) getWatches,
     required TResult Function(String productId, BuildContext context)
         getProduct,
     required TResult Function(String query, String? sort) searchProduct,
@@ -1796,6 +1845,7 @@ class _$GetMobilesImpl implements _GetMobiles {
     TResult? Function(String category, BuildContext context)? getLaptops,
     TResult? Function(String category, BuildContext context)? getEarphones,
     TResult? Function(String category, BuildContext context)? getMobiles,
+    TResult? Function(String category, BuildContext context)? getWatches,
     TResult? Function(String productId, BuildContext context)? getProduct,
     TResult? Function(String query, String? sort)? searchProduct,
   }) {
@@ -1818,6 +1868,7 @@ class _$GetMobilesImpl implements _GetMobiles {
     TResult Function(String category, BuildContext context)? getLaptops,
     TResult Function(String category, BuildContext context)? getEarphones,
     TResult Function(String category, BuildContext context)? getMobiles,
+    TResult Function(String category, BuildContext context)? getWatches,
     TResult Function(String productId, BuildContext context)? getProduct,
     TResult Function(String query, String? sort)? searchProduct,
     required TResult orElse(),
@@ -1840,6 +1891,7 @@ class _$GetMobilesImpl implements _GetMobiles {
     required TResult Function(_GetLaptops value) getLaptops,
     required TResult Function(_GetEarphones value) getEarphones,
     required TResult Function(_GetMobiles value) getMobiles,
+    required TResult Function(_GetWatches value) getWatches,
     required TResult Function(_GetProduct value) getProduct,
     required TResult Function(_SearchProduct value) searchProduct,
   }) {
@@ -1857,6 +1909,7 @@ class _$GetMobilesImpl implements _GetMobiles {
     TResult? Function(_GetLaptops value)? getLaptops,
     TResult? Function(_GetEarphones value)? getEarphones,
     TResult? Function(_GetMobiles value)? getMobiles,
+    TResult? Function(_GetWatches value)? getWatches,
     TResult? Function(_GetProduct value)? getProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
   }) {
@@ -1874,6 +1927,7 @@ class _$GetMobilesImpl implements _GetMobiles {
     TResult Function(_GetLaptops value)? getLaptops,
     TResult Function(_GetEarphones value)? getEarphones,
     TResult Function(_GetMobiles value)? getMobiles,
+    TResult Function(_GetWatches value)? getWatches,
     TResult Function(_GetProduct value)? getProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     required TResult orElse(),
@@ -1894,6 +1948,224 @@ abstract class _GetMobiles implements ProductEvent {
   BuildContext get context;
   @JsonKey(ignore: true)
   _$$GetMobilesImplCopyWith<_$GetMobilesImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetWatchesImplCopyWith<$Res> {
+  factory _$$GetWatchesImplCopyWith(
+          _$GetWatchesImpl value, $Res Function(_$GetWatchesImpl) then) =
+      __$$GetWatchesImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String category, BuildContext context});
+}
+
+/// @nodoc
+class __$$GetWatchesImplCopyWithImpl<$Res>
+    extends _$ProductEventCopyWithImpl<$Res, _$GetWatchesImpl>
+    implements _$$GetWatchesImplCopyWith<$Res> {
+  __$$GetWatchesImplCopyWithImpl(
+      _$GetWatchesImpl _value, $Res Function(_$GetWatchesImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? category = null,
+    Object? context = null,
+  }) {
+    return _then(_$GetWatchesImpl(
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetWatchesImpl implements _GetWatches {
+  const _$GetWatchesImpl({required this.category, required this.context});
+
+  @override
+  final String category;
+  @override
+  final BuildContext context;
+
+  @override
+  String toString() {
+    return 'ProductEvent.getWatches(category: $category, context: $context)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetWatchesImpl &&
+            (identical(other.category, category) ||
+                other.category == category) &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, category, context);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetWatchesImplCopyWith<_$GetWatchesImpl> get copyWith =>
+      __$$GetWatchesImplCopyWithImpl<_$GetWatchesImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ProductModel product, List<Media> selectedImages,
+            BuildContext context)
+        addProduct,
+    required TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)
+        editProduct,
+    required TResult Function(String productId, BuildContext context)
+        deleteProduct,
+    required TResult Function(String fetchType) getAllProduct,
+    required TResult Function(String category, BuildContext context)
+        getProductsByCategory,
+    required TResult Function(String category, BuildContext context) getLaptops,
+    required TResult Function(String category, BuildContext context)
+        getEarphones,
+    required TResult Function(String category, BuildContext context) getMobiles,
+    required TResult Function(String category, BuildContext context) getWatches,
+    required TResult Function(String productId, BuildContext context)
+        getProduct,
+    required TResult Function(String query, String? sort) searchProduct,
+  }) {
+    return getWatches(category, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProductModel product, List<Media> selectedImages,
+            BuildContext context)?
+        addProduct,
+    TResult? Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult? Function(String productId, BuildContext context)? deleteProduct,
+    TResult? Function(String fetchType)? getAllProduct,
+    TResult? Function(String category, BuildContext context)?
+        getProductsByCategory,
+    TResult? Function(String category, BuildContext context)? getLaptops,
+    TResult? Function(String category, BuildContext context)? getEarphones,
+    TResult? Function(String category, BuildContext context)? getMobiles,
+    TResult? Function(String category, BuildContext context)? getWatches,
+    TResult? Function(String productId, BuildContext context)? getProduct,
+    TResult? Function(String query, String? sort)? searchProduct,
+  }) {
+    return getWatches?.call(category, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProductModel product, List<Media> selectedImages,
+            BuildContext context)?
+        addProduct,
+    TResult Function(ProductModel product, BuildContext context,
+            List<Media>? selectedImages)?
+        editProduct,
+    TResult Function(String productId, BuildContext context)? deleteProduct,
+    TResult Function(String fetchType)? getAllProduct,
+    TResult Function(String category, BuildContext context)?
+        getProductsByCategory,
+    TResult Function(String category, BuildContext context)? getLaptops,
+    TResult Function(String category, BuildContext context)? getEarphones,
+    TResult Function(String category, BuildContext context)? getMobiles,
+    TResult Function(String category, BuildContext context)? getWatches,
+    TResult Function(String productId, BuildContext context)? getProduct,
+    TResult Function(String query, String? sort)? searchProduct,
+    required TResult orElse(),
+  }) {
+    if (getWatches != null) {
+      return getWatches(category, context);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AddProduct value) addProduct,
+    required TResult Function(_EditProduct value) editProduct,
+    required TResult Function(_DeleteProduct value) deleteProduct,
+    required TResult Function(_GetAllProduct value) getAllProduct,
+    required TResult Function(_GetProductsByCategory value)
+        getProductsByCategory,
+    required TResult Function(_GetLaptops value) getLaptops,
+    required TResult Function(_GetEarphones value) getEarphones,
+    required TResult Function(_GetMobiles value) getMobiles,
+    required TResult Function(_GetWatches value) getWatches,
+    required TResult Function(_GetProduct value) getProduct,
+    required TResult Function(_SearchProduct value) searchProduct,
+  }) {
+    return getWatches(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AddProduct value)? addProduct,
+    TResult? Function(_EditProduct value)? editProduct,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
+    TResult? Function(_GetAllProduct value)? getAllProduct,
+    TResult? Function(_GetProductsByCategory value)? getProductsByCategory,
+    TResult? Function(_GetLaptops value)? getLaptops,
+    TResult? Function(_GetEarphones value)? getEarphones,
+    TResult? Function(_GetMobiles value)? getMobiles,
+    TResult? Function(_GetWatches value)? getWatches,
+    TResult? Function(_GetProduct value)? getProduct,
+    TResult? Function(_SearchProduct value)? searchProduct,
+  }) {
+    return getWatches?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AddProduct value)? addProduct,
+    TResult Function(_EditProduct value)? editProduct,
+    TResult Function(_DeleteProduct value)? deleteProduct,
+    TResult Function(_GetAllProduct value)? getAllProduct,
+    TResult Function(_GetProductsByCategory value)? getProductsByCategory,
+    TResult Function(_GetLaptops value)? getLaptops,
+    TResult Function(_GetEarphones value)? getEarphones,
+    TResult Function(_GetMobiles value)? getMobiles,
+    TResult Function(_GetWatches value)? getWatches,
+    TResult Function(_GetProduct value)? getProduct,
+    TResult Function(_SearchProduct value)? searchProduct,
+    required TResult orElse(),
+  }) {
+    if (getWatches != null) {
+      return getWatches(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetWatches implements ProductEvent {
+  const factory _GetWatches(
+      {required final String category,
+      required final BuildContext context}) = _$GetWatchesImpl;
+
+  String get category;
+  BuildContext get context;
+  @JsonKey(ignore: true)
+  _$$GetWatchesImplCopyWith<_$GetWatchesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1985,6 +2257,7 @@ class _$GetProductImpl implements _GetProduct {
     required TResult Function(String category, BuildContext context)
         getEarphones,
     required TResult Function(String category, BuildContext context) getMobiles,
+    required TResult Function(String category, BuildContext context) getWatches,
     required TResult Function(String productId, BuildContext context)
         getProduct,
     required TResult Function(String query, String? sort) searchProduct,
@@ -2008,6 +2281,7 @@ class _$GetProductImpl implements _GetProduct {
     TResult? Function(String category, BuildContext context)? getLaptops,
     TResult? Function(String category, BuildContext context)? getEarphones,
     TResult? Function(String category, BuildContext context)? getMobiles,
+    TResult? Function(String category, BuildContext context)? getWatches,
     TResult? Function(String productId, BuildContext context)? getProduct,
     TResult? Function(String query, String? sort)? searchProduct,
   }) {
@@ -2030,6 +2304,7 @@ class _$GetProductImpl implements _GetProduct {
     TResult Function(String category, BuildContext context)? getLaptops,
     TResult Function(String category, BuildContext context)? getEarphones,
     TResult Function(String category, BuildContext context)? getMobiles,
+    TResult Function(String category, BuildContext context)? getWatches,
     TResult Function(String productId, BuildContext context)? getProduct,
     TResult Function(String query, String? sort)? searchProduct,
     required TResult orElse(),
@@ -2052,6 +2327,7 @@ class _$GetProductImpl implements _GetProduct {
     required TResult Function(_GetLaptops value) getLaptops,
     required TResult Function(_GetEarphones value) getEarphones,
     required TResult Function(_GetMobiles value) getMobiles,
+    required TResult Function(_GetWatches value) getWatches,
     required TResult Function(_GetProduct value) getProduct,
     required TResult Function(_SearchProduct value) searchProduct,
   }) {
@@ -2069,6 +2345,7 @@ class _$GetProductImpl implements _GetProduct {
     TResult? Function(_GetLaptops value)? getLaptops,
     TResult? Function(_GetEarphones value)? getEarphones,
     TResult? Function(_GetMobiles value)? getMobiles,
+    TResult? Function(_GetWatches value)? getWatches,
     TResult? Function(_GetProduct value)? getProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
   }) {
@@ -2086,6 +2363,7 @@ class _$GetProductImpl implements _GetProduct {
     TResult Function(_GetLaptops value)? getLaptops,
     TResult Function(_GetEarphones value)? getEarphones,
     TResult Function(_GetMobiles value)? getMobiles,
+    TResult Function(_GetWatches value)? getWatches,
     TResult Function(_GetProduct value)? getProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     required TResult orElse(),
@@ -2196,6 +2474,7 @@ class _$SearchProductImpl implements _SearchProduct {
     required TResult Function(String category, BuildContext context)
         getEarphones,
     required TResult Function(String category, BuildContext context) getMobiles,
+    required TResult Function(String category, BuildContext context) getWatches,
     required TResult Function(String productId, BuildContext context)
         getProduct,
     required TResult Function(String query, String? sort) searchProduct,
@@ -2219,6 +2498,7 @@ class _$SearchProductImpl implements _SearchProduct {
     TResult? Function(String category, BuildContext context)? getLaptops,
     TResult? Function(String category, BuildContext context)? getEarphones,
     TResult? Function(String category, BuildContext context)? getMobiles,
+    TResult? Function(String category, BuildContext context)? getWatches,
     TResult? Function(String productId, BuildContext context)? getProduct,
     TResult? Function(String query, String? sort)? searchProduct,
   }) {
@@ -2241,6 +2521,7 @@ class _$SearchProductImpl implements _SearchProduct {
     TResult Function(String category, BuildContext context)? getLaptops,
     TResult Function(String category, BuildContext context)? getEarphones,
     TResult Function(String category, BuildContext context)? getMobiles,
+    TResult Function(String category, BuildContext context)? getWatches,
     TResult Function(String productId, BuildContext context)? getProduct,
     TResult Function(String query, String? sort)? searchProduct,
     required TResult orElse(),
@@ -2263,6 +2544,7 @@ class _$SearchProductImpl implements _SearchProduct {
     required TResult Function(_GetLaptops value) getLaptops,
     required TResult Function(_GetEarphones value) getEarphones,
     required TResult Function(_GetMobiles value) getMobiles,
+    required TResult Function(_GetWatches value) getWatches,
     required TResult Function(_GetProduct value) getProduct,
     required TResult Function(_SearchProduct value) searchProduct,
   }) {
@@ -2280,6 +2562,7 @@ class _$SearchProductImpl implements _SearchProduct {
     TResult? Function(_GetLaptops value)? getLaptops,
     TResult? Function(_GetEarphones value)? getEarphones,
     TResult? Function(_GetMobiles value)? getMobiles,
+    TResult? Function(_GetWatches value)? getWatches,
     TResult? Function(_GetProduct value)? getProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
   }) {
@@ -2297,6 +2580,7 @@ class _$SearchProductImpl implements _SearchProduct {
     TResult Function(_GetLaptops value)? getLaptops,
     TResult Function(_GetEarphones value)? getEarphones,
     TResult Function(_GetMobiles value)? getMobiles,
+    TResult Function(_GetWatches value)? getWatches,
     TResult Function(_GetProduct value)? getProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     required TResult orElse(),
@@ -2323,6 +2607,7 @@ abstract class _SearchProduct implements ProductEvent {
 mixin _$ProductState {
   ProductModel get product => throw _privateConstructorUsedError;
   List<ProductModel> get products => throw _privateConstructorUsedError;
+  List<ProductModel> get searchResults => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Either<MainFailure, ProductModel>> get productOpt =>
       throw _privateConstructorUsedError;
@@ -2331,6 +2616,7 @@ mixin _$ProductState {
   List<ProductModel> get laptopListOpt => throw _privateConstructorUsedError;
   List<ProductModel> get earphoneListOpt => throw _privateConstructorUsedError;
   List<ProductModel> get mobileListOpt => throw _privateConstructorUsedError;
+  List<ProductModel> get watchListOpt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProductStateCopyWith<ProductState> get copyWith =>
@@ -2346,12 +2632,14 @@ abstract class $ProductStateCopyWith<$Res> {
   $Res call(
       {ProductModel product,
       List<ProductModel> products,
+      List<ProductModel> searchResults,
       bool isLoading,
       Option<Either<MainFailure, ProductModel>> productOpt,
       Option<Either<MainFailure, List<ProductModel>>>? productList,
       List<ProductModel> laptopListOpt,
       List<ProductModel> earphoneListOpt,
-      List<ProductModel> mobileListOpt});
+      List<ProductModel> mobileListOpt,
+      List<ProductModel> watchListOpt});
 
   $ProductModelCopyWith<$Res> get product;
 }
@@ -2371,12 +2659,14 @@ class _$ProductStateCopyWithImpl<$Res, $Val extends ProductState>
   $Res call({
     Object? product = null,
     Object? products = null,
+    Object? searchResults = null,
     Object? isLoading = null,
     Object? productOpt = null,
     Object? productList = freezed,
     Object? laptopListOpt = null,
     Object? earphoneListOpt = null,
     Object? mobileListOpt = null,
+    Object? watchListOpt = null,
   }) {
     return _then(_value.copyWith(
       product: null == product
@@ -2386,6 +2676,10 @@ class _$ProductStateCopyWithImpl<$Res, $Val extends ProductState>
       products: null == products
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
+              as List<ProductModel>,
+      searchResults: null == searchResults
+          ? _value.searchResults
+          : searchResults // ignore: cast_nullable_to_non_nullable
               as List<ProductModel>,
       isLoading: null == isLoading
           ? _value.isLoading
@@ -2411,6 +2705,10 @@ class _$ProductStateCopyWithImpl<$Res, $Val extends ProductState>
           ? _value.mobileListOpt
           : mobileListOpt // ignore: cast_nullable_to_non_nullable
               as List<ProductModel>,
+      watchListOpt: null == watchListOpt
+          ? _value.watchListOpt
+          : watchListOpt // ignore: cast_nullable_to_non_nullable
+              as List<ProductModel>,
     ) as $Val);
   }
 
@@ -2434,12 +2732,14 @@ abstract class _$$ProductStateImplCopyWith<$Res>
   $Res call(
       {ProductModel product,
       List<ProductModel> products,
+      List<ProductModel> searchResults,
       bool isLoading,
       Option<Either<MainFailure, ProductModel>> productOpt,
       Option<Either<MainFailure, List<ProductModel>>>? productList,
       List<ProductModel> laptopListOpt,
       List<ProductModel> earphoneListOpt,
-      List<ProductModel> mobileListOpt});
+      List<ProductModel> mobileListOpt,
+      List<ProductModel> watchListOpt});
 
   @override
   $ProductModelCopyWith<$Res> get product;
@@ -2458,12 +2758,14 @@ class __$$ProductStateImplCopyWithImpl<$Res>
   $Res call({
     Object? product = null,
     Object? products = null,
+    Object? searchResults = null,
     Object? isLoading = null,
     Object? productOpt = null,
     Object? productList = freezed,
     Object? laptopListOpt = null,
     Object? earphoneListOpt = null,
     Object? mobileListOpt = null,
+    Object? watchListOpt = null,
   }) {
     return _then(_$ProductStateImpl(
       product: null == product
@@ -2473,6 +2775,10 @@ class __$$ProductStateImplCopyWithImpl<$Res>
       products: null == products
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
+              as List<ProductModel>,
+      searchResults: null == searchResults
+          ? _value._searchResults
+          : searchResults // ignore: cast_nullable_to_non_nullable
               as List<ProductModel>,
       isLoading: null == isLoading
           ? _value.isLoading
@@ -2498,6 +2804,10 @@ class __$$ProductStateImplCopyWithImpl<$Res>
           ? _value._mobileListOpt
           : mobileListOpt // ignore: cast_nullable_to_non_nullable
               as List<ProductModel>,
+      watchListOpt: null == watchListOpt
+          ? _value._watchListOpt
+          : watchListOpt // ignore: cast_nullable_to_non_nullable
+              as List<ProductModel>,
     ));
   }
 }
@@ -2508,16 +2818,20 @@ class _$ProductStateImpl implements _ProductState {
   const _$ProductStateImpl(
       {required this.product,
       final List<ProductModel> products = const [],
+      final List<ProductModel> searchResults = const [],
       required this.isLoading,
       required this.productOpt,
       this.productList,
       final List<ProductModel> laptopListOpt = const [],
       final List<ProductModel> earphoneListOpt = const [],
-      final List<ProductModel> mobileListOpt = const []})
+      final List<ProductModel> mobileListOpt = const [],
+      final List<ProductModel> watchListOpt = const []})
       : _products = products,
+        _searchResults = searchResults,
         _laptopListOpt = laptopListOpt,
         _earphoneListOpt = earphoneListOpt,
-        _mobileListOpt = mobileListOpt;
+        _mobileListOpt = mobileListOpt,
+        _watchListOpt = watchListOpt;
 
   @override
   final ProductModel product;
@@ -2528,6 +2842,15 @@ class _$ProductStateImpl implements _ProductState {
     if (_products is EqualUnmodifiableListView) return _products;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_products);
+  }
+
+  final List<ProductModel> _searchResults;
+  @override
+  @JsonKey()
+  List<ProductModel> get searchResults {
+    if (_searchResults is EqualUnmodifiableListView) return _searchResults;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_searchResults);
   }
 
   @override
@@ -2563,9 +2886,18 @@ class _$ProductStateImpl implements _ProductState {
     return EqualUnmodifiableListView(_mobileListOpt);
   }
 
+  final List<ProductModel> _watchListOpt;
+  @override
+  @JsonKey()
+  List<ProductModel> get watchListOpt {
+    if (_watchListOpt is EqualUnmodifiableListView) return _watchListOpt;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_watchListOpt);
+  }
+
   @override
   String toString() {
-    return 'ProductState(product: $product, products: $products, isLoading: $isLoading, productOpt: $productOpt, productList: $productList, laptopListOpt: $laptopListOpt, earphoneListOpt: $earphoneListOpt, mobileListOpt: $mobileListOpt)';
+    return 'ProductState(product: $product, products: $products, searchResults: $searchResults, isLoading: $isLoading, productOpt: $productOpt, productList: $productList, laptopListOpt: $laptopListOpt, earphoneListOpt: $earphoneListOpt, mobileListOpt: $mobileListOpt, watchListOpt: $watchListOpt)';
   }
 
   @override
@@ -2575,6 +2907,8 @@ class _$ProductStateImpl implements _ProductState {
             other is _$ProductStateImpl &&
             (identical(other.product, product) || other.product == product) &&
             const DeepCollectionEquality().equals(other._products, _products) &&
+            const DeepCollectionEquality()
+                .equals(other._searchResults, _searchResults) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.productOpt, productOpt) ||
@@ -2586,7 +2920,9 @@ class _$ProductStateImpl implements _ProductState {
             const DeepCollectionEquality()
                 .equals(other._earphoneListOpt, _earphoneListOpt) &&
             const DeepCollectionEquality()
-                .equals(other._mobileListOpt, _mobileListOpt));
+                .equals(other._mobileListOpt, _mobileListOpt) &&
+            const DeepCollectionEquality()
+                .equals(other._watchListOpt, _watchListOpt));
   }
 
   @override
@@ -2594,12 +2930,14 @@ class _$ProductStateImpl implements _ProductState {
       runtimeType,
       product,
       const DeepCollectionEquality().hash(_products),
+      const DeepCollectionEquality().hash(_searchResults),
       isLoading,
       productOpt,
       productList,
       const DeepCollectionEquality().hash(_laptopListOpt),
       const DeepCollectionEquality().hash(_earphoneListOpt),
-      const DeepCollectionEquality().hash(_mobileListOpt));
+      const DeepCollectionEquality().hash(_mobileListOpt),
+      const DeepCollectionEquality().hash(_watchListOpt));
 
   @JsonKey(ignore: true)
   @override
@@ -2612,17 +2950,21 @@ abstract class _ProductState implements ProductState {
   const factory _ProductState(
       {required final ProductModel product,
       final List<ProductModel> products,
+      final List<ProductModel> searchResults,
       required final bool isLoading,
       required final Option<Either<MainFailure, ProductModel>> productOpt,
       final Option<Either<MainFailure, List<ProductModel>>>? productList,
       final List<ProductModel> laptopListOpt,
       final List<ProductModel> earphoneListOpt,
-      final List<ProductModel> mobileListOpt}) = _$ProductStateImpl;
+      final List<ProductModel> mobileListOpt,
+      final List<ProductModel> watchListOpt}) = _$ProductStateImpl;
 
   @override
   ProductModel get product;
   @override
   List<ProductModel> get products;
+  @override
+  List<ProductModel> get searchResults;
   @override
   bool get isLoading;
   @override
@@ -2635,6 +2977,8 @@ abstract class _ProductState implements ProductState {
   List<ProductModel> get earphoneListOpt;
   @override
   List<ProductModel> get mobileListOpt;
+  @override
+  List<ProductModel> get watchListOpt;
   @override
   @JsonKey(ignore: true)
   _$$ProductStateImplCopyWith<_$ProductStateImpl> get copyWith =>

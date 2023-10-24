@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:image_pickers/image_pickers.dart';
 part 'product.freezed.dart';
 part 'product.g.dart';
 
@@ -9,6 +7,9 @@ class ProductModel with _$ProductModel {
   const factory ProductModel({
     required String name,
     @Default(0) double rating,
+    @Default(0) double deliveryFee,
+    @Default(0) double discountedTotal,
+    @Default(0) int discount,
     required String description,
     required String category,
     required double amount,

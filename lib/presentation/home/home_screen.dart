@@ -70,11 +70,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<ProductBloc>(context)
-        .add(ProductEvent.getMobiles(category: 'mobile', context: context));
+        .add(ProductEvent.getMobiles(category: 'mobiles', context: context));
     BlocProvider.of<ProductBloc>(context)
-        .add(ProductEvent.getLaptops(category: 'laptop', context: context));
-    BlocProvider.of<ProductBloc>(context)
-        .add(ProductEvent.getEarphones(category: 'earphone', context: context));
+        .add(ProductEvent.getLaptops(category: 'laptops', context: context));
+    BlocProvider.of<ProductBloc>(context).add(
+        ProductEvent.getEarphones(category: 'earphones', context: context));
     BlocProvider.of<ProductBloc>(context)
         .add(const ProductEvent.getAllProduct(fetchType: 'new'));
     BlocProvider.of<UserBloc>(context).add(const UserEvent.getUser());
@@ -147,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.of(context).push(
                                 buildNavigation(
                                   route: const ProductsScreen(),
-                                  arguments: "mobile",
+                                  arguments: "mobiles",
                                 ),
                               );
                             },
@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.of(context).push(
                                 buildNavigation(
                                   route: const ProductsScreen(),
-                                  arguments: "laptop",
+                                  arguments: "laptops",
                                 ),
                               );
                             },
@@ -169,12 +169,22 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.of(context).push(
                                 buildNavigation(
                                   route: const ProductsScreen(),
-                                  arguments: "earphone",
+                                  arguments: "earphones",
                                 ),
                               );
                             },
                           ),
-                          const CategoryIconCard(icon: Icons.watch),
+                          CategoryIconCard(
+                            icon: Icons.watch,
+                            onTap: () {
+                              Navigator.of(context).push(
+                                buildNavigation(
+                                  route: const ProductsScreen(),
+                                  arguments: "watches",
+                                ),
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),

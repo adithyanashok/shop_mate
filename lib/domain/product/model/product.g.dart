@@ -10,6 +10,9 @@ _$ProductModelImpl _$$ProductModelImplFromJson(Map<String, dynamic> json) =>
     _$ProductModelImpl(
       name: json['name'] as String,
       rating: (json['rating'] as num?)?.toDouble() ?? 0,
+      deliveryFee: (json['deliveryFee'] as num?)?.toDouble() ?? 0,
+      discountedTotal: (json['discountedTotal'] as num?)?.toDouble() ?? 0,
+      discount: json['discount'] as int? ?? 0,
       description: json['description'] as String,
       category: json['category'] as String,
       amount: (json['amount'] as num).toDouble(),
@@ -25,6 +28,9 @@ Map<String, dynamic> _$$ProductModelImplToJson(_$ProductModelImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'rating': instance.rating,
+      'deliveryFee': instance.deliveryFee,
+      'discountedTotal': instance.discountedTotal,
+      'discount': instance.discount,
       'description': instance.description,
       'category': instance.category,
       'amount': instance.amount,

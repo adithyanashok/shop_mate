@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class BuildSearchBarWidget extends StatefulWidget {
   BuildSearchBarWidget({
@@ -27,6 +28,7 @@ class _BuildSearchBarWidgetState extends State<BuildSearchBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           margin: const EdgeInsets.symmetric(
@@ -75,35 +77,45 @@ class _BuildSearchBarWidgetState extends State<BuildSearchBarWidget> {
         ),
         BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
-            return state.products.isNotEmpty
-                ? CustomRadioButton(
-                    elevation: 0,
-                    autoWidth: true,
-                    shapeRadius: 15,
-                    enableShape: true,
-                    selectedBorderColor: Colors.transparent,
-                    unSelectedBorderColor: AppColor.greenColor,
-                    buttonLables: const [
-                      "New",
-                      "Price: Low to high",
-                      "Price: High to low",
+            return state.searchResults.isNotEmpty
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomRadioButton(
+                        elevation: 0,
+                        autoWidth: true,
+                        shapeRadius: 15,
+                        enableShape: true,
+                        selectedBorderColor: Colors.transparent,
+                        unSelectedBorderColor: AppColor.greenColor,
+                        buttonLables: const [
+                          "New",
+                          "Price: Low to high",
+                          "Price: High to low",
+                        ],
+                        buttonValues: const [
+                          "new",
+                          "low",
+                          "high",
+                        ],
+                        radioButtonValue: (value) {
+                          // Update the product search results based on the sorting option.
+                          BlocProvider.of<ProductBloc>(context).add(
+                            ProductEvent.searchProduct(
+                              query: queryController.text,
+                              sort: value,
+                            ),
+                          );
+                        },
+                        unSelectedColor: Colors.white,
+                        selectedColor: AppColor.greenColor,
+                      ),
+                      // A label for displaying the search results.
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: BuildMiniText(fontSize: 13, text: 'Results'),
+                      ),
                     ],
-                    buttonValues: const [
-                      "new",
-                      "low",
-                      "high",
-                    ],
-                    radioButtonValue: (value) {
-                      // Update the product search results based on the sorting option.
-                      BlocProvider.of<ProductBloc>(context).add(
-                        ProductEvent.searchProduct(
-                          query: queryController.text,
-                          sort: value,
-                        ),
-                      );
-                    },
-                    unSelectedColor: Colors.white,
-                    selectedColor: AppColor.greenColor,
                   )
                 : const SizedBox(); // Display nothing when there are no products.
           },

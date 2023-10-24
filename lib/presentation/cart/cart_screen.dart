@@ -40,26 +40,21 @@ class CartScreen extends StatelessWidget {
       body: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
           return SafeArea(
-            child: state.isLoading
-                ? const Center(
-                    child:
-                        BuildLoadingWidget(), // Display loading widget if data is loading.
+            child: state.cart.products.isEmpty
+                ? Center(
+                    child: Image.asset(
+                        'assets/images/cart-is-empty.png'), // Display an image if the cart is empty.
                   )
-                : state.cart.products.isEmpty
-                    ? Center(
-                        child: Image.asset(
-                            'assets/images/cart-is-empty.png'), // Display an image if the cart is empty.
-                      )
-                    : Column(
-                        children: [
-                          CartProductSection(), // Display the cart product section.
-                          const Divider(
-                            color: AppColor.greenColor,
-                            thickness: 3,
-                          ),
-                          const CartAmountSection() // Display the cart amount section.
-                        ],
+                : Column(
+                    children: [
+                      CartProductSection(), // Display the cart product section.
+                      const Divider(
+                        color: AppColor.greenColor,
+                        thickness: 3,
                       ),
+                      const CartAmountSection() // Display the cart amount section.
+                    ],
+                  ),
           );
         },
       ),

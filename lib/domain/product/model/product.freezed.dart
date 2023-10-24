@@ -22,6 +22,9 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
 mixin _$ProductModel {
   String get name => throw _privateConstructorUsedError;
   double get rating => throw _privateConstructorUsedError;
+  double get deliveryFee => throw _privateConstructorUsedError;
+  double get discountedTotal => throw _privateConstructorUsedError;
+  int get discount => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
@@ -45,6 +48,9 @@ abstract class $ProductModelCopyWith<$Res> {
   $Res call(
       {String name,
       double rating,
+      double deliveryFee,
+      double discountedTotal,
+      int discount,
       String description,
       String category,
       double amount,
@@ -69,6 +75,9 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
   $Res call({
     Object? name = null,
     Object? rating = null,
+    Object? deliveryFee = null,
+    Object? discountedTotal = null,
+    Object? discount = null,
     Object? description = null,
     Object? category = null,
     Object? amount = null,
@@ -86,6 +95,18 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as double,
+      deliveryFee: null == deliveryFee
+          ? _value.deliveryFee
+          : deliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      discountedTotal: null == discountedTotal
+          ? _value.discountedTotal
+          : discountedTotal // ignore: cast_nullable_to_non_nullable
+              as double,
+      discount: null == discount
+          ? _value.discount
+          : discount // ignore: cast_nullable_to_non_nullable
+              as int,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -129,6 +150,9 @@ abstract class _$$ProductModelImplCopyWith<$Res>
   $Res call(
       {String name,
       double rating,
+      double deliveryFee,
+      double discountedTotal,
+      int discount,
       String description,
       String category,
       double amount,
@@ -151,6 +175,9 @@ class __$$ProductModelImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? rating = null,
+    Object? deliveryFee = null,
+    Object? discountedTotal = null,
+    Object? discount = null,
     Object? description = null,
     Object? category = null,
     Object? amount = null,
@@ -168,6 +195,18 @@ class __$$ProductModelImplCopyWithImpl<$Res>
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as double,
+      deliveryFee: null == deliveryFee
+          ? _value.deliveryFee
+          : deliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      discountedTotal: null == discountedTotal
+          ? _value.discountedTotal
+          : discountedTotal // ignore: cast_nullable_to_non_nullable
+              as double,
+      discount: null == discount
+          ? _value.discount
+          : discount // ignore: cast_nullable_to_non_nullable
+              as int,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -206,6 +245,9 @@ class _$ProductModelImpl implements _ProductModel {
   const _$ProductModelImpl(
       {required this.name,
       this.rating = 0,
+      this.deliveryFee = 0,
+      this.discountedTotal = 0,
+      this.discount = 0,
       required this.description,
       required this.category,
       required this.amount,
@@ -223,6 +265,15 @@ class _$ProductModelImpl implements _ProductModel {
   @override
   @JsonKey()
   final double rating;
+  @override
+  @JsonKey()
+  final double deliveryFee;
+  @override
+  @JsonKey()
+  final double discountedTotal;
+  @override
+  @JsonKey()
+  final int discount;
   @override
   final String description;
   @override
@@ -248,7 +299,7 @@ class _$ProductModelImpl implements _ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(name: $name, rating: $rating, description: $description, category: $category, amount: $amount, quantity: $quantity, image: $image, date: $date, id: $id)';
+    return 'ProductModel(name: $name, rating: $rating, deliveryFee: $deliveryFee, discountedTotal: $discountedTotal, discount: $discount, description: $description, category: $category, amount: $amount, quantity: $quantity, image: $image, date: $date, id: $id)';
   }
 
   @override
@@ -258,6 +309,12 @@ class _$ProductModelImpl implements _ProductModel {
             other is _$ProductModelImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.deliveryFee, deliveryFee) ||
+                other.deliveryFee == deliveryFee) &&
+            (identical(other.discountedTotal, discountedTotal) ||
+                other.discountedTotal == discountedTotal) &&
+            (identical(other.discount, discount) ||
+                other.discount == discount) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.category, category) ||
@@ -276,6 +333,9 @@ class _$ProductModelImpl implements _ProductModel {
       runtimeType,
       name,
       rating,
+      deliveryFee,
+      discountedTotal,
+      discount,
       description,
       category,
       amount,
@@ -302,6 +362,9 @@ abstract class _ProductModel implements ProductModel {
   const factory _ProductModel(
       {required final String name,
       final double rating,
+      final double deliveryFee,
+      final double discountedTotal,
+      final int discount,
       required final String description,
       required final String category,
       required final double amount,
@@ -317,6 +380,12 @@ abstract class _ProductModel implements ProductModel {
   String get name;
   @override
   double get rating;
+  @override
+  double get deliveryFee;
+  @override
+  double get discountedTotal;
+  @override
+  int get discount;
   @override
   String get description;
   @override

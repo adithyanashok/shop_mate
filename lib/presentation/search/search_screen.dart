@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/constants/route_animation.dart';
+import 'package:shop_mate/presentation/product/product_screen.dart';
 import 'package:shop_mate/presentation/search/widgets/search_screen_widgets.dart';
 import 'package:shop_mate/presentation/widgets/product_card.dart';
-import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -26,11 +27,7 @@ class SearchScreen extends StatelessWidget {
                 );
               },
             ),
-            // A label for displaying the search results.
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: BuildMiniText(fontSize: 13, text: 'Results'),
-            ),
+
             Expanded(
               child: BlocBuilder<ProductBloc, ProductState>(
                 builder: (context, state) {
@@ -41,7 +38,7 @@ class SearchScreen extends StatelessWidget {
                       childAspectRatio: .5,
                     ),
                     itemBuilder: (context, index) {
-                      final product = state.products[index];
+                      final product = state.searchResults[index];
                       return BuildProductCard(
                         image: Image.network(
                           product.image![0],
@@ -50,9 +47,17 @@ class SearchScreen extends StatelessWidget {
                         title: product.name,
                         price: product.amount.toString(),
                         description: product.description,
+                        onTap: () {
+                          Navigator.of(context).push(
+                            buildNavigation(
+                              route: ProductScreen(),
+                              arguments: product.id,
+                            ),
+                          );
+                        },
                       );
                     },
-                    itemCount: state.products.length,
+                    itemCount: state.searchResults.length,
                   );
                 },
               ),
