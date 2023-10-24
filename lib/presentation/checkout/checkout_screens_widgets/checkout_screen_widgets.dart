@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:http/http.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
@@ -17,13 +16,15 @@ class BuildAddressCard extends StatefulWidget {
     this.deleteAddress,
     this.showActionButton = true,
   });
-  final String? title;
-  final String text;
-  final Function(String)? onChanged;
-  final Function()? deleteAddress;
-  String? selectedValue;
-  final bool showRadioButton;
-  final bool showActionButton;
+  final String? title; // Title of the address.
+  final String text; // Address text.
+  final Function(String)?
+      onChanged; // Callback function for when the address selection changes.
+  final Function()?
+      deleteAddress; // Callback function for deleting the address.
+  String? selectedValue; // Currently selected address.
+  final bool showRadioButton; // Whether to display a radio button.
+  final bool showActionButton; // Whether to display a delete action button.
 
   @override
   State<BuildAddressCard> createState() => _BuildAddressCardState();
@@ -45,15 +46,15 @@ class _BuildAddressCardState extends State<BuildAddressCard> {
                     log(value.toString());
                     setState(() {
                       widget.selectedValue = value.toString();
-                      widget.onChanged!(value.toString());
+                      widget.onChanged!(value
+                          .toString()); // Call the onChanged callback when the radio button is selected.
                     });
                   },
                   activeColor: AppColor.greenColor,
                 )
-              : const SizedBox(),
+              : const SizedBox(), // Display the radio button or an empty space based on the showRadioButton flag.
           SizedBox(
-            width: 0.8.sw,
-            // height: 60,
+            width: 0.8.sw, // Set the width of the address card.
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -74,11 +75,13 @@ class _BuildAddressCardState extends State<BuildAddressCard> {
                           widget.showActionButton
                               ? IconButton(
                                   onPressed: () {
-                                    widget.deleteAddress!();
+                                    widget
+                                        .deleteAddress!(); // Call the deleteAddress callback when the action button is pressed.
                                   },
-                                  icon: const Icon(Icons.delete),
+                                  icon: const Icon(
+                                      Icons.delete), // Display a delete icon.
                                 )
-                              : const SizedBox()
+                              : const SizedBox() // Display the action button or an empty space based on the showActionButton flag.
                         ],
                       ),
                 BuildSmallText(

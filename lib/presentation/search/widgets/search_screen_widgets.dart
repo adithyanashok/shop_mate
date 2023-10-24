@@ -30,11 +30,12 @@ class _BuildSearchBarWidgetState extends State<BuildSearchBarWidget> {
       children: [
         Container(
           margin: const EdgeInsets.symmetric(
-              horizontal: 16, vertical: 10), // Added margin
+              horizontal: 16, vertical: 10), // Added margin for spacing
           height: 50,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
-            border: Border.all(color: AppColor.greenColor), // Moved border here
+            border: Border.all(
+                color: AppColor.greenColor), // Moved border styling here
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,6 +47,7 @@ class _BuildSearchBarWidgetState extends State<BuildSearchBarWidget> {
                   child: TextField(
                     controller: queryController,
                     onSubmitted: (value) {
+                      // Callback to handle submitted query.
                       widget.onSubmitted(value);
                     },
                     style: const TextStyle(fontSize: 13, height: 1),
@@ -58,9 +60,12 @@ class _BuildSearchBarWidgetState extends State<BuildSearchBarWidget> {
               ),
               IconButton(
                 onPressed: () {
+                  // Trigger a product search with the query and sorting option.
                   BlocProvider.of<ProductBloc>(context).add(
                     ProductEvent.searchProduct(
-                        query: queryController.text, sort: 'high'),
+                      query: queryController.text,
+                      sort: 'high',
+                    ),
                   );
                 },
                 icon: const Icon(Icons.search),
@@ -81,7 +86,7 @@ class _BuildSearchBarWidgetState extends State<BuildSearchBarWidget> {
                     buttonLables: const [
                       "New",
                       "Price: Low to high",
-                      "Price: High to low"
+                      "Price: High to low",
                     ],
                     buttonValues: const [
                       "new",
@@ -89,15 +94,18 @@ class _BuildSearchBarWidgetState extends State<BuildSearchBarWidget> {
                       "high",
                     ],
                     radioButtonValue: (value) {
+                      // Update the product search results based on the sorting option.
                       BlocProvider.of<ProductBloc>(context).add(
                         ProductEvent.searchProduct(
-                            query: queryController.text, sort: value),
+                          query: queryController.text,
+                          sort: value,
+                        ),
                       );
                     },
                     unSelectedColor: Colors.white,
                     selectedColor: AppColor.greenColor,
                   )
-                : const SizedBox();
+                : const SizedBox(); // Display nothing when there are no products.
           },
         ),
       ],

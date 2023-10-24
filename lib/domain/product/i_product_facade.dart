@@ -19,7 +19,9 @@ abstract class IProductFacade {
     context,
   );
 
-  Future<Either<MainFailure, List<ProductModel>>> getAllProducts();
+  Future<Either<MainFailure, List<ProductModel>>> getAllProducts(
+    String fetch,
+  );
   Future<Either<MainFailure, List<ProductModel>>> getProductsByCategory(
       String category, context);
   Future<Either<MainFailure, List<ProductModel>>> getLaptops(

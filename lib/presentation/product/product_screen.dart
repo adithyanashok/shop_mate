@@ -1,14 +1,18 @@
+import 'dart:math';
+
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/application/pageview/pageview_bloc.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/application/rating/rating_bloc.dart';
 import 'package:shop_mate/domain/cart/model/cart_model.dart';
 import 'package:shop_mate/presentation/cart/cart_screen.dart';
+import 'package:shop_mate/presentation/checkout/checkout_screen.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/rating/rating.dart';
@@ -25,17 +29,22 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     BlocProvider.of<CartBloc>(context)
         .add(CartEvent.getCart(userId: userId!, context: context));
-    // set index of pageview 0
+
+    // set index of pageview to 0
     BlocProvider.of<PageviewBloc>(context)
         .add(const PageviewEvent.onPageChanged(currentIndex: 0));
-    // get productid
+
+    // get product ID from route arguments
     final productId = ModalRoute.of(context)?.settings.arguments as String;
-    //page controller
+
+    // create a page controller for image carousel
     PageController pageController = PageController(initialPage: 0);
-    // get product event
+
+    // fetch product details
     BlocProvider.of<ProductBloc>(context).add(ProductEvent.getProduct(
         productId: productId.toString(), context: context));
-    // fetch ratings of the product
+
+    // fetch product ratings
     BlocProvider.of<RatingBloc>(context)
         .add(RatingEvent.fetchRatings(productId: productId, context: context));
 
@@ -45,18 +54,19 @@ class ProductScreen extends StatelessWidget {
         centerTitle: true,
         title: const BuildRegularTextWidget(text: 'Product Details'),
       ),
-      // body
+      // Body
       body: BlocBuilder<ProductBloc, ProductState>(
         builder: (context, state) {
           final product = state.product;
           return SafeArea(
-            // show a loading when fetching
+            // Show a loading widget while fetching data
             child: state.isLoading
                 ? const BuildLoadingWidget()
                 : SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        // Image carousel
                         Container(
                           width: 1.sw,
                           height: .4.sh,
@@ -72,7 +82,7 @@ class ProductScreen extends StatelessWidget {
                             },
                             controller: pageController,
                             onPageChanged: (value) {
-                              //change index of page
+                              // Change index of page in the carousel
                               BlocProvider.of<PageviewBloc>(context).add(
                                 PageviewEvent.onPageChanged(
                                   currentIndex: value,
@@ -81,15 +91,16 @@ class ProductScreen extends StatelessWidget {
                             },
                           ),
                         ),
+                        // Dots indicator for image carousel
                         Center(
                           child: BlocBuilder<PageviewBloc, PageviewState>(
                             builder: (context, state) {
                               if (product.image!.isNotEmpty) {
-                                // Dots indicator
+                                // Dots indicator for the image carousel
                                 return DotsIndicator(
                                   dotsCount: product.image!.length,
                                   position: state.currentIndex,
-                                  // dots styles
+                                  // Dots styles
                                   decorator: const DotsDecorator(
                                     color: AppColor.colorGrey3,
                                     activeColor: AppColor.greenColor,
@@ -101,6 +112,7 @@ class ProductScreen extends StatelessWidget {
                             },
                           ),
                         ),
+                        // Product name and description
                         Container(
                           margin: const EdgeInsets.only(left: 20),
                           child: Text(
@@ -121,6 +133,7 @@ class ProductScreen extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
+                        // Product price and rating
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -136,7 +149,7 @@ class ProductScreen extends StatelessWidget {
                               ),
                             ),
                             StarRatingWidget(
-                              initialRating: product.rating!.toDouble(),
+                              initialRating: product.rating.toDouble(),
                               readOnly: true,
                             ),
                           ],
@@ -144,15 +157,47 @@ class ProductScreen extends StatelessWidget {
                         const SizedBox(
                           height: 30,
                         ),
-                        // action button
+                        // Action buttons (Buy Now and Add to Cart)
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            const BuildMediumButton(
+                            BuildMediumButton(
                               backgroundColor: Colors.transparent,
                               text: "BUY NOW",
                               textColor: AppColor.greenColor,
                               borderColor: AppColor.greenColor,
+                              onTap: () async {
+                                BlocProvider.of<CartBloc>(context).add(
+                                  CartEvent.addToCart(
+                                    cartModel: CartModel(
+                                      userId: userId!,
+                                      totalPrice: product.amount * 1,
+                                      products: [
+                                        {
+                                          "name": product.name,
+                                          "description": product.description,
+                                          "category": product.category,
+                                          "amount": product.amount,
+                                          "quantity": 1,
+                                          "image": product.image![0],
+                                          "productId": product.id,
+                                          "deliveryFee": 50,
+                                          "discount": 10,
+                                        }
+                                      ],
+                                      totalDeliveryFee: 0,
+                                      totalDiscount: 0,
+                                      subTotal: product.amount,
+                                    ),
+                                    context: context,
+                                  ),
+                                );
+                                Navigator.of(context).push(
+                                  buildNavigation(
+                                    route: CheckoutScreen(),
+                                  ),
+                                );
+                              },
                             ),
                             BlocBuilder<CartBloc, CartState>(
                               builder: (context, state) {
@@ -168,8 +213,10 @@ class ProductScreen extends StatelessWidget {
                                         borderColor: AppColor.greenColor,
                                         onTap: () {
                                           Navigator.of(context).push(
-                                              buildNavigation(
-                                                  route: CartScreen()));
+                                            buildNavigation(
+                                              route: CartScreen(),
+                                            ),
+                                          );
                                         },
                                       )
                                     : BuildMediumButton(
@@ -213,7 +260,7 @@ class ProductScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        // product review section
+                        // Product review section
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -247,6 +294,7 @@ class ReviewSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<RatingBloc, RatingState>(
       builder: (context, state) {
+        // If there are no reviews, display a message.
         return state.ratings.isEmpty
             ? const Center(child: Text('No Review'))
             : SizedBox(
@@ -271,16 +319,23 @@ class ReviewSection extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
+                                      // Review title and rating
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            ratings.title,
-                                            style: TextStyle(
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w800),
+                                          SizedBox(
+                                            width: 100.sp,
+                                            height: 15.sp,
+                                            child: BuildSmallText(
+                                              text: ratings.title,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12,
+                                              textOverflow:
+                                                  TextOverflow.ellipsis,
+                                            ),
                                           ),
+                                          // Star rating for the review
                                           StarRatingWidget(
                                             starSize: 10,
                                             initialRating: ratings.rating,
@@ -288,10 +343,11 @@ class ReviewSection extends StatelessWidget {
                                           )
                                         ],
                                       ),
+                                      // Review description
                                       BuildSmallText(
                                         text: ratings.description,
                                         textOverflow: TextOverflow.visible,
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),

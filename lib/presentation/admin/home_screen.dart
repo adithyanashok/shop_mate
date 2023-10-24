@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/earnings/earnings_bloc.dart';
 import 'package:shop_mate/application/orders/orders_bloc.dart';
 import 'package:shop_mate/application/user/user_bloc.dart';
+import 'package:shop_mate/domain/users/model/user.dart';
 import 'package:shop_mate/presentation/admin/bar/bar.dart';
 import 'package:shop_mate/presentation/constants/amount_formate.dart';
+import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/widgets/custom_card.dart';
 import 'package:shop_mate/presentation/widgets/loading_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
@@ -81,21 +84,21 @@ class AdminHomeScreen extends StatelessWidget {
                 ),
                 BlocBuilder<UserBloc, UserState>(
                   builder: (context, state) {
-                    return state.isLoading
-                        ? const BuildLoadingWidget()
-                        : ListView.separated(
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              final user = state.userModel[index];
-                              return UserCard(user: user);
-                            },
-                            separatorBuilder: (context, index) {
-                              return const SizedBox(
-                                height: 10,
-                              );
-                            },
-                            itemCount: state.userModel.length,
-                          );
+                    return ListView.separated(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        final user = state.userModel[index];
+                        return UserCard(
+                          user: user,
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          height: 10,
+                        );
+                      },
+                      itemCount: state.userModel.length,
+                    );
                   },
                 )
               ],

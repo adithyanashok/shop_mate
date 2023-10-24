@@ -20,7 +20,7 @@ class ProductsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: BuildRegularTextWidget(
-          text: productCat,
+          text: '${productCat.toUpperCase()}S',
         ),
         centerTitle: true,
       ),

@@ -15,7 +15,7 @@ class AdminProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<ProductBloc>(context)
-        .add(const ProductEvent.getAllProduct());
+        .add(const ProductEvent.getAllProduct(fetchType: 'all-products'));
 
     return Scaffold(
       body: BlocBuilder<ProductBloc, ProductState>(
@@ -102,6 +102,8 @@ class AdminProductScreen extends StatelessWidget {
                                                         },
                                                         icon: const Icon(
                                                           Icons.delete,
+                                                          color: AppColor
+                                                              .whiteColor,
                                                         ),
                                                       ),
                                                     ),
@@ -131,6 +133,8 @@ class AdminProductScreen extends StatelessWidget {
                                                         },
                                                         icon: const Icon(
                                                           Icons.edit,
+                                                          color: AppColor
+                                                              .whiteColor,
                                                         ),
                                                       ),
                                                     ),
@@ -143,25 +147,20 @@ class AdminProductScreen extends StatelessWidget {
                                       },
                                     ),
                                     DataCell(
-                                      Text(
-                                        product.name,
-                                      ),
+                                      Text(product.name),
                                     ),
                                     DataCell(
-                                      Text(
-                                        '${product.quantity}',
-                                      ),
+                                      Text('${product.quantity}'),
                                     ),
                                     DataCell(
-                                      Text(
-                                        '${product.amount}',
-                                      ),
+                                      Text('${product.amount}'),
                                     ),
                                   ],
                                 );
                               },
                             ),
-                          )),
+                          ),
+                  ),
           );
         },
       ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:shop_mate/presentation/constants/colors.dart';
-import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class BuildProductCard extends StatelessWidget {
   BuildProductCard({
@@ -20,7 +19,7 @@ class BuildProductCard extends StatelessWidget {
   final String title;
   final String price;
   final String description;
-  Function? onTap;
+  final Function? onTap;
   bool showAddtoCart;
 
   @override
@@ -31,10 +30,11 @@ class BuildProductCard extends StatelessWidget {
       },
       child: Card(
         child: Container(
-          width: 165.sp,
+          width: 165.sp, // Set the width of the product card
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
+            color: Colors.white, // Set the background color of the card
+            borderRadius:
+                BorderRadius.circular(10), // Apply rounded corners to the card
           ),
           child: Padding(
             padding: const EdgeInsets.only(top: 10, right: 10),
@@ -43,7 +43,7 @@ class BuildProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
-                  child: image,
+                  child: image, // Display the product image in the center
                 ),
                 Container(
                   margin: const EdgeInsets.only(left: 10),
@@ -51,28 +51,32 @@ class BuildProductCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        title,
+                        title, // Display the product title
                         style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
+                          fontSize: 14.sp, // Set the font size for the title
+                          fontWeight: FontWeight
+                              .w400, // Set the font weight for the title
                         ),
                       ),
                       Text(
-                        "\$$price",
+                        "\$$price", // Display the product price
                         style: TextStyle(
-                          fontSize: 22.sp,
-                          fontWeight: FontWeight.w400,
+                          fontSize: 20.sp, // Set the font size for the price
+                          fontWeight: FontWeight
+                              .w400, // Set the font weight for the price
                         ),
                       ),
                       SizedBox(
                         width: 130,
                         // height: 50.sp,
                         child: Text(
-                          description,
+                          description, // Display the product description
                           style: TextStyle(
-                            fontSize: 11.sp,
+                            fontSize:
+                                11.sp, // Set the font size for the description
                             overflow: TextOverflow.ellipsis,
-                            color: AppColor.colorGrey1,
+                            color: AppColor
+                                .colorGrey1, // Set the text color for the description
                           ),
                         ),
                       ),
@@ -80,12 +84,15 @@ class BuildProductCard extends StatelessWidget {
                           ? Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                color: AppColor.greenColor,
-                                borderRadius: BorderRadius.circular(3),
+                                color: AppColor
+                                    .greenColor, // Set the background color for the "Add to Cart" button
+                                borderRadius: BorderRadius.circular(
+                                    3), // Apply rounded corners to the button
                               ),
                               child: const Icon(
-                                Icons.add,
-                                color: AppColor.whiteColor,
+                                Icons.add, // Display the "Add" icon
+                                color:
+                                    AppColor.whiteColor, // Set the icon color
                               ),
                             )
                           : const SizedBox()

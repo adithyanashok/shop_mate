@@ -3,14 +3,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
 import 'package:shop_mate/application/login/login_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/signup/signup_screen.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
-import 'package:shop_mate/presentation/widgets/asset_card.dart';
 import 'package:shop_mate/presentation/widgets/loader_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_form_field_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
@@ -45,7 +43,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       BuildHeadingText2(text: "Welcome!"),
                       BuildSmallText(
-                        text: 'Please enter your  data to continue',
+                        text: 'Please enter your data to continue',
                         color: AppColor.colorGrey2,
                         fontSize: 15,
                       ),
@@ -62,7 +60,6 @@ class LoginScreen extends StatelessWidget {
                   keyboardType: TextInputType.emailAddress,
                   func: (value) {
                     log(value);
-
                     email = value;
                   },
                 ),
@@ -76,7 +73,6 @@ class LoginScreen extends StatelessWidget {
                   obscureText: true,
                   func: (value) {
                     log(value);
-
                     password = value;
                   },
                 ),
@@ -131,18 +127,12 @@ class LoginScreen extends StatelessWidget {
                               const SizedBox(
                                 width: 10,
                               ),
-                              const BuildSmallText(text: "Signin with google")
+                              const BuildSmallText(text: "Sign in with Google")
                             ],
                           ),
                         ),
                       ),
                     ),
-                    // BuildAssetCard(
-                    //   asset: Image.asset(
-                    //     'assets/images/google.com.png',
-                    //     width: 50,
-                    //   ),
-                    // ),
                     const SizedBox(
                       width: 10,
                     ),

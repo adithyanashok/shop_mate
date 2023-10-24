@@ -10,9 +10,11 @@ class Users extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Fetch the list of users when the widget is built
     BlocProvider.of<UserBloc>(context).add(
       const UserEvent.getUsers(getAllUsers: true),
     );
+
     return Scaffold(
       appBar: AppBar(
         title: const BuildRegularTextWidget(text: "Users"),
@@ -22,18 +24,20 @@ class Users extends StatelessWidget {
         child: BlocBuilder<UserBloc, UserState>(
           builder: (context, state) {
             return state.isLoading
-                ? const BuildLoadingWidget()
+                ? const BuildLoadingWidget() // Show a loading indicator while fetching data
                 : ListView.separated(
                     itemBuilder: (context, index) {
                       final user = state.userModel[index];
-                      return UserCard(user: user);
+                      return UserCard(
+                          user: user); // Display a card for each user
                     },
                     separatorBuilder: (context, index) {
                       return const SizedBox(
                         height: 10,
-                      );
+                      ); // Add spacing between user cards
                     },
-                    itemCount: state.userModel.length,
+                    itemCount:
+                        state.userModel.length, // Number of users in the list
                   );
           },
         ),

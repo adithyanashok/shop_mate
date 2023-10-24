@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_pickers/image_pickers.dart';
 part 'product.freezed.dart';
@@ -13,6 +14,7 @@ class ProductModel with _$ProductModel {
     required double amount,
     required int quantity,
     List<String>? image,
+    DateTime? date,
     String? id,
   }) = _ProductModel;
 

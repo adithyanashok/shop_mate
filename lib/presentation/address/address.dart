@@ -1,10 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:shop_mate/application/address/address_bloc.dart';
-import 'package:shop_mate/application/user/user_bloc.dart';
 import 'package:shop_mate/domain/address/model/address_model.dart';
 import 'package:shop_mate/presentation/checkout/checkout_screens_widgets/checkout_screen_widgets.dart';
 import 'package:shop_mate/presentation/widgets/address_widgets.dart';
@@ -14,25 +11,30 @@ import 'package:shop_mate/presentation/widgets/text_form_field_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class Address extends StatelessWidget {
-  Address({super.key});
+  Address({super.key}); // Constructor for the Address widget.
 
-  String title = '';
-  String address = '';
+  String title = ''; // Initialize an empty string for the title.
+  String address = ''; // Initialize an empty string for the address.
 
   @override
   Widget build(BuildContext context) {
-    final userId = FirebaseAuth.instance.currentUser!.uid;
+    final userId =
+        FirebaseAuth.instance.currentUser!.uid; // Get the current user's ID.
+
+    // Trigger the AddressBloc to fetch the user's addresses.
     BlocProvider.of<AddressBloc>(context).add(
       AddressEvent.getAddress(userId: userId, context: context),
     );
+
     return Scaffold(
       appBar: AppBar(
-        title: const BuildRegularTextWidget(text: "Address"),
-        centerTitle: true,
+        title: const BuildRegularTextWidget(
+            text: "Address"), // Set the app bar title.
+        centerTitle: true, // Center the app bar title.
         actions: [
           IconButton(
             onPressed: () {
-              addressDialog(context, userId);
+              addressDialog(context, userId); // Show an address input dialog.
             },
             icon: const Icon(
               Icons.add,
@@ -45,14 +47,17 @@ class Address extends StatelessWidget {
         child: BlocBuilder<AddressBloc, AddressState>(
           builder: (context, state) {
             return state.isLoading
-                ? const BuildLoadingWidget()
+                ? const BuildLoadingWidget() // Display loading widget if data is loading.
                 : state.addressModelList.isEmpty
                     ? const Center(
-                        child: Text("No Address found"),
+                        child: Text(
+                            "No Address found"), // Display a message if no addresses are found.
                       )
                     : ListView.separated(
                         itemBuilder: (context, index) {
                           final data = state.addressModelList[index];
+
+                          // Show a dialog to edit the address on long press.
                           return GestureDetector(
                             onLongPress: () {
                               showDialog(
@@ -62,6 +67,8 @@ class Address extends StatelessWidget {
                                     contentPadding: const EdgeInsets.symmetric(
                                         horizontal: 10, vertical: 10),
                                     title: const Text("Add Shipping address"),
+
+                                    // Input fields for updating the address.
                                     children: [
                                       BuildTextFormField(
                                         label: "Title",
@@ -86,7 +93,8 @@ class Address extends StatelessWidget {
                                       ),
                                       BuildButtonWidget(
                                         text: "Done",
-                                        state: state,
+
+                                        // Trigger the update of the address using AddressBloc.
                                         onTap: () {
                                           BlocProvider.of<AddressBloc>(context)
                                               .add(
@@ -111,6 +119,8 @@ class Address extends StatelessWidget {
                               title: data.title,
                               text: data.address,
                               showRadioButton: false,
+
+                              // Trigger a dialog to confirm address deletion.
                               deleteAddress: () {
                                 showDialog(
                                   context: context,
@@ -130,6 +140,7 @@ class Address extends StatelessWidget {
                                         ),
                                         TextButton(
                                           onPressed: () {
+                                            // Trigger the deletion of the address using AddressBloc.
                                             BlocProvider.of<AddressBloc>(
                                                     context)
                                                 .add(

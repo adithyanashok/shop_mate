@@ -16,14 +16,17 @@ class SearchScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Search bar widget to allow users to search for products.
             BuildSearchBarWidget(
               onSubmitted: (query) {
-                query = query;
+                // Trigger a product search with the provided query.
+                query = query; // This assignment seems unnecessary.
                 BlocProvider.of<ProductBloc>(context).add(
                   ProductEvent.searchProduct(query: query, sort: 'new'),
                 );
               },
             ),
+            // A label for displaying the search results.
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: BuildMiniText(fontSize: 13, text: 'Results'),
@@ -79,11 +82,13 @@ class _SortingWidgetState extends State<SortingWidget> {
     return GestureDetector(
       onTap: () {
         setState(() {
+          // Toggle the 'selected' state when tapped.
           widget.selected = !widget.selected;
         });
-        print(widget.selected);
+        print(widget.selected); // Print the current state for debugging.
       },
       child: Container(
+        // Change the background color based on the 'selected' state.
         color: widget.selected ? AppColor.greenColor : AppColor.whiteColor,
         width: double.infinity,
         height: 60,
@@ -92,6 +97,7 @@ class _SortingWidgetState extends State<SortingWidget> {
           child: Text(
             "Popular",
             style: TextStyle(
+              // Adjust the text color based on the 'selected' state.
               color:
                   widget.selected ? AppColor.whiteColor : AppColor.blackColor,
             ),

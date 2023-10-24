@@ -16,6 +16,8 @@ _$ProductModelImpl _$$ProductModelImplFromJson(Map<String, dynamic> json) =>
       quantity: json['quantity'] as int,
       image:
           (json['image'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      date:
+          json['date'] == null ? null : DateTime.parse(json['date'] as String),
       id: json['id'] as String?,
     );
 
@@ -28,5 +30,6 @@ Map<String, dynamic> _$$ProductModelImplToJson(_$ProductModelImpl instance) =>
       'amount': instance.amount,
       'quantity': instance.quantity,
       'image': instance.image,
+      'date': instance.date?.toIso8601String(),
       'id': instance.id,
     };

@@ -38,6 +38,7 @@ class ProductRepository implements IProductFacade {
       Navigator.of(context).pop();
       return Right(productModel);
     } catch (e) {
+      print(e.toString());
       return const Left(MainFailure.clientFailure());
     }
   }
@@ -82,7 +83,7 @@ class ProductRepository implements IProductFacade {
       final db = FirebaseFirestore.instance;
       await db.collection(Collection.collectionProduct).doc(productId).delete();
       BlocProvider.of<ProductBloc>(context)
-          .add(const ProductEvent.getAllProduct());
+          .add(const ProductEvent.getAllProduct(fetchType: 'all-products'));
       Navigator.of(context).pop();
       return const Right(true);
     } catch (e) {
@@ -92,22 +93,47 @@ class ProductRepository implements IProductFacade {
   }
 
   @override
-  Future<Either<MainFailure, List<ProductModel>>> getAllProducts() async {
+  Future<Either<MainFailure, List<ProductModel>>> getAllProducts(
+      String fetchType) async {
     try {
       final db = FirebaseFirestore.instance;
-      List<ProductModel> productList = [];
 
-      final querySnapshot =
-          await db.collection(Collection.collectionProduct).get();
+      if (fetchType == 'new') {
+        List<ProductModel> productList = [];
 
-      for (var docSnapshot in querySnapshot.docs) {
-        final productData = docSnapshot.data();
-        final product =
-            ProductModel.fromJson(productData).copyWith(id: docSnapshot.id);
+        final querySnapshot =
+            await db.collection(Collection.collectionProduct).limit(10).get();
 
-        productList.add(product);
+        for (var docSnapshot in querySnapshot.docs) {
+          final productData = docSnapshot.data();
+          final product =
+              ProductModel.fromJson(productData).copyWith(id: docSnapshot.id);
+
+          productList.add(product);
+        }
+        productList.sort(
+          (a, b) {
+            final dateA = a.date;
+            final dateB = b.date;
+            return dateB!.compareTo(dateA!);
+          },
+        );
+        return Right(productList);
+      } else {
+        List<ProductModel> productList = [];
+
+        final querySnapshot =
+            await db.collection(Collection.collectionProduct).get();
+
+        for (var docSnapshot in querySnapshot.docs) {
+          final productData = docSnapshot.data();
+          final product =
+              ProductModel.fromJson(productData).copyWith(id: docSnapshot.id);
+
+          productList.add(product);
+        }
+        return Right(productList);
       }
-      return Right(productList);
     } catch (e) {
       return const Left(MainFailure.clientFailure());
     }
@@ -205,7 +231,6 @@ class ProductRepository implements IProductFacade {
       String searchQuery, String sort) async {
     try {
       final db = FirebaseFirestore.instance;
-      print("Sort: $sort");
       QuerySnapshot querySnapshot = await db
           .collection(Collection.collectionProduct)
           .where("category", isGreaterThanOrEqualTo: searchQuery)

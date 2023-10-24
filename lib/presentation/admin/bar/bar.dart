@@ -20,7 +20,7 @@ class EarningsDashboard extends StatelessWidget {
           future: getEarningsPerMonth(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const BuildLoadingWidget();
+              return customContainerSkelton();
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else if (snapshot.hasData) {
@@ -249,4 +249,39 @@ Future<List<double>> getEarningsPerMonth() async {
     print(e.toString());
     throw Exception('Error fetching earnings per month');
   }
+}
+
+Container customContainerSkelton() {
+  return Container(
+    height: 350,
+    width: .9.sw,
+    decoration: BoxDecoration(
+      color: AppColor.lightGrey,
+      borderRadius: BorderRadius.circular(23),
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          height: 10,
+          width: 100,
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 255, 255, 255),
+            borderRadius: BorderRadius.circular(23),
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Container(
+          height: 10,
+          width: 100,
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 255, 255, 255),
+            borderRadius: BorderRadius.circular(23),
+          ),
+        ),
+      ],
+    ),
+  );
 }

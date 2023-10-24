@@ -5,12 +5,13 @@ import 'package:shop_mate/presentation/constants/colors.dart';
 
 class BuildHeadingText2 extends StatelessWidget {
   const BuildHeadingText2({
-    super.key,
+    Key? key,
     required this.text,
     this.fontSize = 33,
     this.fontWeight = FontWeight.w700,
     this.letterSpacing = 0.99,
   });
+
   final String text;
   final double fontSize;
   final FontWeight fontWeight;
@@ -19,11 +20,14 @@ class BuildHeadingText2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      text, // Display the provided text
       style: TextStyle(
-        fontSize: 33.sp,
-        fontWeight: FontWeight.w700,
-        letterSpacing: 0.99,
+        fontSize: 33
+            .sp, // Use the specified font size (or the default if not provided)
+        fontWeight: FontWeight
+            .w700, // Use the specified font weight (or the default if not provided)
+        letterSpacing:
+            0.99, // Use the specified letter spacing (or the default if not provided)
       ),
     );
   }
@@ -171,11 +175,13 @@ class BuildRegularTextWidget extends StatelessWidget {
     this.fontSize = 22,
     this.letterSpacing = 0,
     this.color = AppColor.blackColor,
+    this.fontWeight = FontWeight.w400,
   });
   final String text;
   final double fontSize;
   final double letterSpacing;
   final Color color;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +190,7 @@ class BuildRegularTextWidget extends StatelessWidget {
       style: TextStyle(
         color: color,
         fontSize: fontSize.sp,
-        fontWeight: FontWeight.w400,
+        fontWeight: fontWeight,
         letterSpacing: letterSpacing,
       ),
     );

@@ -17,6 +17,7 @@ class OrderSuccessScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Display a checkmark icon to indicate a successful order
             CircleAvatar(
               radius: 100,
               child: Center(
@@ -30,6 +31,7 @@ class OrderSuccessScreen extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
+            // Show a success message to inform the user that the order was completed successfully
             Text(
               'Order Successfully Completed',
               style: TextStyle(
@@ -39,6 +41,7 @@ class OrderSuccessScreen extends StatelessWidget {
                 letterSpacing: 0.84.sp,
               ),
             ),
+            // Add a button to navigate back to the main page
             TextButton.icon(
               onPressed: () {
                 Navigator.of(context)

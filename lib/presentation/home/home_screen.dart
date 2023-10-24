@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
+import 'package:shop_mate/application/user/user_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 
@@ -16,6 +17,7 @@ import 'package:shop_mate/presentation/signup/signup_screen.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
 import 'package:shop_mate/presentation/widgets/app_bar_widget.dart';
 import 'package:shop_mate/presentation/widgets/banner_widget.dart';
+import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -73,139 +75,146 @@ class _HomeScreenState extends State<HomeScreen> {
         .add(ProductEvent.getLaptops(category: 'laptop', context: context));
     BlocProvider.of<ProductBloc>(context)
         .add(ProductEvent.getEarphones(category: 'earphone', context: context));
+    BlocProvider.of<ProductBloc>(context)
+        .add(const ProductEvent.getAllProduct(fetchType: 'new'));
+    BlocProvider.of<UserBloc>(context).add(const UserEvent.getUser());
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(0.1.sh),
-        child: const BuildAppBarWidget(title: "SHOPMATE"),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 1.sw,
-                height: 0.2.sh,
-                child: PageView(
-                  controller: _pageController,
-                  children: [
-                    // Banner widget for the first page
-                    GestureDetector(
-                      onTap: () async {
-                        await signOut();
-                      },
-                      child: const BuildBannerWidget(
-                        backgroundColor: AppColor.greenColor,
-                        buttonTextColor: AppColor.greenColor,
-                        image: 'assets/images/shopping.png',
-                        text: '50% OFF DURING\nSALE',
-                        textColor: AppColor.whiteColor,
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(70),
+          child: BuildAppBarWidget(title: "SHOPMATE"),
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 1.sw,
+                  height: 0.2.sh,
+                  child: PageView(
+                    controller: _pageController,
+                    children: [
+                      // Banner widget for the first page
+                      GestureDetector(
+                        onTap: () async {
+                          await signOut();
+                        },
+                        child: const BuildBannerWidget(
+                          backgroundColor: AppColor.greenColor,
+                          buttonTextColor: AppColor.greenColor,
+                          image: 'assets/images/shopping.png',
+                          text: '50% OFF DURING\nSALE',
+                          textColor: AppColor.whiteColor,
+                        ),
                       ),
-                    ),
-                    // Banner widget for the second page
-                    const BuildBannerWidget(
-                      backgroundColor: AppColor.dartBlueColor,
-                      buttonTextColor: AppColor.dartBlueColor,
-                      image: 'assets/images/shopping.png',
-                      text: '50% OFF DURING\nSALE',
-                      textColor: AppColor.whiteColor,
-                    ),
-                  ],
+                      // Banner widget for the second page
+                      Container(
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: NetworkImage(
+                                'https://as1.ftcdn.net/v2/jpg/03/14/28/96/1000_F_314289607_ADADbnGr64dpGnddyhZPidCoc6jgKiHK.jpg'),
+                          ),
+                        ),
+
+                        // child: Image.network(
+                        //   'https://as1.ftcdn.net/v2/jpg/03/14/28/96/1000_F_314289607_ADADbnGr64dpGnddyhZPidCoc6jgKiHK.jpg',
+                        //   fit: BoxFit.fill,
+                        // ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 50.h,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 25),
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CategoryCard(
-                          image: Image.asset(
-                            'assets/images/macbook.png',
-                            width: 40,
+                const Padding(
+                  padding: EdgeInsets.only(left: 14, bottom: 10),
+                  child: BuildRegularTextWidget(
+                    text: "Categories",
+                    fontWeight: FontWeight.w500,
+                    fontSize: 19,
+                  ),
+                ),
+                SizedBox(
+                  height: 50.h,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 19, right: 19),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CategoryIconCard(
+                            icon: Icons.phone_iphone,
+                            onTap: () {
+                              Navigator.of(context).push(
+                                buildNavigation(
+                                  route: const ProductsScreen(),
+                                  arguments: "mobile",
+                                ),
+                              );
+                            },
                           ),
-                          text: "Laptops",
-                          onTap: () {
-                            Navigator.of(context).push(
-                              buildNavigation(
-                                route: const ProductsScreen(),
-                                arguments: "laptop",
-                              ),
-                            );
-                          },
-                        ),
-                        CategoryCard(
-                          image: Image.asset(
-                            'assets/images/beats.png',
-                            width: 40,
+                          CategoryIconCard(
+                            icon: Icons.laptop_mac_outlined,
+                            onTap: () {
+                              Navigator.of(context).push(
+                                buildNavigation(
+                                  route: const ProductsScreen(),
+                                  arguments: "laptop",
+                                ),
+                              );
+                            },
                           ),
-                          text: "Earphones",
-                          onTap: () {
-                            Navigator.of(context).push(
-                              buildNavigation(
-                                route: const ProductsScreen(),
-                                arguments: "earphone",
-                              ),
-                            );
-                          },
-                        ),
-                        CategoryCard(
-                          image: Image.asset(
-                            'assets/images/iphone.png',
-                            width: 40,
+                          CategoryIconCard(
+                            icon: Icons.headphones_outlined,
+                            onTap: () {
+                              Navigator.of(context).push(
+                                buildNavigation(
+                                  route: const ProductsScreen(),
+                                  arguments: "earphone",
+                                ),
+                              );
+                            },
                           ),
-                          text: "Mobiles",
-                          onTap: () {
-                            Navigator.of(context).push(
-                              buildNavigation(
-                                route: const ProductsScreen(),
-                                arguments: "mobile",
-                              ),
-                            );
-                          },
-                        )
-                      ],
+                          const CategoryIconCard(icon: Icons.watch),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              BlocBuilder<ProductBloc, ProductState>(
-                builder: (context, state) {
-                  return ProductList(
-                    state: state,
-                    text: "Laptops",
-                    productList: state.laptopListOpt,
-                  );
-                },
-              ),
-              BlocBuilder<ProductBloc, ProductState>(
-                builder: (context, state) {
-                  return ProductList(
-                    state: state,
-                    text: "Earphones",
-                    productList: state.earphoneListOpt,
-                  );
-                },
-              ),
-              BlocBuilder<ProductBloc, ProductState>(
-                builder: (context, state) {
-                  return state.mobileListOpt.isEmpty
-                      ? const SizedBox()
-                      : ProductList(
-                          state: state,
-                          text: "Mobiles",
-                          productList: state.laptopListOpt,
-                        );
-                },
-              ),
-            ],
+                BlocBuilder<ProductBloc, ProductState>(
+                  builder: (context, state) {
+                    return ProductList(
+                      state: state,
+                      text: "Latest Arrival",
+                      productList: state.products,
+                    );
+                  },
+                ),
+                BlocBuilder<ProductBloc, ProductState>(
+                  builder: (context, state) {
+                    return ProductList(
+                      state: state,
+                      text: "Earphones",
+                      productList: state.earphoneListOpt,
+                    );
+                  },
+                ),
+                BlocBuilder<ProductBloc, ProductState>(
+                  builder: (context, state) {
+                    return state.mobileListOpt.isEmpty
+                        ? const SizedBox()
+                        : ProductList(
+                            state: state,
+                            text: "Mobiles",
+                            productList: state.mobileListOpt,
+                          );
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
-      // bottomNavigationBar: BottomNavBarWidget(),
-    );
+        )
+        // bottomNavigationBar: BottomNavBarWidget(),
+        );
   }
 
   Future<void> signOut() async {
@@ -221,6 +230,39 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (e) {
       snackBar(context: context, msg: e.toString());
     }
+  }
+}
+
+class CategoryIconCard extends StatelessWidget {
+  const CategoryIconCard({
+    super.key,
+    required this.icon,
+    this.onTap,
+  });
+
+  final IconData icon;
+  final Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        onTap!();
+      },
+      child: Container(
+        width: 70,
+        height: 70,
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 241, 241, 241),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Icon(
+          icon,
+          size: 26,
+          color: const Color.fromARGB(255, 59, 59, 59),
+        ),
+      ),
+    );
   }
 }
 

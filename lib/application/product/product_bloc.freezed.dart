@@ -26,7 +26,7 @@ mixin _$ProductEvent {
         editProduct,
     required TResult Function(String productId, BuildContext context)
         deleteProduct,
-    required TResult Function() getAllProduct,
+    required TResult Function(String fetchType) getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
     required TResult Function(String category, BuildContext context) getLaptops,
@@ -47,7 +47,7 @@ mixin _$ProductEvent {
             List<Media>? selectedImages)?
         editProduct,
     TResult? Function(String productId, BuildContext context)? deleteProduct,
-    TResult? Function()? getAllProduct,
+    TResult? Function(String fetchType)? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult? Function(String category, BuildContext context)? getLaptops,
@@ -66,7 +66,7 @@ mixin _$ProductEvent {
             List<Media>? selectedImages)?
         editProduct,
     TResult Function(String productId, BuildContext context)? deleteProduct,
-    TResult Function()? getAllProduct,
+    TResult Function(String fetchType)? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult Function(String category, BuildContext context)? getLaptops,
@@ -252,7 +252,7 @@ class _$AddProductImpl implements _AddProduct {
         editProduct,
     required TResult Function(String productId, BuildContext context)
         deleteProduct,
-    required TResult Function() getAllProduct,
+    required TResult Function(String fetchType) getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
     required TResult Function(String category, BuildContext context) getLaptops,
@@ -276,7 +276,7 @@ class _$AddProductImpl implements _AddProduct {
             List<Media>? selectedImages)?
         editProduct,
     TResult? Function(String productId, BuildContext context)? deleteProduct,
-    TResult? Function()? getAllProduct,
+    TResult? Function(String fetchType)? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult? Function(String category, BuildContext context)? getLaptops,
@@ -298,7 +298,7 @@ class _$AddProductImpl implements _AddProduct {
             List<Media>? selectedImages)?
         editProduct,
     TResult Function(String productId, BuildContext context)? deleteProduct,
-    TResult Function()? getAllProduct,
+    TResult Function(String fetchType)? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult Function(String category, BuildContext context)? getLaptops,
@@ -499,7 +499,7 @@ class _$EditProductImpl implements _EditProduct {
         editProduct,
     required TResult Function(String productId, BuildContext context)
         deleteProduct,
-    required TResult Function() getAllProduct,
+    required TResult Function(String fetchType) getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
     required TResult Function(String category, BuildContext context) getLaptops,
@@ -523,7 +523,7 @@ class _$EditProductImpl implements _EditProduct {
             List<Media>? selectedImages)?
         editProduct,
     TResult? Function(String productId, BuildContext context)? deleteProduct,
-    TResult? Function()? getAllProduct,
+    TResult? Function(String fetchType)? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult? Function(String category, BuildContext context)? getLaptops,
@@ -545,7 +545,7 @@ class _$EditProductImpl implements _EditProduct {
             List<Media>? selectedImages)?
         editProduct,
     TResult Function(String productId, BuildContext context)? deleteProduct,
-    TResult Function()? getAllProduct,
+    TResult Function(String fetchType)? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult Function(String category, BuildContext context)? getLaptops,
@@ -713,7 +713,7 @@ class _$DeleteProductImpl implements _DeleteProduct {
         editProduct,
     required TResult Function(String productId, BuildContext context)
         deleteProduct,
-    required TResult Function() getAllProduct,
+    required TResult Function(String fetchType) getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
     required TResult Function(String category, BuildContext context) getLaptops,
@@ -737,7 +737,7 @@ class _$DeleteProductImpl implements _DeleteProduct {
             List<Media>? selectedImages)?
         editProduct,
     TResult? Function(String productId, BuildContext context)? deleteProduct,
-    TResult? Function()? getAllProduct,
+    TResult? Function(String fetchType)? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult? Function(String category, BuildContext context)? getLaptops,
@@ -759,7 +759,7 @@ class _$DeleteProductImpl implements _DeleteProduct {
             List<Media>? selectedImages)?
         editProduct,
     TResult Function(String productId, BuildContext context)? deleteProduct,
-    TResult Function()? getAllProduct,
+    TResult Function(String fetchType)? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult Function(String category, BuildContext context)? getLaptops,
@@ -849,6 +849,8 @@ abstract class _$$GetAllProductImplCopyWith<$Res> {
   factory _$$GetAllProductImplCopyWith(
           _$GetAllProductImpl value, $Res Function(_$GetAllProductImpl) then) =
       __$$GetAllProductImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String fetchType});
 }
 
 /// @nodoc
@@ -858,26 +860,51 @@ class __$$GetAllProductImplCopyWithImpl<$Res>
   __$$GetAllProductImplCopyWithImpl(
       _$GetAllProductImpl _value, $Res Function(_$GetAllProductImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? fetchType = null,
+  }) {
+    return _then(_$GetAllProductImpl(
+      fetchType: null == fetchType
+          ? _value.fetchType
+          : fetchType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$GetAllProductImpl implements _GetAllProduct {
-  const _$GetAllProductImpl();
+  const _$GetAllProductImpl({required this.fetchType});
+
+  @override
+  final String fetchType;
 
   @override
   String toString() {
-    return 'ProductEvent.getAllProduct()';
+    return 'ProductEvent.getAllProduct(fetchType: $fetchType)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetAllProductImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$GetAllProductImpl &&
+            (identical(other.fetchType, fetchType) ||
+                other.fetchType == fetchType));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, fetchType);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetAllProductImplCopyWith<_$GetAllProductImpl> get copyWith =>
+      __$$GetAllProductImplCopyWithImpl<_$GetAllProductImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -890,7 +917,7 @@ class _$GetAllProductImpl implements _GetAllProduct {
         editProduct,
     required TResult Function(String productId, BuildContext context)
         deleteProduct,
-    required TResult Function() getAllProduct,
+    required TResult Function(String fetchType) getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
     required TResult Function(String category, BuildContext context) getLaptops,
@@ -901,7 +928,7 @@ class _$GetAllProductImpl implements _GetAllProduct {
         getProduct,
     required TResult Function(String query, String? sort) searchProduct,
   }) {
-    return getAllProduct();
+    return getAllProduct(fetchType);
   }
 
   @override
@@ -914,7 +941,7 @@ class _$GetAllProductImpl implements _GetAllProduct {
             List<Media>? selectedImages)?
         editProduct,
     TResult? Function(String productId, BuildContext context)? deleteProduct,
-    TResult? Function()? getAllProduct,
+    TResult? Function(String fetchType)? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult? Function(String category, BuildContext context)? getLaptops,
@@ -923,7 +950,7 @@ class _$GetAllProductImpl implements _GetAllProduct {
     TResult? Function(String productId, BuildContext context)? getProduct,
     TResult? Function(String query, String? sort)? searchProduct,
   }) {
-    return getAllProduct?.call();
+    return getAllProduct?.call(fetchType);
   }
 
   @override
@@ -936,7 +963,7 @@ class _$GetAllProductImpl implements _GetAllProduct {
             List<Media>? selectedImages)?
         editProduct,
     TResult Function(String productId, BuildContext context)? deleteProduct,
-    TResult Function()? getAllProduct,
+    TResult Function(String fetchType)? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult Function(String category, BuildContext context)? getLaptops,
@@ -947,7 +974,7 @@ class _$GetAllProductImpl implements _GetAllProduct {
     required TResult orElse(),
   }) {
     if (getAllProduct != null) {
-      return getAllProduct();
+      return getAllProduct(fetchType);
     }
     return orElse();
   }
@@ -1010,7 +1037,13 @@ class _$GetAllProductImpl implements _GetAllProduct {
 }
 
 abstract class _GetAllProduct implements ProductEvent {
-  const factory _GetAllProduct() = _$GetAllProductImpl;
+  const factory _GetAllProduct({required final String fetchType}) =
+      _$GetAllProductImpl;
+
+  String get fetchType;
+  @JsonKey(ignore: true)
+  _$$GetAllProductImplCopyWith<_$GetAllProductImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1097,7 +1130,7 @@ class _$GetProductsByCategoryImpl implements _GetProductsByCategory {
         editProduct,
     required TResult Function(String productId, BuildContext context)
         deleteProduct,
-    required TResult Function() getAllProduct,
+    required TResult Function(String fetchType) getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
     required TResult Function(String category, BuildContext context) getLaptops,
@@ -1121,7 +1154,7 @@ class _$GetProductsByCategoryImpl implements _GetProductsByCategory {
             List<Media>? selectedImages)?
         editProduct,
     TResult? Function(String productId, BuildContext context)? deleteProduct,
-    TResult? Function()? getAllProduct,
+    TResult? Function(String fetchType)? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult? Function(String category, BuildContext context)? getLaptops,
@@ -1143,7 +1176,7 @@ class _$GetProductsByCategoryImpl implements _GetProductsByCategory {
             List<Media>? selectedImages)?
         editProduct,
     TResult Function(String productId, BuildContext context)? deleteProduct,
-    TResult Function()? getAllProduct,
+    TResult Function(String fetchType)? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult Function(String category, BuildContext context)? getLaptops,
@@ -1309,7 +1342,7 @@ class _$GetLaptopsImpl implements _GetLaptops {
         editProduct,
     required TResult Function(String productId, BuildContext context)
         deleteProduct,
-    required TResult Function() getAllProduct,
+    required TResult Function(String fetchType) getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
     required TResult Function(String category, BuildContext context) getLaptops,
@@ -1333,7 +1366,7 @@ class _$GetLaptopsImpl implements _GetLaptops {
             List<Media>? selectedImages)?
         editProduct,
     TResult? Function(String productId, BuildContext context)? deleteProduct,
-    TResult? Function()? getAllProduct,
+    TResult? Function(String fetchType)? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult? Function(String category, BuildContext context)? getLaptops,
@@ -1355,7 +1388,7 @@ class _$GetLaptopsImpl implements _GetLaptops {
             List<Media>? selectedImages)?
         editProduct,
     TResult Function(String productId, BuildContext context)? deleteProduct,
-    TResult Function()? getAllProduct,
+    TResult Function(String fetchType)? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult Function(String category, BuildContext context)? getLaptops,
@@ -1521,7 +1554,7 @@ class _$GetEarphonesImpl implements _GetEarphones {
         editProduct,
     required TResult Function(String productId, BuildContext context)
         deleteProduct,
-    required TResult Function() getAllProduct,
+    required TResult Function(String fetchType) getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
     required TResult Function(String category, BuildContext context) getLaptops,
@@ -1545,7 +1578,7 @@ class _$GetEarphonesImpl implements _GetEarphones {
             List<Media>? selectedImages)?
         editProduct,
     TResult? Function(String productId, BuildContext context)? deleteProduct,
-    TResult? Function()? getAllProduct,
+    TResult? Function(String fetchType)? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult? Function(String category, BuildContext context)? getLaptops,
@@ -1567,7 +1600,7 @@ class _$GetEarphonesImpl implements _GetEarphones {
             List<Media>? selectedImages)?
         editProduct,
     TResult Function(String productId, BuildContext context)? deleteProduct,
-    TResult Function()? getAllProduct,
+    TResult Function(String fetchType)? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult Function(String category, BuildContext context)? getLaptops,
@@ -1733,7 +1766,7 @@ class _$GetMobilesImpl implements _GetMobiles {
         editProduct,
     required TResult Function(String productId, BuildContext context)
         deleteProduct,
-    required TResult Function() getAllProduct,
+    required TResult Function(String fetchType) getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
     required TResult Function(String category, BuildContext context) getLaptops,
@@ -1757,7 +1790,7 @@ class _$GetMobilesImpl implements _GetMobiles {
             List<Media>? selectedImages)?
         editProduct,
     TResult? Function(String productId, BuildContext context)? deleteProduct,
-    TResult? Function()? getAllProduct,
+    TResult? Function(String fetchType)? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult? Function(String category, BuildContext context)? getLaptops,
@@ -1779,7 +1812,7 @@ class _$GetMobilesImpl implements _GetMobiles {
             List<Media>? selectedImages)?
         editProduct,
     TResult Function(String productId, BuildContext context)? deleteProduct,
-    TResult Function()? getAllProduct,
+    TResult Function(String fetchType)? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult Function(String category, BuildContext context)? getLaptops,
@@ -1945,7 +1978,7 @@ class _$GetProductImpl implements _GetProduct {
         editProduct,
     required TResult Function(String productId, BuildContext context)
         deleteProduct,
-    required TResult Function() getAllProduct,
+    required TResult Function(String fetchType) getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
     required TResult Function(String category, BuildContext context) getLaptops,
@@ -1969,7 +2002,7 @@ class _$GetProductImpl implements _GetProduct {
             List<Media>? selectedImages)?
         editProduct,
     TResult? Function(String productId, BuildContext context)? deleteProduct,
-    TResult? Function()? getAllProduct,
+    TResult? Function(String fetchType)? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult? Function(String category, BuildContext context)? getLaptops,
@@ -1991,7 +2024,7 @@ class _$GetProductImpl implements _GetProduct {
             List<Media>? selectedImages)?
         editProduct,
     TResult Function(String productId, BuildContext context)? deleteProduct,
-    TResult Function()? getAllProduct,
+    TResult Function(String fetchType)? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult Function(String category, BuildContext context)? getLaptops,
@@ -2156,7 +2189,7 @@ class _$SearchProductImpl implements _SearchProduct {
         editProduct,
     required TResult Function(String productId, BuildContext context)
         deleteProduct,
-    required TResult Function() getAllProduct,
+    required TResult Function(String fetchType) getAllProduct,
     required TResult Function(String category, BuildContext context)
         getProductsByCategory,
     required TResult Function(String category, BuildContext context) getLaptops,
@@ -2180,7 +2213,7 @@ class _$SearchProductImpl implements _SearchProduct {
             List<Media>? selectedImages)?
         editProduct,
     TResult? Function(String productId, BuildContext context)? deleteProduct,
-    TResult? Function()? getAllProduct,
+    TResult? Function(String fetchType)? getAllProduct,
     TResult? Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult? Function(String category, BuildContext context)? getLaptops,
@@ -2202,7 +2235,7 @@ class _$SearchProductImpl implements _SearchProduct {
             List<Media>? selectedImages)?
         editProduct,
     TResult Function(String productId, BuildContext context)? deleteProduct,
-    TResult Function()? getAllProduct,
+    TResult Function(String fetchType)? getAllProduct,
     TResult Function(String category, BuildContext context)?
         getProductsByCategory,
     TResult Function(String category, BuildContext context)? getLaptops,

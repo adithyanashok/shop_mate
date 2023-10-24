@@ -5,12 +5,9 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pay/pay.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:shop_mate/application/address/address_bloc.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
-import 'package:shop_mate/application/user/user_bloc.dart';
 import 'package:shop_mate/domain/order/model/order_model.dart';
 import 'package:shop_mate/domain/payments/payments.dart';
 import 'package:shop_mate/presentation/checkout/checkout_screens_widgets/checkout_screen_widgets.dart';
@@ -22,20 +19,21 @@ import 'package:shop_mate/presentation/widgets/button_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class CheckoutScreen extends StatefulWidget {
-  CheckoutScreen({super.key});
+  const CheckoutScreen(
+      {super.key}); // Constructor for the CheckoutScreen widget.
 
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
 }
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
-  int addressCount = 3;
-  String? selectedAddress;
-  String? userId = FirebaseAuth.instance.currentUser?.uid;
+  int addressCount = 3; // Initialize the address count.
+  String? selectedAddress; // Initialize the selected shipping address as null.
+  String? userId = FirebaseAuth.instance.currentUser
+      ?.uid; // Get the current user's ID, which can be null.
 
   late Razorpay _razorpay;
-  final _paymentItems = <PaymentItem>[];
-  late final Future<PaymentConfiguration> _googlePayConfigFuture;
+
   @override
   void initState() {
     super.initState();
@@ -43,13 +41,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, handleExternalWallet);
-    _googlePayConfigFuture = PaymentConfiguration.fromAsset(
-        'default_payment_profile_google_pay.json');
+
     // Set the default value here, e.g., the first address in the list
-    if (BlocProvider.of<AddressBloc>(context)
-        .state
-        .addressModelList
-        .isNotEmpty) {
+    final addressIsNotEmpty =
+        BlocProvider.of<AddressBloc>(context).state.addressModelList.isNotEmpty;
+    if (addressIsNotEmpty) {
       selectedAddress = BlocProvider.of<AddressBloc>(context)
           .state
           .addressModelList[0]
@@ -61,11 +57,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   Widget build(BuildContext context) {
     BlocProvider.of<AddressBloc>(context)
         .add(AddressEvent.getAddress(userId: userId!, context: context));
-    final user = BlocProvider.of<UserBloc>(context).state.user;
     return Scaffold(
       appBar: AppBar(
-        title: const BuildRegularTextWidget(text: 'Checkout'),
-        centerTitle: true,
+        title: const BuildRegularTextWidget(
+            text: 'Address'), // Set the app bar title.
+        centerTitle: true, // Center the app bar title.
       ),
       body: SafeArea(
         child: Column(
@@ -76,10 +72,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const BuildHeadingText(text: "Shipping Address"),
+                  const BuildHeadingText(
+                      text:
+                          "Shipping Address"), // Display the "Shipping Address" heading.
                   IconButton(
                     onPressed: () {
-                      addressDialog(context, userId!);
+                      addressDialog(context,
+                          userId!); // Show an address input dialog on button press.
                     },
                     icon: const Icon(
                       Icons.add,
@@ -97,19 +96,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     itemBuilder: (context, index) {
                       final address = state.addressModelList[index];
                       return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: BuildAddressCard(
-                          key: Key(address.title),
-                          title: address.title,
-                          text: address.address,
-                          onChanged: (value) {
-                            setState(() {
-                              selectedAddress = value;
-                            });
-                          },
-                          selectedValue: selectedAddress,
-                        ),
-                      );
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: BuildAddressCard(
+                            key: Key(address.title),
+                            title: address.title,
+                            text: address.address,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedAddress = value;
+                              });
+                            },
+                            selectedValue: selectedAddress,
+                          ));
                     },
                     separatorBuilder: (context, index) {
                       return const SizedBox(
@@ -124,7 +122,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             Padding(
               padding: const EdgeInsets.only(bottom: 30),
               child: BuildButtonWidget(
-                text: "Continue",
+                text: "Continue", // Display a "Continue" button.
                 onTap: () {
                   Navigator.of(context).push(
                     buildNavigation(
@@ -159,13 +157,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     ).placeOrder(context);
   }
 
-// Handle payment failure response
+  // Handle payment failure response
   void handlePaymentError(PaymentFailureResponse response) {
     log("response ${response.message}");
     // Handle payment failure
   }
 
-// Handle external wallet response
+  // Handle external wallet response
   void handleExternalWallet(ExternalWalletResponse response) {
     log(response.toString());
     log("response ${response.walletName}");

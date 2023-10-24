@@ -12,8 +12,10 @@ import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 class MyOrders extends StatelessWidget {
   MyOrders({super.key});
   final userId = FirebaseAuth.instance.currentUser?.uid;
+
   @override
   Widget build(BuildContext context) {
+    // Fetch the user's orders using the OrdersBloc
     BlocProvider.of<OrdersBloc>(context).add(
         OrdersEvent.getAllOrdersOfAUser(userId: userId!, context: context));
 
@@ -22,16 +24,18 @@ class MyOrders extends StatelessWidget {
         title: const BuildRegularTextWidget(text: "Orders"),
         centerTitle: true,
       ),
-      body: SafeArea(child: BlocBuilder<OrdersBloc, OrdersState>(
-        builder: (context, state) {
-          return SizedBox(
-            width: 1.sw,
-            height: 1.sh,
-            child: ListView.separated(
-              itemBuilder: (context, index) {
-                final order = state.orderModelList[index];
-                return GestureDetector(
+      body: SafeArea(
+        child: BlocBuilder<OrdersBloc, OrdersState>(
+          builder: (context, state) {
+            return SizedBox(
+              width: 1.sw,
+              height: 1.sh,
+              child: ListView.separated(
+                itemBuilder: (context, index) {
+                  final order = state.orderModelList[index];
+                  return GestureDetector(
                     onTap: () {
+                      // Navigate to the OrderTrackingScreen when an order is tapped
                       Navigator.of(context).push(buildNavigation(
                         route: const OrderTrackingScreen(),
                         arguments: order,
@@ -44,6 +48,7 @@ class MyOrders extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              // Display order date and total price
                               BuildSmallText(
                                 text: convertDate(
                                   dateString: order.orderDate.toString(),
@@ -64,6 +69,7 @@ class MyOrders extends StatelessWidget {
                             children: order.products.map((product) {
                               return Row(
                                 children: [
+                                  // Display product image
                                   Image.network(
                                     product['image'],
                                     width: 80,
@@ -73,6 +79,7 @@ class MyOrders extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
+                                      // Display product name and description
                                       BuildSmallText(text: product['name']),
                                       SizedBox(
                                         width: 0.5.sw,
@@ -90,19 +97,21 @@ class MyOrders extends StatelessWidget {
                           ),
                         ],
                       ),
-                    ));
-              },
-              separatorBuilder: (context, index) {
-                return const Divider(
-                  height: 10,
-                  color: AppColor.greenColor,
-                );
-              },
-              itemCount: state.orderModelList.length,
-            ),
-          );
-        },
-      )),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const Divider(
+                    height: 10,
+                    color: AppColor.greenColor,
+                  );
+                },
+                itemCount: state.orderModelList.length,
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

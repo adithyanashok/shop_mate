@@ -172,8 +172,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         amount,
                         context,
                       );
-                      BlocProvider.of<ProductBloc>(context)
-                          .add(const ProductEvent.getAllProduct());
+                      BlocProvider.of<ProductBloc>(context).add(
+                        const ProductEvent.getAllProduct(
+                          fetchType: 'all-products',
+                        ),
+                      );
                     },
                     state: state,
                   );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/domain/product/model/product.dart';
@@ -27,11 +28,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
   String? amount;
 
   String? quantity;
+  String? delivery;
   String? category;
 
   List<Media>? image;
 
   bool error = false;
+  List<String> selectedColors = [];
+  List<Color> colors = [];
 
   _AddProductScreenState();
 
@@ -94,6 +98,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   quantity = value;
                 },
               ),
+              BuildTextFormField(
+                label: "Delivery fee",
+                hintText: 'Enter delivery fee',
+                icon: Icons.delivery_dining_outlined,
+                keyboardType: TextInputType.number,
+                func: (value) {
+                  delivery = value;
+                },
+              ),
               const SizedBox(
                 height: 10,
               ),
@@ -133,6 +146,62 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         style: TextStyle(color: AppColor.greenColor),
                       ),
               ),
+              TextButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text("Select color"),
+                        content: SingleChildScrollView(
+                          child: ColorPicker(
+                            pickerColor: Colors.red,
+                            onColorChanged: (value) {
+                              setState(() {
+                                selectedColors.add(value.toString());
+                                colors.add(value);
+                              });
+                            },
+                          ),
+                        ),
+                        actions: [
+                          TextButton(
+                            child: const Text('OK'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                child: const Text("Pick color"),
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                height: 55,
+                width: .9.sw,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      width: 10,
+                    );
+                  },
+                  itemBuilder: (context, index) {
+                    return Container(
+                      width: 40,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: colors[index],
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                    );
+                  },
+                  itemCount: colors.length,
+                ),
+              ),
               BlocBuilder<ProductBloc, ProductState>(
                 builder: (context, state) {
                   return BuildButtonWidget(
@@ -170,7 +239,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
         amount == null ||
         quantity == null ||
         image == null ||
-        category == null) {
+        category == null ||
+        delivery == null) {
       snackBar(context: context, msg: 'Please fill the form');
       // return;
     } else {
@@ -185,6 +255,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
             quantity: qty,
             category: category!,
             image: [],
+            date: DateTime.now(),
           ),
           selectedImages: image!,
           context: context,

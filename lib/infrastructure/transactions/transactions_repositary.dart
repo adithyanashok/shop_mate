@@ -40,6 +40,14 @@ class TransactionsRepositary implements ITransactionFacade {
       for (var docSnapshot in querySnapshot.docs) {
         final product = TransactionModel.fromJson(docSnapshot.data());
 
+        transactions.sort(
+          (a, b) {
+            final DateTime dateTimeA = a.date;
+            final DateTime dateTimeB = b.date;
+            return dateTimeB.compareTo(dateTimeA);
+          },
+        );
+
         transactions.add(product);
       }
       return Right(transactions);

@@ -11,7 +11,6 @@ import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/login/login_screen.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
 import 'package:shop_mate/presentation/widgets/asset_card.dart';
-import 'package:shop_mate/presentation/widgets/button_widgets.dart';
 import 'package:shop_mate/presentation/widgets/loader_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_form_field_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
@@ -58,11 +57,13 @@ class SignupScreen extends StatelessWidget {
                 const SizedBox(
                   height: 100,
                 ),
+                // Input field for email
                 BuildTextFormField(
                   label: 'Email',
                   hintText: "Enter your email",
                   icon: Icons.mail,
                   func: (value) {
+                    // Update the userModel with the entered email.
                     final email = userModel.copyWith(email: value);
                     userModel = email;
                     log(userModel.toString());
@@ -71,13 +72,14 @@ class SignupScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
+                // Input field for username
                 BuildTextFormField(
                   label: 'Username',
                   hintText: "Enter username",
                   icon: Icons.person,
                   func: (value) {
+                    // Update the userModel with the entered username.
                     final username = userModel.copyWith(username: value);
-
                     userModel = username;
                     log(username.toString());
                   },
@@ -85,12 +87,14 @@ class SignupScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
+                // Input field for password
                 BuildTextFormField(
                   label: 'Password',
                   hintText: "Enter your password",
                   icon: Icons.lock,
                   obscureText: true,
                   func: (value) {
+                    // Update the userModel with the entered password.
                     final password = userModel.copyWith(password: value);
                     userModel = password;
                     log(userModel.toString());
@@ -99,6 +103,7 @@ class SignupScreen extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
+                // Or separator
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -122,6 +127,7 @@ class SignupScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                // Social media sign-up buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -143,6 +149,7 @@ class SignupScreen extends StatelessWidget {
                   builder: (context, state) {
                     return GestureDetector(
                       onTap: () {
+                        // Validate and submit the sign-up form.
                         formValidationAndSubmission(context);
                       },
                       child: Container(
@@ -169,6 +176,7 @@ class SignupScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
+                    // Navigate to the login screen.
                     Navigator.of(context)
                         .push(buildNavigation(route: LoginScreen()));
                   },
@@ -188,21 +196,25 @@ class SignupScreen extends StatelessWidget {
   void formValidationAndSubmission(BuildContext context) {
     final user = userModel;
     if (user.email == '' || user.email == null) {
+      // Show a snack bar message if email is missing.
       snackBar(
         context: context,
         msg: 'Please enter your email address.',
       );
     } else if (user.username == '' || user.username == null) {
+      // Show a snack bar message if username is missing.
       snackBar(
         context: context,
         msg: 'Please enter your username.',
       );
     } else if (user.password == '' || user.password == null) {
+      // Show a snack bar message if password is missing.
       snackBar(
         context: context,
         msg: 'Please enter your password.',
       );
     } else {
+      // Trigger sign-up event with user data.
       BlocProvider.of<SignupBloc>(context).add(
         SignupEvent.signup(
           userModel: user,

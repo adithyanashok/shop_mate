@@ -27,6 +27,7 @@ mixin _$ProductModel {
   double get amount => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
   List<String>? get image => throw _privateConstructorUsedError;
+  DateTime? get date => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,6 +50,7 @@ abstract class $ProductModelCopyWith<$Res> {
       double amount,
       int quantity,
       List<String>? image,
+      DateTime? date,
       String? id});
 }
 
@@ -72,6 +74,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? amount = null,
     Object? quantity = null,
     Object? image = freezed,
+    Object? date = freezed,
     Object? id = freezed,
   }) {
     return _then(_value.copyWith(
@@ -103,6 +106,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -127,6 +134,7 @@ abstract class _$$ProductModelImplCopyWith<$Res>
       double amount,
       int quantity,
       List<String>? image,
+      DateTime? date,
       String? id});
 }
 
@@ -148,6 +156,7 @@ class __$$ProductModelImplCopyWithImpl<$Res>
     Object? amount = null,
     Object? quantity = null,
     Object? image = freezed,
+    Object? date = freezed,
     Object? id = freezed,
   }) {
     return _then(_$ProductModelImpl(
@@ -179,6 +188,10 @@ class __$$ProductModelImplCopyWithImpl<$Res>
           ? _value._image
           : image // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -198,6 +211,7 @@ class _$ProductModelImpl implements _ProductModel {
       required this.amount,
       required this.quantity,
       final List<String>? image,
+      this.date,
       this.id})
       : _image = image;
 
@@ -228,11 +242,13 @@ class _$ProductModelImpl implements _ProductModel {
   }
 
   @override
+  final DateTime? date;
+  @override
   final String? id;
 
   @override
   String toString() {
-    return 'ProductModel(name: $name, rating: $rating, description: $description, category: $category, amount: $amount, quantity: $quantity, image: $image, id: $id)';
+    return 'ProductModel(name: $name, rating: $rating, description: $description, category: $category, amount: $amount, quantity: $quantity, image: $image, date: $date, id: $id)';
   }
 
   @override
@@ -250,6 +266,7 @@ class _$ProductModelImpl implements _ProductModel {
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
             const DeepCollectionEquality().equals(other._image, _image) &&
+            (identical(other.date, date) || other.date == date) &&
             (identical(other.id, id) || other.id == id));
   }
 
@@ -264,6 +281,7 @@ class _$ProductModelImpl implements _ProductModel {
       amount,
       quantity,
       const DeepCollectionEquality().hash(_image),
+      date,
       id);
 
   @JsonKey(ignore: true)
@@ -289,6 +307,7 @@ abstract class _ProductModel implements ProductModel {
       required final double amount,
       required final int quantity,
       final List<String>? image,
+      final DateTime? date,
       final String? id}) = _$ProductModelImpl;
 
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
@@ -308,6 +327,8 @@ abstract class _ProductModel implements ProductModel {
   int get quantity;
   @override
   List<String>? get image;
+  @override
+  DateTime? get date;
   @override
   String? get id;
   @override

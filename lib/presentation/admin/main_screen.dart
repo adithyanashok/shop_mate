@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
+import 'package:shop_mate/application/user/user_bloc.dart';
 import 'package:shop_mate/domain/notifications/notifications.dart';
 import 'package:shop_mate/presentation/admin/bar/bar.dart';
 import 'package:shop_mate/presentation/admin/home_screen.dart';
@@ -64,6 +65,8 @@ class BuildNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<UserBloc>(context).add(const UserEvent.getUser());
+
     return BottomNavigationBar(
       showSelectedLabels: true,
       showUnselectedLabels: false,

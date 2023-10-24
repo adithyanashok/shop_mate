@@ -4,13 +4,13 @@ import 'package:shop_mate/presentation/constants/colors.dart';
 
 class StarRatingWidget extends StatelessWidget {
   StarRatingWidget({
-    super.key,
+    Key? key,
     required this.initialRating,
     required this.readOnly,
     this.onChanged,
     this.starSize = 20,
     this.filledColor = AppColor.greenColor,
-  });
+  }) : super(key: key);
 
   final double initialRating;
   final bool readOnly;
@@ -26,13 +26,14 @@ class StarRatingWidget extends StatelessWidget {
         onChanged: (value) {
           onChanged!(value);
         },
-        initialRating: initialRating,
-        readOnly: readOnly,
-        starSize: starSize,
-        filledColor: filledColor,
-        customFilledIcon: Icons.star,
-        customHalfFilledIcon: Icons.star_half,
-        customEmptyIcon: Icons.star_border,
+        initialRating: initialRating, // Set the initial rating value
+        readOnly: readOnly, // Set whether the rating is read-only
+        starSize: starSize, // Set the size of each star icon
+        filledColor: filledColor, // S
+        customFilledIcon: Icons.star, // Define the icon for filled stars
+        customHalfFilledIcon: Icons
+            .star_half, // Define the icon for half-filled stars (if supported)
+        customEmptyIcon: Icons.star_border, // Define the icon for empty stars
       ),
     );
   }

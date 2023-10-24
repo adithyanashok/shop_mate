@@ -19,7 +19,8 @@ class ProductEvent with _$ProductEvent {
     required BuildContext context,
   }) = _DeleteProduct;
 
-  const factory ProductEvent.getAllProduct() = _GetAllProduct;
+  const factory ProductEvent.getAllProduct({required String fetchType}) =
+      _GetAllProduct;
 
   const factory ProductEvent.getProductsByCategory({
     required String category,

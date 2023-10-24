@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/rating/rating_bloc.dart';
@@ -80,6 +79,7 @@ class RatingProductWidget extends StatelessWidget {
                         text: "Rate",
                         onTap: () {
                           rate(context);
+                          // Fetch ratings after rating to update the list.
                           BlocProvider.of<RatingBloc>(context).add(
                             RatingEvent.fetchRatings(
                               productId: productId,
@@ -112,6 +112,7 @@ class RatingProductWidget extends StatelessWidget {
         rating == null) {
       snackBar(context: context, msg: "Please fill all the details");
     } else {
+      // Send a rating request to the RatingBloc.
       BlocProvider.of<RatingBloc>(context).add(
         RatingEvent.rateProduct(
           ratingModel: RatingModel(

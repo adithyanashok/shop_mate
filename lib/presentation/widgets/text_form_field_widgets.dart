@@ -1,22 +1,23 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class BuildTextFormField extends StatefulWidget {
-  BuildTextFormField(
-      {super.key,
-      required this.label,
-      required this.hintText,
-      required this.icon,
-      this.initialValue = '',
-      this.obscureText = false,
-      this.keyboardType = TextInputType.multiline,
-      required this.func});
+  const BuildTextFormField({
+    Key? key,
+    required this.label,
+    required this.hintText,
+    required this.icon,
+    this.initialValue = '',
+    this.obscureText = false,
+    this.keyboardType = TextInputType.multiline,
+    required this.func,
+  });
+
   final String label;
   final String hintText;
   final IconData icon;
@@ -31,6 +32,7 @@ class BuildTextFormField extends StatefulWidget {
 
 class _BuildTextFormFieldState extends State<BuildTextFormField> {
   late TextEditingController textEditingController;
+
   @override
   void initState() {
     super.initState();
@@ -49,7 +51,7 @@ class _BuildTextFormFieldState extends State<BuildTextFormField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         BuildSmallText(
-          text: widget.label,
+          text: widget.label, // Display the label text
           fontSize: 14,
           fontWeight: FontWeight.w600,
         ),
@@ -64,7 +66,7 @@ class _BuildTextFormFieldState extends State<BuildTextFormField> {
           child: Row(
             children: [
               Icon(
-                widget.icon,
+                widget.icon, // Display the specified icon
                 color: AppColor.colorGrey2,
               ),
               const SizedBox(
@@ -73,16 +75,19 @@ class _BuildTextFormFieldState extends State<BuildTextFormField> {
               Expanded(
                 child: TextField(
                   onChanged: (value) {
-                    widget.func(value);
+                    widget.func(
+                        value); // Call the provided callback function on value change
                     log(value);
                   },
-                  keyboardType: widget.keyboardType,
-                  obscureText: widget.obscureText,
-                  controller: textEditingController,
+                  keyboardType: widget.keyboardType, // Set the keyboard type
+                  obscureText:
+                      widget.obscureText, // Set text obscuring if needed
+                  controller:
+                      textEditingController, // Use the provided controller
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
-                    hintText: widget.hintText,
+                    hintText: widget.hintText, // Set the hint text
                     hintStyle: TextStyle(
                       color: AppColor.colorGrey2,
                       fontSize: 14.sp,

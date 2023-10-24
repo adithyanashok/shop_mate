@@ -46,7 +46,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<_GetAllProduct>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
-        final productOpt = await iProductFacade.getAllProducts();
+        final productOpt = await iProductFacade.getAllProducts(event.fetchType);
 
         emit(
           productOpt.fold(

@@ -18,39 +18,46 @@ import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 class CartScreen extends StatelessWidget {
   CartScreen({super.key});
 
-  String? userId = FirebaseAuth.instance.currentUser?.uid;
+  String? userId = FirebaseAuth.instance.currentUser
+      ?.uid; // Get the current user's ID, which can be null.
 
   @override
   Widget build(BuildContext context) {
+    // Trigger the CartBloc to fetch the user's cart data.
     BlocProvider.of<CartBloc>(context)
         .add(CartEvent.getCart(userId: userId!, context: context));
+
+    // Trigger the AddressBloc to fetch the user's address data.
     BlocProvider.of<AddressBloc>(context)
         .add(AddressEvent.getAddress(userId: userId!, context: context));
 
     return Scaffold(
       appBar: AppBar(
-        title: const BuildRegularTextWidget(text: 'Cart'),
-        centerTitle: true,
+        title: const BuildRegularTextWidget(
+            text: 'Cart'), // Set the app bar title.
+        centerTitle: true, // Center the app bar title.
       ),
       body: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
           return SafeArea(
             child: state.isLoading
                 ? const Center(
-                    child: BuildLoadingWidget(),
+                    child:
+                        BuildLoadingWidget(), // Display loading widget if data is loading.
                   )
                 : state.cart.products.isEmpty
                     ? Center(
-                        child: Image.asset('assets/images/cart-is-empty.png'),
+                        child: Image.asset(
+                            'assets/images/cart-is-empty.png'), // Display an image if the cart is empty.
                       )
                     : Column(
                         children: [
-                          CartProductSection(),
+                          CartProductSection(), // Display the cart product section.
                           const Divider(
                             color: AppColor.greenColor,
                             thickness: 3,
                           ),
-                          const CartAmountSection()
+                          const CartAmountSection() // Display the cart amount section.
                         ],
                       ),
           );
@@ -63,7 +70,7 @@ class CartScreen extends StatelessWidget {
 class CartAmountSection extends StatelessWidget {
   const CartAmountSection({
     super.key,
-  });
+  }); // Constructor for the CartAmountSection widget.
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +86,10 @@ class CartAmountSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const BuildRegularTextWidget(text: "Price Details"),
+                  const BuildRegularTextWidget(
+                      text: "Price Details"), // Display the section title.
+
+                  // Display the subtotal with its value.
                   BuildTextRow(
                     text1: const BuildRegularTextWidget(
                       text: 'Subtotal:',
@@ -90,6 +100,8 @@ class CartAmountSection extends StatelessWidget {
                       fontSize: 15,
                     ),
                   ),
+
+                  // Display the delivery fee with its value.
                   BuildTextRow(
                     text1: const BuildRegularTextWidget(
                       text: 'Delivery Fee:',
@@ -100,6 +112,8 @@ class CartAmountSection extends StatelessWidget {
                       fontSize: 15,
                     ),
                   ),
+
+                  // Display the discount with its value.
                   BuildTextRow(
                     text1: const BuildRegularTextWidget(
                       text: 'Discount:',
@@ -110,20 +124,25 @@ class CartAmountSection extends StatelessWidget {
                       fontSize: 15,
                     ),
                   ),
+
+                  // Display the total price with its value.
                   BuildTextRow(
                     text1: const BuildRegularTextWidget(text: "Total:"),
                     text2: BuildHeadingText(text: "\$${state.cart.totalPrice}"),
                   ),
+
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context)
-                          .push(buildNavigation(route: CheckoutScreen()));
+                      Navigator.of(context).push(buildNavigation(
+                          route:
+                              const CheckoutScreen())); // Navigate to the checkout screen on tap.
                     },
                     child: BuildButtonWidget(
                       text: 'Continue',
                       onTap: () {
-                        Navigator.of(context)
-                            .push(buildNavigation(route: CheckoutScreen()));
+                        Navigator.of(context).push(buildNavigation(
+                            route:
+                                const CheckoutScreen())); // Navigate to the checkout screen on button press.
                       },
                     ),
                   )
@@ -142,7 +161,8 @@ class CartProductSection extends StatelessWidget {
     super.key,
   });
 
-  final String? userId = FirebaseAuth.instance.currentUser?.uid;
+  final String? userId = FirebaseAuth.instance.currentUser
+      ?.uid; // Get the current user's ID, which can be null.
 
   @override
   Widget build(BuildContext context) {
@@ -154,12 +174,15 @@ class CartProductSection extends StatelessWidget {
           child: ListView.separated(
             itemBuilder: (context, index) {
               final product = state.cart.products[index];
+
+              // Create a Slidable widget for each product.
               return Slidable(
                 startActionPane: ActionPane(
                   motion: const BehindMotion(),
                   children: [
                     SlidableAction(
                       onPressed: (context) {
+                        // Trigger the CartBloc to delete the product.
                         BlocProvider.of<CartBloc>(context)
                             .add(CartEvent.deleteProduct(
                                 cartModel: CartModel(
@@ -220,12 +243,15 @@ class CartProductSection extends StatelessWidget {
                         ),
                       ],
                     ),
+
+                    // Increment and decrement the quantity of the product.
                     BlocBuilder<CartBloc, CartState>(
                       builder: (context, state) {
                         return Row(
                           children: [
                             GestureDetector(
                               onTap: () {
+                                // Trigger CartBloc to increment the quantity.
                                 BlocProvider.of<CartBloc>(context)
                                     .add(CartEvent.incrementQty(
                                         cartModel: CartModel(
@@ -279,6 +305,7 @@ class CartProductSection extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
+                                // Trigger CartBloc to decrement the quantity.
                                 BlocProvider.of<CartBloc>(context)
                                     .add(CartEvent.incrementQty(
                                         cartModel: CartModel(
