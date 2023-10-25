@@ -187,6 +187,8 @@ class ProductScreen extends StatelessWidget {
                               textColor: AppColor.greenColor,
                               borderColor: AppColor.greenColor,
                               onTap: () async {
+                                final discount =
+                                    (product.discount / 100) * product.amount;
                                 BlocProvider.of<CartBloc>(context).add(
                                   CartEvent.addToCart(
                                     cartModel: CartModel(
@@ -202,7 +204,7 @@ class ProductScreen extends StatelessWidget {
                                           "image": product.image![0],
                                           "productId": product.id,
                                           "deliveryFee": product.deliveryFee,
-                                          "discount": product.discount,
+                                          "discount": discount,
                                         }
                                       ],
                                       totalDeliveryFee: 0,
@@ -246,12 +248,17 @@ class ProductScreen extends StatelessWidget {
                                         borderColor: AppColor.greenColor,
                                         state: state,
                                         onTap: () {
+                                          final discount =
+                                              (product.discount / 100) *
+                                                  product.amount;
                                           BlocProvider.of<CartBloc>(context)
                                               .add(
                                             CartEvent.addToCart(
                                               cartModel: CartModel(
                                                 userId: userId!,
-                                                totalPrice: product.amount * 1,
+                                                totalPrice:
+                                                    product.discountedTotal +
+                                                        state.cart.totalPrice,
                                                 products: [
                                                   {
                                                     "name": product.name,
@@ -259,19 +266,24 @@ class ProductScreen extends StatelessWidget {
                                                         product.description,
                                                     "category":
                                                         product.category,
-                                                    "amount": product.amount,
+                                                    "amount":
+                                                        product.discountedTotal,
                                                     "quantity": 1,
                                                     "image": product.image![0],
                                                     "productId": product.id,
                                                     "deliveryFee":
                                                         product.deliveryFee,
-                                                    "discount":
-                                                        product.discount,
+                                                    "discount": discount,
                                                   }
                                                 ],
-                                                totalDeliveryFee: 0,
-                                                totalDiscount: 0,
-                                                subTotal: product.amount,
+                                                totalDeliveryFee: state
+                                                        .cart.totalDeliveryFee +
+                                                    product.deliveryFee,
+                                                totalDiscount:
+                                                    state.cart.totalDiscount +
+                                                        discount,
+                                                subTotal: state.cart.subTotal +
+                                                    product.discountedTotal,
                                               ),
                                               context: context,
                                             ),

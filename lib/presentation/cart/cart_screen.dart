@@ -91,7 +91,7 @@ class CartAmountSection extends StatelessWidget {
                       fontSize: 15,
                     ),
                     text2: BuildRegularTextWidget(
-                      text: '\$${state.cart.subTotal}',
+                      text: '\$${state.cart.subTotal.round()}',
                       fontSize: 15,
                     ),
                   ),
@@ -103,7 +103,7 @@ class CartAmountSection extends StatelessWidget {
                       fontSize: 15,
                     ),
                     text2: BuildRegularTextWidget(
-                      text: '\$${state.cart.totalDeliveryFee}',
+                      text: '\$${state.cart.totalDeliveryFee.round()}',
                       fontSize: 15,
                     ),
                   ),
@@ -115,7 +115,7 @@ class CartAmountSection extends StatelessWidget {
                       fontSize: 15,
                     ),
                     text2: BuildRegularTextWidget(
-                      text: '\$${state.cart.totalDiscount}',
+                      text: '\$${state.cart.totalDiscount.round()}',
                       fontSize: 15,
                     ),
                   ),
@@ -123,7 +123,8 @@ class CartAmountSection extends StatelessWidget {
                   // Display the total price with its value.
                   BuildTextRow(
                     text1: const BuildRegularTextWidget(text: "Total:"),
-                    text2: BuildHeadingText(text: "\$${state.cart.totalPrice}"),
+                    text2: BuildHeadingText(
+                        text: "\$${state.cart.totalPrice.round()}"),
                   ),
 
                   GestureDetector(
@@ -192,12 +193,12 @@ class CartProductSection extends StatelessWidget {
                                       "quantity": product['quantity'],
                                       "image": product['image'],
                                       "productId": product['productId'],
-                                      "deliveryFee": 10,
-                                      "discount": 50,
+                                      "deliveryFee": product['deliveryFee'],
+                                      "discount": product['discount'],
                                     }
                                   ],
-                                  totalDeliveryFee: 10,
-                                  totalDiscount: 50,
+                                  totalDeliveryFee: state.cart.totalDeliveryFee,
+                                  totalDiscount: state.cart.totalDiscount,
                                   subTotal: state.cart.subTotal,
                                 ),
                                 context: context));
@@ -225,11 +226,11 @@ class CartProductSection extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            BuildSmallText(text: product['name']),
+                            BuildSmallText(text: product['amount'].toString()),
                             SizedBox(
                               width: 0.5.sw,
                               child: BuildSmallText(
-                                text: product['description'],
+                                text: product['discount'].toString(),
                                 color: AppColor.colorGrey1,
                                 fontSize: 12,
                               ),

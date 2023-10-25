@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/application/user/user_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
@@ -27,6 +28,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  //userId
+  final userId = FirebaseAuth.instance.currentUser?.uid;
   // Current page index for the PageView
   int _currentPage = 0;
 
@@ -77,6 +80,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ProductEvent.getEarphones(category: 'earphones', context: context));
     BlocProvider.of<ProductBloc>(context)
         .add(const ProductEvent.getAllProduct(fetchType: 'new'));
+    BlocProvider.of<CartBloc>(context)
+        .add(CartEvent.getCart(userId: userId!, context: context));
     BlocProvider.of<UserBloc>(context).add(const UserEvent.getUser());
     return Scaffold(
         appBar: const PreferredSize(
