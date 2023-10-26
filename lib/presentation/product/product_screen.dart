@@ -257,8 +257,7 @@ class ProductScreen extends StatelessWidget {
                                               cartModel: CartModel(
                                                 userId: userId!,
                                                 totalPrice:
-                                                    product.discountedTotal +
-                                                        state.cart.totalPrice,
+                                                    product.discountedTotal,
                                                 products: [
                                                   {
                                                     "name": product.name,
@@ -276,13 +275,10 @@ class ProductScreen extends StatelessWidget {
                                                     "discount": discount,
                                                   }
                                                 ],
-                                                totalDeliveryFee: state
-                                                        .cart.totalDeliveryFee +
+                                                totalDeliveryFee:
                                                     product.deliveryFee,
-                                                totalDiscount:
-                                                    state.cart.totalDiscount +
-                                                        discount,
-                                                subTotal: state.cart.subTotal +
+                                                totalDiscount: discount,
+                                                subTotal:
                                                     product.discountedTotal,
                                               ),
                                               context: context,

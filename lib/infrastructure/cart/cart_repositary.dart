@@ -18,108 +18,65 @@ class CartRepositary implements ICartFacade {
       CartModel cartModel, context) async {
     try {
       final db = FirebaseFirestore.instance;
-      final state = BlocProvider.of<CartBloc>(context).state;
-      log(cartModel.toString());
-      // Calculate the total price for the product being added
-      double productTotalPrice = cartModel.products.fold<double>(
-        0,
-        (previousTotal, product) =>
-            previousTotal + (product['amount'] as double),
-      );
-      log("prouctTotalPrice: ${productTotalPrice}");
-
-      double subTotal = cartModel.products.fold<double>(
-        0,
-        (previousTotal, product) =>
-            previousTotal + (product['amount']) * (product['quantity'] as int),
-      );
-      log("subtotal: ${subTotal}");
-
-      // Calculate the total delivery fee and total discount for the entire cart
-      double totalDeliveryFee = cartModel.products.fold<double>(
-        0,
-        (previousTotal, product) => previousTotal + (product['deliveryFee']),
-      );
-      log("totaldelivery fee init: ${totalDeliveryFee}");
-
-      double totalDiscount = cartModel.products.fold<double>(
-        0,
-        (previousTotal, product) => previousTotal + (product['discount']),
-      );
-
-      final productWithDiscont = cartModel.products[0]['deliveryFee'] -
-          cartModel.products[0]['discount'];
-      log("product with discount: ${productWithDiscont}");
-
-      // Fetch cart
-      final currentCart = await db
+      final docRef = await db
           .collection(Collection.collectionCart)
           .doc(cartModel.userId)
           .get();
-      final cart = CartModel.fromJson(currentCart.data()!);
-      final totalFromCart = cart.totalPrice + cartModel.totalPrice;
-      log("totalFromCart: ${totalFromCart}");
 
-      // Check there is a cart
-      if (currentCart.data() != null) {
-        final cart = CartModel.fromJson(currentCart.data()!);
-        // Update the total delivery fee
-        totalDeliveryFee = cart.totalDeliveryFee + totalDeliveryFee;
-        log("total delivery fee: ${totalDeliveryFee}");
+      // Retrieve the document data from Firestore
+      // var docData = await docRef.get();
 
-        // Update the total discount
-        totalDiscount = cart.totalDiscount + totalDiscount;
-        log("totalDiscount: ${totalDiscount}");
+      log(docRef.id.toString());
+      if (docRef.data() != null) {
+        log("called docData.data != null");
+        final cart = CartModel.fromJson(docRef.data()!);
+        final state = BlocProvider.of<CartBloc>(context).state;
+        if (cart.products.isEmpty) {
+          log("cart.products.isempty");
 
-        // Update the total price
-        productTotalPrice = cart.totalPrice + productTotalPrice;
-        log("prouctTotalPrice2: ${productTotalPrice}");
+          // await db
+          //     .collection(Collection.collectionCart)
+          //     .doc(cartModel.userId)
+          //     .update({
+          //   "products": FieldValue.arrayUnion(cartModel.products),
+          //   "totalPrice": cartModel.totalPrice,
+          //   "totalDeliveryFee": cartModel.totalDeliveryFee,
+          //   "totalDiscount": cartModel.totalDiscount,
+          //   "subTotal": cartModel.subTotal,
+          // });
+        } else {
+          log("${cart.totalDeliveryFee} ${cartModel.products[0]['amount']}");
 
-        subTotal = cart.subTotal + subTotal;
-        log("subTotal2: ${subTotal}");
-      }
-      double totalWithDelivery = productTotalPrice + totalDeliveryFee;
-      double totalWithDiscount = totalWithDelivery - totalDiscount;
-      double totalSubTotal = subTotal;
-
-      if (state.cart.products.isEmpty) {
-        log("cartModel.totalPrice: ${cartModel.totalPrice}");
-        log("cartModel.totalDeliveryFee: ${cartModel.totalDeliveryFee}");
-        log("cartModel.totalDiscount: ${totalDiscount}");
-        log("cartModel.subTotal: ${cartModel.subTotal}");
-        // If the cart is empty, set the total price directly
-
+          log("${cartModel}");
+          await db
+              .collection(Collection.collectionCart)
+              .doc(cartModel.userId)
+              .update({
+            "products": FieldValue.arrayUnion(cartModel.products),
+            "totalPrice": cart.totalPrice +
+                cartModel.products[0]['deliveryFee'] +
+                cartModel.totalPrice,
+            "totalDeliveryFee":
+                cart.totalDeliveryFee + cartModel.products[0]['deliveryFee'],
+            "totalDiscount":
+                cart.totalDiscount + cartModel.products[0]['discount'],
+            "subTotal": cart.subTotal + cartModel.products[0]['amount'],
+          });
+        }
+      } else {
+        log("called docData.data != null else");
         cartModel = cartModel.copyWith(
-          totalPrice: cartModel.totalPrice,
-          totalDeliveryFee: totalDeliveryFee,
-          totalDiscount: totalDiscount,
-          subTotal: subTotal,
+          totalPrice:
+              cartModel.totalPrice + cartModel.products[0]['deliveryFee'],
+          totalDeliveryFee: cartModel.totalDeliveryFee,
+          totalDiscount: cartModel.totalDiscount,
+          subTotal: cartModel.subTotal,
         );
         await db
             .collection(Collection.collectionCart)
             .doc(cartModel.userId)
             .set(cartModel.toJson());
-      } else {
-        // If the cart is not empty, update the total price, total delivery fee, and total discount
-        final cart = CartModel.fromJson(currentCart.data()!);
-
-        log("cartModel.totalPrice: ${cart.totalPrice}");
-        log("cartModel.totalDeliveryFee: ${cartModel.totalDeliveryFee}");
-        log("cartModel.totalDiscount: ${totalDiscount}");
-        log("cartModel.subTotal: ${cartModel.subTotal}");
-        await db
-            .collection(Collection.collectionCart)
-            .doc(cartModel.userId)
-            .update({
-          "products": FieldValue.arrayUnion(cartModel.products),
-          "totalPrice": cartModel
-              .totalPrice, // Update the total price with discount and delivery fee
-          "totalDeliveryFee": totalDeliveryFee, // Update total delivery fee
-          "totalDiscount": totalDiscount,
-          "subTotal": subTotal,
-        });
       }
-
       snackBar(context: context, success: true, msg: "Added to cart");
 
       return Right(cartModel);
@@ -153,7 +110,9 @@ class CartRepositary implements ICartFacade {
 
       if (docData.exists) {
         for (var cartProducts in docData.data()?['products']) {
-          print(cartProducts['amount']++);
+          double total = 0;
+          final dd = docData.data()?['totalPrice'] += cartProducts['amount'];
+          print("get Cart: $dd");
         }
         // If the document exists, parse it as a CartModel
         final cart = CartModel.fromJson(docData.data()!).copyWith();
@@ -346,3 +305,103 @@ class CartRepositary implements ICartFacade {
     }
   }
 }
+
+// Calculate the total price for the product being added
+      // double productTotalPrice = cartModel.products.fold<double>(
+      //   0,
+      //   (previousTotal, product) =>
+      //       previousTotal + (product['amount'] as double),
+      // );
+      // log("prouctTotalPrice: ${productTotalPrice}");
+
+      // double subTotal = cartModel.products.fold<double>(
+      //   0,
+      //   (previousTotal, product) =>
+      //       previousTotal + (product['amount']) * (product['quantity'] as int),
+      // );
+      // log("subtotal: ${subTotal}");
+
+      // // Calculate the total delivery fee and total discount for the entire cart
+      // double totalDeliveryFee = cartModel.products.fold<double>(
+      //   0,
+      //   (previousTotal, product) => previousTotal + (product['deliveryFee']),
+      // );
+      // log("totaldelivery fee init: ${totalDeliveryFee}");
+
+      // double totalDiscount = cartModel.products.fold<double>(
+      //   0,
+      //   (previousTotal, product) => previousTotal + (product['discount']),
+      // );
+
+      // final productWithDiscont = cartModel.products[0]['deliveryFee'] -
+      //     cartModel.products[0]['discount'];
+      // log("product with discount: ${productWithDiscont}");
+
+      // // Fetch cart
+      // final currentCart = await db
+      //     .collection(Collection.collectionCart)
+      //     .doc(cartModel.userId)
+      //     .get();
+      // final cart = CartModel.fromJson(currentCart.data()!);
+      // final totalFromCart = cart.totalPrice + cartModel.totalPrice;
+      // log("totalFromCart: ${totalFromCart}");
+
+      // // Check there is a cart
+      // if (currentCart.data() != null) {
+      //   final cart = CartModel.fromJson(currentCart.data()!);
+      //   // Update the total delivery fee
+      //   totalDeliveryFee = cart.totalDeliveryFee + totalDeliveryFee;
+      //   log("total delivery fee: ${totalDeliveryFee}");
+
+      //   // Update the total discount
+      //   totalDiscount = cart.totalDiscount + totalDiscount;
+      //   log("totalDiscount: ${totalDiscount}");
+
+      //   // Update the total price
+      //   productTotalPrice = cart.totalPrice + productTotalPrice;
+      //   log("prouctTotalPrice2: ${productTotalPrice}");
+
+      //   subTotal = cart.subTotal + subTotal;
+      //   log("subTotal2: ${subTotal}");
+      // }
+      // double totalWithDelivery = productTotalPrice + totalDeliveryFee;
+      // double totalWithDiscount = totalWithDelivery - totalDiscount;
+      // double totalSubTotal = subTotal;
+
+      // if (state.cart.products.isEmpty) {
+      //   log("cartModel.totalPrice: ${cartModel.totalPrice}");
+      //   log("cartModel.totalDeliveryFee: ${cartModel.totalDeliveryFee}");
+      //   log("cartModel.totalDiscount: ${totalDiscount}");
+      //   log("cartModel.subTotal: ${cartModel.subTotal}");
+      //   // If the cart is empty, set the total price directly
+
+      //   cartModel = cartModel.copyWith(
+      //     totalPrice: cartModel.totalPrice,
+      //     totalDeliveryFee: totalDeliveryFee,
+      //     totalDiscount: totalDiscount,
+      //     subTotal: subTotal,
+      //   );
+      //   await db
+      //       .collection(Collection.collectionCart)
+      //       .doc(cartModel.userId)
+      //       .set(cartModel.toJson());
+      // } else {
+      //   // If the cart is not empty, update the total price, total delivery fee, and total discount
+      //   final cart = CartModel.fromJson(currentCart.data()!);
+
+      //   log("cartModel.totalPrice: ${cart.totalPrice}");
+      //   log("cartModel.totalDeliveryFee: ${cartModel.totalDeliveryFee}");
+      //   log("cartModel.totalDiscount: ${totalDiscount}");
+      //   log("cartModel.subTotal: ${cartModel.subTotal}");
+      //   await db
+      //       .collection(Collection.collectionCart)
+      //       .doc(cartModel.userId)
+      //       .update({
+      //     "products": FieldValue.arrayUnion(cartModel.products),
+      //     "totalPrice": cartModel
+      //         .totalPrice, // Update the total price with discount and delivery fee
+      //     "totalDeliveryFee": totalDeliveryFee, // Update total delivery fee
+      //     "totalDiscount": totalDiscount,
+      //     "subTotal": subTotal,
+      //   });
+      // }
