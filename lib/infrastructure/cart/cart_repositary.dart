@@ -31,38 +31,24 @@ class CartRepositary implements ICartFacade {
         log("called docData.data != null");
         final cart = CartModel.fromJson(docRef.data()!);
         final state = BlocProvider.of<CartBloc>(context).state;
-        if (cart.products.isEmpty) {
-          log("cart.products.isempty");
 
-          // await db
-          //     .collection(Collection.collectionCart)
-          //     .doc(cartModel.userId)
-          //     .update({
-          //   "products": FieldValue.arrayUnion(cartModel.products),
-          //   "totalPrice": cartModel.totalPrice,
-          //   "totalDeliveryFee": cartModel.totalDeliveryFee,
-          //   "totalDiscount": cartModel.totalDiscount,
-          //   "subTotal": cartModel.subTotal,
-          // });
-        } else {
-          log("${cart.totalDeliveryFee} ${cartModel.products[0]['amount']}");
+        log("${cart.totalDeliveryFee} ${cartModel.products[0]['amount']}");
 
-          log("${cartModel}");
-          await db
-              .collection(Collection.collectionCart)
-              .doc(cartModel.userId)
-              .update({
-            "products": FieldValue.arrayUnion(cartModel.products),
-            "totalPrice": cart.totalPrice +
-                cartModel.products[0]['deliveryFee'] +
-                cartModel.totalPrice,
-            "totalDeliveryFee":
-                cart.totalDeliveryFee + cartModel.products[0]['deliveryFee'],
-            "totalDiscount":
-                cart.totalDiscount + cartModel.products[0]['discount'],
-            "subTotal": cart.subTotal + cartModel.products[0]['amount'],
-          });
-        }
+        log("${cartModel}");
+        await db
+            .collection(Collection.collectionCart)
+            .doc(cartModel.userId)
+            .update({
+          "products": FieldValue.arrayUnion(cartModel.products),
+          "totalPrice": cart.totalPrice +
+              cartModel.products[0]['deliveryFee'] +
+              cartModel.totalPrice,
+          "totalDeliveryFee":
+              cart.totalDeliveryFee + cartModel.products[0]['deliveryFee'],
+          "totalDiscount":
+              cart.totalDiscount + cartModel.products[0]['discount'],
+          "subTotal": cart.subTotal + cartModel.products[0]['amount'],
+        });
       } else {
         log("called docData.data != null else");
         cartModel = cartModel.copyWith(
@@ -232,10 +218,12 @@ class CartRepositary implements ICartFacade {
       final List<Map<String, dynamic>> existingProducts =
           List<Map<String, dynamic>>.from(cartDoc.data()!['products']);
 
+      // Find the index of the product to be removed
       final productIndex = existingProducts.indexWhere((product) =>
           product['productId'] == cartModel.products[0]['productId']);
-      log("productIndex: ${productIndex}");
+
       if (cartData?['products'].isEmpty) {
+        // Update cart fields to default values if the products list is empty
         await cartReference.update({
           "totalPrice": 0,
           "subTotal": 0,
@@ -247,50 +235,34 @@ class CartRepositary implements ICartFacade {
       if (productIndex != -1) {
         // Get the product that is being removed
         final removedProduct = existingProducts[productIndex];
-        log("removed product: ${removedProduct}");
 
         // Calculate the amount to subtract from the total price
         final removedAmount =
             removedProduct['amount'] * removedProduct['quantity'];
-        log("removed amount: ${removedAmount}");
-
-        final additionalAmount =
-            removedProduct['deliveryFee'] - removedProduct['discount'];
-        log("additional Amount: ${additionalAmount}");
-
+        log("${cartData?['subTotal'] - removedAmount}");
         // Calculate the new values for total delivery fee and total discount
-        final newTotalDeliveryFee = cartData?['totalDeliveryFee'] -
-            removedProduct[
-                'deliveryFee']; // You might need to update this value as needed
-        log("newTotalDeliveryFee: ${newTotalDeliveryFee}");
+        final totalDeliverFee =
+            cartData?['totalDeliveryFee'] - removedProduct['deliveryFee'];
 
-        final newTotalDiscount = cartData?['totalDiscount'] -
-            removedProduct[
-                'discount']; // You might need to update this value as needed
-        log("newTotalDiscount: ${newTotalDiscount}");
+        final totalDiscount =
+            cartData?['totalDiscount'] - removedProduct['discount'];
 
-        // Calculate the new values for total price, subtotal, and total discount
-        final newRemovingPrice = removedAmount + additionalAmount;
-        log("cartTotalPrice: ${cartData?['totalPrice']}");
-
-        log("newRemovingPrice: ${newRemovingPrice}");
-
-        final newSubTotal = cartModel.subTotal - removedAmount;
-        log("newSubTotal: ${newSubTotal}");
+        final amount = removedAmount + removedProduct['deliveryFee'];
+        final totalPrice = cartData?['totalPrice'] - amount;
+        final subTotal = cartData?['subTotal'] - removedProduct['amount'];
 
         // Update the specific product in Firestore and the other fields
         await cartReference.update({
           "products": FieldValue.arrayRemove([removedProduct]),
-          "totalPrice": cartData?['totalPrice'] - newRemovingPrice,
-          "subTotal": cartModel.products[productIndex]['amount'] -
-              cartData?['subTotal'],
-          "totalDeliveryFee": newTotalDeliveryFee,
-          "totalDiscount": newTotalDiscount,
+          "totalPrice": totalPrice,
+          "subTotal": subTotal,
+          "totalDeliveryFee": totalDeliverFee,
+          "totalDiscount": totalDiscount,
         });
 
         // Dispatch an event to update the cart state
-        // BlocProvider.of<CartBloc>(context)
-        //     .add(CartEvent.getCart(userId: cartModel.userId, context: context));
+        BlocProvider.of<CartBloc>(context)
+            .add(CartEvent.getCart(userId: cartModel.userId, context: context));
 
         return const Right(true);
       } else {
