@@ -1,18 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:shop_mate/application/address/address_bloc.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
-import 'package:shop_mate/domain/cart/model/cart_model.dart';
-import 'package:shop_mate/presentation/checkout/checkout_screen.dart';
+import 'package:shop_mate/presentation/cart/cart_amount_section.dart';
+import 'package:shop_mate/presentation/cart/cart_product_section.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
-import 'package:shop_mate/presentation/constants/route_animation.dart';
-import 'package:shop_mate/presentation/widgets/button_widgets.dart';
-import 'package:shop_mate/presentation/widgets/loader_widgets.dart';
-import 'package:shop_mate/presentation/widgets/loading_widget.dart';
-import 'package:shop_mate/presentation/widgets/row_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class CartScreen extends StatelessWidget {
@@ -40,19 +33,21 @@ class CartScreen extends StatelessWidget {
       body: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
           return SafeArea(
+            // Display an image if the cart is empty.
             child: state.cart.products.isEmpty
                 ? Center(
-                    child: Image.asset(
-                        'assets/images/cart-is-empty.png'), // Display an image if the cart is empty.
+                    child: Image.asset('assets/images/cart-is-empty.png'),
                   )
                 : Column(
                     children: [
-                      CartProductSection(), // Display the cart product section.
+                      // Display the cart product section.
+                      CartProductSection(),
                       const Divider(
                         color: AppColor.greenColor,
                         thickness: 3,
                       ),
-                      const CartAmountSection() // Display the cart amount section.
+                      // Display the cart amount section.
+                      const CartAmountSection()
                     ],
                   ),
           );
@@ -62,305 +57,29 @@ class CartScreen extends StatelessWidget {
   }
 }
 
-class CartAmountSection extends StatelessWidget {
-  const CartAmountSection({
+class CartQtyButton extends StatelessWidget {
+  const CartQtyButton({
     super.key,
-  }); // Constructor for the CartAmountSection widget.
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: BlocBuilder<CartBloc, CartState>(
-        builder: (context, state) {
-          return SizedBox(
-            width: double.infinity,
-            height: .5.sh,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const BuildRegularTextWidget(
-                      text: "Price Details"), // Display the section title.
-
-                  // Display the subtotal with its value.
-                  BuildTextRow(
-                    text1: const BuildRegularTextWidget(
-                      text: 'Subtotal:',
-                      fontSize: 15,
-                    ),
-                    text2: BuildRegularTextWidget(
-                      text: '\$${state.cart.subTotal.round()}',
-                      fontSize: 15,
-                    ),
-                  ),
-
-                  // Display the delivery fee with its value.
-                  BuildTextRow(
-                    text1: const BuildRegularTextWidget(
-                      text: 'Delivery Fee:',
-                      fontSize: 15,
-                    ),
-                    text2: BuildRegularTextWidget(
-                      text: '\$${state.cart.totalDeliveryFee.round()}',
-                      fontSize: 15,
-                    ),
-                  ),
-
-                  // Display the discount with its value.
-                  BuildTextRow(
-                    text1: const BuildRegularTextWidget(
-                      text: 'Discount:',
-                      fontSize: 15,
-                    ),
-                    text2: BuildRegularTextWidget(
-                      text: '\$${state.cart.totalDiscount.round()}',
-                      fontSize: 15,
-                    ),
-                  ),
-
-                  // Display the total price with its value.
-                  BuildTextRow(
-                    text1: const BuildRegularTextWidget(text: "Total:"),
-                    text2: BuildHeadingText(
-                        text: "\$${state.cart.totalPrice.round()}"),
-                  ),
-
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(buildNavigation(
-                          route:
-                              const CheckoutScreen())); // Navigate to the checkout screen on tap.
-                    },
-                    child: BuildButtonWidget(
-                      text: 'Continue',
-                      onTap: () {
-                        Navigator.of(context).push(buildNavigation(
-                            route:
-                                const CheckoutScreen())); // Navigate to the checkout screen on button press.
-                      },
-                    ),
-                  )
-                ],
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-
-class CartProductSection extends StatelessWidget {
-  CartProductSection({
-    super.key,
+    required this.icon,
   });
-
-  final String? userId = FirebaseAuth.instance.currentUser
-      ?.uid; // Get the current user's ID, which can be null.
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartBloc, CartState>(
-      builder: (context, state) {
-        return SizedBox(
-          width: double.infinity,
-          height: 0.4.sh,
-          child: ListView.separated(
-            itemBuilder: (context, index) {
-              final product = state.cart.products[index];
-
-              // Create a Slidable widget for each product.
-              return Slidable(
-                startActionPane: ActionPane(
-                  motion: const BehindMotion(),
-                  children: [
-                    SlidableAction(
-                      onPressed: (context) {
-                        // Trigger the CartBloc to delete the product.
-                        BlocProvider.of<CartBloc>(context)
-                            .add(CartEvent.deleteProduct(
-                                cartModel: CartModel(
-                                  userId: userId!,
-                                  totalPrice: state.cart.totalPrice,
-                                  products: [
-                                    {
-                                      "name": product['name'],
-                                      "description": product['description'],
-                                      "category": product['category'],
-                                      "amount": product['amount'],
-                                      "quantity": product['quantity'],
-                                      "image": product['image'],
-                                      "productId": product['productId'],
-                                      "deliveryFee": product['deliveryFee'],
-                                      "discount": product['discount'],
-                                    }
-                                  ],
-                                  totalDeliveryFee: state.cart.totalDeliveryFee,
-                                  totalDiscount: state.cart.totalDiscount,
-                                  subTotal: state.cart.subTotal,
-                                ),
-                                context: context));
-                      },
-                      backgroundColor: Colors.red,
-                      foregroundColor: AppColor.whiteColor,
-                      icon: Icons.delete,
-                      label: 'Remove',
-                      spacing: 2,
-                      autoClose: false,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Row(
-                      children: [
-                        Image.network(
-                          product['image'],
-                          width: 80,
-                          height: 80,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            BuildSmallText(text: product['amount'].toString()),
-                            SizedBox(
-                              width: 0.5.sw,
-                              child: BuildSmallText(
-                                text: product['discount'].toString(),
-                                color: AppColor.colorGrey1,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-
-                    // Increment and decrement the quantity of the product.
-                    BlocBuilder<CartBloc, CartState>(
-                      builder: (context, state) {
-                        return Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                // Trigger CartBloc to increment the quantity.
-                                BlocProvider.of<CartBloc>(context)
-                                    .add(CartEvent.incrementQty(
-                                        cartModel: CartModel(
-                                          userId: userId!,
-                                          totalPrice: state.cart.totalPrice,
-                                          products: [
-                                            {
-                                              "name": product['name'],
-                                              "description":
-                                                  product['description'],
-                                              "category": product['category'],
-                                              "amount": product['amount'],
-                                              "quantity": product['quantity'],
-                                              "image": product['image'],
-                                              "productId": product['productId'],
-                                              "deliveryFee": 10,
-                                              "discount": 50,
-                                            }
-                                          ],
-                                          totalDeliveryFee: 10,
-                                          totalDiscount: 50,
-                                          subTotal: state.cart.subTotal,
-                                        ),
-                                        type: 'inc',
-                                        context: context));
-                              },
-                              child: Container(
-                                height: 30,
-                                width: 30,
-                                decoration: BoxDecoration(
-                                  color: AppColor.greenColor,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.add,
-                                    size: 15,
-                                    color: AppColor.whiteColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5),
-                              child: state.isLoading
-                                  ? const BuildMiniLoader(
-                                      color: AppColor.greenColor,
-                                    )
-                                  : Text(product['quantity'].toString()),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                // Trigger CartBloc to decrement the quantity.
-                                BlocProvider.of<CartBloc>(context)
-                                    .add(CartEvent.incrementQty(
-                                        cartModel: CartModel(
-                                          userId: userId!,
-                                          totalPrice: state.cart.totalPrice,
-                                          products: [
-                                            {
-                                              "name": product['name'],
-                                              "description":
-                                                  product['description'],
-                                              "category": product['category'],
-                                              "amount": product['amount'],
-                                              "quantity": product['quantity'],
-                                              "image": product['image'],
-                                              "productId": product['productId'],
-                                              "deliveryFee": 10,
-                                              "discount": 50,
-                                            }
-                                          ],
-                                          totalDeliveryFee: 10,
-                                          totalDiscount: 50,
-                                          subTotal: state.cart.subTotal,
-                                        ),
-                                        type: 'dec',
-                                        context: context));
-                              },
-                              child: Container(
-                                height: 30,
-                                width: 30,
-                                decoration: BoxDecoration(
-                                  color: AppColor.greenColor,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.remove,
-                                    size: 15,
-                                    color: AppColor.whiteColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    )
-                  ],
-                ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const Divider(
-                color: AppColor.greenColor,
-              );
-            },
-            itemCount: state.cart.products.length,
-          ),
-        );
-      },
+    return Container(
+      height: 30,
+      width: 30,
+      decoration: BoxDecoration(
+        color: AppColor.greenColor,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Center(
+        child: Icon(
+          icon,
+          size: 15,
+          color: AppColor.whiteColor,
+        ),
+      ),
     );
   }
 }

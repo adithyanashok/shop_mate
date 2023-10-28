@@ -4,6 +4,7 @@ part of 'cart_bloc.dart';
 class CartState with _$CartState {
   const factory CartState({
     required bool isLoading,
+    required bool isDeleting,
     required List<CartModel> cartList,
     required CartModel cart,
     required bool cartBool,
@@ -13,6 +14,7 @@ class CartState with _$CartState {
   factory CartState.initial() {
     return const CartState(
         isLoading: false,
+        isDeleting: false,
         cartList: [],
         cart: CartModel(
           userId: '',

@@ -19,6 +19,7 @@ import 'package:shop_mate/application/transaction/transaction_bloc.dart';
 import 'package:shop_mate/application/user/user_bloc.dart';
 import 'package:shop_mate/domain/core/api/api.dart';
 import 'package:shop_mate/domain/core/di/injectable.dart';
+import 'package:shop_mate/presentation/home/skelton.dart';
 import 'package:shop_mate/presentation/login/login_screen.dart';
 import 'package:shop_mate/presentation/splash_screen/splash_screen.dart';
 

@@ -1115,6 +1115,7 @@ abstract class _DeleteProduct implements CartEvent {
 /// @nodoc
 mixin _$CartState {
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isDeleting => throw _privateConstructorUsedError;
   List<CartModel> get cartList => throw _privateConstructorUsedError;
   CartModel get cart => throw _privateConstructorUsedError;
   bool get cartBool => throw _privateConstructorUsedError;
@@ -1135,6 +1136,7 @@ abstract class $CartStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
+      bool isDeleting,
       List<CartModel> cartList,
       CartModel cart,
       bool cartBool,
@@ -1158,6 +1160,7 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isDeleting = null,
     Object? cartList = null,
     Object? cart = null,
     Object? cartBool = null,
@@ -1168,6 +1171,10 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDeleting: null == isDeleting
+          ? _value.isDeleting
+          : isDeleting // ignore: cast_nullable_to_non_nullable
               as bool,
       cartList: null == cartList
           ? _value.cartList
@@ -1211,6 +1218,7 @@ abstract class _$$CartStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
+      bool isDeleting,
       List<CartModel> cartList,
       CartModel cart,
       bool cartBool,
@@ -1233,6 +1241,7 @@ class __$$CartStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isDeleting = null,
     Object? cartList = null,
     Object? cart = null,
     Object? cartBool = null,
@@ -1243,6 +1252,10 @@ class __$$CartStateImplCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDeleting: null == isDeleting
+          ? _value.isDeleting
+          : isDeleting // ignore: cast_nullable_to_non_nullable
               as bool,
       cartList: null == cartList
           ? _value._cartList
@@ -1273,6 +1286,7 @@ class __$$CartStateImplCopyWithImpl<$Res>
 class _$CartStateImpl implements _CartState {
   const _$CartStateImpl(
       {required this.isLoading,
+      required this.isDeleting,
       required final List<CartModel> cartList,
       required this.cart,
       required this.cartBool,
@@ -1282,6 +1296,8 @@ class _$CartStateImpl implements _CartState {
 
   @override
   final bool isLoading;
+  @override
+  final bool isDeleting;
   final List<CartModel> _cartList;
   @override
   List<CartModel> get cartList {
@@ -1301,7 +1317,7 @@ class _$CartStateImpl implements _CartState {
 
   @override
   String toString() {
-    return 'CartState(isLoading: $isLoading, cartList: $cartList, cart: $cart, cartBool: $cartBool, cartOpt: $cartOpt, cartListOpt: $cartListOpt)';
+    return 'CartState(isLoading: $isLoading, isDeleting: $isDeleting, cartList: $cartList, cart: $cart, cartBool: $cartBool, cartOpt: $cartOpt, cartListOpt: $cartListOpt)';
   }
 
   @override
@@ -1311,6 +1327,8 @@ class _$CartStateImpl implements _CartState {
             other is _$CartStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isDeleting, isDeleting) ||
+                other.isDeleting == isDeleting) &&
             const DeepCollectionEquality().equals(other._cartList, _cartList) &&
             (identical(other.cart, cart) || other.cart == cart) &&
             (identical(other.cartBool, cartBool) ||
@@ -1324,6 +1342,7 @@ class _$CartStateImpl implements _CartState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      isDeleting,
       const DeepCollectionEquality().hash(_cartList),
       cart,
       cartBool,
@@ -1340,6 +1359,7 @@ class _$CartStateImpl implements _CartState {
 abstract class _CartState implements CartState {
   const factory _CartState(
       {required final bool isLoading,
+      required final bool isDeleting,
       required final List<CartModel> cartList,
       required final CartModel cart,
       required final bool cartBool,
@@ -1349,6 +1369,8 @@ abstract class _CartState implements CartState {
 
   @override
   bool get isLoading;
+  @override
+  bool get isDeleting;
   @override
   List<CartModel> get cartList;
   @override

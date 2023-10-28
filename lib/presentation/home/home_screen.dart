@@ -13,6 +13,7 @@ import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 
 import 'package:shop_mate/presentation/home/productlist_section.dart';
+import 'package:shop_mate/presentation/home/skelton.dart';
 import 'package:shop_mate/presentation/product/products_screen.dart';
 import 'package:shop_mate/presentation/signup/signup_screen.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
@@ -83,153 +84,160 @@ class _HomeScreenState extends State<HomeScreen> {
     BlocProvider.of<CartBloc>(context)
         .add(CartEvent.getCart(userId: userId!, context: context));
     BlocProvider.of<UserBloc>(context).add(const UserEvent.getUser());
-    return Scaffold(
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(70),
-          child: BuildAppBarWidget(title: "SHOPMATE"),
-        ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 1.sw,
-                  height: 0.2.sh,
-                  child: PageView(
-                    controller: _pageController,
-                    children: [
-                      // Banner widget for the first page
-                      GestureDetector(
-                        onTap: () async {
-                          await signOut();
-                        },
-                        child: const BuildBannerWidget(
-                          backgroundColor: AppColor.greenColor,
-                          buttonTextColor: AppColor.greenColor,
-                          image: 'assets/images/shopping.png',
-                          text: '50% OFF DURING\nSALE',
-                          textColor: AppColor.whiteColor,
-                        ),
-                      ),
-                      // Banner widget for the second page
-                      Container(
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: NetworkImage(
-                                'https://as1.ftcdn.net/v2/jpg/03/14/28/96/1000_F_314289607_ADADbnGr64dpGnddyhZPidCoc6jgKiHK.jpg'),
-                          ),
-                        ),
+    return BlocBuilder<ProductBloc, ProductState>(
+      builder: (context, state) {
+        return state.isLoading
+            ? SkeletonLoadingScreen()
+            : Scaffold(
+                appBar: const PreferredSize(
+                  preferredSize: Size.fromHeight(70),
+                  child: BuildAppBarWidget(title: "SHOPMATE"),
+                ),
+                body: SafeArea(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 1.sw,
+                          height: 0.2.sh,
+                          child: PageView(
+                            controller: _pageController,
+                            children: [
+                              // Banner widget for the first page
+                              GestureDetector(
+                                onTap: () async {
+                                  await signOut();
+                                },
+                                child: const BuildBannerWidget(
+                                  backgroundColor: AppColor.greenColor,
+                                  buttonTextColor: AppColor.greenColor,
+                                  image: 'assets/images/shopping.png',
+                                  text: '50% OFF DURING\nSALE',
+                                  textColor: AppColor.whiteColor,
+                                ),
+                              ),
+                              // Banner widget for the second page
+                              Container(
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(
+                                        'https://as1.ftcdn.net/v2/jpg/03/14/28/96/1000_F_314289607_ADADbnGr64dpGnddyhZPidCoc6jgKiHK.jpg'),
+                                  ),
+                                ),
 
-                        // child: Image.network(
-                        //   'https://as1.ftcdn.net/v2/jpg/03/14/28/96/1000_F_314289607_ADADbnGr64dpGnddyhZPidCoc6jgKiHK.jpg',
-                        //   fit: BoxFit.fill,
-                        // ),
-                      )
-                    ],
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 14, bottom: 10),
-                  child: BuildRegularTextWidget(
-                    text: "Categories",
-                    fontWeight: FontWeight.w500,
-                    fontSize: 19,
-                  ),
-                ),
-                SizedBox(
-                  height: 50.h,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 19, right: 19),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CategoryIconCard(
-                            icon: Icons.phone_iphone,
-                            onTap: () {
-                              Navigator.of(context).push(
-                                buildNavigation(
-                                  route: const ProductsScreen(),
-                                  arguments: "mobiles",
-                                ),
-                              );
-                            },
+                                // child: Image.network(
+                                //   'https://as1.ftcdn.net/v2/jpg/03/14/28/96/1000_F_314289607_ADADbnGr64dpGnddyhZPidCoc6jgKiHK.jpg',
+                                //   fit: BoxFit.fill,
+                                // ),
+                              )
+                            ],
                           ),
-                          CategoryIconCard(
-                            icon: Icons.laptop_mac_outlined,
-                            onTap: () {
-                              Navigator.of(context).push(
-                                buildNavigation(
-                                  route: const ProductsScreen(),
-                                  arguments: "laptops",
-                                ),
-                              );
-                            },
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 14, bottom: 10),
+                          child: BuildRegularTextWidget(
+                            text: "Categories",
+                            fontWeight: FontWeight.w500,
+                            fontSize: 19,
                           ),
-                          CategoryIconCard(
-                            icon: Icons.headphones_outlined,
-                            onTap: () {
-                              Navigator.of(context).push(
-                                buildNavigation(
-                                  route: const ProductsScreen(),
-                                  arguments: "earphones",
-                                ),
-                              );
-                            },
+                        ),
+                        SizedBox(
+                          height: 50.h,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 19, right: 19),
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  CategoryIconCard(
+                                    icon: Icons.phone_iphone,
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                        buildNavigation(
+                                          route: const ProductsScreen(),
+                                          arguments: "mobiles",
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  CategoryIconCard(
+                                    icon: Icons.laptop_mac_outlined,
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                        buildNavigation(
+                                          route: const ProductsScreen(),
+                                          arguments: "laptops",
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  CategoryIconCard(
+                                    icon: Icons.headphones_outlined,
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                        buildNavigation(
+                                          route: const ProductsScreen(),
+                                          arguments: "earphones",
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  CategoryIconCard(
+                                    icon: Icons.watch,
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                        buildNavigation(
+                                          route: const ProductsScreen(),
+                                          arguments: "watches",
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          CategoryIconCard(
-                            icon: Icons.watch,
-                            onTap: () {
-                              Navigator.of(context).push(
-                                buildNavigation(
-                                  route: const ProductsScreen(),
-                                  arguments: "watches",
-                                ),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
+                        ),
+                        BlocBuilder<ProductBloc, ProductState>(
+                          builder: (context, state) {
+                            return ProductList(
+                              state: state,
+                              text: "Latest Arrival",
+                              productList: state.products,
+                            );
+                          },
+                        ),
+                        BlocBuilder<ProductBloc, ProductState>(
+                          builder: (context, state) {
+                            return ProductList(
+                              state: state,
+                              text: "Earphones",
+                              productList: state.earphoneListOpt,
+                            );
+                          },
+                        ),
+                        BlocBuilder<ProductBloc, ProductState>(
+                          builder: (context, state) {
+                            return state.mobileListOpt.isEmpty
+                                ? const SizedBox()
+                                : ProductList(
+                                    state: state,
+                                    text: "Mobiles",
+                                    productList: state.mobileListOpt,
+                                  );
+                          },
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                BlocBuilder<ProductBloc, ProductState>(
-                  builder: (context, state) {
-                    return ProductList(
-                      state: state,
-                      text: "Latest Arrival",
-                      productList: state.products,
-                    );
-                  },
-                ),
-                BlocBuilder<ProductBloc, ProductState>(
-                  builder: (context, state) {
-                    return ProductList(
-                      state: state,
-                      text: "Earphones",
-                      productList: state.earphoneListOpt,
-                    );
-                  },
-                ),
-                BlocBuilder<ProductBloc, ProductState>(
-                  builder: (context, state) {
-                    return state.mobileListOpt.isEmpty
-                        ? const SizedBox()
-                        : ProductList(
-                            state: state,
-                            text: "Mobiles",
-                            productList: state.mobileListOpt,
-                          );
-                  },
-                ),
-              ],
-            ),
-          ),
-        )
-        // bottomNavigationBar: BottomNavBarWidget(),
-        );
+                )
+                // bottomNavigationBar: BottomNavBarWidget(),
+                );
+      },
+    );
   }
 
   Future<void> signOut() async {

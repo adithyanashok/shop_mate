@@ -22,7 +22,7 @@ class ProductList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: state.isLoading
+      child: state?.isLoading == true
           ? const BuildLoadingWidget() // Display a loading widget when data is loading
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -89,16 +89,20 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
     on<_DeleteProduct>(
       (event, emit) async {
+        emit(state.copyWith(isDeleting: true));
         final deleteCartOpt =
             await iCartFacade.deleteProduct(event.cartModel, event.context);
         emit(
           deleteCartOpt.fold(
             (failure) => state.copyWith(
-                cartOpt: Some(
-              Left(failure),
-            )),
+              cartOpt: Some(
+                Left(failure),
+              ),
+              isDeleting: false,
+            ),
             (success) => state.copyWith(
               cartBool: success,
+              isDeleting: false,
             ),
           ),
         );
