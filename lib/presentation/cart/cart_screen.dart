@@ -42,10 +42,7 @@ class CartScreen extends StatelessWidget {
                     children: [
                       // Display the cart product section.
                       CartProductSection(),
-                      const Divider(
-                        color: AppColor.greenColor,
-                        thickness: 3,
-                      ),
+
                       // Display the cart amount section.
                       const CartAmountSection()
                     ],

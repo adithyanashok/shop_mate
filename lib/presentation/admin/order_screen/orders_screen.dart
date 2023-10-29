@@ -41,7 +41,10 @@ class AdminOrdersScreen extends StatelessWidget {
                             ));
                           },
                           child: Card(
-                            surfaceTintColor: AppColor.colorGrey2,
+                            surfaceTintColor: AppColor.whiteColor,
+                            color: AppColor.whiteColor,
+                            shadowColor: AppColor.whiteColor,
+                            elevation: 3,
                             child: Container(
                               padding: const EdgeInsets.all(10),
                               child: Column(
@@ -80,39 +83,6 @@ class AdminOrdersScreen extends StatelessWidget {
                                     text2FontWeight: FontWeight.w400,
                                     text2Color: AppColor.colorGrey1,
                                   ),
-                                  BuildTextWithSignupLink(
-                                    text1: "Date: ",
-                                    text2: convertDate(
-                                        dateString: "${order.orderDate}"),
-                                    text1Color: AppColor.blackColor,
-                                    text1FontWeight: FontWeight.w600,
-                                    text2FontWeight: FontWeight.w400,
-                                    text2Color: AppColor.colorGrey1,
-                                  ),
-                                  BuildTextWithSignupLink(
-                                    text1: "Product count: ",
-                                    text2: "${order.products.length}",
-                                    text1Color: AppColor.blackColor,
-                                    text1FontWeight: FontWeight.w600,
-                                    text2FontWeight: FontWeight.w400,
-                                    text2Color: AppColor.colorGrey1,
-                                  ),
-                                  BuildTextWithSignupLink(
-                                    text1: "Total amount: ",
-                                    text2: "${order.totalPrice}",
-                                    text1Color: AppColor.blackColor,
-                                    text1FontWeight: FontWeight.w600,
-                                    text2FontWeight: FontWeight.w400,
-                                    text2Color: AppColor.colorGrey1,
-                                  ),
-                                  BuildTextWithSignupLink(
-                                    text1: "Status: ",
-                                    text2: order.status,
-                                    text1Color: AppColor.blackColor,
-                                    text1FontWeight: FontWeight.w600,
-                                    text2FontWeight: FontWeight.w400,
-                                    text2Color: AppColor.colorGrey1,
-                                  ),
                                 ],
                               ),
                             ),
@@ -120,7 +90,7 @@ class AdminOrdersScreen extends StatelessWidget {
                         );
                       },
                       separatorBuilder: (context, index) {
-                        return const Divider();
+                        return const SizedBox();
                       },
                       itemCount: state.orderModelList.length,
                     ),

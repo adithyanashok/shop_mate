@@ -73,38 +73,49 @@ class _OrderSummaryState extends State<OrderSummary> {
                   child: ListView.separated(
                     itemBuilder: (context, index) {
                       final product = state.cart.products[index];
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Row(
+                      return Card(
+                        color: AppColor.whiteColor,
+                        surfaceTintColor: AppColor.whiteColor,
+                        shadowColor: AppColor.lightGrey,
+                        elevation: 2,
+                        child: SizedBox(
+                          height: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Image.network(
-                                product['image'],
-                                width: 80,
-                                height: 80,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              Row(
                                 children: [
-                                  BuildSmallText(text: product['name']),
-                                  SizedBox(
-                                    width: 0.7.sw,
-                                    child: BuildSmallText(
-                                      text: product['description'],
-                                      color: AppColor.colorGrey1,
-                                      fontSize: 12,
-                                    ),
+                                  Image.network(
+                                    product['image'],
+                                    width: 80,
+                                    height: 80,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      BuildSmallText(text: product['name']),
+                                      SizedBox(
+                                        width: 0.7.sw,
+                                        child: BuildSmallText(
+                                          text: product['description'],
+                                          color: AppColor.colorGrey1,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
                             ],
                           ),
-                        ],
+                        ),
                       );
                     },
                     separatorBuilder: (context, index) {
-                      return const Divider(
-                        color: AppColor.greenColor,
+                      return const SizedBox(
+                        height: 5,
                       );
                     },
                     itemCount: state.cart.products.length,
@@ -112,13 +123,7 @@ class _OrderSummaryState extends State<OrderSummary> {
                 );
               },
             ),
-            // Display the selected shipping address
-            BuildAddressCard(
-              title: "Shipping address",
-              text: widget.selectedAddress,
-              showRadioButton: false,
-              showActionButton: false,
-            ),
+
             // Display payment methods and icons
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -243,7 +248,8 @@ class _OrderSummaryState extends State<OrderSummary> {
             Expanded(
               child: Card(
                 surfaceTintColor: AppColor.whiteColor,
-                elevation: 2,
+                color: AppColor.whiteColor,
+                elevation: 20,
                 child: BlocBuilder<CartBloc, CartState>(
                   builder: (context, state) {
                     final cart = state.cart;
@@ -272,7 +278,7 @@ class _OrderSummaryState extends State<OrderSummary> {
                               fontSize: 15,
                             ),
                             text2: BuildRegularTextWidget(
-                              text: "\$${cart.subTotal}",
+                              text: "\$${cart.subTotal.round()}",
                               fontSize: 15,
                             ),
                           ),
@@ -283,7 +289,7 @@ class _OrderSummaryState extends State<OrderSummary> {
                               fontSize: 15,
                             ),
                             text2: BuildRegularTextWidget(
-                              text: "\$${cart.totalDeliveryFee}",
+                              text: "\$${cart.totalDeliveryFee.round()}",
                               fontSize: 15,
                             ),
                           ),
@@ -294,7 +300,7 @@ class _OrderSummaryState extends State<OrderSummary> {
                               fontSize: 15,
                             ),
                             text2: BuildRegularTextWidget(
-                              text: "\$${cart.totalDiscount}",
+                              text: "\$${cart.totalDiscount.round()}",
                               fontSize: 15,
                             ),
                           ),
@@ -304,8 +310,8 @@ class _OrderSummaryState extends State<OrderSummary> {
                               text: "Total:",
                               fontSize: 20,
                             ),
-                            text2:
-                                BuildHeadingText(text: "\$${cart.totalPrice}"),
+                            text2: BuildHeadingText(
+                                text: "\$${cart.totalPrice.round()}"),
                           ),
                         ],
                       ),

@@ -8,6 +8,7 @@ import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/product/product_screen.dart';
 import 'package:shop_mate/presentation/widgets/loading_widget.dart';
+import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class AdminProductScreen extends StatelessWidget {
   const AdminProductScreen({super.key});
@@ -56,6 +57,7 @@ class AdminProductScreen extends StatelessWidget {
                                     DataCell(
                                       Image.network(
                                         product.image![0],
+                                        width: 50,
                                       ),
                                       onTap: () {
                                         Navigator.of(context).push(
@@ -147,13 +149,23 @@ class AdminProductScreen extends StatelessWidget {
                                       },
                                     ),
                                     DataCell(
-                                      Text(product.name),
+                                      BuildSmallText(
+                                        text: product.name,
+                                        fontSize: 10,
+                                        textOverflow: TextOverflow.fade,
+                                      ),
                                     ),
                                     DataCell(
-                                      Text('${product.quantity}'),
+                                      BuildRegularTextWidget(
+                                        text: '${product.quantity}',
+                                        fontSize: 11,
+                                      ),
                                     ),
                                     DataCell(
-                                      Text('${product.amount}'),
+                                      BuildRegularTextWidget(
+                                        text: '${product.amount}',
+                                        fontSize: 11,
+                                      ),
                                     ),
                                   ],
                                 );

@@ -39,13 +39,16 @@ class Transactions extends StatelessWidget {
                           fontSize: 20,
                         ),
                         leading: CircleAvatar(
-                          radius: 30,
+                          backgroundColor: AppColor.greenColor,
+                          radius: 25,
                           child: Center(
                             child: BuildSmallText(
                               text: convertDateIntoMonthAndDay(
                                 dateString: transaction.date.toString(),
                               ),
                               textOverflow: TextOverflow.visible,
+                              color: AppColor.whiteColor,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
                         ),

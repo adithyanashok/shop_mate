@@ -47,7 +47,8 @@ class EarningsPerMonthChart extends StatelessWidget {
         height: 350,
         width: .9.sw,
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 4, 9, 70),
+          // color: const Color.fromARGB(255, 4, 9, 70),
+          color: Color.fromARGB(255, 2, 104, 87),
           borderRadius: BorderRadius.circular(10),
         ),
         child: BarChart(

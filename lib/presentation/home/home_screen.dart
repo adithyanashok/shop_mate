@@ -47,20 +47,22 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     // Initialize a timer for automatic page switching
-    _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       // Check if we are at the last page, reset to the first page if so
-      if (_currentPage < 1) {
+      if (_currentPage < 2) {
         _currentPage++;
       } else {
         _currentPage = 0;
       }
 
       // Animate to the new page
-      _pageController.animateToPage(
-        _currentPage,
-        duration: const Duration(milliseconds: 350),
-        curve: Curves.linearToEaseOut,
-      );
+      if (_pageController.hasClients) {
+        _pageController.animateToPage(
+          _currentPage,
+          duration: const Duration(milliseconds: 350),
+          curve: Curves.linearToEaseOut,
+        );
+      }
     });
   }
 
@@ -105,19 +107,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             controller: _pageController,
                             children: [
                               // Banner widget for the first page
-                              GestureDetector(
-                                onTap: () async {
-                                  await signOut();
-                                },
-                                child: const BuildBannerWidget(
-                                  backgroundColor: AppColor.greenColor,
-                                  buttonTextColor: AppColor.greenColor,
-                                  image: 'assets/images/shopping.png',
-                                  text: '50% OFF DURING\nSALE',
-                                  textColor: AppColor.whiteColor,
-                                ),
-                              ),
-                              // Banner widget for the second page
                               Container(
                                 decoration: const BoxDecoration(
                                   image: DecorationImage(
@@ -126,17 +115,32 @@ class _HomeScreenState extends State<HomeScreen> {
                                         'https://as1.ftcdn.net/v2/jpg/03/14/28/96/1000_F_314289607_ADADbnGr64dpGnddyhZPidCoc6jgKiHK.jpg'),
                                   ),
                                 ),
-
-                                // child: Image.network(
-                                //   'https://as1.ftcdn.net/v2/jpg/03/14/28/96/1000_F_314289607_ADADbnGr64dpGnddyhZPidCoc6jgKiHK.jpg',
-                                //   fit: BoxFit.fill,
-                                // ),
+                              ),
+                              Container(
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(
+                                        'https://thumbs.dreamstime.com/z/black-friday-promotional-sale-banner-shopping-products-discount-electronics-computers-touch-screen-devices-127392139.jpg'),
+                                  ),
+                                ),
+                              ),
+                              // Banner widget for the second page
+                              Container(
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(
+                                        'https://static.vecteezy.com/system/resources/previews/006/560/561/original/4-april-sale-poster-or-banner-with-4-over-on-product-podium-scene-april-4-sales-banner-template-design-for-social-media-and-website-special-offer-sale-50-off-campaign-or-promotion-free-vector.jpg'),
+                                  ),
+                                ),
                               )
                             ],
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 14, bottom: 10),
+                          padding:
+                              EdgeInsets.only(left: 14, bottom: 10, top: 30),
                           child: BuildRegularTextWidget(
                             text: "Categories",
                             fontWeight: FontWeight.w500,
@@ -203,10 +207,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         BlocBuilder<ProductBloc, ProductState>(
                           builder: (context, state) {
-                            return ProductList(
-                              state: state,
-                              text: "Latest Arrival",
-                              productList: state.products,
+                            return Container(
+                              margin: const EdgeInsets.symmetric(vertical: 15),
+                              child: ProductList(
+                                state: state,
+                                text: "Latest Arrival",
+                                productList: state.products,
+                              ),
                             );
                           },
                         ),

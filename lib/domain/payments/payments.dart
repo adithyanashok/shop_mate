@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart' as http;
@@ -10,7 +9,6 @@ import 'package:shop_mate/application/orders/orders_bloc.dart';
 import 'package:shop_mate/domain/core/api/api.dart';
 import 'package:shop_mate/domain/order/model/order_model.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class Payments {
   final OrderModel? orderModel;

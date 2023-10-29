@@ -14,14 +14,24 @@ class UserCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: const CircleAvatar(
-        backgroundColor: AppColor.dartBlueColor,
-      ),
+      // leading: const CircleAvatar(
+      //   backgroundColor: AppColor.dartBlueColor,
+      // ),
       title: BuildSmallText(text: user.username!),
       subtitle: BuildSmallText(text: user.email!),
       tileColor: AppColor.lightGrey,
-      trailing:
-          user.isAdmin == true ? const Icon(Icons.person) : const SizedBox(),
+      leading: CircleAvatar(
+        backgroundColor: AppColor.greenColor,
+        child: user.isAdmin == true
+            ? const Icon(
+                Icons.admin_panel_settings_sharp,
+                color: AppColor.whiteColor,
+              )
+            : const Icon(
+                Icons.person,
+                color: AppColor.whiteColor,
+              ),
+      ),
     );
   }
 }

@@ -48,7 +48,8 @@ class AdminHomeScreen extends StatelessWidget {
                           text: convertAmount(
                             amount: state.earningsModel.earnings,
                           ),
-                          color: const Color.fromARGB(255, 24, 38, 231),
+                          // color: const Color.fromARGB(255, 24, 38, 231),
+                          color: AppColor.greenColor,
                           isLoading: state.isLoading,
                         );
                       },
@@ -58,7 +59,8 @@ class AdminHomeScreen extends StatelessWidget {
                         return CustomCard(
                           label: "Total Orders",
                           text: state.orderModelList.length.toString(),
-                          color: const Color.fromARGB(255, 24, 38, 231),
+                          color: Color.fromARGB(255, 3, 133, 111),
+                          // color: const Color.fromARGB(255, 24, 38, 231),
                           isLoading: state.isLoading,
                         );
                       },

@@ -31,7 +31,7 @@ class CartProductSection extends StatelessWidget {
 
               // Create a Slidable widget for each product.
               return state.isDeleting
-                  ? BuildLoadingWidget()
+                  ? const BuildLoadingWidget()
                   : Slidable(
                       key: Key(product['productId']),
                       startActionPane: ActionPane(
@@ -76,145 +76,167 @@ class CartProductSection extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Row(
+                      child: Card(
+                        color: AppColor.whiteColor,
+                        surfaceTintColor: AppColor.whiteColor,
+                        shadowColor: AppColor.lightGrey,
+                        elevation: 2,
+                        child: SizedBox(
+                          height: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Image.network(
-                                product['image'],
-                                width: 80,
-                                height: 80,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              Row(
                                 children: [
-                                  BuildSmallText(
-                                      text: product['amount'].toString()),
-                                  SizedBox(
-                                    width: 0.5.sw,
-                                    child: BuildSmallText(
-                                      text: product['discount'].toString(),
-                                      color: AppColor.colorGrey1,
-                                      fontSize: 12,
-                                    ),
+                                  Image.network(
+                                    product['image'],
+                                    width: 80,
+                                    height: 80,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      BuildSmallText(
+                                          text: product['amount'].toString()),
+                                      SizedBox(
+                                        width: 0.5.sw,
+                                        child: BuildSmallText(
+                                          text: product['discount'].toString(),
+                                          color: AppColor.colorGrey1,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
+
+                              // Increment and decrement the quantity of the product.
+                              BlocBuilder<CartBloc, CartState>(
+                                builder: (context, state) {
+                                  return Row(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          // Trigger CartBloc to increment the quantity.
+                                          BlocProvider.of<CartBloc>(context)
+                                              .add(CartEvent.incrementQty(
+                                                  cartModel: CartModel(
+                                                    userId: userId!,
+                                                    totalPrice:
+                                                        state.cart.totalPrice,
+                                                    products: [
+                                                      {
+                                                        "name": product['name'],
+                                                        "description": product[
+                                                            'description'],
+                                                        "category":
+                                                            product['category'],
+                                                        "amount":
+                                                            product['amount'],
+                                                        "quantity":
+                                                            product['quantity'],
+                                                        "image":
+                                                            product['image'],
+                                                        "productId": product[
+                                                            'productId'],
+                                                        "deliveryFee": product[
+                                                            'deliveryFee'],
+                                                        "discount": 50,
+                                                      }
+                                                    ],
+                                                    totalDeliveryFee: state
+                                                        .cart.totalDeliveryFee,
+                                                    totalDiscount: state
+                                                        .cart.totalDiscount,
+                                                    subTotal:
+                                                        state.cart.subTotal,
+                                                  ),
+                                                  type: 'inc',
+                                                  context: context));
+                                        },
+                                        child: const CartQtyButton(
+                                            icon: Icons.add),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5),
+                                        child: state.isLoading
+                                            ? BuildRegularTextWidget(
+                                                text: product['quantity']
+                                                    .toString(),
+                                                fontSize: 13,
+                                                color: Colors.grey,
+                                              )
+                                            : BuildRegularTextWidget(
+                                                text: product['quantity']
+                                                    .toString(),
+                                                fontSize: 13,
+                                              ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          // Trigger CartBloc to decrement the quantity.
+                                          BlocProvider.of<CartBloc>(context)
+                                              .add(CartEvent.incrementQty(
+                                                  cartModel: CartModel(
+                                                    userId: userId!,
+                                                    totalPrice:
+                                                        state.cart.totalPrice,
+                                                    products: [
+                                                      {
+                                                        "name": product['name'],
+                                                        "description": product[
+                                                            'description'],
+                                                        "category":
+                                                            product['category'],
+                                                        "amount":
+                                                            product['amount'],
+                                                        "quantity":
+                                                            product['quantity'],
+                                                        "image":
+                                                            product['image'],
+                                                        "productId": product[
+                                                            'productId'],
+                                                        "deliveryFee": product[
+                                                            'deliveryFee'],
+                                                        "discount":
+                                                            product['discount'],
+                                                      }
+                                                    ],
+                                                    totalDeliveryFee: state
+                                                        .cart.totalDeliveryFee,
+                                                    totalDiscount: state
+                                                        .cart.totalDiscount,
+                                                    subTotal:
+                                                        state.cart.subTotal,
+                                                  ),
+                                                  type: 'dec',
+                                                  context: context));
+                                        },
+                                        child: const CartQtyButton(
+                                            icon: Icons.remove),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              )
                             ],
                           ),
-
-                          // Increment and decrement the quantity of the product.
-                          BlocBuilder<CartBloc, CartState>(
-                            builder: (context, state) {
-                              return Row(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      // Trigger CartBloc to increment the quantity.
-                                      BlocProvider.of<CartBloc>(context)
-                                          .add(CartEvent.incrementQty(
-                                              cartModel: CartModel(
-                                                userId: userId!,
-                                                totalPrice:
-                                                    state.cart.totalPrice,
-                                                products: [
-                                                  {
-                                                    "name": product['name'],
-                                                    "description":
-                                                        product['description'],
-                                                    "category":
-                                                        product['category'],
-                                                    "amount": product['amount'],
-                                                    "quantity":
-                                                        product['quantity'],
-                                                    "image": product['image'],
-                                                    "productId":
-                                                        product['productId'],
-                                                    "deliveryFee":
-                                                        product['deliveryFee'],
-                                                    "discount": 50,
-                                                  }
-                                                ],
-                                                totalDeliveryFee:
-                                                    state.cart.totalDeliveryFee,
-                                                totalDiscount:
-                                                    state.cart.totalDiscount,
-                                                subTotal: state.cart.subTotal,
-                                              ),
-                                              type: 'inc',
-                                              context: context));
-                                    },
-                                    child: const CartQtyButton(icon: Icons.add),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5),
-                                    child: state.isLoading
-                                        ? BuildRegularTextWidget(
-                                            text:
-                                                product['quantity'].toString(),
-                                            fontSize: 13,
-                                            color: Colors.grey,
-                                          )
-                                        : BuildRegularTextWidget(
-                                            text:
-                                                product['quantity'].toString(),
-                                            fontSize: 13,
-                                          ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      // Trigger CartBloc to decrement the quantity.
-                                      BlocProvider.of<CartBloc>(context)
-                                          .add(CartEvent.incrementQty(
-                                              cartModel: CartModel(
-                                                userId: userId!,
-                                                totalPrice:
-                                                    state.cart.totalPrice,
-                                                products: [
-                                                  {
-                                                    "name": product['name'],
-                                                    "description":
-                                                        product['description'],
-                                                    "category":
-                                                        product['category'],
-                                                    "amount": product['amount'],
-                                                    "quantity":
-                                                        product['quantity'],
-                                                    "image": product['image'],
-                                                    "productId":
-                                                        product['productId'],
-                                                    "deliveryFee":
-                                                        product['deliveryFee'],
-                                                    "discount":
-                                                        product['discount'],
-                                                  }
-                                                ],
-                                                totalDeliveryFee:
-                                                    state.cart.totalDeliveryFee,
-                                                totalDiscount:
-                                                    state.cart.totalDiscount,
-                                                subTotal: state.cart.subTotal,
-                                              ),
-                                              type: 'dec',
-                                              context: context));
-                                    },
-                                    child:
-                                        const CartQtyButton(icon: Icons.remove),
-                                  ),
-                                ],
-                              );
-                            },
-                          )
-                        ],
+                        ),
                       ),
                     );
             },
             separatorBuilder: (context, index) {
-              return const Divider(
-                color: AppColor.greenColor,
+              return const SizedBox(
+                height: 10,
               );
+              // return const Divider(
+              //   color: AppColor.greenColor,
+              // );
             },
             itemCount: state.cart.products.length,
           ),

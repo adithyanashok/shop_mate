@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:shop_mate/application/product/product_bloc.dart';
+import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/home/home_screen.dart';
 import 'package:shop_mate/presentation/home/productlist_section.dart';
+import 'package:shop_mate/presentation/product/product_screen.dart';
 import 'package:shop_mate/presentation/widgets/banner_widget.dart';
 import 'package:shop_mate/presentation/widgets/product_card.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
@@ -54,7 +59,7 @@ class SkeletonLoadingScreen extends StatelessWidget {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.only(left: 14, bottom: 10),
+                padding: EdgeInsets.only(left: 14, bottom: 10, top: 30),
                 child: BuildRegularTextWidget(
                   text: "Categories",
                   fontWeight: FontWeight.w500,
@@ -63,21 +68,21 @@ class SkeletonLoadingScreen extends StatelessWidget {
                 ),
               ),
               // Loading skeleton for Categories
-              Shimmer.fromColors(
-                baseColor: Colors.grey[300]!,
-                highlightColor: Colors.grey[100]!,
-                child: SizedBox(
-                  height: 50.h,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 19, right: 19),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: List.generate(4, (index) {
-                        return const CategoryIconCard(
+              SizedBox(
+                height: 50.h,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 19, right: 19),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: List.generate(4, (index) {
+                      return Shimmer.fromColors(
+                        baseColor: Colors.grey[300]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: const CategoryIconCard(
                           icon: Icons.new_label,
-                        );
-                      }),
-                    ),
+                        ),
+                      );
+                    }),
                   ),
                 ),
               ),
@@ -95,15 +100,14 @@ class SkeletonLoadingScreen extends StatelessWidget {
                 baseColor: Colors.grey[300]!,
                 highlightColor: Colors.grey[100]!,
                 child: SizedBox(
-                  height: 250,
+                  height: 260,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      return Card(
                         child: Container(
+                          margin: const EdgeInsets.only(top: 20, left: 6),
                           width: 165.sp,
-                          height: 100,
                           decoration: BoxDecoration(
                             color: Colors
                                 .white, // Set the background color of the card
@@ -114,7 +118,7 @@ class SkeletonLoadingScreen extends StatelessWidget {
                       );
                     },
                     separatorBuilder: (context, index) => const SizedBox(),
-                    itemCount: 2,
+                    itemCount: 5,
                   ),
                 ),
               ),
