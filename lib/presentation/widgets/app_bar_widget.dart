@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/presentation/cart/cart_screen.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
+import 'package:shop_mate/presentation/signup/signup_screen.dart';
+import 'package:shop_mate/presentation/util/snackbar.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class BuildAppBarWidget extends StatelessWidget {
@@ -28,9 +31,12 @@ class BuildAppBarWidget extends StatelessWidget {
         letterSpacing: 3,
         fontWeight: FontWeight.w400,
       ),
-      leading: const Icon(
-        Icons.logout_rounded,
-        size: 26,
+      leading: GestureDetector(
+        onTap: () => signOut(context),
+        child: const Icon(
+          Icons.logout_rounded,
+          size: 26,
+        ),
       ),
       actions: [
         GestureDetector(
@@ -88,5 +94,20 @@ class BuildAppBarWidget extends StatelessWidget {
     //   //   ),
     //   // ),
     // );
+  }
+
+  Future<void> signOut(context) async {
+    try {
+      await FirebaseAuth.instance.signOut();
+
+      // Navigate to the onboarding screen.
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) {
+          return SignupScreen();
+        },
+      ));
+    } catch (e) {
+      snackBar(context: context, msg: e.toString());
+    }
   }
 }

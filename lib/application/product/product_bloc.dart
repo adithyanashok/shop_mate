@@ -59,6 +59,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             (success) => state.copyWith(
               isLoading: false,
               products: success,
+              latestProducts: success,
               productList: Some(
                 Right(success),
               ),

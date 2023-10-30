@@ -2607,6 +2607,7 @@ abstract class _SearchProduct implements ProductEvent {
 mixin _$ProductState {
   ProductModel get product => throw _privateConstructorUsedError;
   List<ProductModel> get products => throw _privateConstructorUsedError;
+  List<ProductModel> get latestProducts => throw _privateConstructorUsedError;
   List<ProductModel> get searchResults => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Either<MainFailure, ProductModel>> get productOpt =>
@@ -2632,6 +2633,7 @@ abstract class $ProductStateCopyWith<$Res> {
   $Res call(
       {ProductModel product,
       List<ProductModel> products,
+      List<ProductModel> latestProducts,
       List<ProductModel> searchResults,
       bool isLoading,
       Option<Either<MainFailure, ProductModel>> productOpt,
@@ -2659,6 +2661,7 @@ class _$ProductStateCopyWithImpl<$Res, $Val extends ProductState>
   $Res call({
     Object? product = null,
     Object? products = null,
+    Object? latestProducts = null,
     Object? searchResults = null,
     Object? isLoading = null,
     Object? productOpt = null,
@@ -2676,6 +2679,10 @@ class _$ProductStateCopyWithImpl<$Res, $Val extends ProductState>
       products: null == products
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
+              as List<ProductModel>,
+      latestProducts: null == latestProducts
+          ? _value.latestProducts
+          : latestProducts // ignore: cast_nullable_to_non_nullable
               as List<ProductModel>,
       searchResults: null == searchResults
           ? _value.searchResults
@@ -2732,6 +2739,7 @@ abstract class _$$ProductStateImplCopyWith<$Res>
   $Res call(
       {ProductModel product,
       List<ProductModel> products,
+      List<ProductModel> latestProducts,
       List<ProductModel> searchResults,
       bool isLoading,
       Option<Either<MainFailure, ProductModel>> productOpt,
@@ -2758,6 +2766,7 @@ class __$$ProductStateImplCopyWithImpl<$Res>
   $Res call({
     Object? product = null,
     Object? products = null,
+    Object? latestProducts = null,
     Object? searchResults = null,
     Object? isLoading = null,
     Object? productOpt = null,
@@ -2775,6 +2784,10 @@ class __$$ProductStateImplCopyWithImpl<$Res>
       products: null == products
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
+              as List<ProductModel>,
+      latestProducts: null == latestProducts
+          ? _value._latestProducts
+          : latestProducts // ignore: cast_nullable_to_non_nullable
               as List<ProductModel>,
       searchResults: null == searchResults
           ? _value._searchResults
@@ -2818,6 +2831,7 @@ class _$ProductStateImpl implements _ProductState {
   const _$ProductStateImpl(
       {required this.product,
       final List<ProductModel> products = const [],
+      final List<ProductModel> latestProducts = const [],
       final List<ProductModel> searchResults = const [],
       required this.isLoading,
       required this.productOpt,
@@ -2827,6 +2841,7 @@ class _$ProductStateImpl implements _ProductState {
       final List<ProductModel> mobileListOpt = const [],
       final List<ProductModel> watchListOpt = const []})
       : _products = products,
+        _latestProducts = latestProducts,
         _searchResults = searchResults,
         _laptopListOpt = laptopListOpt,
         _earphoneListOpt = earphoneListOpt,
@@ -2842,6 +2857,15 @@ class _$ProductStateImpl implements _ProductState {
     if (_products is EqualUnmodifiableListView) return _products;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_products);
+  }
+
+  final List<ProductModel> _latestProducts;
+  @override
+  @JsonKey()
+  List<ProductModel> get latestProducts {
+    if (_latestProducts is EqualUnmodifiableListView) return _latestProducts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_latestProducts);
   }
 
   final List<ProductModel> _searchResults;
@@ -2897,7 +2921,7 @@ class _$ProductStateImpl implements _ProductState {
 
   @override
   String toString() {
-    return 'ProductState(product: $product, products: $products, searchResults: $searchResults, isLoading: $isLoading, productOpt: $productOpt, productList: $productList, laptopListOpt: $laptopListOpt, earphoneListOpt: $earphoneListOpt, mobileListOpt: $mobileListOpt, watchListOpt: $watchListOpt)';
+    return 'ProductState(product: $product, products: $products, latestProducts: $latestProducts, searchResults: $searchResults, isLoading: $isLoading, productOpt: $productOpt, productList: $productList, laptopListOpt: $laptopListOpt, earphoneListOpt: $earphoneListOpt, mobileListOpt: $mobileListOpt, watchListOpt: $watchListOpt)';
   }
 
   @override
@@ -2907,6 +2931,8 @@ class _$ProductStateImpl implements _ProductState {
             other is _$ProductStateImpl &&
             (identical(other.product, product) || other.product == product) &&
             const DeepCollectionEquality().equals(other._products, _products) &&
+            const DeepCollectionEquality()
+                .equals(other._latestProducts, _latestProducts) &&
             const DeepCollectionEquality()
                 .equals(other._searchResults, _searchResults) &&
             (identical(other.isLoading, isLoading) ||
@@ -2930,6 +2956,7 @@ class _$ProductStateImpl implements _ProductState {
       runtimeType,
       product,
       const DeepCollectionEquality().hash(_products),
+      const DeepCollectionEquality().hash(_latestProducts),
       const DeepCollectionEquality().hash(_searchResults),
       isLoading,
       productOpt,
@@ -2950,6 +2977,7 @@ abstract class _ProductState implements ProductState {
   const factory _ProductState(
       {required final ProductModel product,
       final List<ProductModel> products,
+      final List<ProductModel> latestProducts,
       final List<ProductModel> searchResults,
       required final bool isLoading,
       required final Option<Either<MainFailure, ProductModel>> productOpt,
@@ -2963,6 +2991,8 @@ abstract class _ProductState implements ProductState {
   ProductModel get product;
   @override
   List<ProductModel> get products;
+  @override
+  List<ProductModel> get latestProducts;
   @override
   List<ProductModel> get searchResults;
   @override

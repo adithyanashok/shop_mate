@@ -13,6 +13,8 @@ class BuildMediumButton extends StatelessWidget {
     required this.text,
     this.onTap,
     this.state,
+    this.width = 0.4,
+    this.height = 50,
   });
 
   final Color backgroundColor; // The background color of the button
@@ -22,6 +24,8 @@ class BuildMediumButton extends StatelessWidget {
   final Function()? onTap; // Function to be executed when the button is tapped
   final dynamic
       state; // Represents the state of the button (e.g., loading state)
+  final double width;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +34,9 @@ class BuildMediumButton extends StatelessWidget {
         onTap!(); // Execute the provided function when the button is tapped
       },
       child: Container(
-        width:
-            .4.sw, // Set the width of the button (responsive design using sw)
-        height: 50, // Set the height of the button
+        width: width
+            .sw, // Set the width of the button (responsive design using sw)
+        height: height, // Set the height of the button
         decoration: BoxDecoration(
           color: backgroundColor, // Set the background color of the button
           borderRadius:

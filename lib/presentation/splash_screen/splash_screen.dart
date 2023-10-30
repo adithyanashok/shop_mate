@@ -29,6 +29,8 @@ class SplashScreen extends StatelessWidget {
             // If the user's email is not verified, navigate to another route
             route(context);
           }
+        } else {
+          route(context);
         }
       },
     );

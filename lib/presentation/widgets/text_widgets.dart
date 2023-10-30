@@ -177,6 +177,7 @@ class BuildRegularTextWidget extends StatelessWidget {
     this.color = AppColor.blackColor,
     this.fontWeight = FontWeight.w400,
     this.textDecoration = TextDecoration.none,
+    this.textAlign = TextAlign.start,
   });
   final String text;
   final double fontSize;
@@ -184,11 +185,13 @@ class BuildRegularTextWidget extends StatelessWidget {
   final Color color;
   final FontWeight fontWeight;
   final TextDecoration textDecoration;
+  final TextAlign textAlign;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: textAlign,
       style: TextStyle(
         color: color,
         fontSize: fontSize.sp,

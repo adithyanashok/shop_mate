@@ -5,6 +5,7 @@ class ProductState with _$ProductState {
   const factory ProductState({
     required ProductModel product,
     @Default([]) List<ProductModel> products,
+    @Default([]) List<ProductModel> latestProducts,
     @Default([]) List<ProductModel> searchResults,
     required bool isLoading,
     required Option<Either<MainFailure, ProductModel>> productOpt,

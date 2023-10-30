@@ -261,9 +261,9 @@ class CartRepositary implements ICartFacade {
         });
 
         // Dispatch an event to update the cart state
+
         BlocProvider.of<CartBloc>(context)
             .add(CartEvent.getCart(userId: cartModel.userId, context: context));
-
         return const Right(true);
       } else {
         snackBar(

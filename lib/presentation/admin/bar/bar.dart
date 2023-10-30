@@ -53,7 +53,7 @@ class EarningsPerMonthChart extends StatelessWidget {
         ),
         child: BarChart(
           BarChartData(
-            maxY: 80000,
+            maxY: 150000,
             alignment: BarChartAlignment.spaceEvenly,
             // Titles Data
             titlesData: FlTitlesData(

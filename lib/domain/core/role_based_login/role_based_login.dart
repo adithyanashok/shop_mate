@@ -5,6 +5,7 @@ import 'package:shop_mate/domain/core/collections/collections.dart';
 import 'package:shop_mate/presentation/admin/main_screen.dart';
 import 'package:shop_mate/presentation/login/login_screen.dart';
 import 'package:shop_mate/presentation/main_page.dart';
+import 'package:shop_mate/presentation/onboard/onboard.dart';
 
 void route(context) {
   User? user = FirebaseAuth.instance.currentUser;
@@ -32,7 +33,7 @@ void route(context) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => LoginScreen(),
+            builder: (context) => const OnboardingScreen(),
           ),
         );
       }
@@ -40,7 +41,7 @@ void route(context) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => LoginScreen(),
+          builder: (context) => const OnboardingScreen(),
         ),
       );
     }

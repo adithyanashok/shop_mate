@@ -13,9 +13,16 @@ import 'package:shop_mate/presentation/widgets/loader_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_form_field_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   String? email;
+
   String? password;
 
   @override
@@ -26,10 +33,6 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        leading: const Icon(
-          Icons.close,
-          color: AppColor.colorGrey3,
-        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

@@ -25,15 +25,6 @@ class SignupScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-          child: const Icon(
-            Icons.close,
-            color: AppColor.colorGrey3,
-          ),
-        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

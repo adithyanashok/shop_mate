@@ -66,7 +66,7 @@ class Address extends StatelessWidget {
                                   return SimpleDialog(
                                     contentPadding: const EdgeInsets.symmetric(
                                         horizontal: 10, vertical: 10),
-                                    title: const Text("Add Shipping address"),
+                                    title: const Text("Edit Shipping address"),
 
                                     // Input fields for updating the address.
                                     children: [

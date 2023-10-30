@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shop_mate/domain/cart/i_cart_facade.dart';
@@ -92,6 +93,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         emit(state.copyWith(isDeleting: true));
         final deleteCartOpt =
             await iCartFacade.deleteProduct(event.cartModel, event.context);
+        final cart =
+            await iCartFacade.getCart(event.cartModel.userId, event.context);
         emit(
           deleteCartOpt.fold(
             (failure) => state.copyWith(
@@ -102,6 +105,20 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             ),
             (success) => state.copyWith(
               cartBool: success,
+              // isDeleting: false,
+            ),
+          ),
+        );
+        emit(
+          cart.fold(
+            (failure) => state.copyWith(
+              cartOpt: Some(
+                Left(failure),
+              ),
+              isDeleting: false,
+            ),
+            (success) => state.copyWith(
+              cart: success,
               isDeleting: false,
             ),
           ),

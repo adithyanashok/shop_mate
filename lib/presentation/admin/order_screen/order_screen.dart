@@ -110,7 +110,8 @@ class OrderScreen extends StatelessWidget {
                             ),
                             BuildTextWithSignupLink(
                               text1: "Subtotal: ",
-                              text2: state.orderModel.subTotal.toString(),
+                              text2:
+                                  state.orderModel.subTotal.round().toString(),
                               text1Color: AppColor.blackColor,
                               text1FontWeight: FontWeight.w600,
                               text1FontSize: 14,
@@ -120,8 +121,9 @@ class OrderScreen extends StatelessWidget {
                             ),
                             BuildTextWithSignupLink(
                               text1: "Delivery Fee: ",
-                              text2:
-                                  state.orderModel.totalDeliveryFee.toString(),
+                              text2: state.orderModel.totalDeliveryFee
+                                  .round()
+                                  .toString(),
                               text1Color: AppColor.blackColor,
                               text1FontWeight: FontWeight.w600,
                               text1FontSize: 14,
@@ -131,7 +133,9 @@ class OrderScreen extends StatelessWidget {
                             ),
                             BuildTextWithSignupLink(
                               text1: "Discount: ",
-                              text2: state.orderModel.totalDiscount.toString(),
+                              text2: state.orderModel.totalDiscount
+                                  .round()
+                                  .toString(),
                               text1Color: AppColor.blackColor,
                               text1FontWeight: FontWeight.w600,
                               text1FontSize: 14,
@@ -141,7 +145,9 @@ class OrderScreen extends StatelessWidget {
                             ),
                             BuildTextWithSignupLink(
                               text1: "Total amount: ",
-                              text2: state.orderModel.totalPrice.toString(),
+                              text2: state.orderModel.totalPrice
+                                  .round()
+                                  .toString(),
                               text1Color: AppColor.blackColor,
                               text1FontWeight: FontWeight.w600,
                               text1FontSize: 14,

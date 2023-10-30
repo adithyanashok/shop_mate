@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     // Initialize a timer for automatic page switching
-    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+    _timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
       // Check if we are at the last page, reset to the first page if so
       if (_currentPage < 2) {
         _currentPage++;
@@ -212,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: ProductList(
                                 state: state,
                                 text: "Latest Arrival",
-                                productList: state.products,
+                                productList: state.latestProducts,
                               ),
                             );
                           },
@@ -245,21 +245,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
       },
     );
-  }
-
-  Future<void> signOut() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-
-      // Navigate to the onboarding screen.
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) {
-          return SignupScreen();
-        },
-      ));
-    } catch (e) {
-      snackBar(context: context, msg: e.toString());
-    }
   }
 }
 

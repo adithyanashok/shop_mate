@@ -6,6 +6,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/domain/cart/model/cart_model.dart';
 import 'package:shop_mate/presentation/cart/cart_screen.dart';
+import 'package:shop_mate/presentation/cart/skelton.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/widgets/loading_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
@@ -31,7 +32,7 @@ class CartProductSection extends StatelessWidget {
 
               // Create a Slidable widget for each product.
               return state.isDeleting
-                  ? const BuildLoadingWidget()
+                  ? const CartProductSkelton()
                   : Slidable(
                       key: Key(product['productId']),
                       startActionPane: ActionPane(

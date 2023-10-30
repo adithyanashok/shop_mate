@@ -31,34 +31,36 @@ class SearchScreen extends StatelessWidget {
             Expanded(
               child: BlocBuilder<ProductBloc, ProductState>(
                 builder: (context, state) {
-                  return GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: .5,
-                    ),
-                    itemBuilder: (context, index) {
-                      final product = state.searchResults[index];
-                      return BuildProductCard(
-                        image: Image.network(
-                          product.image![0],
-                          width: 80,
-                        ),
-                        title: product.name,
-                        price: product.amount.toString(),
-                        description: product.description,
-                        onTap: () {
-                          Navigator.of(context).push(
-                            buildNavigation(
-                              route: ProductScreen(),
-                              arguments: product.id,
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    itemCount: state.searchResults.length,
-                  );
+                  return state.searchResults.isEmpty
+                      ? const Center(child: Text("No Products"))
+                      : GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            childAspectRatio: .5,
+                          ),
+                          itemBuilder: (context, index) {
+                            final product = state.searchResults[index];
+                            return BuildProductCard(
+                              image: Image.network(
+                                product.image![0],
+                                width: 80,
+                              ),
+                              title: product.name,
+                              price: product.amount.toString(),
+                              description: product.description,
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  buildNavigation(
+                                    route: ProductScreen(),
+                                    arguments: product.id,
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          itemCount: state.searchResults.length,
+                        );
                 },
               ),
             )
@@ -90,7 +92,6 @@ class _SortingWidgetState extends State<SortingWidget> {
           // Toggle the 'selected' state when tapped.
           widget.selected = !widget.selected;
         });
-        print(widget.selected); // Print the current state for debugging.
       },
       child: Container(
         // Change the background color based on the 'selected' state.
