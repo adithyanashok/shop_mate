@@ -7,8 +7,6 @@ class LocalAuthApi {
     try {
       return await _auth.canCheckBiometrics;
     } on PlatformException catch (e) {
-      print(e.toString());
-
       return false;
     }
   }
@@ -28,7 +26,6 @@ class LocalAuthApi {
         ),
       );
     } on PlatformException catch (e) {
-      print(e.toString());
       return false;
     }
   }

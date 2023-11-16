@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
@@ -43,7 +41,6 @@ class _BuildAddressCardState extends State<BuildAddressCard> {
                   value: widget.text,
                   groupValue: widget.selectedValue,
                   onChanged: (value) {
-                    log(value.toString());
                     setState(() {
                       widget.selectedValue = value.toString();
                       widget.onChanged!(value

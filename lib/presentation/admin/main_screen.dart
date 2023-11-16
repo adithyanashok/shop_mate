@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
 import 'package:shop_mate/application/user/user_bloc.dart';
 import 'package:shop_mate/domain/notifications/notifications.dart';
-import 'package:shop_mate/presentation/admin/bar/bar.dart';
 import 'package:shop_mate/presentation/admin/home_screen.dart';
 import 'package:shop_mate/presentation/admin/order_screen/orders_screen.dart';
 import 'package:shop_mate/presentation/admin/product/product_screen.dart';
@@ -24,24 +21,21 @@ class _MainScreenState extends State<MainScreen> {
   FirebaseNotificationService notifications = FirebaseNotificationService();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     notifications.getNotificationPermission();
     notifications.firebaseInit(context);
-    notifications.getDeviceToken().then((value) {
-      log(value.toString());
-    });
+    notifications.getDeviceToken().then((value) {});
     notifications.onTokenRefresh();
   }
 
   @override
   Widget build(BuildContext context) {
     final screens = [
-      AdminHomeScreen(),
-      AdminProductScreen(),
-      AdminOrdersScreen(),
-      Users(),
-      ProfileScreen(),
+      const AdminHomeScreen(),
+      const AdminProductScreen(),
+      const AdminOrdersScreen(),
+      const Users(),
+      const ProfileScreen(),
     ];
     return BlocBuilder<BottomNavBloc, BottomNavState>(
       builder: (context, state) {

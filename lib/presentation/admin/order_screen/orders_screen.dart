@@ -27,74 +27,90 @@ class AdminOrdersScreen extends StatelessWidget {
           builder: (context, state) {
             return state.isLoading
                 ? const BuildLoadingWidget()
-                : SizedBox(
-                    width: 1.sw,
-                    height: 1.sh,
-                    child: ListView.separated(
-                      itemBuilder: (context, index) {
-                        final order = state.orderModelList[index];
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(buildNavigation(
-                              route: const OrderScreen(),
-                              arguments: order.id,
-                            ));
-                          },
-                          child: Card(
-                            surfaceTintColor: AppColor.whiteColor,
-                            color: AppColor.whiteColor,
-                            shadowColor: AppColor.whiteColor,
-                            elevation: 3,
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: double.infinity,
-                                    height: 50,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, index) {
-                                        final values = order.products[index];
-                                        return Image.network(
-                                          values['image'],
-                                          width: 50,
-                                        );
-                                      },
-                                      itemCount: order.products.length,
-                                    ),
-                                  ),
-                                  BuildSmallText(
-                                      text: "Name: ${order.username!}"),
-                                  BuildTextWithSignupLink(
-                                    text1: "Email: ",
-                                    text2: order.email!,
-                                    text1Color: AppColor.blackColor,
-                                    text1FontWeight: FontWeight.w600,
-                                    text2FontWeight: FontWeight.w400,
-                                    text2Color: AppColor.colorGrey1,
-                                  ),
-                                  BuildTextWithSignupLink(
-                                    text1: "Address: ",
-                                    text2: order.shippingAddress,
-                                    text1Color: AppColor.blackColor,
-                                    text1FontWeight: FontWeight.w600,
-                                    text2FontWeight: FontWeight.w400,
-                                    text2Color: AppColor.colorGrey1,
-                                  ),
-                                ],
-                              ),
-                            ),
+                : state.orderModelList.isEmpty
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset("assets/images/empty-orders.png"),
+                          const BuildRegularTextWidget(
+                            text: "No order placed yet!",
+                            fontWeight: FontWeight.w300,
                           ),
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return const SizedBox();
-                      },
-                      itemCount: state.orderModelList.length,
-                    ),
-                  );
+                          const SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      )
+                    : SizedBox(
+                        width: 1.sw,
+                        height: 1.sh,
+                        child: ListView.separated(
+                          itemBuilder: (context, index) {
+                            final order = state.orderModelList[index];
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(buildNavigation(
+                                  route: const OrderScreen(),
+                                  arguments: order.id,
+                                ));
+                              },
+                              child: Card(
+                                surfaceTintColor: AppColor.whiteColor,
+                                color: AppColor.whiteColor,
+                                shadowColor: AppColor.whiteColor,
+                                elevation: 3,
+                                child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: double.infinity,
+                                        height: 50,
+                                        child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (context, index) {
+                                            final values =
+                                                order.products[index];
+                                            return Image.network(
+                                              values['image'],
+                                              width: 50,
+                                            );
+                                          },
+                                          itemCount: order.products.length,
+                                        ),
+                                      ),
+                                      BuildSmallText(
+                                          text: "Name: ${order.username!}"),
+                                      BuildTextWithSignupLink(
+                                        text1: "Email: ",
+                                        text2: order.email!,
+                                        text1Color: AppColor.blackColor,
+                                        text1FontWeight: FontWeight.w600,
+                                        text2FontWeight: FontWeight.w400,
+                                        text2Color: AppColor.colorGrey1,
+                                      ),
+                                      BuildTextWithSignupLink(
+                                        text1: "Address: ",
+                                        text2: order.shippingAddress,
+                                        text1Color: AppColor.blackColor,
+                                        text1FontWeight: FontWeight.w600,
+                                        text2FontWeight: FontWeight.w400,
+                                        text2Color: AppColor.colorGrey1,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const SizedBox();
+                          },
+                          itemCount: state.orderModelList.length,
+                        ),
+                      );
           },
         ),
       ),

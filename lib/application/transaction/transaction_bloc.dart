@@ -14,6 +14,7 @@ part 'transaction_bloc.freezed.dart';
 class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
   ITransactionFacade iTransactionFacade;
   TransactionBloc(this.iTransactionFacade) : super(TransactionState.initial()) {
+    // Create a transaction
     on<_CreateTransaction>((event, emit) async {
       emit(state.copyWith(isLoading: true));
       final transactionOpt =
@@ -36,7 +37,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
         ),
       );
     });
-
+    // Fetching transactions
     on<_FetchTransactions>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));

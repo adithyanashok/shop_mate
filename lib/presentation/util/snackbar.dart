@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 snackBar({
   required BuildContext context,

@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
@@ -76,8 +73,8 @@ class _BuildTextFormFieldState extends State<BuildTextFormField> {
                 child: TextField(
                   onChanged: (value) {
                     widget.func(
-                        value); // Call the provided callback function on value change
-                    log(value);
+                      value,
+                    ); // Call the provided callback function on value change
                   },
                   keyboardType: widget.keyboardType, // Set the keyboard type
                   obscureText:

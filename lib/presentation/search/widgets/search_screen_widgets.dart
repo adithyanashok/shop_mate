@@ -6,7 +6,7 @@ import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class BuildSearchBarWidget extends StatefulWidget {
-  BuildSearchBarWidget({
+  const BuildSearchBarWidget({
     super.key,
     required this.onSubmitted,
   });

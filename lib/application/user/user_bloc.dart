@@ -14,6 +14,7 @@ part 'user_bloc.freezed.dart';
 class UserBloc extends Bloc<UserEvent, UserState> {
   IAuthFacade iAuthFacade;
   UserBloc(this.iAuthFacade) : super(UserState.initial()) {
+    // Get users
     on<_GetUsers>((event, emit) async {
       emit(state.copyWith(isLoading: true));
       final usersOpt =
@@ -36,7 +37,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         ),
       );
     });
-
+    // get user
     on<_GetUser>((event, emit) async {
       emit(state.copyWith(isLoading: true));
       final usersOpt = await iAuthFacade.getCurrentUser();

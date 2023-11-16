@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shop_mate/presentation/constants/colors.dart';
 
 class BuildBannerWidget extends StatelessWidget {
   const BuildBannerWidget({
@@ -41,29 +40,6 @@ class BuildBannerWidget extends StatelessWidget {
                 ),
               ),
             ),
-            // Positioned(
-            //   bottom: 25,
-            //   left: 28,
-            //   child: Container(
-            //     width: 100,
-            //     height: 45,
-            //     decoration: BoxDecoration(
-            //       color: AppColor.whiteColor, // Set the button background color
-            //       borderRadius: BorderRadius.circular(
-            //           50), // Apply rounded corners to the button
-            //     ),
-            //     child: Center(
-            //       child: Text(
-            //         "Get Now", // Button text
-            //         style: TextStyle(
-            //           fontSize: 15.sp, // Set the font size for the button text
-            //           fontWeight: FontWeight.w600, // Set the font weight
-            //           color: buttonTextColor, // Set the button text color
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
             Positioned(
               right: 1,
               child: Image.asset(

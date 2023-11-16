@@ -70,6 +70,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
     );
+    // Quantity changing
     on<_IncrementQty>(
       (event, emit) async {
         final updateCartOpt = await iCartFacade.updateCart(
@@ -87,7 +88,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
     );
-
+    // Deleting product
     on<_DeleteProduct>(
       (event, emit) async {
         emit(state.copyWith(isDeleting: true));

@@ -28,5 +28,3 @@ abstract class IOrderFacade {
     String userId,
   );
 }
-
-enum Update { pending, shipped, delivered }

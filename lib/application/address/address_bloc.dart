@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +15,7 @@ part 'address_bloc.freezed.dart';
 class AddressBloc extends Bloc<AddressEvent, AddressState> {
   IAddressFacade iAddressFacade;
   AddressBloc(this.iAddressFacade) : super(AddressState.initial()) {
+    // Add Address
     on<_AddAddress>((event, emit) async {
       emit(state.copyWith(isLoading: true));
       final addressOpt =
@@ -39,7 +38,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
         ),
       );
     });
-
+    // Get Address
     on<_GetAddress>((event, emit) async {
       emit(state.copyWith(isLoading: true));
       final addressOpt =
@@ -58,7 +57,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
         ),
       );
     });
-
+    // Update Address
     on<_UpdateAddress>((event, emit) async {
       emit(state.copyWith(isLoading: true));
       final addressOpt =
@@ -74,7 +73,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
         ),
       );
     });
-
+    // Delete Address
     on<_DeleteAddress>((event, emit) async {
       emit(state.copyWith(isLoading: true));
       final addressOpt = await iAddressFacade.deleteAddress(

@@ -16,6 +16,7 @@ part 'product_bloc.freezed.dart';
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   IProductFacade iProductFacade;
   ProductBloc(this.iProductFacade) : super(ProductState.initial()) {
+    // Add product
     on<_AddProduct>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
@@ -43,6 +44,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
       },
     );
+    // Get All Products
     on<_GetAllProduct>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
@@ -68,6 +70,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
       },
     );
+    // Get Products by category
     on<_GetProductsByCategory>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
@@ -91,6 +94,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
       },
     );
+    // Getlaptops
     on<_GetLaptops>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
@@ -114,6 +118,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
       },
     );
+    // get earphones
     on<_GetEarphones>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
@@ -137,7 +142,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
       },
     );
-
+    // get mobiles
     on<_GetMobiles>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
@@ -158,7 +163,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
       },
     );
-
+    // Get watches
     on<_GetWatches>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
@@ -179,6 +184,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
       },
     );
+    // Get product
     on<_GetProduct>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
@@ -203,6 +209,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
       },
     );
+    // Edit product
     on<_EditProduct>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
@@ -223,6 +230,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
       },
     );
+    // Delete product
     on<_DeleteProduct>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
@@ -242,7 +250,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
       },
     );
-
+    // Search product
     on<_SearchProduct>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
@@ -263,6 +271,27 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
               productList: Some(
                 Right(success),
               ),
+            ),
+          ),
+        );
+      },
+    );
+    // Add Discount to product
+    on<_AddDiscount>(
+      (event, emit) async {
+        emit(state.copyWith(isLoading: true));
+        final addDiscount = await iProductFacade.addDiscount(
+          event.productId,
+          event.discount,
+          event.context,
+        );
+        emit(
+          addDiscount.fold(
+            (failure) => state.copyWith(
+              isLoading: false,
+            ),
+            (r) => state.copyWith(
+              isLoading: false,
             ),
           ),
         );

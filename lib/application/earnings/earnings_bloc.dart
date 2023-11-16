@@ -16,6 +16,7 @@ part 'earnings_bloc.freezed.dart';
 class EarningsBloc extends Bloc<EarningsEvent, EarningsState> {
   IEarningsFacade iEarningsFacade;
   EarningsBloc(this.iEarningsFacade) : super(EarningsState.initial()) {
+    //Get Total Earnings
     on<_GetTotalEarnings>((event, emit) async {
       emit(state.copyWith(isLoading: true));
       final earningsOpt = await iEarningsFacade.getTotalEarnings();

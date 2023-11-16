@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +11,7 @@ import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 import 'package:image_pickers/image_pickers.dart';
 
 class EditProductScreen extends StatefulWidget {
-  EditProductScreen({
+  const EditProductScreen({
     super.key,
     this.product,
     required this.id,
@@ -53,7 +51,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    log(widget.product.toString());
     return Container(
       color: AppColor.whiteColor,
       width: 1.sw,
@@ -230,7 +227,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
       final parsedAmount = double.parse(amount!);
       final parsedQty = int.parse(quantity!);
       final parsedDelivery = double.parse(delivery!);
-      print(parsedDelivery);
       BlocProvider.of<ProductBloc>(context).add(
         ProductEvent.editProduct(
           product: ProductModel(

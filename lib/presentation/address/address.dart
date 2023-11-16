@@ -10,12 +10,18 @@ import 'package:shop_mate/presentation/widgets/loading_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_form_field_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
-class Address extends StatelessWidget {
-  Address({super.key}); // Constructor for the Address widget.
+class Address extends StatefulWidget {
+  Address({super.key});
+  @override
+  State<Address> createState() => _AddressState();
+}
 
-  String title = ''; // Initialize an empty string for the title.
-  String address = ''; // Initialize an empty string for the address.
-
+class _AddressState extends State<Address> {
+  // Constructor for the Address widget.
+  String title = '';
+  // Initialize an empty string for the title.
+  String address = '';
+  // Initialize an empty string for the address.
   @override
   Widget build(BuildContext context) {
     final userId =
@@ -96,17 +102,12 @@ class Address extends StatelessWidget {
 
                                         // Trigger the update of the address using AddressBloc.
                                         onTap: () {
-                                          BlocProvider.of<AddressBloc>(context)
-                                              .add(
-                                            AddressEvent.updateAddress(
-                                              addressModel: AddressModel(
-                                                userId: userId,
-                                                title: title,
-                                                address: address,
-                                                id: data.id,
-                                              ),
-                                              context: context,
-                                            ),
+                                          editAddress(
+                                            context,
+                                            title,
+                                            address,
+                                            userId,
+                                            data.id!,
                                           );
                                         },
                                       )

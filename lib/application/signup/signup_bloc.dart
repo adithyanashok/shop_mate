@@ -18,6 +18,7 @@ part 'signup_bloc.freezed.dart';
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
   ISignupFacade iSignupFacade;
   SignupBloc(this.iSignupFacade) : super(SignupState.initial()) {
+    // Signup
     on<_Signup>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));

@@ -8,7 +8,6 @@ import 'package:shop_mate/domain/cart/model/cart_model.dart';
 import 'package:shop_mate/presentation/cart/cart_screen.dart';
 import 'package:shop_mate/presentation/cart/skelton.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
-import 'package:shop_mate/presentation/widgets/loading_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class CartProductSection extends StatelessWidget {
@@ -101,11 +100,12 @@ class CartProductSection extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       BuildSmallText(
-                                          text: product['amount'].toString()),
+                                          text: product['name'].toString()),
                                       SizedBox(
                                         width: 0.5.sw,
                                         child: BuildSmallText(
-                                          text: product['discount'].toString(),
+                                          text:
+                                              product['description'].toString(),
                                           color: AppColor.colorGrey1,
                                           fontSize: 12,
                                         ),
@@ -235,9 +235,6 @@ class CartProductSection extends StatelessWidget {
               return const SizedBox(
                 height: 10,
               );
-              // return const Divider(
-              //   color: AppColor.greenColor,
-              // );
             },
             itemCount: state.cart.products.length,
           ),

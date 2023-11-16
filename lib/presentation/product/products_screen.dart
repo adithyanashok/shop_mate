@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/product/product_screen.dart';
 import 'package:shop_mate/presentation/widgets/loading_widget.dart';
 import 'package:shop_mate/presentation/widgets/product_card.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class ProductsScreen extends StatelessWidget {
@@ -16,9 +14,14 @@ class ProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final productCat = ModalRoute.of(context)?.settings.arguments as String;
 
-    BlocProvider.of<ProductBloc>(context).add(
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      BlocProvider.of<ProductBloc>(context).add(
         ProductEvent.getProductsByCategory(
-            category: productCat, context: context));
+          category: productCat,
+          context: context,
+        ),
+      );
+    });
     return Scaffold(
       appBar: AppBar(
         title: BuildRegularTextWidget(
@@ -78,35 +81,5 @@ class ProductsScreen extends StatelessWidget {
         ),
       ),
     );
-
-    // child: Column(
-    //   crossAxisAlignment: CrossAxisAlignment.start,
-    //   children: [
-    //     Expanded(
-    //       child: BlocBuilder<ProductBloc, ProductState>(
-    //         builder: (context, state) {
-    //           return GridView.builder(
-    //             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-    //               maxCrossAxisExtent: 0.5.sw,
-    //             ),
-    //             itemBuilder: (context, index) {
-    //               final product = state.products[index];
-    //               return BuildProductCard(
-    //                 image: Image.network(
-    //                   product.image![0],
-    //                   width: 80,
-    //                 ),
-    //                 title: product.name,
-    //                 price: product.amount.toString(),
-    //                 description: product.description,
-    //               );
-    //             },
-    //             itemCount: state.products.length,
-    //           );
-    //         },
-    //       ),
-    //     )
-    //   ],
-    // ),
   }
 }

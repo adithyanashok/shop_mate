@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +32,7 @@ class Payments {
       // Display the payment sheet to the user
       await displayPaymentSheet(context, paymentIntentData, userId, order);
     } catch (e) {
-      log("Exception at makePayment(): $e");
+      snackBar(context: context, msg: "Something went wrong...");
     }
   }
 
@@ -41,23 +40,18 @@ class Payments {
   displayPaymentSheet(context, paymentIntentData, userId, order) async {
     try {
       await Stripe.instance.presentPaymentSheet().then((newValue) {
-        final paymentId = paymentIntentData!['id'];
-        log('payment intentsss ${paymentIntentData!['id']}');
-        log('payment intent $paymentIntentData');
-
         snackBar(context: context, msg: "Payment Completed");
         BlocProvider.of<OrdersBloc>(context).add(
           OrdersEvent.placeOrder(orderModel: order, context: context),
         );
         paymentIntentData = null;
       }).onError((error, stackTrace) {
-        log('Exception/DISPLAYPAYMENTSHEET==> $error $stackTrace');
         snackBar(context: context, msg: "Cancelled");
       });
     } on StripeException catch (_) {
       snackBar(context: context, msg: "Cancelled");
     } catch (e) {
-      log('$e');
+      snackBar(context: context, msg: "Something went wrong...");
     }
   }
 
@@ -77,19 +71,16 @@ class Payments {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       );
-      log('Create Intent reponse ===> ${response.body.toString()}');
+
       return jsonDecode(response.body.toString());
     } catch (e) {
-      log("Exception at createPaymentIntent(): ${e.toString()}");
+      //
     }
   }
 
   //<=============================Razorpay Payment=====================================>
   // Function to initiate the Razorpay payment process
   void openCheckout(amount, razorpay, order, name, email, context) async {
-    final user = FirebaseAuth.instance.currentUser;
-    log(user.toString());
-
     // Prepare payment options
     var options = {
       'key': 'rzp_test_fRFxOcDMGdbCCv',
@@ -104,17 +95,19 @@ class Payments {
       // Open the Razorpay payment window with the provided options
       await razorpay.open(options);
     } catch (e) {
-      log('Error: $e');
+      snackBar(context: context, msg: "Something went wrong...");
     }
   }
 
   void placeOrder(context) {
-    BlocProvider.of<OrdersBloc>(context)
-        .add(OrdersEvent.placeOrder(orderModel: orderModel!, context: context));
+    BlocProvider.of<OrdersBloc>(context).add(
+      OrdersEvent.placeOrder(
+        orderModel: orderModel!,
+        context: context,
+      ),
+    );
   }
 
-  // Function to convert the amount to the format expected by StripeBlocProvider.of<OrdersBloc>(context)
-  //     .add(OrdersEvent.placeOrder(orderModel: orderModel, context: context));
   calculateAmount(String amount) {
     final data = int.parse(amount) * 100;
     return data.toString();

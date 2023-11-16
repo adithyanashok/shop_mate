@@ -4,6 +4,7 @@ import 'package:shop_mate/domain/transactions/model/transaction_model.dart';
 
 abstract class ITransactionFacade {
   Future<Either<MainFailure, TransactionModel>> createTransaction(
-      TransactionModel transactionModel);
+    TransactionModel transactionModel,
+  );
   Future<Either<MainFailure, List<TransactionModel>>> fetchTransactions();
 }

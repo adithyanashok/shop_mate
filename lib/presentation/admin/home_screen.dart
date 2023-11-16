@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/application/earnings/earnings_bloc.dart';
 import 'package:shop_mate/application/orders/orders_bloc.dart';
 import 'package:shop_mate/application/user/user_bloc.dart';
-import 'package:shop_mate/domain/users/model/user.dart';
 import 'package:shop_mate/presentation/admin/bar/bar.dart';
 import 'package:shop_mate/presentation/constants/amount_formate.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/widgets/custom_card.dart';
-import 'package:shop_mate/presentation/widgets/loading_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 import 'package:shop_mate/presentation/widgets/user_card.dart';
 
@@ -59,7 +56,7 @@ class AdminHomeScreen extends StatelessWidget {
                         return CustomCard(
                           label: "Total Orders",
                           text: state.orderModelList.length.toString(),
-                          color: Color.fromARGB(255, 3, 133, 111),
+                          color: const Color.fromARGB(255, 3, 133, 111),
                           // color: const Color.fromARGB(255, 24, 38, 231),
                           isLoading: state.isLoading,
                         );

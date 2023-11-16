@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_mate/domain/earnings/models/earnings_model.dart';
 import 'package:shop_mate/domain/order/model/order_model.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
-import 'package:shop_mate/presentation/widgets/loading_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class EarningsDashboard extends StatelessWidget {
@@ -44,16 +43,16 @@ class EarningsPerMonthChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: 350,
+        height: 400,
         width: .9.sw,
         decoration: BoxDecoration(
           // color: const Color.fromARGB(255, 4, 9, 70),
-          color: Color.fromARGB(255, 2, 104, 87),
+          color: const Color.fromARGB(255, 2, 104, 87),
           borderRadius: BorderRadius.circular(10),
         ),
         child: BarChart(
           BarChartData(
-            maxY: 150000,
+            maxY: 1000000,
             alignment: BarChartAlignment.spaceEvenly,
             // Titles Data
             titlesData: FlTitlesData(
@@ -184,10 +183,14 @@ class EarningsPerMonthChart extends StatelessWidget {
                       x: entry.key.toInt(),
                       barRods: [
                         BarChartRodData(
-                          toY: entry.value,
-                          width: 12,
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                        ),
+                            toY: entry.value,
+                            width: 12,
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            rodStackItems: [
+                              BarChartRodStackItem(0, 3, Colors.red),
+                              BarChartRodStackItem(3, 6, Colors.green),
+                              BarChartRodStackItem(6, 9, Colors.blue),
+                            ]),
                       ],
                     ))
                 .toList(),
@@ -228,7 +231,6 @@ Future<EarningsModel> getTotalEarnings() async {
 
     return EarningsModel(earnings: totalProfit);
   } catch (e) {
-    print(e.toString());
     throw Exception('Error fetching total earnings');
   }
 }
@@ -242,12 +244,11 @@ Future<List<double>> getEarningsPerMonth() async {
     for (var docSnapshot in querySnapshot.docs) {
       final orders = OrderModel.fromJson(docSnapshot.data());
       final month = orders.orderDate.month;
-      earningsPerMonth[month - 1] += orders.totalPrice;
+      earningsPerMonth[month - 1] += orders.totalPrice.round();
     }
 
     return earningsPerMonth;
   } catch (e) {
-    print(e.toString());
     throw Exception('Error fetching earnings per month');
   }
 }

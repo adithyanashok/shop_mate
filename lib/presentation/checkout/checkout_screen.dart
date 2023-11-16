@@ -1,7 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +12,7 @@ import 'package:shop_mate/presentation/checkout/checkout_screens_widgets/checkou
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/order/order_summary.dart';
+import 'package:shop_mate/presentation/util/snackbar.dart';
 import 'package:shop_mate/presentation/widgets/address_widgets.dart';
 import 'package:shop_mate/presentation/widgets/button_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
@@ -159,14 +158,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   // Handle payment failure response
   void handlePaymentError(PaymentFailureResponse response) {
-    log("response ${response.message}");
+    snackBar(context: context, msg: response.message.toString());
     // Handle payment failure
   }
 
   // Handle external wallet response
   void handleExternalWallet(ExternalWalletResponse response) {
-    log(response.toString());
-    log("response ${response.walletName}");
+    snackBar(context: context, msg: response.walletName.toString());
     // Handle external wallet
   }
 }

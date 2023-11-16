@@ -10,14 +10,5 @@ class BottomNavBloc extends Bloc<BottomNavEvent, BottomNavState> {
     on<HomeEvent>((event, emit) {
       emit(state.copyWith(value: event.value));
     });
-    // on<Search>((event, emit) {
-    //   emit(state.copyWith(value: event.value));
-    // });
-    // on<Cart>((event, emit) {
-    //   emit(state.copyWith(value: event.value));
-    // });
-    // on<Profile>((event, emit) {
-    //   emit(state.copyWith(value: event.value));
-    // });
   }
 }

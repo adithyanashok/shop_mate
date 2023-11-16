@@ -10,9 +10,7 @@ import 'package:shop_mate/presentation/profile/profile_screen.dart';
 import 'package:shop_mate/presentation/search/search_screen.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key, this.user});
-
-  final user;
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -38,7 +36,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     // List of screens that can be displayed based on the selected tab.
     final screens = [
-      HomeScreen(),
+      const HomeScreen(),
       const SearchScreen(),
       const ProfileScreen(),
     ];

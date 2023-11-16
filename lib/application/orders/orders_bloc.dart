@@ -15,6 +15,7 @@ part 'orders_bloc.freezed.dart';
 class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
   IOrderFacade iOrderFacade;
   OrdersBloc(this.iOrderFacade) : super(OrdersState.initial()) {
+    // Place order
     on<_PlaceOrder>((event, emit) async {
       emit(state.copyWith(isLoading: true));
       final orderOpt =
@@ -127,24 +128,5 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
         ),
       );
     });
-
-    // on<_UpdateOrderStatusDate>((event, emit) async {
-    //   emit(state.copyWith(isLoading: true));
-    //   final orderOpt = await iOrderFacade.updateOrderStatusDate(
-    //       event.context, event.id, event.date, event.update);
-    //   emit(
-    //     orderOpt.fold(
-    //       (failure) => state.copyWith(
-    //         isLoading: false,
-    //         orderOpt: Some(
-    //           Left(failure),
-    //         ),
-    //       ),
-    //       (success) => state.copyWith(
-    //         isLoading: false,
-    //       ),
-    //     ),
-    //   );
-    // });
   }
 }

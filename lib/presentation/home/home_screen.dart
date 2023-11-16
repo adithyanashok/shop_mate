@@ -15,10 +15,7 @@ import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/home/productlist_section.dart';
 import 'package:shop_mate/presentation/home/skelton.dart';
 import 'package:shop_mate/presentation/product/products_screen.dart';
-import 'package:shop_mate/presentation/signup/signup_screen.dart';
-import 'package:shop_mate/presentation/util/snackbar.dart';
 import 'package:shop_mate/presentation/widgets/app_bar_widget.dart';
-import 'package:shop_mate/presentation/widgets/banner_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -75,16 +72,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<ProductBloc>(context)
-        .add(ProductEvent.getMobiles(category: 'mobiles', context: context));
-    BlocProvider.of<ProductBloc>(context)
-        .add(ProductEvent.getLaptops(category: 'laptops', context: context));
-    BlocProvider.of<ProductBloc>(context).add(
-        ProductEvent.getEarphones(category: 'earphones', context: context));
-    BlocProvider.of<ProductBloc>(context)
-        .add(const ProductEvent.getAllProduct(fetchType: 'new'));
-    BlocProvider.of<CartBloc>(context)
-        .add(CartEvent.getCart(userId: userId!, context: context));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      BlocProvider.of<ProductBloc>(context)
+          .add(ProductEvent.getMobiles(category: 'mobiles', context: context));
+      BlocProvider.of<ProductBloc>(context)
+          .add(ProductEvent.getLaptops(category: 'laptops', context: context));
+      BlocProvider.of<ProductBloc>(context).add(
+          ProductEvent.getEarphones(category: 'earphones', context: context));
+      BlocProvider.of<ProductBloc>(context)
+          .add(const ProductEvent.getAllProduct(fetchType: 'new'));
+      if (userId != null) {
+        BlocProvider.of<CartBloc>(context)
+            .add(CartEvent.getCart(userId: userId!, context: context));
+      }
+    });
     BlocProvider.of<UserBloc>(context).add(const UserEvent.getUser());
     return BlocBuilder<ProductBloc, ProductState>(
       builder: (context, state) {

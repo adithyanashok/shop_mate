@@ -1,6 +1,5 @@
 // import 'dart:developer';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
@@ -28,17 +27,21 @@ class ProductRepository implements IProductFacade {
       product = product.copyWith(image: images);
       final productMap = product.toJson();
 
-      final docRef =
-          await db.collection(Collection.collectionProduct).add(productMap);
-
-      final snapshot = await docRef.get();
-      final productData = snapshot.data() as Map<String, dynamic>;
-
-      final productModel = ProductModel.fromJson(productData);
-      Navigator.of(context).pop();
-      return Right(productModel);
+      if (images.isNotEmpty) {
+        final docRef =
+            await db.collection(Collection.collectionProduct).add(productMap);
+        final snapshot = await docRef.get();
+        final productData = snapshot.data() as Map<String, dynamic>;
+        final productModel = ProductModel.fromJson(productData);
+        BlocProvider.of<ProductBloc>(context)
+            .add(const ProductEvent.getAllProduct(fetchType: 'all-products'));
+        Navigator.of(context).pop();
+        return Right(productModel);
+      } else {
+        snackBar(context: context, msg: "Fill all the fields");
+        return const Left(MainFailure.clientFailure());
+      }
     } catch (e) {
-      print(e.toString());
       return const Left(MainFailure.clientFailure());
     }
   }
@@ -154,7 +157,6 @@ class ProductRepository implements IProductFacade {
         await storageReference.putFile(file);
         final String downloadURL = await storageReference.getDownloadURL();
         downloadUrls.add(downloadURL);
-        snackBar(context: context, msg: 'Image $i uploaded');
       } catch (e) {
         snackBar(context: context, msg: 'Error uploading image $i: $e');
       }
@@ -276,8 +278,29 @@ class ProductRepository implements IProductFacade {
       }
       return Right(products);
     } catch (e) {
-      print(e.toString());
-      return Left(MainFailure.clientFailure());
+      return const Left(MainFailure.clientFailure());
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, bool>> addDiscount(
+      String productId, discount, context) async {
+    try {
+      final db = FirebaseFirestore.instance;
+      db.collection(Collection.collectionProduct).doc(productId).update(
+        {
+          "discount": discount,
+        },
+      );
+
+      Navigator.of(context).pop();
+      return const Right(true);
+    } catch (e) {
+      snackBar(
+        context: context,
+        msg: 'Something went wrong while adding discount',
+      );
+      return const Left(MainFailure.clientFailure());
     }
   }
 }

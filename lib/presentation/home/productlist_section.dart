@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/product/product_screen.dart';
-import 'package:shop_mate/presentation/widgets/loading_widget.dart';
 import 'package:shop_mate/presentation/widgets/product_card.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
@@ -37,6 +36,8 @@ class ProductList extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 final product = productList[index];
+                final discount = (product.discount / 100) * product.amount;
+                final discountedTotal = product.amount - discount;
                 return BuildProductCard(
                   title: product.name, // Display the product name
                   image: Image.network(
@@ -56,7 +57,7 @@ class ProductList extends StatelessWidget {
                   description:
                       product.description, // Display the product description
                   price:
-                      "${product.amount.round()}", // Display the product price
+                      "${discountedTotal.round()}", // Display the product price
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(),

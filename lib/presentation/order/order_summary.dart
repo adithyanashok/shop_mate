@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,8 +9,8 @@ import 'package:shop_mate/application/orders/orders_bloc.dart';
 import 'package:shop_mate/application/user/user_bloc.dart';
 import 'package:shop_mate/domain/order/model/order_model.dart';
 import 'package:shop_mate/domain/payments/payments.dart';
-import 'package:shop_mate/presentation/checkout/checkout_screens_widgets/checkout_screen_widgets.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/util/snackbar.dart';
 import 'package:shop_mate/presentation/widgets/asset_card.dart';
 import 'package:shop_mate/presentation/widgets/row_widget.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
@@ -345,14 +343,14 @@ class _OrderSummaryState extends State<OrderSummary> {
 
   // Handle payment failure response
   void handlePaymentError(PaymentFailureResponse response) {
-    log("response ${response.message}");
+    snackBar(context: context, msg: response.message.toString());
     // Handle payment failure
   }
 
   // Handle external wallet response
   void handleExternalWallet(ExternalWalletResponse response) {
-    log(response.toString());
-    log("response ${response.walletName}");
+    snackBar(context: context, msg: response.walletName.toString());
+
     // Handle external wallet
   }
 }

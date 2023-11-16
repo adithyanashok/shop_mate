@@ -1,23 +1,24 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:shop_mate/application/signup/signup_bloc.dart';
 import 'package:shop_mate/domain/users/model/user.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/login/login_screen.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
-import 'package:shop_mate/presentation/widgets/asset_card.dart';
 import 'package:shop_mate/presentation/widgets/loader_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_form_field_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
-class SignupScreen extends StatelessWidget {
-  SignupScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
+  @override
+  State<SignupScreen> createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
   UserModel userModel = const UserModel();
 
   @override
@@ -33,11 +34,15 @@ class SignupScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Center(
+                Center(
                   child: Column(
                     children: [
-                      BuildHeadingText2(text: "Let’s Get Started"),
-                      BuildSmallText(
+                      Image.asset(
+                        'assets/images/signup.png',
+                        width: 200.sp,
+                      ),
+                      const BuildHeadingText2(text: "Let’s Get Started"),
+                      const BuildSmallText(
                         text: 'Sign up and we will continue',
                         color: AppColor.colorGrey2,
                         fontSize: 15,
@@ -46,8 +51,9 @@ class SignupScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 100,
+                  height: 60,
                 ),
+
                 // Input field for email
                 BuildTextFormField(
                   label: 'Email',
@@ -57,7 +63,6 @@ class SignupScreen extends StatelessWidget {
                     // Update the userModel with the entered email.
                     final email = userModel.copyWith(email: value);
                     userModel = email;
-                    log(userModel.toString());
                   },
                 ),
                 const SizedBox(
@@ -72,7 +77,6 @@ class SignupScreen extends StatelessWidget {
                     // Update the userModel with the entered username.
                     final username = userModel.copyWith(username: value);
                     userModel = username;
-                    log(username.toString());
                   },
                 ),
                 const SizedBox(
@@ -88,54 +92,12 @@ class SignupScreen extends StatelessWidget {
                     // Update the userModel with the entered password.
                     final password = userModel.copyWith(password: value);
                     userModel = password;
-                    log(userModel.toString());
                   },
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
-                // Or separator
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        color: AppColor.colorGrey2,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: BuildSmallText(
-                        text: "Or",
-                        fontSize: 14,
-                        color: AppColor.colorGrey2,
-                      ),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        color: AppColor.colorGrey2,
-                      ),
-                    ),
-                  ],
-                ),
-                // Social media sign-up buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    BuildAssetCard(
-                      asset: Image.asset(
-                        'assets/images/google.com.png',
-                        width: 50,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    BuildAssetCard(
-                      asset: SvgPicture.asset('assets/images/fb.svg'),
-                    ),
-                  ],
-                ),
+
                 BlocBuilder<SignupBloc, SignupState>(
                   builder: (context, state) {
                     return GestureDetector(
@@ -168,8 +130,11 @@ class SignupScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     // Navigate to the login screen.
-                    Navigator.of(context)
-                        .push(buildNavigation(route: LoginScreen()));
+                    Navigator.of(context).push(
+                      buildNavigation(
+                        route: const LoginScreen(),
+                      ),
+                    );
                   },
                   child: const BuildTextWithSignupLink(
                     text1: "Don't have an account?",

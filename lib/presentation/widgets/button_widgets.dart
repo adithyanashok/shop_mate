@@ -70,11 +70,14 @@ class BuildButtonWidget extends StatelessWidget {
     super.key,
     required this.text, // The text to display on the button
     this.onTap, // Function to be executed when the button is tapped
-    this.state, // Represents the state of the button (e.g., loading state)
+    this.state,
+    this.borderRadius =
+        15, // Represents the state of the button (e.g., loading state)
   });
 
   final String text; // The text to display on the button
   final Function? onTap; // Function to be executed when the button is tapped
+  final double borderRadius;
   final dynamic
       state; // Represents the state of the button (e.g., loading state)
 
@@ -93,7 +96,7 @@ class BuildButtonWidget extends StatelessWidget {
             color:
                 AppColor.greenColor, // Set the background color of the button
             borderRadius: BorderRadius.circular(
-                15), // Apply rounded corners to the button
+                borderRadius), // Apply rounded corners to the button
           ),
           child: Center(
             child: state?.isLoading == true

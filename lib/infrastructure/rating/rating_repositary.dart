@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +64,6 @@ class RatingRepositary implements IRatingFacade {
       // return result
       return Right(reviews);
     } catch (e) {
-      log(e.toString());
       snackBar(context: context, msg: e.toString());
       return const Left(MainFailure.clientFailure());
     }

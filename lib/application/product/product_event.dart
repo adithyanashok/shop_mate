@@ -56,4 +56,10 @@ class ProductEvent with _$ProductEvent {
     required String query,
     String? sort,
   }) = _SearchProduct;
+
+  const factory ProductEvent.addDiscount({
+    required String productId,
+    required int discount,
+    required BuildContext context,
+  }) = _AddDiscount;
 }

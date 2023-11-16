@@ -53,7 +53,7 @@ class EarningsRepositary implements IEarningsFacade {
 
       return Right(EarningsModel(earnings: totalProfit));
     } catch (e) {
-      log(e.toString());
+      log("erorr: $e");
       return const Left(MainFailure.clientFailure());
     }
   }

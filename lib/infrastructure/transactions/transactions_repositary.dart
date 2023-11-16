@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -22,7 +20,6 @@ class TransactionsRepositary implements ITransactionFacade {
       TransactionModel model = TransactionModel.fromJson(data.data()!);
       return Right(model);
     } catch (e) {
-      log(e.toString());
       return const Left(MainFailure.clientFailure());
     }
   }

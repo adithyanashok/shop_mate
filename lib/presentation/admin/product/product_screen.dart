@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
 import 'package:shop_mate/presentation/admin/product/add_product/add_product_screen.dart';
-import 'package:shop_mate/presentation/admin/product/edit_product/edit_product.dart';
+import 'package:shop_mate/presentation/admin/product/product_actions.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/product/product_screen.dart';
@@ -28,8 +28,18 @@ class AdminProductScreen extends StatelessWidget {
                 : Padding(
                     padding: const EdgeInsets.all(1.0),
                     child: state.products.isEmpty
-                        ? const Center(
-                            child: Text('No Products'),
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset("assets/images/products.png"),
+                              const BuildRegularTextWidget(
+                                text: "No products found",
+                                fontWeight: FontWeight.w300,
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                            ],
                           )
                         : DataTable2(
                             dataRowHeight: 100,
@@ -68,84 +78,7 @@ class AdminProductScreen extends StatelessWidget {
                                         );
                                       },
                                       onLongPress: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return SimpleDialog(
-                                              title: Text(product.name),
-                                              children: [
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  children: [
-                                                    Container(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                          15,
-                                                        ),
-                                                        color: Colors.red,
-                                                      ),
-                                                      child: IconButton(
-                                                        onPressed: () {
-                                                          BlocProvider.of<
-                                                                      ProductBloc>(
-                                                                  context)
-                                                              .add(
-                                                            ProductEvent
-                                                                .deleteProduct(
-                                                              productId:
-                                                                  product.id!,
-                                                              context: context,
-                                                            ),
-                                                          );
-                                                        },
-                                                        icon: const Icon(
-                                                          Icons.delete,
-                                                          color: AppColor
-                                                              .whiteColor,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                          15,
-                                                        ),
-                                                        color: Colors.blue,
-                                                      ),
-                                                      child: IconButton(
-                                                        onPressed: () {
-                                                          showModalBottomSheet(
-                                                            context: context,
-                                                            isScrollControlled:
-                                                                true,
-                                                            builder: (context) {
-                                                              return EditProductScreen(
-                                                                product:
-                                                                    product,
-                                                                id: product.id!,
-                                                              );
-                                                            },
-                                                          );
-                                                        },
-                                                        icon: const Icon(
-                                                          Icons.edit,
-                                                          color: AppColor
-                                                              .whiteColor,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            );
-                                          },
-                                        );
+                                        productActions(context, product);
                                       },
                                     ),
                                     DataCell(
@@ -182,7 +115,7 @@ class AdminProductScreen extends StatelessWidget {
             isScrollControlled: true,
             context: context,
             builder: (context) {
-              return AddProductScreen();
+              return const AddProductScreen();
             },
           );
         },

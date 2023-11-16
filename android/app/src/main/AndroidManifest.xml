@@ -8,7 +8,7 @@
 
 
     <application
-        android:label="shop_mate"
+        android:label="Shop Mate"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

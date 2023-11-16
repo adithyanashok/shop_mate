@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +7,6 @@ import 'package:shop_mate/application/transaction/transaction_bloc.dart';
 import 'package:shop_mate/domain/core/collections/collections.dart';
 import 'package:shop_mate/domain/core/failures/main_failures.dart';
 import 'package:shop_mate/domain/earnings/models/earnings_model.dart';
-import 'package:shop_mate/domain/notifications/notifications.dart';
 import 'package:shop_mate/domain/order/i_order_facade.dart';
 import 'package:shop_mate/domain/order/model/order_model.dart';
 import 'package:shop_mate/domain/transactions/model/transaction_model.dart';
@@ -26,7 +23,6 @@ class OrderRepositary implements IOrderFacade {
     BuildContext context,
   ) async {
     try {
-      log("ORDER PLACED ==> orderPlaced");
       final db = FirebaseFirestore.instance;
       final user = await db
           .collection(Collection.collectionUser)
@@ -73,7 +69,6 @@ class OrderRepositary implements IOrderFacade {
       return Right(order);
     } catch (e) {
       snackBar(context: context, msg: e.toString());
-      print(e.toString());
       return const Left(MainFailure.clientFailure());
     }
   }
@@ -89,7 +84,6 @@ class OrderRepositary implements IOrderFacade {
       final querySnapshot =
           await db.collection(Collection.collectionOrder).get();
       for (var docSnapshot in querySnapshot.docs) {
-        log(docSnapshot.toString());
         final orders = OrderModel.fromJson(docSnapshot.data())
             .copyWith(id: docSnapshot.id);
         orderModel.add(orders);
@@ -113,10 +107,11 @@ class OrderRepositary implements IOrderFacade {
       } else {
         // If it doesn't exist, create a new document.
         final totalProfitModel = EarningsModel(earnings: totalProfit);
+        final totalProfitJson = totalProfitModel.toJson();
         await db
             .collection(Collection.collectionEarnings)
             .doc('earning')
-            .set(totalProfitModel as Map<String, dynamic>);
+            .set(totalProfitJson);
       }
 
       // Sort the orderModel list by orderDate (newest first).
@@ -128,7 +123,6 @@ class OrderRepositary implements IOrderFacade {
 
       return Right(orderModel);
     } catch (e) {
-      log(e.toString());
       snackBar(context: context, msg: e.toString());
       return const Left(MainFailure.clientFailure());
     }
@@ -220,7 +214,6 @@ class OrderRepositary implements IOrderFacade {
           .where("userId", isEqualTo: userId)
           .get();
       for (var docSnapshot in querySnapshot.docs) {
-        log(docSnapshot.toString());
         final orders = OrderModel.fromJson(docSnapshot.data())
             .copyWith(id: docSnapshot.id);
         orderModel.add(orders);
@@ -235,7 +228,6 @@ class OrderRepositary implements IOrderFacade {
 
       return Right(orderModel);
     } catch (e) {
-      log(e.toString());
       snackBar(context: context, msg: e.toString());
       return const Left(MainFailure.clientFailure());
     }

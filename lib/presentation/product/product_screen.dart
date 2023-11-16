@@ -1,11 +1,8 @@
-import 'dart:math';
-
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:injectable/injectable.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/application/pageview/pageview_bloc.dart';
 import 'package:shop_mate/application/product/product_bloc.dart';
@@ -193,13 +190,13 @@ class ProductScreen extends StatelessWidget {
                                   CartEvent.addToCart(
                                     cartModel: CartModel(
                                       userId: userId!,
-                                      totalPrice: product.amount * 1,
+                                      totalPrice: product.discountedTotal,
                                       products: [
                                         {
                                           "name": product.name,
                                           "description": product.description,
                                           "category": product.category,
-                                          "amount": product.amount,
+                                          "amount": product.discountedTotal,
                                           "quantity": 1,
                                           "image": product.image![0],
                                           "productId": product.id,
@@ -207,9 +204,9 @@ class ProductScreen extends StatelessWidget {
                                           "discount": discount,
                                         }
                                       ],
-                                      totalDeliveryFee: 0,
-                                      totalDiscount: 0,
-                                      subTotal: product.amount,
+                                      totalDeliveryFee: product.deliveryFee,
+                                      totalDiscount: discount,
+                                      subTotal: product.discountedTotal,
                                     ),
                                     context: context,
                                   ),

@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:shop_mate/application/product/product_bloc.dart';
-import 'package:shop_mate/presentation/constants/colors.dart';
-import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/home/home_screen.dart';
-import 'package:shop_mate/presentation/home/productlist_section.dart';
-import 'package:shop_mate/presentation/product/product_screen.dart';
-import 'package:shop_mate/presentation/widgets/banner_widget.dart';
-import 'package:shop_mate/presentation/widgets/product_card.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class SkeletonLoadingScreen extends StatelessWidget {
+  const SkeletonLoadingScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

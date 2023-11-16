@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/transaction/transaction_bloc.dart';
-import 'package:shop_mate/application/user/user_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/date_convertion.dart';
 import 'package:shop_mate/presentation/widgets/loading_widget.dart';
@@ -34,7 +33,7 @@ class Transactions extends StatelessWidget {
                           transaction.email,
                         ),
                         trailing: BuildSmallText(
-                          text: transaction.amount.toString(),
+                          text: transaction.amount.round().toString(),
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),

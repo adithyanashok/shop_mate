@@ -15,6 +15,7 @@ part 'rating_bloc.freezed.dart';
 class RatingBloc extends Bloc<RatingEvent, RatingState> {
   IRatingFacade iRatingFacade;
   RatingBloc(this.iRatingFacade) : super(RatingState.initial()) {
+    // Rate a product
     on<_RateProduct>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));
@@ -39,7 +40,7 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
         );
       },
     );
-    // fetch all ratings here
+    // fetch all ratings
     on<_FetchRatings>(
       (event, emit) async {
         emit(state.copyWith(isLoading: true));

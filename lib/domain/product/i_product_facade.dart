@@ -14,6 +14,11 @@ abstract class IProductFacade {
     List<Media>? selectedImages,
     context,
   );
+  Future<Either<MainFailure, bool>> addDiscount(
+    String productId,
+    discount,
+    context,
+  );
   Future<Either<MainFailure, bool>> deleteProduct(
     String productId,
     context,
@@ -22,18 +27,34 @@ abstract class IProductFacade {
   Future<Either<MainFailure, List<ProductModel>>> getAllProducts(
     String fetch,
   );
+
   Future<Either<MainFailure, List<ProductModel>>> getProductsByCategory(
-      String category, context);
+    String category,
+    context,
+  );
+
   Future<Either<MainFailure, List<ProductModel>>> getLaptops(
-      String category, context);
+    String category,
+    context,
+  );
+
   Future<Either<MainFailure, List<ProductModel>>> getEarphones(
-      String category, context);
+    String category,
+    context,
+  );
+
   Future<Either<MainFailure, List<ProductModel>>> getMobiles(
-      String category, context);
+    String category,
+    context,
+  );
+
   Future<Either<MainFailure, ProductModel>> getProduct(
     String productId,
     context,
   );
+
   Future<Either<MainFailure, List<ProductModel>>> searchProducts(
-      String query, String sort);
+    String query,
+    String sort,
+  );
 }

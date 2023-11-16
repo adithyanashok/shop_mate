@@ -83,17 +83,6 @@ class BuildAppBarWidget extends StatelessWidget {
         ),
       ],
     );
-    // AppBar(
-    //   centerTitle: true,
-    //   title: BuildLogoText(title: title),
-    //   backgroundColor: AppColor.greenColor,
-    //   // shape: const RoundedRectangleBorder(
-    //   //   borderRadius: BorderRadius.only(
-    //   //     bottomLeft: Radius.circular(60),
-    //   //     bottomRight: Radius.circular(60),
-    //   //   ),
-    //   // ),
-    // );
   }
 
   Future<void> signOut(context) async {
@@ -103,7 +92,7 @@ class BuildAppBarWidget extends StatelessWidget {
       // Navigate to the onboarding screen.
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) {
-          return SignupScreen();
+          return const SignupScreen();
         },
       ));
     } catch (e) {

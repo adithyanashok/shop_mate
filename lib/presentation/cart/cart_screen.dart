@@ -2,10 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_mate/application/address/address_bloc.dart';
+import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/presentation/cart/cart_amount_section.dart';
 import 'package:shop_mate/presentation/cart/cart_product_section.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
+import 'package:shop_mate/presentation/main_page.dart';
+import 'package:shop_mate/presentation/widgets/button_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class CartScreen extends StatelessWidget {
@@ -35,8 +38,42 @@ class CartScreen extends StatelessWidget {
           return SafeArea(
             // Display an image if the cart is empty.
             child: state.cart.products.isEmpty
-                ? Center(
-                    child: Image.asset('assets/images/cart-is-empty.png'),
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset("assets/images/cart-is-empty.png"),
+                      const BuildRegularTextWidget(
+                        text: "Your cart is empty!",
+                        fontWeight: FontWeight.w300,
+                      ),
+                      const BuildRegularTextWidget(
+                        text:
+                            "Your cart is currently empty. Explore our wide range of products and start adding items to your cart to begin your shopping journey!",
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      BuildMediumButton(
+                        backgroundColor: AppColor.greenColor,
+                        textColor: AppColor.whiteColor,
+                        text: "Explore",
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                context.read<BottomNavBloc>().add(
+                                      const BottomNavEvent.homeEvent(value: 0),
+                                    );
+                                return const MainPage();
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   )
                 : Column(
                     children: [

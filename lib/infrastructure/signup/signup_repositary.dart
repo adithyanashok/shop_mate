@@ -27,7 +27,7 @@ class SignupRepository implements ISignupFacade {
         'email': user.email,
         'username': user.username,
         'password': user.password,
-        'isAdmin': true,
+        'isAdmin': false,
         'fcmToken': fcmToken,
         "date": DateTime.now().toString(),
       };

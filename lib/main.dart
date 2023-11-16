@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:shop_mate/application/address/address_bloc.dart';
-import 'package:shop_mate/application/auth/auth_bloc.dart';
 import 'package:shop_mate/application/cart/cart_bloc.dart';
 import 'package:shop_mate/application/earnings/earnings_bloc.dart';
 import 'package:shop_mate/application/orders/orders_bloc.dart';
@@ -19,7 +18,7 @@ import 'package:shop_mate/application/transaction/transaction_bloc.dart';
 import 'package:shop_mate/application/user/user_bloc.dart';
 import 'package:shop_mate/domain/core/api/api.dart';
 import 'package:shop_mate/domain/core/di/injectable.dart';
-import 'package:shop_mate/presentation/home/skelton.dart';
+import 'package:shop_mate/presentation/home/home_screen.dart';
 import 'package:shop_mate/presentation/login/login_screen.dart';
 import 'package:shop_mate/presentation/splash_screen/splash_screen.dart';
 
@@ -61,9 +60,6 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => getIt<EarningsBloc>()),
             BlocProvider(create: (context) => getIt<UserBloc>()),
             BlocProvider(create: (context) => getIt<TransactionBloc>()),
-            BlocProvider<AuthBloc>(
-              create: (_) => AuthBloc(),
-            ),
           ],
           child: MaterialApp(
             title: 'Flutter Demo',
@@ -73,38 +69,10 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             home: SplashScreen(),
             routes: {
-              "login": (context) => LoginScreen(),
+              "login": (context) => const LoginScreen(),
+              "home": (context) => const HomeScreen(),
             },
           ));
     });
   }
 }
-
-// class AuthWrapper extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocBuilder<AuthBloc, AuthState>(
-//       builder: (context, state) {
-//         return state.when(
-//           initial: () => SplashScreen(),
-//           authenticated: (user) {
-//             Navigator.of(context).push(MaterialPageRoute(
-//               builder: (context) {
-//                 return MainPage();
-//               },
-//             ));
-//             return MainPage(user: user);
-//           },
-//           unauthenticated: () {
-//             Navigator.of(context).push(MaterialPageRoute(
-//               builder: (context) {
-//                 return SignupScreen();
-//               },
-//             ));
-//             return SignupScreen();
-//           },
-//         );
-//       },
-//     );
-//   }
-// }

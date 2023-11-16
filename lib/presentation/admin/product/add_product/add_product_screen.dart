@@ -12,7 +12,7 @@ import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 import 'package:image_pickers/image_pickers.dart';
 
 class AddProductScreen extends StatefulWidget {
-  AddProductScreen({
+  const AddProductScreen({
     super.key,
   });
 
@@ -146,38 +146,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         "Add Image",
                         style: TextStyle(color: AppColor.greenColor),
                       ),
-              ),
-              TextButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: const Text("Select color"),
-                        content: SingleChildScrollView(
-                          child: ColorPicker(
-                            pickerColor: Colors.red,
-                            onColorChanged: (value) {
-                              setState(() {
-                                selectedColors.add(value.toString());
-                                colors.add(value);
-                              });
-                            },
-                          ),
-                        ),
-                        actions: [
-                          TextButton(
-                            child: const Text('OK'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-                child: const Text("Pick color"),
               ),
               Container(
                 padding: const EdgeInsets.all(8),

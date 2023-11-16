@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +12,7 @@ import 'package:shop_mate/presentation/widgets/text_form_field_widgets.dart';
 import 'package:shop_mate/presentation/widgets/text_widgets.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -62,7 +60,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   icon: Icons.mail,
                   keyboardType: TextInputType.emailAddress,
                   func: (value) {
-                    log(value);
                     email = value;
                   },
                 ),
@@ -75,7 +72,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   icon: Icons.lock,
                   obscureText: true,
                   func: (value) {
-                    log(value);
                     password = value;
                   },
                 ),
@@ -171,8 +167,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context)
-                        .push(buildNavigation(route: SignupScreen()));
+                    Navigator.of(context).push(
+                      buildNavigation(
+                        route: const SignupScreen(),
+                      ),
+                    );
                   },
                   child: const BuildTextWithSignupLink(
                     text1: "Don't have an account?",
@@ -188,8 +187,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void formValidationAndSubmission(BuildContext context) {
-    log(email.toString());
-    log(password.toString());
     if (email == '' || email == null) {
       snackBar(
         context: context,

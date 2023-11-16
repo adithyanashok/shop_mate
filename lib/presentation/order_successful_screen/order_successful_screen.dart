@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shop_mate/application/bottom_nav/bottom_nav_bloc.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
 import 'package:shop_mate/presentation/constants/route_animation.dart';
 import 'package:shop_mate/presentation/main_page.dart';
@@ -44,8 +46,14 @@ class OrderSuccessScreen extends StatelessWidget {
             // Add a button to navigate back to the main page
             TextButton.icon(
               onPressed: () {
-                Navigator.of(context)
-                    .push(buildNavigation(route: const MainPage()));
+                BlocProvider.of<BottomNavBloc>(context).add(
+                  const BottomNavEvent.homeEvent(value: 0),
+                );
+                Navigator.of(context).push(
+                  buildNavigation(
+                    route: const MainPage(),
+                  ),
+                );
               },
               icon: const Icon(
                 Icons.arrow_back,

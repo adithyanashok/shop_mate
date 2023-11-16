@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
@@ -63,7 +62,7 @@ class LoginRepositary implements ILoginFacade {
       } else if (e.code == 'wrong-password') {
         snackBar(context: context, msg: 'Wrong password');
       } else {
-        snackBar(context: context, msg: e.code);
+        snackBar(context: context, msg: "Wrong email or password!");
       }
       return const Left(MainFailure.clientFailure());
     }
@@ -72,7 +71,10 @@ class LoginRepositary implements ILoginFacade {
   @override
   Future<Either<MainFailure, User>> signinWithGoogle(context) async {
     try {
+      final db = FirebaseFirestore.instance;
       final FirebaseAuth _auth = FirebaseAuth.instance;
+      FirebaseNotificationService firebaseNotificationService =
+          FirebaseNotificationService();
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication? googleAuth =
           await googleUser?.authentication;
@@ -84,6 +86,13 @@ class LoginRepositary implements ILoginFacade {
         );
         UserCredential userCredential =
             await _auth.signInWithCredential(credential);
+        final fcmToken = await firebaseNotificationService.getDeviceToken();
+        await db
+            .collection(Collection.collectionUser)
+            .doc(userCredential.user?.uid)
+            .update({
+          'fcmToken': fcmToken,
+        });
         route(context);
         final User? user = userCredential.user;
         return Right(user!);
@@ -91,7 +100,7 @@ class LoginRepositary implements ILoginFacade {
         return const Left(MainFailure.clientFailure());
       }
     } on FirebaseAuthException catch (e) {
-      snackBar(context: context, msg: e.message.toString());
+      snackBar(context: context, msg: "Something went wrong...");
       return const Left(MainFailure.clientFailure());
     }
   }
