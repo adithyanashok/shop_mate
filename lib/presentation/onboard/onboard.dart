@@ -25,19 +25,19 @@ class OnboardingScreen extends StatelessWidget {
           children: [
             Image.asset(
               'assets/images/new-onboard.png',
-              height: 0.5.sh,
+              width: 0.3.sh,
               fit: BoxFit.contain,
             ),
             const SizedBox(height: 20),
             const BuildRegularTextWidget(
               text: "Let’s Get Started",
-              fontSize: 38,
+              fontSize: 34,
               fontWeight: FontWeight.bold,
               color: AppColor.greenColor,
             ),
             const SizedBox(height: 10),
             const BuildRegularTextWidget(
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: FontWeight.w300,
               textAlign: TextAlign.center,
               text:
@@ -50,6 +50,7 @@ class OnboardingScreen extends StatelessWidget {
                 BuildMediumButton(
                   backgroundColor: AppColor.greenColor,
                   textColor: Colors.white,
+                  height: 45,
                   text: "Login",
                   onTap: () {
                     Navigator.pushAndRemoveUntil(
@@ -68,7 +69,7 @@ class OnboardingScreen extends StatelessWidget {
                   backgroundColor: AppColor.whiteColor,
                   textColor: AppColor.greenColor,
                   text: "Signup",
-                  height: 50,
+                  height: 45,
                   borderColor: AppColor.greenColor,
                   onTap: () {
                     Navigator.pushAndRemoveUntil(

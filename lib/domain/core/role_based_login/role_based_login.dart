@@ -9,7 +9,7 @@ import 'package:shop_mate/presentation/onboard/onboard.dart';
 
 void route(context) {
   User? user = FirebaseAuth.instance.currentUser;
-  var userData = FirebaseFirestore.instance
+  FirebaseFirestore.instance
       .collection(Collection.collectionUser)
       .doc(user?.uid)
       .get()

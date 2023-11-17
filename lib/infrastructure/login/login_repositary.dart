@@ -93,8 +93,10 @@ class LoginRepositary implements ILoginFacade {
             .update({
           'fcmToken': fcmToken,
         });
-        route(context);
         final User? user = userCredential.user;
+        if (user != null) {
+          route(context);
+        }
         return Right(user!);
       } else {
         return const Left(MainFailure.clientFailure());
