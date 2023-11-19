@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => getIt<TransactionBloc>()),
           ],
           child: MaterialApp(
-            title: 'Flutter Demo',
+            title: 'Shop Mate',
             theme: ThemeData(
               useMaterial3: true,
             ),
