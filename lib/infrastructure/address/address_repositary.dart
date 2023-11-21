@@ -58,8 +58,10 @@ class AddressRepositary implements IAddressFacade {
       List<AddressModel> addressList = [];
 
       // Retrieve a query snapshot of all documents in the collection
-      final querySnapshot =
-          await db.collection(Collection.collectionAddress).get();
+      final querySnapshot = await db
+          .collection(Collection.collectionAddress)
+          .where("userId", isEqualTo: userId)
+          .get();
 
       // Iterate through each document in the query snapshot
       for (var docSnapshot in querySnapshot.docs) {

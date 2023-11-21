@@ -10,7 +10,10 @@ import 'package:shop_mate/domain/core/failures/main_failures.dart';
 import 'package:shop_mate/domain/core/role_based_login/role_based_login.dart';
 import 'package:shop_mate/domain/login/i_login_facade.dart';
 import 'package:shop_mate/domain/notifications/notifications.dart';
+import 'package:shop_mate/presentation/admin/main_screen.dart';
+import 'package:shop_mate/presentation/main_page.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
+import 'package:flutter/material.dart';
 
 @LazySingleton(as: ILoginFacade)
 class LoginRepositary implements ILoginFacade {
@@ -95,7 +98,11 @@ class LoginRepositary implements ILoginFacade {
         });
         final User? user = userCredential.user;
         if (user != null) {
-          route(context);
+          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+            builder: (context) {
+              return const MainPage();
+            },
+          ), (route) => false);
         }
         return Right(user!);
       } else {
