@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shop_mate/application/login/login_bloc.dart';
 import 'package:shop_mate/application/signup/signup_bloc.dart';
 import 'package:shop_mate/domain/users/model/user.dart';
 import 'package:shop_mate/presentation/constants/colors.dart';
@@ -96,6 +97,44 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 const SizedBox(
                   height: 20,
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        BlocProvider.of<LoginBloc>(context).add(
+                          LoginEvent.signInWithGoogle(
+                              buildContext: context, userModel: userModel),
+                        );
+                      },
+                      child: Card(
+                        color: AppColor.whiteColor,
+                        surfaceTintColor: AppColor.whiteColor,
+                        child: SizedBox(
+                          width: 0.8.sw,
+                          height: 70,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/images/google.com.png',
+                                width: 50,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const BuildSmallText(text: "Sigup with Google")
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                  ],
                 ),
 
                 BlocBuilder<SignupBloc, SignupState>(

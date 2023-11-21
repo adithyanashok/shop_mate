@@ -27,7 +27,15 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const BuildRegularTextWidget(text: "Profile"),
+        title: BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) {
+            return BuildRegularTextWidget(
+              text: state.user.email.toString(),
+              textAlign: TextAlign.center,
+              fontWeight: FontWeight.w400,
+            );
+          },
+        ),
         centerTitle: true,
       ),
       body: SafeArea(

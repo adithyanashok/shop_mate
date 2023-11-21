@@ -10,5 +10,6 @@ class LoginEvent with _$LoginEvent {
 
   const factory LoginEvent.signInWithGoogle({
     required BuildContext buildContext,
+    UserModel? userModel,
   }) = _SignInWithGoogle;
 }

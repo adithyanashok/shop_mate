@@ -13,10 +13,7 @@ import 'package:shop_mate/domain/core/failures/main_failures.dart';
 import 'package:shop_mate/domain/core/role_based_login/role_based_login.dart';
 import 'package:shop_mate/domain/login/i_login_facade.dart';
 import 'package:shop_mate/domain/notifications/notifications.dart';
-import 'package:shop_mate/presentation/admin/main_screen.dart';
-import 'package:shop_mate/presentation/main_page.dart';
 import 'package:shop_mate/presentation/util/snackbar.dart';
-import 'package:flutter/material.dart';
 
 @LazySingleton(as: ILoginFacade)
 class LoginRepositary implements ILoginFacade {
@@ -77,56 +74,61 @@ class LoginRepositary implements ILoginFacade {
   @override
   Future<Either<MainFailure, User>> signinWithGoogle(context) async {
     try {
-      snackBar(context: context, msg: 'started');
-
       final db = FirebaseFirestore.instance;
       final FirebaseAuth _auth = FirebaseAuth.instance;
+
       FirebaseNotificationService firebaseNotificationService =
           FirebaseNotificationService();
-      snackBar(context: context, msg: "after notification");
 
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      snackBar(context: context, msg: googleUser.toString());
       final GoogleSignInAuthentication? googleAuth =
           await googleUser?.authentication;
-      snackBar(context: context, msg: googleAuth.toString());
+
       if (googleAuth?.accessToken != null && googleAuth?.idToken != null) {
         final credential = GoogleAuthProvider.credential(
           accessToken: googleAuth?.accessToken,
           idToken: googleAuth?.idToken,
         );
-        snackBar(context: context, msg: credential.toString());
 
         UserCredential userCredential =
             await _auth.signInWithCredential(credential);
-        snackBar(context: context, msg: userCredential.toString());
+
+        final User? user = userCredential.user;
 
         final fcmToken = await firebaseNotificationService.getDeviceToken();
-        await db
-            .collection(Collection.collectionUser)
-            .doc(userCredential.user?.uid)
-            .update({
-          'fcmToken': fcmToken,
-        });
-        final User? user = userCredential.user;
-        snackBar(context: context, msg: user.toString());
+
+        if (userCredential.additionalUserInfo?.isNewUser == true) {
+          // Create user data to be stored in Firestore
+          final Map<String, dynamic> userData = {
+            'email': user?.email,
+            'username': user?.displayName,
+            'password': user?.email,
+            'isAdmin': false,
+            'fcmToken': fcmToken,
+            "date": DateTime.now().toString(),
+          };
+          await db
+              .collection(Collection.collectionUser)
+              .doc(user?.uid)
+              .set(userData);
+        } else {
+          await db
+              .collection(Collection.collectionUser)
+              .doc(userCredential.user?.uid)
+              .update({
+            'fcmToken': fcmToken,
+          });
+        }
 
         if (user != null) {
-          snackBar(context: context, msg: "Navigation started");
-
-          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-            builder: (context) {
-              return const MainPage();
-            },
-          ), (route) => false);
-          snackBar(context: context, msg: "Navigation ended");
+          route(context);
         }
         return Right(user!);
       } else {
         return const Left(MainFailure.clientFailure());
       }
     } on FirebaseAuthException catch (e) {
-      snackBar(context: context, msg: "Something went wrong...");
+      snackBar(context: context, msg: "$e");
       return const Left(MainFailure.clientFailure());
     } on PlatformException catch (e) {
       snackBar(context: context, msg: "$e");

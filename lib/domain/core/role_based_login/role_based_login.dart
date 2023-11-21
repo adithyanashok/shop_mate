@@ -16,33 +16,37 @@ void route(context) {
       .then((DocumentSnapshot documentSnapshot) {
     if (documentSnapshot.exists) {
       if (documentSnapshot.get('isAdmin') == true) {
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
             builder: (context) => const MainScreen(),
           ),
+          (route) => false,
         );
       } else if (documentSnapshot.get('isAdmin') == false) {
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
             builder: (context) => const MainPage(),
           ),
+          (route) => false,
         );
       } else {
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
             builder: (context) => const OnboardingScreen(),
           ),
+          (route) => false,
         );
       }
     } else {
-      Navigator.pushReplacement(
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
           builder: (context) => const OnboardingScreen(),
         ),
+        (route) => false,
       );
     }
   });

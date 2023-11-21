@@ -22,21 +22,24 @@ mixin _$LoginEvent {
     required TResult Function(
             String email, String password, BuildContext buildContext)
         login,
-    required TResult Function(BuildContext buildContext) signInWithGoogle,
+    required TResult Function(BuildContext buildContext, UserModel? userModel)
+        signInWithGoogle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password, BuildContext buildContext)?
         login,
-    TResult? Function(BuildContext buildContext)? signInWithGoogle,
+    TResult? Function(BuildContext buildContext, UserModel? userModel)?
+        signInWithGoogle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password, BuildContext buildContext)?
         login,
-    TResult Function(BuildContext buildContext)? signInWithGoogle,
+    TResult Function(BuildContext buildContext, UserModel? userModel)?
+        signInWithGoogle,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -187,7 +190,8 @@ class _$LoginImpl implements _Login {
     required TResult Function(
             String email, String password, BuildContext buildContext)
         login,
-    required TResult Function(BuildContext buildContext) signInWithGoogle,
+    required TResult Function(BuildContext buildContext, UserModel? userModel)
+        signInWithGoogle,
   }) {
     return login(email, password, buildContext);
   }
@@ -197,7 +201,8 @@ class _$LoginImpl implements _Login {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password, BuildContext buildContext)?
         login,
-    TResult? Function(BuildContext buildContext)? signInWithGoogle,
+    TResult? Function(BuildContext buildContext, UserModel? userModel)?
+        signInWithGoogle,
   }) {
     return login?.call(email, password, buildContext);
   }
@@ -207,7 +212,8 @@ class _$LoginImpl implements _Login {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password, BuildContext buildContext)?
         login,
-    TResult Function(BuildContext buildContext)? signInWithGoogle,
+    TResult Function(BuildContext buildContext, UserModel? userModel)?
+        signInWithGoogle,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -272,7 +278,9 @@ abstract class _$$SignInWithGoogleImplCopyWith<$Res>
       __$$SignInWithGoogleImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({BuildContext buildContext});
+  $Res call({BuildContext buildContext, UserModel? userModel});
+
+  $UserModelCopyWith<$Res>? get userModel;
 }
 
 /// @nodoc
@@ -287,27 +295,46 @@ class __$$SignInWithGoogleImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? buildContext = null,
+    Object? userModel = freezed,
   }) {
     return _then(_$SignInWithGoogleImpl(
       buildContext: null == buildContext
           ? _value.buildContext
           : buildContext // ignore: cast_nullable_to_non_nullable
               as BuildContext,
+      userModel: freezed == userModel
+          ? _value.userModel
+          : userModel // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserModelCopyWith<$Res>? get userModel {
+    if (_value.userModel == null) {
+      return null;
+    }
+
+    return $UserModelCopyWith<$Res>(_value.userModel!, (value) {
+      return _then(_value.copyWith(userModel: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$SignInWithGoogleImpl implements _SignInWithGoogle {
-  const _$SignInWithGoogleImpl({required this.buildContext});
+  const _$SignInWithGoogleImpl({required this.buildContext, this.userModel});
 
   @override
   final BuildContext buildContext;
+  @override
+  final UserModel? userModel;
 
   @override
   String toString() {
-    return 'LoginEvent.signInWithGoogle(buildContext: $buildContext)';
+    return 'LoginEvent.signInWithGoogle(buildContext: $buildContext, userModel: $userModel)';
   }
 
   @override
@@ -316,11 +343,13 @@ class _$SignInWithGoogleImpl implements _SignInWithGoogle {
         (other.runtimeType == runtimeType &&
             other is _$SignInWithGoogleImpl &&
             (identical(other.buildContext, buildContext) ||
-                other.buildContext == buildContext));
+                other.buildContext == buildContext) &&
+            (identical(other.userModel, userModel) ||
+                other.userModel == userModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, buildContext);
+  int get hashCode => Object.hash(runtimeType, buildContext, userModel);
 
   @JsonKey(ignore: true)
   @override
@@ -335,9 +364,10 @@ class _$SignInWithGoogleImpl implements _SignInWithGoogle {
     required TResult Function(
             String email, String password, BuildContext buildContext)
         login,
-    required TResult Function(BuildContext buildContext) signInWithGoogle,
+    required TResult Function(BuildContext buildContext, UserModel? userModel)
+        signInWithGoogle,
   }) {
-    return signInWithGoogle(buildContext);
+    return signInWithGoogle(buildContext, userModel);
   }
 
   @override
@@ -345,9 +375,10 @@ class _$SignInWithGoogleImpl implements _SignInWithGoogle {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password, BuildContext buildContext)?
         login,
-    TResult? Function(BuildContext buildContext)? signInWithGoogle,
+    TResult? Function(BuildContext buildContext, UserModel? userModel)?
+        signInWithGoogle,
   }) {
-    return signInWithGoogle?.call(buildContext);
+    return signInWithGoogle?.call(buildContext, userModel);
   }
 
   @override
@@ -355,11 +386,12 @@ class _$SignInWithGoogleImpl implements _SignInWithGoogle {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password, BuildContext buildContext)?
         login,
-    TResult Function(BuildContext buildContext)? signInWithGoogle,
+    TResult Function(BuildContext buildContext, UserModel? userModel)?
+        signInWithGoogle,
     required TResult orElse(),
   }) {
     if (signInWithGoogle != null) {
-      return signInWithGoogle(buildContext);
+      return signInWithGoogle(buildContext, userModel);
     }
     return orElse();
   }
@@ -397,11 +429,13 @@ class _$SignInWithGoogleImpl implements _SignInWithGoogle {
 }
 
 abstract class _SignInWithGoogle implements LoginEvent {
-  const factory _SignInWithGoogle({required final BuildContext buildContext}) =
-      _$SignInWithGoogleImpl;
+  const factory _SignInWithGoogle(
+      {required final BuildContext buildContext,
+      final UserModel? userModel}) = _$SignInWithGoogleImpl;
 
   @override
   BuildContext get buildContext;
+  UserModel? get userModel;
   @override
   @JsonKey(ignore: true)
   _$$SignInWithGoogleImplCopyWith<_$SignInWithGoogleImpl> get copyWith =>

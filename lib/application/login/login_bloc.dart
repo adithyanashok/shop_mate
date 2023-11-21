@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shop_mate/domain/core/failures/main_failures.dart';
 import 'package:shop_mate/domain/login/i_login_facade.dart';
+import 'package:shop_mate/domain/users/model/user.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
