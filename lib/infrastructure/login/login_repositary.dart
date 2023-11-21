@@ -81,14 +81,19 @@ class LoginRepositary implements ILoginFacade {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication? googleAuth =
           await googleUser?.authentication;
-
+      snackBar(context: context, msg: googleUser.toString());
+      snackBar(context: context, msg: googleAuth.toString());
       if (googleAuth?.accessToken != null && googleAuth?.idToken != null) {
         final credential = GoogleAuthProvider.credential(
           accessToken: googleAuth?.accessToken,
           idToken: googleAuth?.idToken,
         );
+        snackBar(context: context, msg: credential.toString());
+
         UserCredential userCredential =
             await _auth.signInWithCredential(credential);
+        snackBar(context: context, msg: userCredential.toString());
+
         final fcmToken = await firebaseNotificationService.getDeviceToken();
         await db
             .collection(Collection.collectionUser)
@@ -97,12 +102,17 @@ class LoginRepositary implements ILoginFacade {
           'fcmToken': fcmToken,
         });
         final User? user = userCredential.user;
+        snackBar(context: context, msg: user.toString());
+
         if (user != null) {
+          snackBar(context: context, msg: "Navigation started");
+
           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
             builder: (context) {
               return const MainPage();
             },
           ), (route) => false);
+          snackBar(context: context, msg: "Navigation ended");
         }
         return Right(user!);
       } else {
