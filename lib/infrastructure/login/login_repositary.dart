@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
@@ -74,14 +75,18 @@ class LoginRepositary implements ILoginFacade {
   @override
   Future<Either<MainFailure, User>> signinWithGoogle(context) async {
     try {
+      snackBar(context: context, msg: 'started');
+
       final db = FirebaseFirestore.instance;
       final FirebaseAuth _auth = FirebaseAuth.instance;
       FirebaseNotificationService firebaseNotificationService =
           FirebaseNotificationService();
+      snackBar(context: context, msg: "after notification");
+
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      snackBar(context: context, msg: googleUser.toString());
       final GoogleSignInAuthentication? googleAuth =
           await googleUser?.authentication;
-      snackBar(context: context, msg: googleUser.toString());
       snackBar(context: context, msg: googleAuth.toString());
       if (googleAuth?.accessToken != null && googleAuth?.idToken != null) {
         final credential = GoogleAuthProvider.credential(
@@ -120,6 +125,9 @@ class LoginRepositary implements ILoginFacade {
       }
     } on FirebaseAuthException catch (e) {
       snackBar(context: context, msg: "Something went wrong...");
+      return const Left(MainFailure.clientFailure());
+    } on PlatformException catch (e) {
+      snackBar(context: context, msg: "$e");
       return const Left(MainFailure.clientFailure());
     }
   }
